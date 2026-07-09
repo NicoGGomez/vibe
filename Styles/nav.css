@@ -1,0 +1,39 @@
+/* nav */
+
+nav {
+    margin-top: 2vh;
+    width: 80%;
+    height: 10vh;
+    border-radius: 20px;
+    background-image: linear-gradient(180deg, #5E0083 12%, #000 86% );
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+nav a img {
+    height: 13%;
+    width: auto;
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}

@@ -1,0 +1,34 @@
+.card {
+    background-color: #fff;
+    padding: 2vh;
+}
+
+.card img {
+    width: 300px;
+}
+
+.card .info-card-comp {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card .info-card-comp .info-card{
+    align-items: flex-start;
+    padding: 1vh;
+    font-weight: bold;
+}
+
+.card .info-card-comp .info-card .texto {
+    font-size: 20px;
+}
+
+.card .info-card-comp .info-card .precio {
+    font-size: 26px;
+}
+
+.card .info-card-comp img {
+    width: 48px;
+    height: 48px;
+}
