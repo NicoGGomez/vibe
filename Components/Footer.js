@@ -5,10 +5,10 @@ class Footer extends HTMLElement {
                 <div class="cont footer-arriba">
                     <div class="cont links">
                         <div class="texto">
-                            <a href="">Atencion al cliente</a>
-                            <a href="">Preguntas frecuentes</a>
-                            <a href="">¿Como hacer mi compra?</a>
-                            <a href="">otros</a>
+                            <a href="Nosotros.html">Atencion al cliente</a>
+                            <a href="Nosotros.html">Preguntas frecuentes</a>
+                            <a href="Nosotros.html">¿Como hacer mi compra?</a>
+                            <a href="Nosotros.html">otros</a>
                         </div>
                     </div>
                     <div class="cont seccion-medio">
