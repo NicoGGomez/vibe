@@ -29,7 +29,8 @@ footer a {
 }
 
 footer img {
-    height: 10vh;
+    margin: 2vh;
+    height: 8vh;
     width: auto;
 }
 

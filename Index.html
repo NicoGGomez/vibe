@@ -21,7 +21,11 @@
 </head>
 <body>
 
+    <!-- nav -->
+
     <nav-bar class="cont"></nav-bar>
+
+    <!-- seccion principal -->
 
     <div class="cont contenido-principal">
         <img src="Imgs/fundas.png" alt="">
@@ -34,6 +38,8 @@
 
     <div class="separador"></div>
 
+    <!-- seccion ofertas -->
+
     <div class="cont ofertas">
         <img class="logo" src="Imgs/productos-oferta.png" alt="">
     
@@ -42,38 +48,19 @@
             <div class=" productos-oferta">
 
                 <div class="cards">
-                    <div class="cont card">
-                        <img src="Imgs/img-card.png" alt="">
-                        <div class="cont info-card-comp">
-                            <div class="cont info-card">
-                                <p class="texto">Funda Iphone 11</p>
-                                <p class="precio">$10000</p>
-                            </div>
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-                    </div>
 
-                    <div class="cont card">
-                        <img src="Imgs/img-card.png" alt="">
-                        <div class="cont info-card-comp">
-                            <div class="cont info-card">
-                                <p class="texto">Funda Iphone 11</p>
-                                <p class="precio">$10000</p>
-                            </div>
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-                    </div>
-
-                    <div class="cont card">
-                        <img src="Imgs/img-card.png" alt="">
-                        <div class="cont info-card-comp">
-                            <div class="cont info-card">
-                                <p class="texto">Funda Iphone 11</p>
-                                <p class="precio">$10000</p>
-                            </div>
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-                    </div>
+                    <card-comp 
+                    nombre='Funda iphone 11' 
+                    precio='10.000'>
+                    </card-comp>
+                    <card-comp 
+                    nombre='Funda iphone 11' 
+                    precio='10.000'>
+                    </card-comp>
+                    <card-comp 
+                    nombre='Funda iphone 11' 
+                    precio='10.000'>
+                    </card-comp>
 
                 </div>
 
@@ -82,131 +69,45 @@
         </div>
     
     </div>
+
+    <!-- seccion destacados -->
 
     <div class="cont destacados">
         <img class="logo" src="Imgs/productos-destacados.png" alt="">
     
         <div class="cont productos-destacados">
 
-            <div class="cont card">
-                <img src="Imgs/img-card.png" alt="">
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">Funda Iphone 11</p>
-                        <p class="precio">$10000</p>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
+            <script>
+                const contenedor = document.querySelector(".productos-destacados");
 
-            <div class="cont card">
-                <img src="Imgs/img-card.png" alt="">
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">Funda Iphone 11</p>
-                        <p class="precio">$10000</p>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
-
-            <div class="cont card">
-                <img src="Imgs/img-card.png" alt="">
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">Funda Iphone 11</p>
-                        <p class="precio">$10000</p>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
-
-            <div class="cont card">
-                <img src="Imgs/img-card.png" alt="">
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">Funda Iphone 11</p>
-                        <p class="precio">$10000</p>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
-
-            <div class="cont card">
-                <img src="Imgs/img-card.png" alt="">
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">Funda Iphone 11</p>
-                        <p class="precio">$10000</p>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
-
-            <div class="cont card">
-                <img src="Imgs/img-card.png" alt="">
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">Funda Iphone 11</p>
-                        <p class="precio">$10000</p>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
+                for (let i = 0; i < 9; i++) {
+                    const card = document.createElement("card-comp");
+                    card.setAttribute("id-producto", i);
+                    card.setAttribute("nombre", "Funda iPhone 11");
+                    card.setAttribute("precio", "10.000");
+                    contenedor.appendChild(card);
+                }
+            </script>
 
         </div>
     
     </div>
 
+    <!-- seccion ingreso al catalogo -->
+
     <div class="cont seccion-catalogo">
         <div class="separador"></div>
-        <button><a href="">Ver catalogo completo</a></button>
+        <button><a href="Productos.html">Ver catalogo completo</a></button>
         <div class="separador"></div>
     </div>
 
-    <!-- <footer>
-        <div class="cont footer-arriba">
-            <div class="cont links">
-                <div class="texto">
-                    <a href="">Atencion al cliente</a>
-                    <a href="">Preguntas frecuentes</a>
-                    <a href="">¿Como hacer mi compra?</a>
-                    <a href="">otros</a>
-                </div>
-            </div>
-            <div class="cont seccion-medio">
-                <img src="Imgs/logo-vibe.png" alt="">
-                <div class="cont sociales">
-                        <a target="_blank" href="https://www.instagram.com/vibe.tandil/">
-                            <i class="fa-brands fa-instagram"></i>
-                            <p>Vibe.tandil</p>
-                        </a>
-                        <a target="_blank" href="https://www.facebook.com/vibe.tandil">
-                            <i class="fa-brands fa-facebook"></i>
-                            <p>Vibe.tandil</p>
-                        </a>
-                </div>
-            </div>
-            <div class="cont contacto">
-                <div class="texto">
-                    <p>Contacto</p>
-                    <p>2494494850</p>
-                    <p>vibe.tandil@gmail.com</p>
-                    <p>Espora 1074</p>
-                </div>
-            </div>
-        </div>
-        <div class="cont footer-abajo">
-            <div class="separador"></div>
-            <div class="cont texto">
-                <p>© Todos los derechos reservados 2026.</p>
-                <p>Vibe</p>
-            </div>
-        </div>
-    </footer> -->
+    <!-- footer -->
 
     <footer-comp class="cont"></footer-comp>
 
+    <!-- link a scripts -->
+
+    <script src="Components/Card.js"></script>
     <script src="Components/Footer.js"></script>
     <script src="Components/NavBar.js"></script>
     <script src="Scripts/Carrusel.js"></script>
