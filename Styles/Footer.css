@@ -84,3 +84,11 @@ footer .footer-abajo .texto {
     flex-direction: row;
     justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+
+    footer .contacto {
+        display: none;
+    }
+
+}

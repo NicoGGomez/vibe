@@ -43,3 +43,21 @@ nav ul li a {
     text-decoration: none;
     color: #fff;
 }
+
+@media (max-width: 600px) {
+
+    nav {
+        height: max-content;
+    }
+
+    nav a img {
+        width: 15vh;
+    }
+
+    nav ul {
+        flex-direction: column;
+        margin: 2vh;
+        gap: 1vh;
+    }
+
+}
