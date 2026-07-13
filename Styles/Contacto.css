@@ -1,0 +1,44 @@
+.seccion-contacto {
+    width: 100%;
+}
+
+.seccion-contacto form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3vh;
+    background-color: #fff;
+    width: 50%;
+    height: 65vh;
+    flex-direction: column;
+    gap: 4vh;
+    margin: 2vh 0;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.input label {
+    width: 90%;
+    font-weight: bold;
+    display: flex;
+    align-items: start;
+}
+
+.input input, textarea {
+    width: 90%;
+    height: 40px;
+    border: none;
+    background-color: #e7e7e7;
+    padding: 4px;
+}
+
+textarea {
+    height: 20vh;
+}
