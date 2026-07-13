@@ -4,7 +4,7 @@ bread-crumb {
 
 .bread-crumb {
     width: 80%;
-    margin: 2vh 0;
+    margin-top: 2vh;
     cursor: pointer;
 }
 

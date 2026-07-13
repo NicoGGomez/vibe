@@ -1,0 +1,136 @@
+.logo-quienes-somos {
+    margin: 2vh;
+}
+
+.contenedor-nosotros .principal {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.principal .texto {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+    gap: 5vh;
+    height: 100%;
+    width: 50%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.principal .img-empresa {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.separador-preguntas {
+    margin: 4vh;
+}
+
+/* seccion preguntas */
+
+.logo-preguntas {
+    margin-bottom: 3vh;
+}
+
+.preguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    width: 80%;
+    margin-bottom: 2vh;
+}
+
+.pregunta {
+    display: flex;
+    align-items: start;
+    background-color: #fff;
+    padding: 2vh;
+    border-radius: 20px;
+}
+
+@media (max-width: 1500px) {
+
+    .contenedor-nosotros .principal {
+        width: 80%;
+    }
+
+    .principal .texto {
+        padding: 1vh;
+        gap: 4vh;
+    }
+
+}
+
+@media (max-width: 1200px) {
+
+    .contenedor-nosotros .principal {
+        width: 80%;
+    }
+
+    .principal .texto {
+        padding: 1vh;
+        gap: 0;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .contenedor-nosotros .principal {
+        flex-direction: column-reverse;
+        width: 80%;
+        height: auto;
+    }
+
+    .principal .img-empresa {
+        width: 100%;
+        height: 50vh;
+    }
+
+
+    .principal .texto {
+        width: 100%;
+        padding: 2vh;
+        gap: 1vh;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .contenedor-nosotros .principal {
+        flex-direction: column-reverse;
+        width: 80%;
+        height: auto;
+    }
+
+    .principal .img-empresa {
+        width: 100%;
+        height: 40%;
+    }
+
+
+    .principal .texto {
+        width: 100%;
+        padding: 2vh;
+        gap: 1vh;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+}

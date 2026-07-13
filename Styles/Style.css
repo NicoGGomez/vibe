@@ -13,6 +13,7 @@
 @import url(Footer.css);
 @import url(Home.css);
 @import url(Productos.css);
+@import url(Nosotros.css);
 
 /* Variables */
 
@@ -20,8 +21,8 @@
 
     /* Colores */
     --color-principal: #FEF1DC;
-    --color-secundario: #5E0083;
-    --color-gradient: linear-gradient(180deg, #5E0083 12%, #000 86% );
+    --color-secundario: #8F50BB;
+    --color-gradient: linear-gradient(180deg, #8F50BB 12%, #000 90% );
 
     /* Fuentes */
     --font-main: "Google Sans Flex", sans-serif;
