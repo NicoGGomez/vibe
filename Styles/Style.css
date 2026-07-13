@@ -99,7 +99,7 @@ body {
 
 .cards {
     display: flex;
-    gap: 2vh;
+    gap: 20px;
     width: max-content;
 }
 
