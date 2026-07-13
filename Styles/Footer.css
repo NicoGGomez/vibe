@@ -1,13 +1,15 @@
+@import url(Style.css);
+
 footer {
     margin: 2vh 0 2vh 0;
     padding: 2vh;
     width: 80%;
     border-radius: 20px;
-    background-image: linear-gradient(180deg, #5E0083 12%, #000 86% );
+    background: var(--color-gradient);
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: hsl(37, 94%, 93%);
+    color: #fff;
     gap: 3vh;
 }
 
@@ -20,7 +22,7 @@ footer .footer-arriba {
 }
 
 footer a {
-    color: #FEF1DC;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -62,7 +64,7 @@ footer .sociales a {
 }
 
 footer .separador {
-    background-color: #FEF1DC;
+    background-color: var(--color-principal);
     height: 1px;
     width: 80%;
 }

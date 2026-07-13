@@ -1,129 +1,53 @@
+/* Fuentes */
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap');
 
-@import url(nav.css);
+/* Componentes */
+
+@import url(Nav.css);
 @import url(Card.css);
 @import url(Button.css);
 @import url(Footer.css);
+@import url(Home.css);
 
-.stack-sans-text {
-  font-family: "Stack Sans Text", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
+/* Variables */
+
+:root {
+
+    /* Colores */
+    --color-principal: #FEF1DC;
+    --color-secundario: #5E0083;
+    --color-gradient: linear-gradient(180deg, #5E0083 12%, #000 86% );
+
+    /* Fuentes */
+    --font-main: "Google Sans Flex", sans-serif;
+    --font-alt: "Stack Sans Text", sans-serif;
+
+    /* Transiciones */
+    --transition: .3s ease;
+
 }
 
-@font-face {
-    font-family: "Google Sans Flex";
-    src: url("fonts/GoogleSansFlex.woff2") format("woff2");
-}
-
-/* estilos generales */
+/* Reset */
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-main), var(--font-alt);
 }
 
-.cont {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+html{
+    scroll-behavior: smooth;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FEF1DC;
+    background-color: var(--color-principal);
 }
 
-.contenido-principal {
-    width: 100%;
-    margin: 2vh 0 2vh 0;
-}
 
-.contenido-principal img {
-    width: 100%;
-    height: 50vh;
-    object-fit: cover;
-}   
-
-.separador {
-    background-color: #000;
-    height: 1px;
-    width: 80%;
-}
-
-.fa-cart-shopping {
-    font-size: 36px;
-}
-
-.texto-principal {
-    margin-bottom: 2vh;
-}
-
-.seccion-catalogo {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-}
-
-.seccion-catalogo button {
-    margin: 0 2vh 0 2vh;
-}
-
-.seccion-catalogo .separador {
-    flex: 1;
-    height: 1px;
-    background-color: #000;    
-}
-
-.ofertas {
-    width: 100%;
-}
-
-.carrusel-oferta {
-    width: 100%;
-    overflow: hidden;
-}
-
-.productos-oferta {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-    background-color: rgb(162, 136, 136);
-}
-
-.cards {
-    display: flex;
-    gap: 20px;
-    width: max-content;
-}
-
-.productos-oferta .card{
-    flex-shrink: 0;
-}
-
-.productos-destacados {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2vh;
-    margin-bottom: 2vh;
-}
-
-@media (max-width: 900px) {
-    .productos-oferta,
-    .productos-destacados {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .productos-oferta,
-    .productos-destacados {
-        grid-template-columns: 1fr;
-    }
-}

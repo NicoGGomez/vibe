@@ -1,3 +1,5 @@
+@import url(Style.css);
+
 /* nav */
 
 nav {
@@ -5,7 +7,7 @@ nav {
     width: 80%;
     height: 10vh;
     border-radius: 20px;
-    background-image: linear-gradient(180deg, #5E0083 12%, #000 86% );
+    background: var(--color-gradient);
     display: flex;
     align-items: center;
 }
