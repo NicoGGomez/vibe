@@ -51,17 +51,63 @@ body {
     object-fit: cover;
 }   
 
-.texto-principal {
-    margin-bottom: 2vh;
-}
-
 .separador {
     background-color: #000;
     height: 1px;
     width: 80%;
 }
 
-.productos-oferta, .productos-destacados {
+.fa-cart-shopping {
+    font-size: 36px;
+}
+
+.texto-principal {
+    margin-bottom: 2vh;
+}
+
+.seccion-catalogo {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.seccion-catalogo button {
+    margin: 0 2vh 0 2vh;
+}
+
+.seccion-catalogo .separador {
+    flex: 1;
+    height: 1px;
+    background-color: #000;    
+}
+
+.ofertas {
+    width: 100%;
+}
+
+.carrusel-oferta {
+    width: 100%;
+    overflow: hidden;
+}
+
+.productos-oferta {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    background-color: rgb(162, 136, 136);
+}
+
+.cards {
+    display: flex;
+    gap: 2vh;
+    width: max-content;
+}
+
+.productos-oferta .card{
+    flex-shrink: 0;
+}
+
+.productos-destacados {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2vh;

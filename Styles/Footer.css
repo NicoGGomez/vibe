@@ -5,7 +5,7 @@ footer {
     border-radius: 20px;
     background-image: linear-gradient(180deg, #5E0083 12%, #000 86% );
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
     align-items: center;
     color: hsl(37, 94%, 93%);
     gap: 3vh;

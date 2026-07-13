@@ -1,7 +1,13 @@
 .card {
     background-color: #fff;
     padding: 2vh;
-    
+    transition:.3s;
+    width: 350px
+}
+
+.card:hover{
+    transform:scale(1.05);
+    cursor: pointer;
 }
 
 .card img {
