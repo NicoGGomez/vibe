@@ -6,24 +6,22 @@
     <meta name="google" content="notranslate"> 
     <!--  -->
 
+    <!-- metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe</title>
+
+    <!-- info general -->
+    <title>Vibe - Home</title>
+    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <!-- estilos -->
     <link rel="stylesheet" href="Styles/Style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
 </head>
 <body>
 
-    <nav class="cont">
-        <ul>
-            <a href=""><img src="Imgs/logo-vibe.png" alt=""></a>
-            <li><a href="">Home</a></li>
-            <li><a href="">Productos</a></li>
-            <li><a href="">Contacto</a></li>
-        </ul>
-    </nav>
+    <nav-bar class="cont"></nav-bar>
 
     <div class="cont contenido-principal">
         <img src="Imgs/fundas.png" alt="">
@@ -166,7 +164,7 @@
         <div class="separador"></div>
     </div>
 
-    <footer>
+    <!-- <footer>
         <div class="cont footer-arriba">
             <div class="cont links">
                 <div class="texto">
@@ -205,8 +203,12 @@
                 <p>Vibe</p>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
+    <footer-comp class="cont"></footer-comp>
+
+    <script src="Components/Footer.js"></script>
+    <script src="Components/NavBar.js"></script>
     <script src="Scripts/Carrusel.js"></script>
 </body>
 </html>

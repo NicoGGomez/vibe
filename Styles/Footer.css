@@ -1,4 +1,6 @@
-@import url(Style.css);
+footer-comp {
+    width: 100%;
+}
 
 footer {
     margin: 2vh 0 2vh 0;
