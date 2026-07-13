@@ -1,0 +1,26 @@
+.contenedor-productos {
+    width: 80%;
+}
+
+.contenedor-categorias {
+    margin-top: 5vh;
+    width: 100%;
+}
+
+.contenedor-categorias .categorias {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.contenedor-productos .separador {
+    margin-top: 2vh;
+    width: 100%;
+}
+
+.productos {
+    margin: 2vh 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3vh;
+}

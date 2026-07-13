@@ -1,0 +1,21 @@
+bread-crumb {
+    width: 80%;
+}
+
+.bread-crumb {
+    width: 80%;
+    margin: 2vh 0;
+    cursor: pointer;
+}
+
+.bread-crumb .texto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vh;
+    font-size: 16px;
+}
+
+.bread-crumb .texto p {
+    margin: 0;
+}
