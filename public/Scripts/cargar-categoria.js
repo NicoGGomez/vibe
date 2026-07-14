@@ -4,13 +4,13 @@ const inputNombre = document.getElementById("input-ca-nombre");
 
 formCategoria.addEventListener("submit", async (e) => {
 
-    e.preventDefault(); // evita recargar la página
+    e.preventDefault();
 
     const nombreCategoria = inputNombre.value;
 
     try {
 
-        const respuesta = await fetch("/categorias", {
+        const respuesta = await fetch("https://tu-backend.onrender.com/categorias", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -24,10 +24,8 @@ formCategoria.addEventListener("submit", async (e) => {
 
         console.log(data);
 
-        // limpiar input
         inputNombre.value = "";
 
-        // volver a cargar la lista/select
         cargarCategorias();
 
     } catch(error) {
