@@ -84,10 +84,15 @@ producto-comp {
         display: flex;
         flex-direction: column;
         padding: 1vh;
+        gap: 0;
     }
 
     .producto-informacion {
         width: 100%;
+    }
+
+    .informacion-principal {
+        flex-direction: column;
     }
 
     .imagenes {

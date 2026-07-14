@@ -17,7 +17,7 @@ class Producto extends HTMLElement {
                 <div class="producto-texto">
                     <div class="informacion-principal">
                         <p class="nombre">${nombre}</p>
-                        <p class="precio">${precio}</p>
+                        <p class="precio">$${precio}</p>
                     </div>
                     <p>${descripcion}</p>
                 </div>
