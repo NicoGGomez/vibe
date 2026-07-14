@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 
-const contactoRoutes = require("./routes/contactoRoutes");
+const usuarioRoutes = require("./routes/usuario.routes");
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
 
 // rutas
-app.use("/contacto", contactoRoutes);
+app.use("/usuarios", usuarioRoutes);
 
 module.exports = app;
 

@@ -1,0 +1,15 @@
+.contenedor-cargar-producto {
+    width: 100%;
+}
+
+.form-carga-producto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3vh;
+    background-color: #fff;
+    width: 60%;
+    flex-direction: column;
+    gap: 3vh;
+    margin: 2vh 0;
+}

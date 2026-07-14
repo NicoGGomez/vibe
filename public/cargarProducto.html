@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <!-- sacar dsp -->
+    <meta name="google" content="notranslate"> 
+    <!--  -->
+
+    <!-- metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- info general -->
+    <title>Vibe - Cargar producto</title>
+    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="Styles/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+<body>
+
+    <!-- nav -->
+
+    <nav-bar class="cont"></nav-bar>
+
+    <!-- bread crumb -->
+
+    <bread-crumb links='Home,Producto'></bread-crumb>
+
+    <!-- seccion producto cargar producto -->
+
+    <div class="cont contenedor-cargar-producto">
+
+        <form class="form-carga-producto" id="form-carga-producto" action="">
+
+            <div class="input">
+                <label for="input-pr-nombre">Nombre del producto</label>
+                <input type="text" id="input-pr-nombre" required>
+            </div>
+
+            <div class="input">
+                <label for="input-pr-precio">Precio</label>
+                <input type="text" id="input-pr-precio" required>
+            </div>
+
+            <div class="input">
+                <label for="input-pr-descr">Descripción</label>
+                <textarea name="" id="input-pr-descr"></textarea required>
+            </div>
+
+            <div class="input">
+                <label for="input-pr-url">cargar imagen principal</label>
+                <input type="file" name="" id="input-pr-url" required>
+            </div>
+
+            <div class="input">
+                <label for="input-pr-url-ex1">cargar imagen extra uno</label>
+                <input type="file" name="" id="input-pr-url-ex1">
+            </div>
+
+            <div class="input">
+                <label for="input-pr-url-ex2">cargar imagen extra dos</label>
+                <input type="file" name="" id="input-pr-url-ex2">
+            </div>
+
+            <div class="input">
+                <label for="input-pr-url-ex3">cargar imagen extra tres</label>
+                <input type="file" name=""id="input-pr-url-ex3">                
+            </div>
+
+            <div class="input">
+                <label for="input-pr-stock">Stock</label>
+                <input type="text" id="input-pr-stock" required>
+            </div>
+
+            <div class="input">
+                <label for="">selecciona la categoria</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="1">Remeras</option>
+                        <option value="2">Pantalones</option>
+                        <option value="3">Zapatillas</option>
+                    </select>
+            </div>
+
+            <button type="submit">Cargar producto</button>
+
+        </form>
+
+    </div>
+    
+    <!-- footer -->
+
+    <footer-comp class="cont"></footer-comp>
+
+    <!-- link a scripts -->
+
+    <script src="Components/Footer.js"></script>
+    <script src="Components/NavBar.js"></script>
+</body>
+</html>
