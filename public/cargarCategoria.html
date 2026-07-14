@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <!-- sacar dsp -->
+    <meta name="google" content="notranslate"> 
+    <!--  -->
+
+    <!-- metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- info general -->
+    <title>Vibe - Cargar categoria</title>
+    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="Styles/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+<body>
+
+    <!-- nav -->
+
+    <nav-bar class="cont"></nav-bar>
+
+    <!-- seccion producto cargar producto -->
+
+    <div class="cont contenedor-cargar-categoria">
+
+        <form class="form-carga-categoria" id="form-carga-categoria" >
+
+            <div class="input">
+                <label for="input-ca-nombre">Nombre de la categoria</label>
+                <input type="text" name="nombreCategoria" id="input-ca-nombre" required>
+            </div>
+
+            <button type="submit">Cargar categoria</button>
+
+        </form>
+
+    </div>
+
+    <div class="contenedor-lista-categorias">
+        <h2>Categorías cargadas</h2>
+
+        <ul id="lista-categorias"></ul>
+    </div>
+    
+    <!-- footer -->
+
+    <footer-comp class="cont"></footer-comp>
+
+    <!-- link a scripts -->
+
+    <script src="Scripts/cargar-categoria.js"></script>
+    <script src="Scripts/categorias.js"></script>
+    <script src="Components/Footer.js"></script>
+    <script src="Components/NavBar.js"></script>
+</body>
+</html>

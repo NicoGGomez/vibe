@@ -1,8 +1,8 @@
-.contenedor-cargar-producto {
+.contenedor-cargar-producto, .contenedor-cargar-categoria {
     width: 100%;
 }
 
-.form-carga-producto {
+.form-carga-producto, .form-carga-categoria {
     display: flex;
     justify-content: center;
     align-items: center;
