@@ -10,7 +10,7 @@ formCategoria.addEventListener("submit", async (e) => {
 
     try {
 
-        const respuesta = await fetch("https://tu-backend.onrender.com/categorias", {
+        const respuesta = await fetch("https://vibe-n9dy.onrender.com", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
