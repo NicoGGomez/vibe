@@ -4,7 +4,7 @@ const cargarCategorias = async () => {
 
     try {
 
-        const respuesta = await fetch("/categorias");
+        const respuesta = await fetch("https://vibe-n9dy.onrender.com");
 
         const categorias = await respuesta.json();
 
