@@ -3,7 +3,7 @@ const listaCategorias = document.getElementById("lista-categorias");
 const cargarCategorias = async () => {
 
     try {
-        const respuesta = await fetch(`${API_URL}/categorias`);
+        const respuesta = await fetch(`https://vibe-n9dy.onrender.com/categorias`);
 
         if (!respuesta.ok) {
             throw new Error(`Error ${respuesta.status}`);
