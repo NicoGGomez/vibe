@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <!-- sacar dsp -->
+    <meta name="google" content="notranslate"> 
+    <!--  -->
+
+    <!-- metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- info general -->
+    <title>Vibe - Producto</title>
+    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="Styles/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+<body>
+
+    <!-- nav -->
+
+    <nav-bar class="cont"></nav-bar>
+
+    <!-- bread crumb -->
+
+    <bread-crumb links='Home,Producto'></bread-crumb>
+
+    <!-- seccion producto -->
+
+    <producto-comp 
+    imagen="Imgs/img-card.png"
+    imagenExUno="Imgs/img-card.png" 
+    imagenExDos="Imgs/img-card.png" 
+    imagenExTres="Imgs/img-card.png"  
+    nombre="Funda Iphone 11"
+    precio="10.000"
+    descripcion="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing and..."
+    ></producto-comp>
+
+    <div class="cont productos-similares">
+
+        <img src="Imgs/productos-similares.png" alt="">
+
+        <div class="contenedor-productos-similares">
+
+            <script>
+                        const contenedor = document.querySelector(".contenedor-productos-similares");
+
+                        for (let i = 0; i < 9; i++) {
+                            const card = document.createElement("card-comp");
+                            card.setAttribute("id-producto", i);
+                            card.setAttribute("nombre", "Funda iPhone 11");
+                            card.setAttribute("precio", "10.000");
+                            contenedor.appendChild(card);
+                        }
+                
+            </script>
+
+        </div>
+
+    </div>
+
+    <div class="cont seccion-catalogo">
+        <div class="separador"></div>
+        <button><a href="Productos.html">Ver catalogo completo</a></button>
+        <div class="separador"></div>
+    </div>
+
+    <!-- footer -->
+
+    <footer-comp class="cont"></footer-comp>
+
+    <!-- link a scripts -->
+
+    <script src="Components/Producto.js"></script>
+    <script src="Components/BreadCrumb.js"></script>
+    <script src="Components/Card.js"></script>
+    <script src="Components/Footer.js"></script>
+    <script src="Components/NavBar.js"></script>
+</body>
+</html>

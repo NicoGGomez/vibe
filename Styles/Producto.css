@@ -1,0 +1,79 @@
+producto-comp {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.contenedor-producto {
+    margin: 4vh;
+    background-color: #fff;
+    width: 80%;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 30% 70%;
+}
+
+.contenedor-producto .img-producto-prin {
+    width: 100%;
+    margin: 2vh;
+}
+
+.contenedor-producto .producto-informacion {
+    display: flex;
+    height: 100%;
+    gap: 2vh;
+    margin: 2vh;
+    padding: 2vh;
+    justify-content: space-around;
+}
+
+.producto-informacion .producto-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.producto-informacion .informacion-principal {
+    font-size: xx-large;
+    font-weight: bold;
+    display: flex;
+    gap: 1vh;
+}
+
+.contenedor-producto .imagenes {
+    display: flex;
+    width: 100%;
+    gap: 2vh;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.contenedor-producto .imagenes img {
+    width: 15vh;
+}
+
+.separador-producto {
+    width: 100%;
+}
+
+.contenedor-botones {
+    display: flex;
+    width: 100%;
+}
+
+.contenedor-botones .botones {
+    margin-top: 1vh;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 2vh;
+    justify-content: start;
+}
+
+.contenedor-productos-similares {
+    display: grid;
+    margin: 3vh 0 3vh 0;
+    width: 100%;
+    gap: 2vh;
+    grid-template-columns: repeat(3, 1fr);
+}

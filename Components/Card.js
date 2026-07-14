@@ -7,6 +7,7 @@ class Card extends HTMLElement {
         const imagen = this.getAttribute("imagen");
 
         this.innerHTML = `
+                    <a href="producto.html">
                     <div class="cont card" data-id="${id}">
                         <img src="Imgs/img-card.png" alt="">
                         <div class="cont info-card-comp">
@@ -17,6 +18,7 @@ class Card extends HTMLElement {
                             <i class="fa-solid fa-cart-shopping"></i>
                         </div>
                     </div>
+                    </a>
         `;
     }
 }
