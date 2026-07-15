@@ -8,7 +8,7 @@ const subirImagen = async (archivo) => {
     const nombreArchivo = `${Date.now()}-${archivo.originalname}`;
 
     const { error } = await supabase.storage
-        .from("productos")
+        .from("Productos")
         .upload(nombreArchivo, archivo.buffer, {
             contentType: archivo.mimetype
         });
@@ -16,7 +16,7 @@ const subirImagen = async (archivo) => {
     if (error) throw error;
 
     const { data } = supabase.storage
-        .from("productos")
+        .from("Productos")
         .getPublicUrl(nombreArchivo);
 
     return data.publicUrl;
