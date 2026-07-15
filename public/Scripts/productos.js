@@ -19,9 +19,9 @@ const cargarProductos = async () => {
                     precio="${producto.precio}"
                     descripcion="${producto.descripcion}"
                     imagen="${producto.imagen_principal}"
-                    imagenExUno="${producto.imagen_extra_uno}"
-                    imagenExDos="${producto.imagen_extra_dos}"
-                    imagenExTres="${producto.imagen_extra_tres}">
+                    imagenExUno="${producto.imagen_extra_uno ?? ""}"
+                    imagenExDos="${producto.imagen_extra_dos ?? ""}"
+                    imagenExTres="${producto.imagen_extra_tres ?? ""}">
                 </producto-comp>
             `;
 
