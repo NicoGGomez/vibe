@@ -1,4 +1,4 @@
-const contenedor = document.getElementById("contenedor-productos");
+const contenedor = document.getElementById("lista-productos");
 
 const cargarProductos = async () => {
 
