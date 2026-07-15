@@ -4,7 +4,7 @@ const getProductos = async (req,res)=>{
 
     try {
 
-        const productos = await productoService.listarproductos();
+        const productos = await productoService.listaRproductos();
 
         res.json(productos);
 
@@ -37,7 +37,7 @@ const cargarProducto = async (req, res) => {
             } = req.body;
 
 
-        const producto = await productoService.cargarproductos(nombreProducto, precioProducto, descrProducto, imgPrinProducto, imgEx1Producto, imgEx2Producto, imgEx3Producto, stockProducto, categoriaProducto);
+        const producto = await productoService.cargarProductos(nombreProducto, precioProducto, descrProducto, imgPrinProducto, imgEx1Producto, imgEx2Producto, imgEx3Producto, stockProducto, categoriaProducto);
 
         res.status(201).json({
             mensaje: "Producto creado correctamente",
