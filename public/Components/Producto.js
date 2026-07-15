@@ -22,9 +22,9 @@ class Producto extends HTMLElement {
                     <p>${descripcion}</p>
                 </div>
                 <div class="cont imagenes">
-                    <img src="${imagenExtraUno ? `<img src="${imagen}" alt="">` : ""}" alt="">
-                    <img src="${imagenExtraDos ? `<img src="${imagen}" alt="">` : ""}" alt="">
-                    <img src="${imagenExtraTres ? `<img src="${imagen}" alt="">` : ""}" alt="">
+                        ${imagenExtraUno ? `<img src="${imagenExtraUno}" alt="">` : ""}
+                        ${imagenExtraDos ? `<img src="${imagenExtraDos}" alt="">` : ""}
+                        ${imagenExtraTres ? `<img src="${imagenExtraTres}" alt="">` : ""}
                 </div>
                 <div class="cont contenedor-botones">
                     <div class="separador separador-producto"></div>
