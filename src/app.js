@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const usuarioRoutes = require("./routes/usuario.routes");
 const categoriasRoutes = require("./routes/categoria.routes");
+const productosRoutes = require("./routes/producto.routes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 // rutas
 app.use("/usuarios", usuarioRoutes);
 app.use("/categorias", categoriasRoutes);
+app.use("/productos", productosRoutes);
 
 module.exports = app;
 
