@@ -7,9 +7,9 @@ class Card extends HTMLElement {
         const imagen = this.getAttribute("imagen");
 
         this.innerHTML = `
-                    <a href="producto.html">
+                    <a href="producto.html?id=${id}">
                     <div class="cont card" data-id="${id}">
-                        <img src="Imgs/img-card.png" alt="">
+                        <img src="${imagen}" alt="">
                         <div class="cont info-card-comp">
                             <div class="cont info-card">
                                 <p class="texto">${nombre}</p>

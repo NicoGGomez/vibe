@@ -1,4 +1,5 @@
 const contenedor = document.getElementById("lista-productos");
+const contenedorCards = document.getElementById("lista-cards-productos");
 
 const cargarProductos = async () => {
 
@@ -8,9 +9,19 @@ const cargarProductos = async () => {
 
         const productos = await respuesta.json();
 
+        contenedorCards.innerHTML = "";
         contenedor.innerHTML = "";
 
         productos.forEach(producto => {
+
+            contenedorCards.innerHTML += `
+                <card-comp 
+                    data-id="${producto.id_producto}"
+                    imagen="${producto.imagen_principal}"
+                    nombre="${producto.nombre}"
+                    precio="${producto.precio}">
+                </card-comp>
+            `
 
             contenedor.innerHTML += `
                 <producto-comp
