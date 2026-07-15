@@ -5,7 +5,7 @@ const productoController = require("../controllers/producto.controller");
 
 router.get("/", productoController.getProductos);
 
-const upload = require("../middleware/upload");
+const upload = require("../middlewares/upload");
 
 router.post(
     "/",
