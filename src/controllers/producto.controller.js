@@ -4,7 +4,7 @@ const getProductos = async (req,res)=>{
 
     try {
 
-        const productos = await productoService.listaRproductos();
+        const productos = await productoService.listarProductos();
 
         res.json(productos);
 
