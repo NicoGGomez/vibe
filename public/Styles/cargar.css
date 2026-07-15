@@ -13,3 +13,17 @@
     gap: 3vh;
     margin: 2vh 0;
 }
+
+.contenedor-lista-productos {
+    margin: 4vh 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-lista-productos .contenedor-productos {
+    margin: 4vh 0;
+    display: flex;
+}
