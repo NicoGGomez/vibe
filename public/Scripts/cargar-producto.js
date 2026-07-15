@@ -13,54 +13,46 @@ formProducto.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const nombreProducto = inputNombre.value;
-    const precioProducto = inputPrecio.value;
-    const descrProducto = inputDescripcion.value;
-    const imgPrinProducto = inputImagenPrin.files[0]?.name;
-    const imgEx1Producto = inputImagenex1.files[0]?.name;
-    const imgEx2Producto = inputImagenex2.files[0]?.name;
-    const imgEx3Producto = inputImagenex3.files[0]?.name;
-    const stockProducto = inputStock.value;
-    const categoriaProducto = selectCategoria.value;
+    const formData = new FormData();
 
+    // Datos del producto
+    formData.append("nombreProducto", inputNombre.value);
+    formData.append("precioProducto", inputPrecio.value);
+    formData.append("descrProducto", inputDescripcion.value);
+    formData.append("stockProducto", inputStock.value);
+    formData.append("categoriaProducto", selectCategoria.value);
+
+    // Imágenes
+    formData.append("imagenPrincipal", inputImagenPrin.files[0]);
+
+    if (inputImagenex1.files.length > 0) {
+        formData.append("imagenExtraUno", inputImagenex1.files[0]);
+    }
+
+    if (inputImagenex2.files.length > 0) {
+        formData.append("imagenExtraDos", inputImagenex2.files[0]);
+    }
+
+    if (inputImagenex3.files.length > 0) {
+        formData.append("imagenExtraTres", inputImagenex3.files[0]);
+    }
 
     try {
 
         const respuesta = await fetch("https://vibe-n9dy.onrender.com/productos", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nombreProducto,
-                precioProducto,
-                descrProducto,
-                imgPrinProducto,
-                imgEx1Producto,
-                imgEx2Producto,
-                imgEx3Producto,
-                stockProducto,
-                categoriaProducto
-            })
+            body: formData
         });
 
         const data = await respuesta.json();
 
         console.log(data);
 
-        inputNombre.value = "";
-        inputPrecio.value = ""; 
-        inputDescripcion.value = ""; 
-        inputImagenPrin.value = ""; 
-        inputImagenex1.value = ""; 
-        inputImagenex2.value = "";  
-        inputImagenex3.value = ""; 
-        inputStock.value = ""; 
-        selectCategoria.value = ""; 
+        formProducto.reset();
 
-        cargarProducto();
+        cargarProductos();
 
-    } catch(error) {
+    } catch (error) {
 
         console.log("Error al cargar el producto:", error);
 
