@@ -13,7 +13,7 @@ class Card extends HTMLElement {
                         <div class="cont info-card-comp">
                             <div class="cont info-card">
                                 <p class="texto">${nombre}</p>
-                                <p class="precio">${precio}</p>
+                                <p class="precio">$${precio}</p>
                             </div>
                             <i class="fa-solid fa-cart-shopping"></i>
                         </div>

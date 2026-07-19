@@ -37,24 +37,15 @@
 
         <div class="cont contenedor-categorias">
             <div class="categorias">
-                <ul id="lista-categorias"></ul>
+                <ul id="lista-categorias">
+                </ul>
             </div>
             <div class="separador"></div>
         </div>
 
         <div class="cont productos">
 
-                <script>
-                        const contenedor = document.querySelector(".productos");
-
-                        for (let i = 0; i < 12; i++) {
-                            const card = document.createElement("card-comp");
-                            card.setAttribute("id-producto", i);
-                            card.setAttribute("nombre", "Funda iPhone 11");
-                            card.setAttribute("precio", "10.000");
-                            contenedor.appendChild(card);
-                        }
-                </script>
+                <div class="cards" id="lista-cards-productos"></div>
 
         </div>
 
@@ -66,6 +57,9 @@
 
     <!-- link a scripts -->
 
+    <script src="Components/Card.js"></script>
+    <script src="Components/Producto.js"></script>
+    <script src="Scripts/productos.js"></script>    
     <script src="Scripts/categorias.js"></script>
     <script src="Components/BreadCrumb.js"></script>
     <script src="Components/Card.js"></script>

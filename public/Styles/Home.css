@@ -95,10 +95,16 @@
 }
 
 .productos-destacados {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    margin: 2vh 0;
+    width: 100%;
+    display: flex;
+    gap: 3vh;
+}
+
+.productos-destacados .cards {
     gap: 2vh;
-    margin-bottom: 2vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 /* seccion para ingresar al catalogo */

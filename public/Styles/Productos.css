@@ -30,21 +30,27 @@
 
 .productos {
     margin: 2vh 0;
+    width: 100%;
+    display: flex;
+    gap: 3vh;
+}
+
+.productos .cards {
+    gap: 2vh;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 3vh;
 }
 
 @media (max-width: 900px) {
 
-    .productos {
+    .productos .cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
 
-    .productos {
+    .productos .cards {
         grid-template-columns: repeat(1, 1fr);
     }
 }

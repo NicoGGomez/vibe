@@ -21,9 +21,11 @@ const cargarCategorias = async () => {
         categorias.forEach(categoria => {
 
             listaCategorias.innerHTML += `
-                <li>
-                    ${categoria.nombre}
-                </li>
+                <a href="productos.html?categoria=${categoria.id_categoria}">
+                    <li>
+                        ${categoria.nombre}
+                    </li>
+                </a>
             `;
 
         });
