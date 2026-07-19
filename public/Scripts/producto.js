@@ -16,10 +16,10 @@ const cargarProducto = async () => {
         const componente = document.getElementById("producto");
 
         componente.setAttribute("data-id", producto.id_producto);
-        componente.setAttribute("imagen", producto.imagen_principal);
-        componente.setAttribute("imagenExUno", producto.imagen_extra_uno);
-        componente.setAttribute("imagenExDos", producto.imagen_extra_dos);
-        componente.setAttribute("imagenExTres", producto.imagen_extra_tres);
+        componente.setAttribute("imagen", producto.imagen_principal || "");
+        componente.setAttribute("imagenExUno", producto.imagen_extra_uno || "");
+        componente.setAttribute("imagenExDos", producto.imagen_extra_dos || "");
+        componente.setAttribute("imagenExTres", producto.imagen_extra_tres || "");
         componente.setAttribute("nombre", producto.nombre);
         componente.setAttribute("precio", producto.precio);
         componente.setAttribute("descripcion", producto.descripcion);
