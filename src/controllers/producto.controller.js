@@ -42,6 +42,28 @@ const getProductos = async (req,res)=>{
 
 };
 
+const getProducto = async (req,res)=>{
+
+    try {
+
+        const id = req.params.id;
+
+        const producto = await productoService.listarProducto(id);
+
+        res.json(producto);
+
+    } catch(error){
+
+            console.log(error);
+
+            res.status(500).json({
+                error: error.message
+            });
+
+    }
+
+};
+
 const cargarProducto = async (req, res) => {
 
     try {
@@ -94,6 +116,7 @@ const cargarProducto = async (req, res) => {
 
 
 module.exports = {
+    getProducto,
     getProductos,
     cargarProducto
 };
