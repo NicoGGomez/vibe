@@ -130,7 +130,7 @@
 
 @media (max-width: 900px) {
     .productos-oferta,
-    .productos-destacados {
+    .productos-destacados .cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -144,7 +144,7 @@
     }
 
     .productos-oferta,
-    .productos-destacados {
+    .productos-destacados .cards {
         grid-template-columns: 1fr;
     }
 }
