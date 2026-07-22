@@ -24,7 +24,7 @@ const cargarUsuario = async (nombreUsuario, apellidoUsuario, emailUsuario, passw
         )
         VALUES
         ($1,$2,$3,$4)
-        RETURNING id, nombre, apellido, email
+        RETURNING id_usuario, nombre, apellido, email, rol
         `,
         [nombreUsuario, apellidoUsuario, emailUsuario, hash]
     );
