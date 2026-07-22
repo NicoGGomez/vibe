@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middlewares/upload");
 const verificarToken = require("../middlewares/auth.middleware");
-const verificarAdmin = require("../middlewares/verificarAdmin.middleware");
+const verificarRol = require("../middlewares/verificarAdmin.middleware");
 
 const productoController = require("../controllers/producto.controller");
 
