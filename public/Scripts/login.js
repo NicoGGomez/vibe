@@ -1,26 +1,45 @@
-const form = document.querySelector('form.cont');
-console.log(form);
+const formLogin = document.getElementById("form-login");
+const inputEmail = document.getElementById("input-lg-email");
+const inputPassword = document.getElementById("input-lg-password");
 
-fetch('/login', {
-    method: 'POST',
-    body: JSON.stringify({ name, password }),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
+formLogin.addEventListener("submit", async (e) => {
 
-form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const data = new FormData(form);
+    try {
 
-    const name = data.get('name')
-    const password = data.get('password')
+        const respuesta = await fetch("https://vibe-n9dy.onrender.com/usuarios/login",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                emailUsuario: inputEmail.value,
+                passwordUsuario: inputPassword.value
+            })
+        });
 
-    if(name == "admin" && password == "1234"){
-        window.location.href = "index.html/edicion";
-    } else {
-        window.location.href = "login.html";
+        const data = await respuesta.json();
+
+        if(!respuesta.ok){
+            throw new Error(data.error);
+        }
+
+        localStorage.setItem("token", data.token);
+
+        localStorage.setItem(
+            "usuario",
+            JSON.stringify(data.usuario)
+        );
+
+        console.log(data);
+
+        window.location.href = "index.html";
+
+    } catch (error) {
+
+        console.log("Error al iniciar sesion:", error);
+
     }
-});
 
+});

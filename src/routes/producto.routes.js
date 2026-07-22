@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middlewares/upload");
+const verificarToken = require("../middlewares/auth.middleware");
 
 const productoController = require("../controllers/producto.controller");
 
 router.get("/", productoController.getProductos);
 router.get("/:id", productoController.getProducto);
-
-const upload = require("../middlewares/upload");
-
 router.post(
     "/",
+    verificarToken,
     upload.fields([
         {
             name: "imagenPrincipal",

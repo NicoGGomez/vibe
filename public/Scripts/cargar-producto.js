@@ -39,12 +39,26 @@ formProducto.addEventListener("submit", async (e) => {
 
     try {
 
+        const token = localStorage.getItem("token");
+
+        if(!token){
+            alert("Tenés que iniciar sesión");
+            return;
+        }
+
         const respuesta = await fetch("https://vibe-n9dy.onrender.com/productos", {
             method: "POST",
+            headers:{
+                Authorization:`Bearer ${token}`
+            },
             body: formData
         });
 
         const data = await respuesta.json();
+
+        if(!respuesta.ok){
+            throw new Error(data.error);
+        }
 
         console.log(data);
 

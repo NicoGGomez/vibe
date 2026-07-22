@@ -70,9 +70,48 @@ const registrarUsuario = async (req, res) => {
 
 };
 
+const loguearUsuario = async (req, res) => {
 
+    try {
+
+        const {
+            emailUsuario,
+            passwordUsuario
+        } = req.body;
+
+        if(
+            !emailUsuario ||
+            !passwordUsuario
+        ){
+            return res.status(400).json({
+                error:"Complete todos los campos."
+            });
+        }
+
+        const datos = await usuarioService.loguearUsuario(
+            emailUsuario,
+            passwordUsuario
+        );
+
+        res.status(200).json({
+            mensaje: "Sesion iniciada correctamente",
+            token: datos.token,
+            usuario: datos.usuario
+        });
+
+    } catch(error) {
+            
+            console.log(error);
+
+            res.status(500).json({
+                error: error.message
+            });
+    }
+
+};
 
 module.exports = {
     getUsuarios,
-    registrarUsuario
+    registrarUsuario,
+    loguearUsuario
 };

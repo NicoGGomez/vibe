@@ -32,7 +32,22 @@ const cargarUsuario = async (nombreUsuario, apellidoUsuario, emailUsuario, passw
     return resultado.rows[0];
 };
 
+const obtenerUsuarioPorEmail = async (emailUsuario) => {
+
+    const resultado = await db.query(
+        `
+        SELECT *
+        FROM usuario
+        WHERE email = $1;
+        `,
+        [emailUsuario]
+    );
+
+    return resultado.rows[0];
+};
+
 module.exports = {
     obtenerUsuarios,
-    cargarUsuario
+    cargarUsuario,
+    obtenerUsuarioPorEmail
 };
