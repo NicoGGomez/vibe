@@ -36,15 +36,19 @@ class NavBar extends HTMLElement {
                             : `<li><a href="perfil.html">Perfil</a></li>`
                     }
 
-                    ${
-                        usuario?.rol === "admin"
-                            ? `<li><a href="cargarProducto.html">Cargar producto</a></li>`
-                            : ""
-                    }
+                    <li id="btnAdmin">
+                        <a href="cargarProducto.html">Cargar producto</a>
+                    </li>
 
                 </ul>
             </nav>
         `;
+
+        const btnAdmin = this.querySelector("#btnAdmin");
+
+        if (usuario?.rol !== "admin") {
+            btnAdmin.style.display = "none";
+        }
     }
 }
 
