@@ -1,6 +1,14 @@
+import { getUsuario } from "./auth.js";
+
+const usuario = getUsuario();
+
+if (!usuario || usuario.rol !== "admin") {
+    window.location.replace("index.html");
+    throw new Error("Acceso denegado");
+}
+
 const formCategoria = document.getElementById("form-carga-categoria");
 const inputNombre = document.getElementById("input-ca-nombre");
-
 
 formCategoria.addEventListener("submit", async (e) => {
 
