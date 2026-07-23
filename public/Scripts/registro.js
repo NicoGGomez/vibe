@@ -1,3 +1,12 @@
+import { getUsuario } from "./auth.js";
+
+const usuario = getUsuario();
+
+if (usuario) {
+    window.location.replace("perfil.html");
+    throw new Error("Ya estas logueado");
+}
+
 const formRegistro = document.getElementById("form-registro");
 const inputNombre = document.getElementById("input-lg-nombre");
 const inputApellido = document.getElementById("input-lg-apellido");

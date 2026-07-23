@@ -1,3 +1,12 @@
+import { getUsuario } from "./auth.js";
+
+const usuario = getUsuario();
+
+if (usuario) {
+    window.location.replace("perfil.html");
+    throw new Error("Ya estas logueado");
+}
+
 const formLogin = document.getElementById("form-login");
 const inputEmail = document.getElementById("input-lg-email");
 const inputPassword = document.getElementById("input-lg-password");
