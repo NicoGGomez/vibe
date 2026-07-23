@@ -15,7 +15,7 @@
 
 // customElements.define("nav-bar", NavBar);
 
-import { getUsuario } from "./auth.js";
+import { getUsuario } from "scripts/auth.js";
 
 const usuario = getUsuario();
 
