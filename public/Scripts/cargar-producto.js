@@ -1,3 +1,12 @@
+import { getUsuario } from "./auth.js";
+
+const usuario = getUsuario();
+
+if (!usuario || usuario.rol !== "admin") {
+    window.location.replace("index.html");
+    throw new Error("Acceso denegado");
+}
+
 const formProducto = document.getElementById("form-carga-producto");
 const inputNombre = document.getElementById("input-pr-nombre");
 const inputPrecio = document.getElementById("input-pr-precio");
