@@ -32,5 +32,11 @@ router.post(
     ]),
     productoController.cargarProducto
 );
+router.delete(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    productoController.eliminarProducto
+);
 
 module.exports = router;

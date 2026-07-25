@@ -13,8 +13,13 @@ const cargarProductos = async (nombre, precio, descr, imgP, img1, img2, img3, st
     return await productoModel.cargarProductos(nombre, precio, descr, imgP, img1, img2, img3, sttock, categoria);
 }
 
+const eliminarProducto = async (id) => {
+    return await productoModel.eliminarProducto(id);
+}
+
 module.exports = {
     listarProducto,
     listarProductos,
-    cargarProductos
+    cargarProductos,
+    eliminarProducto
 };

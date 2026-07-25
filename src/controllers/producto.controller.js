@@ -114,9 +114,32 @@ const cargarProducto = async (req, res) => {
 
 };
 
+const eliminarProducto = async (req,res)=>{
+
+    try {
+
+        const id = req.params.id;
+
+        const producto = await productoService.eliminarProducto(id);
+
+        res.json(producto);
+
+    } catch(error){
+
+            console.log(error);
+
+            res.status(500).json({
+                error: error.message
+            });
+
+    }
+
+};
+
 
 module.exports = {
     getProducto,
     getProductos,
-    cargarProducto
+    cargarProducto,
+    eliminarProducto
 };

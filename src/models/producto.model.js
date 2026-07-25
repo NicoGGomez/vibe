@@ -44,9 +44,19 @@ const cargarProductos = async (nombre, precio, descr, imgP, img1, img2, img3, st
     return resultado.rows[0];
 };
 
+const eliminarProducto = async (id) => {
+
+    const resultado = await db.query(
+        "DELETE FROM producto WHERE id_producto = $1 RETURNING *",
+        [id]
+    );
+
+    return resultado.rows[0];
+};
 
 module.exports = {
     obtenerProducto,
     obtenerProductos,
-    cargarProductos
+    cargarProductos,
+    eliminarProducto
 };
