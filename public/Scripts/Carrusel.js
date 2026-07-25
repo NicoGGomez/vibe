@@ -1,65 +1,89 @@
-const cards = document.querySelector(".cards");
 
-const originales = [...cards.children];
+function iniciarCarrusel(){
 
-let anchoNecesario = window.innerWidth * 2;
+    const cards = document.querySelector(".carrusel-cards");
 
-while (cards.scrollWidth < anchoNecesario) {
-    originales.forEach(card => {
-        cards.appendChild(card.cloneNode(true));
-    });
-}
-
-let x = 0;
-const velocidad = 0.7;
-
-let pausado = false;
-
-cards.addEventListener("mouseenter", () => pausado = true);
-cards.addEventListener("mouseleave", () => pausado = false);
-
-
-// Calculamos ancho real del loop
-function calcularAnchoOriginal(){
-
-    const gap = parseInt(getComputedStyle(cards).gap) || 0;
-
-    return originales.reduce(
-        (total, card) => total + card.getBoundingClientRect().width,
-        0
-    ) + gap * (originales.length - 1);
-}
-
-
-let anchoOriginal = calcularAnchoOriginal() + 20;
-
-
-cards.style.willChange = "transform";
-
-
-function animar(){
-
-    if(!pausado){
-
-        x += velocidad;
-
-        if(x >= anchoOriginal){
-            x -= anchoOriginal;
-        }
-
-
-        cards.style.transform = `translate3d(-${x}px,0,0)`;
+    if (!cards) {
+        console.log("No existe carrusel");
+        return;
     }
 
 
-    requestAnimationFrame(animar);
+    const originales = [...cards.children];
+
+
+    // duplicamos
+    originales.forEach(card => {
+        const clon = card.cloneNode(true);
+        cards.appendChild(clon);
+    });
+
+
+    let x = 0;
+    const velocidad = 0.5;
+
+    let pausado = false;
+
+
+    cards.addEventListener("mouseenter", () => pausado = true);
+    cards.addEventListener("mouseleave", () => pausado = false);
+
+
+    function calcularAnchoOriginal(){
+
+        let ancho = 0;
+
+        originales.forEach(card => {
+            ancho += card.getBoundingClientRect().width;
+        });
+
+        const gap = parseInt(getComputedStyle(cards).gap) || 0;
+
+        return ancho + gap * originales.length;
+    }
+
+
+    let anchoOriginal;
+
+
+    // Esperamos que rendericen los card-comp
+    setTimeout(() => {
+        anchoOriginal = calcularAnchoOriginal();
+
+        console.log("ancho carrusel:", anchoOriginal);
+        console.log("ancho real:", cards.scrollWidth);
+
+        animar();
+    }, 100);
+
+
+    function animar(){
+
+        if(!pausado && anchoOriginal){
+
+            x += velocidad;
+
+
+            if (x >= anchoOriginal - 50) {
+                cards.style.transition = "none";
+                x = 0;
+                cards.style.transform = `translate3d(-${x}px,0,0)`;
+            }
+
+
+            cards.style.transform = `translate3d(-${x}px,0,0)`;
+        }
+
+
+        requestAnimationFrame(animar);
+    }
+
+
+    window.addEventListener("resize", () => {
+        anchoOriginal = calcularAnchoOriginal();
+    });
+
 }
 
 
-animar();
-
-
-// Por si cambia el tamaño de pantalla
-window.addEventListener("resize", () => {
-    anchoOriginal = calcularAnchoOriginal();
-});
+iniciarCarrusel();

@@ -78,7 +78,7 @@
     background-color: rgb(162, 136, 136);
 }
 
-.cards {
+.carrusel-cards {
     display: flex;
     gap: 20px;
     width: max-content;

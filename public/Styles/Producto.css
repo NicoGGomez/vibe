@@ -71,11 +71,18 @@ producto-comp {
 }
 
 .contenedor-productos-similares {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.cards {
     display: grid;
     margin: 3vh 0 3vh 0;
     width: 100%;
     gap: 2vh;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 @media (max-width: 900px) {
@@ -99,7 +106,7 @@ producto-comp {
         overflow-x: scroll;
     }
 
-    .contenedor-productos-similares {
+    .cards {
         grid-template-columns: repeat(1, 1fr);
     }
 

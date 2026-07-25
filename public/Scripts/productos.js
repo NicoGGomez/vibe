@@ -31,15 +31,6 @@ const cargarProductos = async () => {
             const botonEliminar = esAdmin ? `<button class="btn-eliminar" data-id="${producto.id_producto}">✖</button>` : "";
 
             if (contenedorCards) {
-            //     contenedorCards.innerHTML += `
-            //         <card-comp
-            //             data-id="${producto.id_producto}"
-            //             imagen="${producto.imagen_principal}"
-            //             nombre="${producto.nombre}"
-            //             precio="${producto.precio}">
-            //         </card-comp>
-            //     `;
-            
 
             contenedorCards.innerHTML += `
                 <div class="card-wrapper">
@@ -100,7 +91,6 @@ document.addEventListener("click", async (e) => {
             throw new Error("No se pudo eliminar");
         }
 
-        // e.target.closest(".card-wrapper").remove();
         await cargarProductos();
 
     } catch (error) {
