@@ -10,6 +10,7 @@ if (usuario) {
 const formLogin = document.getElementById("form-login");
 const inputEmail = document.getElementById("input-lg-email");
 const inputPassword = document.getElementById("input-lg-password");
+const divError = document.getElementById("msg-error");
 
 formLogin.addEventListener("submit", async (e) => {
 
@@ -48,6 +49,12 @@ formLogin.addEventListener("submit", async (e) => {
     } catch (error) {
 
         console.log("Error al iniciar sesion:", error);
+        divError.textContent = error.message;
+        divError.style.display = "block";
+
+        setTimeout(() => {
+            divError.style.display = "none";
+        }, 3000);
 
     }
 

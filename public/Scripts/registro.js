@@ -12,6 +12,8 @@ const inputNombre = document.getElementById("input-lg-nombre");
 const inputApellido = document.getElementById("input-lg-apellido");
 const inputEmail = document.getElementById("input-lg-email");
 const inputPassword = document.getElementById("input-lg-password");
+const divError = document.getElementById("msg-error");
+
 
 formRegistro.addEventListener("submit", async (e) => {
 
@@ -46,6 +48,12 @@ formRegistro.addEventListener("submit", async (e) => {
     } catch (error) {
 
         console.log("Error al cargar el usuario:", error);
+        divError.textContent = error.message;
+        divError.style.display = "block";
+
+        setTimeout(() => {
+            divError.style.display = "none";
+        }, 3000);
 
     }
 
