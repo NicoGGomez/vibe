@@ -9,6 +9,7 @@
     padding: 3vh;
     background-color: #fff;
     width: 60%;
+    min-height: 60vh;
     flex-direction: column;
     gap: 3vh;
     margin: 2vh 0;

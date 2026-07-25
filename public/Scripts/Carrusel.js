@@ -43,8 +43,6 @@ function animar(){
 
         x += velocidad;
 
-
-        // reinicio suave
         if(x >= anchoOriginal){
             x -= anchoOriginal;
         }

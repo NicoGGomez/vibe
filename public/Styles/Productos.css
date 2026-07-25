@@ -23,6 +23,10 @@
     list-style: none;
 }
 
+.categorias a {
+    color: #000;
+}
+
 .contenedor-productos .separador {
     margin-top: 2vh;
     width: 100%;

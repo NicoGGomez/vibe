@@ -1,0 +1,9 @@
+.contenedor-perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80vh;
+    margin: 2vh;
+    background-color: #fff;
+}
