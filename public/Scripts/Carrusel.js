@@ -14,6 +14,7 @@ function iniciarCarrusel(){
 
     // duplicamos
     originales.forEach(card => {
+        console.log(card.getBoundingClientRect().width);
         const clon = card.cloneNode(true);
         cards.appendChild(clon);
     });
@@ -39,7 +40,7 @@ function iniciarCarrusel(){
 
         const gap = parseInt(getComputedStyle(cards).gap) || 0;
 
-        return ancho + gap * originales.length;
+        return ancho + gap * (originales.length - 1);
     }
 
 
@@ -64,7 +65,7 @@ function iniciarCarrusel(){
             x += velocidad;
 
 
-            if (x >= anchoOriginal - 50) {
+            if (x >= anchoOriginal) {
                 cards.style.transition = "none";
                 x = 0;
                 cards.style.transform = `translate3d(-${x}px,0,0)`;
@@ -79,8 +80,9 @@ function iniciarCarrusel(){
     }
 
 
-    window.addEventListener("resize", () => {
+    window.addEventListener("load", () => {
         anchoOriginal = calcularAnchoOriginal();
+        animar();
     });
 
 }
