@@ -87,6 +87,12 @@ producto-comp {
 
 @media (max-width: 900px) {
 
+    .productos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .contenedor-producto {
         display: flex;
         flex-direction: column;

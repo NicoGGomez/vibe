@@ -1,5 +1,8 @@
 a {
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
@@ -59,7 +62,7 @@ a {
     align-items: center;
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 20px;
     width: 30px;
     height: 30px;
     border: none;
@@ -73,4 +76,26 @@ a {
 
 .btn-eliminar:hover{
     background: #c40000;
+}
+
+@media (max-width: 900px) {
+
+    .btn-eliminar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 40px;
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 50%;
+        background: red;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+        z-index: 100;
+    }
+
 }
