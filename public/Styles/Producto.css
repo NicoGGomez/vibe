@@ -70,14 +70,20 @@ producto-comp {
     justify-content: start;
 }
 
-.productos-similares .contenedor-productos-similares {
+.productos-similares {
+    width: 80%;
+    margin: 2vh;
+    gap: 4vh;
+}
+
+.productos-similares .cont-productos-similares {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.contenedor-productos-similares .cards {
+.productos-similares .cont-productos-similares .cards {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -112,7 +118,7 @@ producto-comp {
     }
 
     .cards {
-        grid-template-columns: repeat(1, 1fr);
+        /* grid-template-columns: repeat(1, 1fr); */
     }
 
 }
