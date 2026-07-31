@@ -1,29 +1,37 @@
 import { getUsuario } from "./auth.js";
 
 const parametros = new URLSearchParams(window.location.search);
-const categoriaSeleccionada = parametros.get("categoria");
+const idProducto = parametros.get("id");
 
-const contenedor = document.getElementById("lista-productos");
-const contenedorCards = document.getElementById("lista-cards-productos");
+const contenedorCards = document.getElementById("lista-cards-productos-similares");
 
 const usuario = getUsuario();
 const esAdmin = usuario?.rol === "admin";
 
-const cargarProductos = async () => {
+const cargarProductosRelacionados = async () => {
 
     try {
 
-        let url = "https://vibe-n9dy.onrender.com/productos";
+        // Obtengo el producto actual
+        const respuestaProducto = await fetch(
+            `https://vibe-n9dy.onrender.com/productos/${idProducto}`
+        );
 
-        if (categoriaSeleccionada) {
-            url = `https://vibe-n9dy.onrender.com/productos/categoria/${categoriaSeleccionada}`;
-        }
+        const productoActual = await respuestaProducto.json();
 
-        const respuesta = await fetch(url);
-        const productos = await respuesta.json();
+        // Obtengo los productos de la misma categoría
+        const respuesta = await fetch(
+            `https://vibe-n9dy.onrender.com/productos/categoria/${productoActual.id_categoria}`
+        );
 
-        if (contenedorCards) contenedorCards.innerHTML = "";
-        if (contenedor) contenedor.innerHTML = "";
+        let productos = await respuesta.json();
+
+        // Quito el producto que estoy viendo
+        productos = productos.filter(
+            producto => producto.id_producto != idProducto
+        );
+
+        contenedorCards.innerHTML = "";
 
         productos.forEach(producto => {
 
@@ -31,34 +39,17 @@ const cargarProductos = async () => {
                 ? `<button class="btn-eliminar" data-id="${producto.id_producto}">✖</button>`
                 : "";
 
-            if (contenedorCards) {
-                contenedorCards.innerHTML += `
-                    <div class="card-wrapper">
-                        ${botonEliminar}
-                        <card-comp
-                            data-id="${producto.id_producto}"
-                            imagen="${producto.imagen_principal}"
-                            nombre="${producto.nombre}"
-                            precio="${producto.precio}">
-                        </card-comp>
-                    </div>
-                `;
-            }
-
-            if (contenedor) {
-                contenedor.innerHTML += `
-                    <producto-comp
+            contenedorCards.innerHTML += `
+                <div class="card-wrapper">
+                    ${botonEliminar}
+                    <card-comp
                         data-id="${producto.id_producto}"
-                        nombre="${producto.nombre}"
-                        precio="${producto.precio}"
-                        descripcion="${producto.descripcion}"
                         imagen="${producto.imagen_principal}"
-                        imagenExUno="${producto.imagen_extra_uno ?? ""}"
-                        imagenExDos="${producto.imagen_extra_dos ?? ""}"
-                        imagenExTres="${producto.imagen_extra_tres ?? ""}">
-                    </producto-comp>
-                `;
-            }
+                        nombre="${producto.nombre}"
+                        precio="${producto.precio}">
+                    </card-comp>
+                </div>
+            `;
 
         });
 
@@ -68,4 +59,4 @@ const cargarProductos = async () => {
 
 };
 
-cargarProductos();
+cargarProductosRelacionados();
