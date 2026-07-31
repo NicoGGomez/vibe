@@ -162,6 +162,7 @@ const eliminarProducto = async (req,res)=>{
 module.exports = {
     getProducto,
     getProductos,
+    getProductoPorCategoria,
     cargarProducto,
     eliminarProducto
 };
