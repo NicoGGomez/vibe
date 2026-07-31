@@ -10,6 +10,17 @@ const obtenerCategorias = async () => {
     return resultado.rows;
 };
 
+const obtenerCategoria = async (id) => {
+
+    const resultado = await db.query(
+        "SELECT * FROM categoria WHERE id_categoria = $1",
+        [id]
+    );
+
+    return resultado.rows[0];
+};
+
+
 const cargarCategorias = async (nombreCategoria) => {
     const resultado = await db.query(
         `INSERT INTO categoria (nombre)
@@ -24,5 +35,6 @@ const cargarCategorias = async (nombreCategoria) => {
 
 module.exports = {
     obtenerCategorias,
-    cargarCategorias
+    cargarCategorias,
+    obtenerCategoria
 };

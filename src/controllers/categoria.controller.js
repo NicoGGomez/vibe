@@ -45,8 +45,31 @@ const cargarCategoria = async (req, res) => {
 
 };
 
+const getCategoria = async (req,res)=>{
+
+    try {
+
+        const id = req.params.id;
+
+        const categoria = await categoriaService.listarCategoria(id);
+
+        res.json(categoria);
+
+    } catch(error){
+
+            console.log(error);
+
+            res.status(500).json({
+                error: error.message
+            });
+
+    }
+
+};
+
 
 module.exports = {
     getCategorias,
-    cargarCategoria
+    cargarCategoria,
+    getCategoria
 };

@@ -64,6 +64,28 @@ const getProducto = async (req,res)=>{
 
 };
 
+const getProductoPorCategoria = async (req,res)=>{
+
+    try {
+
+        const id = req.params.id_categoria;
+
+        const producto = await productoService.listarProductoPorCategoria(id);
+
+        res.json(producto);
+
+    } catch(error){
+
+            console.log(error);
+
+            res.status(500).json({
+                error: error.message
+            });
+
+    }
+
+};
+
 const cargarProducto = async (req, res) => {
 
     try {

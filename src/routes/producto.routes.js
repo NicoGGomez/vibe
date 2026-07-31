@@ -7,6 +7,7 @@ const verificarRol = require("../middlewares/verificarAdmin.middleware");
 const productoController = require("../controllers/producto.controller");
 
 router.get("/", productoController.getProductos);
+router.get("/categoria/:id", productoController.getProductoPorCategoria);
 router.get("/:id", productoController.getProducto);
 router.post(
     "/",
