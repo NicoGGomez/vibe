@@ -24,6 +24,9 @@ const cargarProductosRelacionados = async () => {
             `https://vibe-n9dy.onrender.com/productos/categoria/${productoActual.id_categoria}`
         );
 
+        console.log(productoActual);
+        console.log(productoActual.id_categoria);
+
         let productos = await respuesta.json();
 
         // Quito el producto que estoy viendo

@@ -68,7 +68,7 @@ const getProductoPorCategoria = async (req,res)=>{
 
     try {
 
-        const id = req.params.id_categoria;
+        const id = req.params.id;
 
         const producto = await productoService.listarProductoPorCategoria(id);
 
