@@ -24,6 +24,8 @@ const cargarProducto = async () => {
         componente.setAttribute("precio", producto.precio);
         componente.setAttribute("descripcion", producto.descripcion);
 
+        document.title = `Vibe - ${producto.nombre}`;
+
         componente.render();
 
     } catch (error) {

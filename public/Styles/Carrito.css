@@ -1,0 +1,45 @@
+.contenedor-carrito {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.contenedor-carrito .contenedor-info-pago {
+    background-color: #fff;
+    width: 100%;
+    padding: 2vh;
+    gap: 2vh;
+}
+
+.contenedor-carrito .contenedor-info-pago .info-compra {
+    width: 100%;
+}
+
+.contenedor-carrito .contenedor-info-pago .cupon {
+    width: 100%;
+}
+
+.contenedor-carrito .contenedor-info-pago .cupon input {
+    width: 100%;
+    padding: 1vh;
+    background-color: #e1e0e0;
+    border: none;
+}
+
+.contenedor-carrito .titulo p {
+    font-weight: bold;
+}
+
+.contenedor-carrito .titulo {
+    width: 100%;
+}
+
+.contenedor-carrito .titulo .separador {
+    width: 100%;
+}
+
+.contenedor-carrito .carrito-productos, .carrito-envio, .monto {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
