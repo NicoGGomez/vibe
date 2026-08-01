@@ -36,7 +36,7 @@ async function agregarAlCarrito(idProducto) {
 
     if (!respuesta.ok) {
         const error = await respuesta.json();
-        console.log(error); // <-- importante
+        console.log(error);
         throw new Error(error.mensaje);
     }
 
@@ -67,6 +67,7 @@ async function cargarCarrito(){
 
         lista.innerHTML += `
             <carrito-producto
+                id="${producto.id_producto}"
                 nombre="${producto.nombre}"
                 precio="${producto.precio}"
                 cantidad="${producto.cantidad}"
