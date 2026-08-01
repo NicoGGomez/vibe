@@ -35,7 +35,9 @@ async function agregarAlCarrito(idProducto) {
     });
 
     if (!respuesta.ok) {
-        throw new Error("No se pudo agregar el producto al carrito");
+        const error = await respuesta.json();
+        console.log(error); // <-- importante
+        throw new Error(error.mensaje);
     }
 
     cargarCarrito();
