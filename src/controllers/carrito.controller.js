@@ -4,7 +4,7 @@ const agregarProductoCarrito = async (req, res) => {
 
     try {
 
-        const idUsuario = req.usuario.id_usuario;
+        const idUsuario = req.usuario.id;
         const { id_producto, cantidad } = req.body;
 
         await carritoService.agregarProducto(
@@ -29,7 +29,7 @@ const getProductosCarrito = async (req, res) => {
 
     try {
 
-        const idUsuario = req.usuario.id_usuario;
+        const idUsuario = req.usuario.id;
 
         const productos = await carritoService.getProductosCarrito(idUsuario);
 
