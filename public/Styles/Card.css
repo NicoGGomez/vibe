@@ -5,13 +5,18 @@ a {
     align-items: center;
 }
 
+.card-wrapper {
+    width: 100%;
+    max-width: 350px;
+    height: 450px;
+}
+
 .card {
     background-color: #fff;
     color: #000;
     padding: 2vh;
     transition:.3s;
     width: 100%;
-    max-width: 350px;
     height: 450px;
 }
 
