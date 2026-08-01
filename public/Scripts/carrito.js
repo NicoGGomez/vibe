@@ -15,12 +15,23 @@ btnCerrarCarrito.addEventListener("click", () => {
 });
 
 document.addEventListener("agregar-carrito", (e) => {
-    agregarAlCarrito(e.detail.idProducto);
+    try {
+        agregarAlCarrito(e.detail.idProducto);
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
 });
+
 
 async function agregarAlCarrito(idProducto) {
 
     const token = localStorage.getItem("token");
+
+    if (!token) {
+        alert("Debés iniciar sesión para agregar productos al carrito.");
+        return;
+    }
 
     const respuesta = await fetch("https://vibe-n9dy.onrender.com/carrito", {
         method: "POST",

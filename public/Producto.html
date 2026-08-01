@@ -29,6 +29,18 @@
 
     <bread-crumb links='Home,Producto'></bread-crumb>
 
+    <!-- carrito -->
+
+    <div id="btn-abrir-carrito" class="carrito-btn-comp">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </div>
+
+    <div id="carrito-abierto" class="carrito-abierto-comp">
+        <div id="btn-cerrar-carrito" class="cerrar-carrito">x</div>
+        <b>Carrito</b>
+        <div id="lista-carrito"></div>
+    </div>
+
     <!-- seccion producto -->
 
     <producto-comp id="producto"></producto-comp>
@@ -57,12 +69,13 @@
 
     <!-- link a scripts -->
 
+    <script src="Scripts/carrito.js"></script>
     <script src="Scripts/producto.js"></script>
     <script src="Components/Producto.js"></script>
     <script src="Components/BreadCrumb.js"></script>
     <script src="Components/Card.js"></script>
     <script src="Components/Footer.js"></script>
-    <!-- <script type="module" src="Scripts/productos.js"></script> -->
+    <script src="Components/CarritoProducto.js"></script>
     <script type="module" src="Scripts/productosPorCategoria.js"></script>
     <script type="module" src="Components/NavBar.js"></script>
 </body>

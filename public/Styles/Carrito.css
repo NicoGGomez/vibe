@@ -67,7 +67,7 @@
 }
 
 .carrito-abierto-comp {
-    display: flex;
+    display: none;
     flex-direction: column;
 
     width: 350px;
@@ -123,4 +123,13 @@
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .carrito-abierto-comp {
+        width: 80%;
+    }
+
+
 }

@@ -48,13 +48,29 @@ class Producto extends HTMLElement {
 
                         <div class="cont botones">
                             <button>Comprar</button>
-                            <button>Agregar al carrito</button>
+                            <button id="btn-agregar-carrito-prod">Agregar al carrito</button>
                         </div>
                     </div>
 
                 </div>
             </div>
         `;
+
+        const btnCarritoProducto = this.querySelector("#btn-agregar-carrito-prod");
+
+        btnCarritoProducto.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            this.dispatchEvent(
+                new CustomEvent("agregar-carrito", {
+                    bubbles: true,
+                    detail: {
+                        idProducto: id
+                    }
+                })
+            );
+        });
     }
 
 }
