@@ -1,9 +1,9 @@
-const pool = require("../config/db");
+const db = require("../config/database");
 
 // Buscar el carrito de un usuario
 const obtenerCarritoPorUsuario = async (idUsuario) => {
 
-    const resultado = await pool.query(
+    const resultado = await db.query(
         `SELECT * FROM carrito WHERE id_usuario = $1`,
         [idUsuario]
     );
@@ -14,7 +14,7 @@ const obtenerCarritoPorUsuario = async (idUsuario) => {
 // Crear un carrito para un usuario
 const crearCarrito = async (idUsuario) => {
 
-    const resultado = await pool.query(
+    const resultado = await db.query(
         `INSERT INTO carrito (id_usuario)
          VALUES ($1)
          RETURNING *`,
@@ -27,7 +27,7 @@ const crearCarrito = async (idUsuario) => {
 // Buscar si un producto ya está en el carrito
 const obtenerProductoCarrito = async (idCarrito, idProducto) => {
 
-    const resultado = await pool.query(
+    const resultado = await db.query(
         `SELECT *
          FROM carrito_producto
          WHERE id_carrito = $1
@@ -41,7 +41,7 @@ const obtenerProductoCarrito = async (idCarrito, idProducto) => {
 // Aumentar la cantidad de un producto existente
 const aumentarCantidad = async (idCarrito, idProducto, cantidad) => {
 
-    await pool.query(
+    await db.query(
         `UPDATE carrito_producto
          SET cantidad = cantidad + $3
          WHERE id_carrito = $1
@@ -53,7 +53,7 @@ const aumentarCantidad = async (idCarrito, idProducto, cantidad) => {
 // Agregar un producto nuevo al carrito
 const agregarProducto = async (idCarrito, idProducto, cantidad) => {
 
-    await pool.query(
+    await db.query(
         `INSERT INTO carrito_producto
         (cantidad, id_carrito, id_producto)
         VALUES ($1, $2, $3)`,
@@ -63,7 +63,7 @@ const agregarProducto = async (idCarrito, idProducto, cantidad) => {
 
 const getProductosCarrito = async (idUsuario) => {
 
-    const resultado = await pool.query(
+    const resultado = await db.query(
         `SELECT
             cp.id_carrito_producto,
             cp.cantidad,
