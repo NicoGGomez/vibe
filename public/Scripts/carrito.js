@@ -6,7 +6,7 @@ btnAbrirCarrito.addEventListener("click", () => {
     carritoAbierto.style.display = "flex";
     btnAbrirCarrito.style.display = "none";
 
-    await cargarCarrito();
+    cargarCarrito();
 });
 
 btnCerrarCarrito.addEventListener("click", () => {
