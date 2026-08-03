@@ -85,7 +85,7 @@ const getProductosCarrito = async (idUsuario) => {
 
 const eliminarProducto = async (idCarrito, idProducto) => {
 
-    await db.query(
+    const resultado = await db.query(
         `DELETE FROM carrito_producto
          WHERE id_carrito = $1
          AND id_producto = $2`,
