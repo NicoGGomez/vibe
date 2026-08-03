@@ -45,7 +45,33 @@ const getProductosCarrito = async (req, res) => {
 
 };
 
+const eliminarProductoCarrito = async (req, res) => {
+
+    try {
+
+        const idUsuario = req.usuario.id;
+        const idProducto = req.params.id;
+
+        await carritoService.eliminarProductoCarrito(idUsuario, idProducto)
+
+        res.json({
+            mensaje: "Producto eliminado"
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+            res.status(500).json({
+                error: error.message
+            });
+
+    }
+
+}
+
 module.exports = {
     agregarProductoCarrito,
-    getProductosCarrito
+    getProductosCarrito,
+    eliminarProductoCarrito
 };

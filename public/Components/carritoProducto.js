@@ -10,9 +10,9 @@ class CarritoProducto extends HTMLElement {
 
         this.innerHTML = `
 
-            <a href="producto.html?id=${id}">
             <div class="producto-carrito">
-
+            <a href="producto.html?id=${id}">   
+        
                 <img src="${imagen}" alt="${nombre}">
 
                 <div class="info-producto">
@@ -22,8 +22,28 @@ class CarritoProducto extends HTMLElement {
                 </div>
             </a>
 
+            <div class="cont-btn-borrar-carrito">
+                <i class="fa-solid fa-trash btn-carrito btn-borrar-carrito"></i>
+            </div>
+
             </div>
         `;
+
+        const btnBorrarCarrito = this.querySelector(".btn-borrar-carrito");
+
+        btnBorrarCarrito.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            this.dispatchEvent(
+                new CustomEvent("borrar-carrito", {
+                    bubbles: true,
+                    detail: {
+                        idProducto: id
+                    }
+                })
+            );
+        });
     }
 
 }

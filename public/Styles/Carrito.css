@@ -91,6 +91,25 @@
 .producto-carrito {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+}
+
+.cont-btn-borrar-carrito {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.cont-btn-borrar-carrito i {
+    padding: 10px;
+    border-radius: 20vh;
+}
+
+.cont-btn-borrar-carrito i:hover {
+    background-color: #e53935;
+    color: #fff;
+    cursor: pointer;
 }
 
 #lista-carrito {

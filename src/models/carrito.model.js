@@ -83,11 +83,24 @@ const getProductosCarrito = async (idUsuario) => {
     return resultado.rows;
 };
 
+const eliminarProducto = async (idCarrito, idProducto) => {
+
+    await db.query(
+        `DELETE FROM carrito_producto
+         WHERE id_carrito = $1
+         AND id_producto = $2`,
+        [idCarrito, idProducto]
+    );
+
+    return resultado.rowCount;
+}
+
 module.exports = {
     obtenerCarritoPorUsuario,
     crearCarrito,
     obtenerProductoCarrito,
     aumentarCantidad,
     agregarProducto,
-    getProductosCarrito
+    getProductosCarrito,
+    eliminarProducto
 };

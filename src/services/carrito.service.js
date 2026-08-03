@@ -24,7 +24,7 @@ const agregarProducto = async (idUsuario, idProducto, cantidad) => {
     const cantidadActual = productoCarrito ? productoCarrito.cantidad : 0;
 
     if (cantidadActual + cantidad > producto.stock) {
-        throw new Error("No hay suficiente stock disponible.");
+        throw new Error("No hay stock disponible del producto.");
     }
 
     if (productoCarrito) {
@@ -46,7 +46,25 @@ const getProductosCarrito = async (idUsuario) => {
     return await carritoModel.getProductosCarrito(idUsuario);
 };
 
+const eliminarProductoCarrito = async (idUsuario, idProducto) => {
+    const carrito = await carritoModel.obtenerCarritoPorUsuario(idUsuario);
+
+    if (!carrito) {
+        throw new Error("Carrito no encontrado");
+    }
+
+    const filasEliminadas = await carritoModel.eliminarProducto(
+        carrito.id_carrito,
+        idProducto
+    );
+
+    if (filasEliminadas === 0) {
+        throw new Error("El producto no se encuentra en el carrito.");
+    }
+}
+
 module.exports = {
     agregarProducto,
-    getProductosCarrito
+    getProductosCarrito,
+    eliminarProductoCarrito
 };

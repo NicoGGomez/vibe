@@ -6,5 +6,6 @@ const verificarToken = require("../middlewares/auth.middleware");
 
 router.post("/", verificarToken, carritoController.agregarProductoCarrito);
 router.get("/", verificarToken, carritoController.getProductosCarrito);
+router.delete("/:id", verificarToken, carritoController.eliminarProductoCarrito);
 
 module.exports = router;

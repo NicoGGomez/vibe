@@ -1,6 +1,7 @@
 const btnAbrirCarrito = document.getElementById("btn-abrir-carrito");
 const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
 const carritoAbierto = document.getElementById("carrito-abierto");
+const mensajeError = document.getElementById("msg-error");
 
 btnAbrirCarrito.addEventListener("click", () => {
     carritoAbierto.style.display = "flex";
@@ -14,15 +15,13 @@ btnCerrarCarrito.addEventListener("click", () => {
     btnAbrirCarrito.style.display = "flex";
 });
 
-document.addEventListener("agregar-carrito", (e) => {
+document.addEventListener("agregar-carrito", async (e) => {
     try {
-        agregarAlCarrito(e.detail.idProducto);
+        await agregarAlCarrito(e.detail.idProducto);
     } catch (error) {
         console.error(error);
-        alert(error.message);
     }
 });
-
 
 async function agregarAlCarrito(idProducto) {
 
@@ -48,6 +47,54 @@ async function agregarAlCarrito(idProducto) {
     if (!respuesta.ok) {
         const error = await respuesta.json();
         console.log(error);
+
+        mensajeError.textContent = error.mensaje;
+        mensajeError.style.display = "block";
+
+        setTimeout(() => {
+            mensajeError.style.display = "none";
+        }, 3000);
+
+        throw new Error(error.mensaje);
+    }
+
+    cargarCarrito();
+}
+
+document.addEventListener("borrar-carrito", async (e) => {
+    try {
+        await borrarDelCarrito(e.detail.idProducto);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+async function borrarDelCarrito(idProducto) {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        alert("Debés iniciar sesión.");
+        return;
+    }
+
+    const respuesta = await fetch(`https://vibe-n9dy.onrender.com/carrito/${idProducto}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (!respuesta.ok) {
+        const error = await respuesta.json();
+
+        mensajeError.textContent = error.mensaje;
+        mensajeError.style.display = "block";
+
+        setTimeout(() => {
+            mensajeError.style.display = "none";
+        }, 3000);
+
         throw new Error(error.mensaje);
     }
 
