@@ -2,6 +2,7 @@ const btnAbrirCarrito = document.getElementById("btn-abrir-carrito");
 const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
 const carritoAbierto = document.getElementById("carrito-abierto");
 const mensajeError = document.getElementById("msg-error");
+const btnIrCarrito = document.getElementById("btn-ir-carrito");
 
 btnAbrirCarrito.addEventListener("click", () => {
     carritoAbierto.style.display = "flex";
@@ -63,9 +64,17 @@ async function agregarAlCarrito(idProducto) {
 
 document.addEventListener("borrar-carrito", async (e) => {
     try {
+        // Eliminar visualmente al instante
+        e.detail.elemento.remove();
+        actualizarBtnCarrito();
+
+        // Borrar en la base de datos
         await borrarDelCarrito(e.detail.idProducto);
+
     } catch (error) {
         console.error(error);
+
+        await cargarCarrito();
     }
 });
 
@@ -78,27 +87,20 @@ async function borrarDelCarrito(idProducto) {
         return;
     }
 
-    const respuesta = await fetch(`https://vibe-n9dy.onrender.com/carrito/${idProducto}`, {
-        method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${token}`
+    const respuesta = await fetch(
+        `https://vibe-n9dy.onrender.com/carrito/${idProducto}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }
-    });
+    );
 
     if (!respuesta.ok) {
         const error = await respuesta.json();
-
-        mensajeError.textContent = error.mensaje;
-        mensajeError.style.display = "block";
-
-        setTimeout(() => {
-            mensajeError.style.display = "none";
-        }, 3000);
-
         throw new Error(error.mensaje);
     }
-
-    cargarCarrito();
 }
 
 async function cargarCarrito(){
@@ -135,4 +137,11 @@ async function cargarCarrito(){
 
     });
 
+    actualizarBtnCarrito();
+
+}
+
+function actualizarBtnCarrito() {
+    const cantidad = document.querySelectorAll("carrito-producto").length;
+    btnIrCarrito.style.display = cantidad > 0 ? "block" : "none";
 }

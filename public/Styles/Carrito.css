@@ -82,10 +82,19 @@
     box-sizing: border-box;
 
     align-items: stretch;   /* <- importante */
+    gap: 2vh;
 
     z-index: 10000;
     border-radius: 2vh;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.carrito-abierto-comp .separador {
+    width: 100%;
+}
+
+#btn-ir-carrito {
+    display: none;
 }
 
 .producto-carrito {
@@ -123,6 +132,11 @@
 .producto-carrito img {
     width: 100px;
     height: 100px;
+}
+
+.producto-carrito a {
+    display: flex;
+    gap: 2vh;
 }
 
 .cerrar-carrito {

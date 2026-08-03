@@ -39,11 +39,13 @@ class CarritoProducto extends HTMLElement {
                 new CustomEvent("borrar-carrito", {
                     bubbles: true,
                     detail: {
-                        idProducto: id
+                        idProducto: id,
+                        elemento: this
                     }
                 })
             );
         });
+    
     }
 
 }
