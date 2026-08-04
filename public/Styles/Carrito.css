@@ -1,4 +1,5 @@
 .contenedor-carrito {
+    margin: 2vh;
     width: 80%;
     display: grid;
     grid-template-columns: 70% 30%;
@@ -159,6 +160,11 @@
 }
 
 @media (max-width: 600px) {
+
+    .contenedor-carrito {
+        display: flex;
+        flex-direction: column;
+    }
 
     .carrito-abierto-comp {
         width: 80%;

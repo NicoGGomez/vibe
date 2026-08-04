@@ -70,12 +70,17 @@ const getProductosCarrito = async (idUsuario) => {
             p.id_producto,
             p.nombre,
             p.precio,
-            p.imagen_principal
+            p.imagen_principal,
+            p.stock,
+            p.descripcion,
+            ca.nombre AS categoria
         FROM carrito c
         JOIN carrito_producto cp
             ON c.id_carrito = cp.id_carrito
         JOIN producto p
             ON cp.id_producto = p.id_producto
+        JOIN categoria ca
+            ON p.id_categoria = ca.id_categoria
         WHERE c.id_usuario = $1`,
         [idUsuario]
     );
