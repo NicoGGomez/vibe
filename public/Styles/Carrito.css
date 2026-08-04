@@ -1,7 +1,11 @@
+/* PAGINA CARRITO */
+
 .contenedor-carrito {
     margin: 2vh;
     width: 80%;
     display: grid;
+    justify-content: start;
+    align-items: start;
     grid-template-columns: 70% 30%;
 }
 
@@ -44,6 +48,21 @@
     display: flex;
     justify-content: space-between;
 }
+
+.contenedor-carrito .cards-carrito {
+    display: flex;
+    gap: 2vh;
+    flex-wrap: wrap;
+}
+
+carrito-card-comp {
+    width: 100%;
+    max-width: 320px;
+    max-height: 450px;
+    padding: 1vh;
+}
+
+/* CARRITO FLOTANTE */
 
 .carrito-btn-comp {
     position: fixed;
@@ -163,7 +182,14 @@
 
     .contenedor-carrito {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
+        gap: 1vh;
+    }
+
+    .cards-carrito {
+        justify-content: center;
+        align-items: center;
+        gap: 2vh;
     }
 
     .carrito-abierto-comp {

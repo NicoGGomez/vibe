@@ -4,18 +4,25 @@ const carritoAbierto = document.getElementById("carrito-abierto");
 const mensajeError = document.getElementById("msg-error");
 const btnIrCarrito = document.getElementById("btn-ir-carrito");
 const contenedorCardsCarrito = document.getElementById("cont-cards-carrito")
+const cantProductos = document.getElementById("cant-productos");
+const montoProductos = document.getElementById("monto-productos");
+const montoFinal = document.getElementById("monto-final");
 
-btnAbrirCarrito.addEventListener("click", () => {
-    carritoAbierto.style.display = "flex";
-    btnAbrirCarrito.style.display = "none";
+if (btnAbrirCarrito) {
+    btnAbrirCarrito.addEventListener("click", () => {
+        carritoAbierto.style.display = "flex";
+        btnAbrirCarrito.style.display = "none";
 
-    cargarCarrito();
-});
+        cargarCarrito();
+    });
+}
 
-btnCerrarCarrito.addEventListener("click", () => {
-    carritoAbierto.style.display = "none";
-    btnAbrirCarrito.style.display = "flex";
-});
+if (btnCerrarCarrito) {
+    btnCerrarCarrito.addEventListener("click", () => {
+        carritoAbierto.style.display = "none";
+        btnAbrirCarrito.style.display = "flex";
+    });
+}
 
 document.addEventListener("agregar-carrito", async (e) => {
     try {
@@ -65,6 +72,7 @@ async function agregarAlCarrito(idProducto) {
 
 document.addEventListener("borrar-carrito", async (e) => {
     try {
+        console.log("borrar-carrito", e.detail);
         // Eliminar visualmente al instante
         e.detail.elemento.remove();
         actualizarBtnCarrito();
@@ -73,7 +81,7 @@ document.addEventListener("borrar-carrito", async (e) => {
         await borrarDelCarrito(e.detail.idProducto);
 
         // Recargar vistas
-        await cargarCarrito();
+        cargarCarrito();
 
         if (contenedorCardsCarrito) {
             await cargarProductos();
@@ -135,32 +143,36 @@ async function cargarCarrito(){
 
     const lista = document.getElementById("lista-carrito");
 
-    lista.innerHTML = "";
+    if (lista) {
+        lista.innerHTML = "";
 
-    productos.forEach(producto=>{
+        productos.forEach(producto => {
+                lista.innerHTML += `
+                    <carrito-producto
+                        id="${producto.id_producto}"
+                        nombre="${producto.nombre}"
+                        precio="${producto.precio}"
+                        cantidad="${producto.cantidad}"
+                        imagen="${producto.imagen_principal}">
+                    </carrito-producto>
+                `;
+        });
 
-        lista.innerHTML += `
-            <carrito-producto
-                id="${producto.id_producto}"
-                nombre="${producto.nombre}"
-                precio="${producto.precio}"
-                cantidad="${producto.cantidad}"
-                imagen="${producto.imagen_principal}">
-            </carrito-producto>
-        `;
-
-    });
-
-    actualizarBtnCarrito();
+        actualizarBtnCarrito();
+    }
 
 }
 
 function actualizarBtnCarrito() {
+    if (!btnIrCarrito) return;
     const cantidad = document.querySelectorAll("carrito-producto").length;
     btnIrCarrito.style.display = cantidad > 0 ? "block" : "none";
 }
 
 const cargarProductos = async () => {
+
+    let total = 0;
+    let cantidadTotal = 0;
 
     try {
 
@@ -184,6 +196,12 @@ const cargarProductos = async () => {
         if (contenedorCardsCarrito) contenedorCardsCarrito.innerHTML = "";
 
         productos.forEach(producto => {
+
+            const precio = parseFloat(producto.precio);
+            const cantidad = parseInt(producto.cantidad, 10);
+
+            total += precio * cantidad;
+            cantidadTotal += cantidad;
 
             if (contenedorCardsCarrito) {
                 
@@ -214,6 +232,11 @@ const cargarProductos = async () => {
         }, 3000);
 
     }
+
+    cantProductos.textContent = `Productos (${cantidadTotal})`;
+    montoProductos.textContent = `$${total.toLocaleString("es-AR")}`;
+    const totalCompra = document.querySelector(".monto p:last-child");
+    totalCompra.textContent = `$${total.toLocaleString("es-AR")}`;
 
 }
 

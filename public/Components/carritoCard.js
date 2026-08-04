@@ -35,6 +35,8 @@ class carritoCard extends HTMLElement {
             e.preventDefault();
             e.stopPropagation();
 
+            console.log("Click borrar", id);
+
             this.dispatchEvent(
                 new CustomEvent("borrar-carrito", {
                     bubbles: true,
