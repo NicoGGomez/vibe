@@ -98,3 +98,18 @@ document.addEventListener("click", async (e) => {
         alert("Error al eliminar el producto.");
     }
 });
+
+function mostrarCarga() {
+    contenedor.innerHTML = "";
+
+    for (let i = 0; i < 8; i++) {
+        contenedor.innerHTML += `
+            <div class="card-skeleton">
+                <div class="skeleton-img"></div>
+                <div class="skeleton-text titulo"></div>
+                <div class="skeleton-text precio"></div>
+                <div class="skeleton-btn"></div>
+            </div>
+        `;
+    }
+}
