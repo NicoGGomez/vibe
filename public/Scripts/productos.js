@@ -9,6 +9,7 @@ const usuario = getUsuario();
 const esAdmin = usuario?.rol === "admin";
 
 const cargarProductos = async () => {
+    mostrarCarga();
 
     try {
 
@@ -99,17 +100,25 @@ document.addEventListener("click", async (e) => {
     }
 });
 
-function mostrarCarga() {
-    contenedor.innerHTML = "";
+function generarSkeleton() {
+    return `
+        <div class="card-skeleton">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-text titulo"></div>
+            <div class="skeleton-text precio"></div>
+            <div class="skeleton-btn"></div>
+        </div>
+    `;
+}
 
-    for (let i = 0; i < 8; i++) {
-        contenedor.innerHTML += `
-            <div class="card-skeleton">
-                <div class="skeleton-img"></div>
-                <div class="skeleton-text titulo"></div>
-                <div class="skeleton-text precio"></div>
-                <div class="skeleton-btn"></div>
-            </div>
-        `;
+function mostrarCarga() {
+    const skeletons = Array(8).fill(generarSkeleton()).join("");
+
+    if (contenedorCards) {
+        contenedorCards.innerHTML = skeletons;
+    }
+
+    if (contenedor) {
+        contenedor.innerHTML = skeletons;
     }
 }
