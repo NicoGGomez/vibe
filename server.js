@@ -1,5 +1,5 @@
 const app = require("./src/app");
-import { cotizarViaCargo } from "./src/services/viaCargo.service";
+const { cotizarViaCargo } = require("./src/services/viaCargo.service");
 
 
 const PORT = process.env.PORT || 3000;
