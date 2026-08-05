@@ -1,6 +1,6 @@
 const PUBLIC_KEY = process.env.VIACARGO_PUBLIC_KEY;
 
-export const cotizarViaCargo = async ({
+const cotizarViaCargo = async ({
     cpOrigen,
     cpDestino,
     peso,
@@ -19,20 +19,14 @@ export const cotizarViaCargo = async ({
         body: JSON.stringify({
             IdClienteRemitente: "99999999",
             IdCentroRemitente: "99",
-
             CodigoPostalRemitente: cpOrigen,
             CodigoPostalDestinatario: cpDestino,
-
             Alto: String(alto),
             Ancho: String(ancho),
             Largo: String(largo),
-
             Kilos: String(peso),
-
             NumeroBultos: "1",
-
             ImporteValorDeclarado: String(valorDeclarado),
-
             TipoPortes: "P"
         })
     });
@@ -42,4 +36,8 @@ export const cotizarViaCargo = async ({
     }
 
     return await response.json();
+};
+
+module.exports = {
+    cotizarViaCargo
 };
