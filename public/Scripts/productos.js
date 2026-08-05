@@ -1,4 +1,5 @@
 import { getUsuario } from "./auth.js";
+import { generarSkeleton, mostrarCarga } from "./carga.js";
 
 const parametros = new URLSearchParams(window.location.search);
 const categoriaSeleccionada = parametros.get("categoria");
@@ -9,7 +10,7 @@ const usuario = getUsuario();
 const esAdmin = usuario?.rol === "admin";
 
 const cargarProductos = async () => {
-    mostrarCarga();
+    mostrarCarga(contenedorCards, contenedor);
 
     try {
 
@@ -100,25 +101,25 @@ document.addEventListener("click", async (e) => {
     }
 });
 
-function generarSkeleton() {
-    return `
-        <div class="card-skeleton">
-            <div class="skeleton-img"></div>
-            <div class="skeleton-text titulo"></div>
-            <div class="skeleton-text precio"></div>
-            <div class="skeleton-btn"></div>
-        </div>
-    `;
-}
+// function generarSkeleton() {
+//     return `
+//         <div class="card-skeleton">
+//             <div class="skeleton-img"></div>
+//             <div class="skeleton-text titulo"></div>
+//             <div class="skeleton-text precio"></div>
+//             <div class="skeleton-btn"></div>
+//         </div>
+//     `;
+// }
 
-function mostrarCarga() {
-    const skeletons = Array(8).fill(generarSkeleton()).join("");
+// function mostrarCarga() {
+//     const skeletons = Array(8).fill(generarSkeleton()).join("");
 
-    if (contenedorCards) {
-        contenedorCards.innerHTML = skeletons;
-    }
+//     if (contenedorCards) {
+//         contenedorCards.innerHTML = skeletons;
+//     }
 
-    if (contenedor) {
-        contenedor.innerHTML = skeletons;
-    }
-}
+//     if (contenedor) {
+//         contenedor.innerHTML = skeletons;
+//     }
+// }

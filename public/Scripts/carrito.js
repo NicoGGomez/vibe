@@ -1,3 +1,5 @@
+import { mostrarCarga, generarSkeleton } from "./carga.js";
+
 const btnAbrirCarrito = document.getElementById("btn-abrir-carrito");
 const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
 const carritoAbierto = document.getElementById("carrito-abierto");
@@ -170,6 +172,8 @@ function actualizarBtnCarrito() {
 }
 
 const cargarProductos = async () => {
+
+    mostrarCarga(contenedorCardsCarrito)
 
     let total = 0;
     let cantidadTotal = 0;
