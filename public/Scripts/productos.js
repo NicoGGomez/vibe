@@ -89,8 +89,13 @@ document.addEventListener("click", async (e) => {
             }
         });
 
+        const data = await respuesta.json().catch(() => null);
+
+        console.log("DELETE status:", respuesta.status);
+        console.log("DELETE respuesta:", data);
+
         if (!respuesta.ok) {
-            throw new Error("No se pudo eliminar");
+            throw new Error(data?.error || data?.mensaje || "No se pudo eliminar");
         }
 
         await cargarProductos();
@@ -100,26 +105,3 @@ document.addEventListener("click", async (e) => {
         alert("Error al eliminar el producto.");
     }
 });
-
-// function generarSkeleton() {
-//     return `
-//         <div class="card-skeleton">
-//             <div class="skeleton-img"></div>
-//             <div class="skeleton-text titulo"></div>
-//             <div class="skeleton-text precio"></div>
-//             <div class="skeleton-btn"></div>
-//         </div>
-//     `;
-// }
-
-// function mostrarCarga() {
-//     const skeletons = Array(8).fill(generarSkeleton()).join("");
-
-//     if (contenedorCards) {
-//         contenedorCards.innerHTML = skeletons;
-//     }
-
-//     if (contenedor) {
-//         contenedor.innerHTML = skeletons;
-//     }
-// }
