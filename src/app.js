@@ -7,6 +7,7 @@ const categoriasRoutes = require("./routes/categoria.routes");
 const productosRoutes = require("./routes/producto.routes");
 const carritoRoutes = require("./routes/carrito.routes");
 const pagoRoutes = require("./routes/pago.routes");
+const mercadoPagoSetupRoutes = require("./routes/mercadoPagoSetup.routes");
 
 const app = express();
 
