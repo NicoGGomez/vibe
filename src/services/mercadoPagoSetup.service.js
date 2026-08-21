@@ -44,6 +44,32 @@ const crearSucursal = async () => {
     return datos;
 };
 
+const obtenerSucursales = async () => {
+
+    const respuesta = await fetch(
+        `https://api.mercadopago.com/users/${process.env.MP_USER_ID}/stores`,
+        {
+            headers: {
+                "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
+            }
+        }
+    );
+
+    const datos = await respuesta.json();
+
+    console.log("Sucursales:", respuesta.status);
+    console.log(datos);
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.message ||
+            JSON.stringify(datos)
+        );
+    }
+
+    return datos;
+};
+
 
 const crearCaja = async (storeId) => {
 
@@ -91,5 +117,6 @@ const crearCaja = async (storeId) => {
 
 module.exports = {
     crearSucursal,
-    crearCaja
+    crearCaja,
+    obtenerSucursales
 };

@@ -18,5 +18,9 @@ router.post(
     controller.crearCaja
 );
 
+router.get(
+    "/sucursales",
+    controller.obtenerSucursales
+);
 
 module.exports = router;
