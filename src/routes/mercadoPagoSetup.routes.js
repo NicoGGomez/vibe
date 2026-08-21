@@ -23,4 +23,9 @@ router.get(
     controller.obtenerSucursales
 );
 
+router.get(
+    "/caja",
+    controller.obtenerCaja
+);
+
 module.exports = router;

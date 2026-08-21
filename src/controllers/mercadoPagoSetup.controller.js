@@ -69,9 +69,28 @@ const obtenerSucursales = async (req, res) => {
     }
 };
 
+const obtenerCaja = async (req, res) => {
+
+    try {
+
+        const caja =
+            await mercadoPagoSetupService.obtenerCaja();
+
+        res.json(caja);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            mensaje: error.message
+        });
+    }
+};
 
 module.exports = {
     crearSucursal,
     crearCaja,
-    obtenerSucursales
+    obtenerSucursales,
+    obtenerCaja
 };

@@ -73,6 +73,34 @@ const obtenerSucursales = async () => {
 };
 
 
+const obtenerCaja = async () => {
+
+    const respuesta = await fetch(
+        "https://api.mercadopago.com/pos?external_id=VIBE001POS001",
+        {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
+            }
+        }
+    );
+
+    const datos = await respuesta.json();
+
+    console.log("Buscar caja:", respuesta.status);
+    console.log(datos);
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.message ||
+            datos.error ||
+            JSON.stringify(datos)
+        );
+    }
+
+    return datos;
+};
+
 const crearCaja = async (storeId) => {
 
     const respuesta = await fetch(
@@ -120,5 +148,6 @@ const crearCaja = async (storeId) => {
 module.exports = {
     crearSucursal,
     crearCaja,
-    obtenerSucursales
+    obtenerSucursales,
+    obtenerCaja
 };
