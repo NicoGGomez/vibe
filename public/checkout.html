@@ -29,14 +29,50 @@
 
     <div id="msg-error" class="error" style="display: none;"></div>
 
-    <bread-crumb links='Home,Carrito'></bread-crumb>
+    <bread-crumb links='Home,Carrito,Finalizar compra'></bread-crumb>
 
     <!-- seccion Carrito -->
 
     <div class="cont contenedor-carrito">
 
-        <div class="cont contenedor-cards-carrito">
-            <div id="cont-cards-carrito" class="cards-carrito"></div>
+        <div class="cont contenedor-info-cliente">
+            <div class="cont-titulo">
+                <b>Finalizar compra</b>
+                <div class="separador"></div>
+            </div>
+            <div class="cont-informacion-pedido">
+                <div class="cont-informacion">
+                    <div class="cont-ubicacion">
+                        <b>Forma de entrega</b>
+                        <div class="cont-ubicacion-btns">
+                            <button id="btn-retiro">Retiro</button>
+                            <button id="btn-envio">Envio</button>
+                            <button id="btn-ubicacion">Usar mi ubicacion</button>
+                            <button id="btn-ubicacion-seleccionada">✓</button>
+                        </div>
+
+                        <div id="info-ubicacion" class="cont-info-ubicacion">
+                            <input id="direccion" type="text" placeholder="Dirección">
+                            <input id="ciudad" type="text" placeholder="Ciudad">
+                            <input id="codigo-postal" type="text" placeholder="Código postal">
+                        </div>
+                    </div>
+                    <div class="cont-info-comprador">
+                        <b>Informacion del comprador</b>
+                        <div class="cont-input">
+                            <p>Nombre y Apellido</p>
+                            <input type="text" placeholder="Agrega tu nombre aqui...">
+                        </div>
+                        <div class="cont-input">
+                            <p>Telefono</p>
+                            <input type="text" placeholder="Agrega tu numero de Telefono aqui...">
+                        </div>
+                    </div>
+                </div>
+                <div class="cont-qr">
+                    <button>Generar QR de pago</button>
+                </div>
+            </div>
         </div>
 
         <div class="cont contenedor-info-pago">
@@ -53,7 +89,7 @@
                 </div>
                 <div class="carrito-envio">
                     <p class="monto-envio">Envio</p>
-                    <p>$000</p>
+                    <p id="monto-envio">$000</p>
                 </div>
             </div>
 
@@ -66,8 +102,6 @@
                 <p>Total</p>
                 <p id="monto-final" class="monto-final">$0000</p>
             </div>
-
-            <button id="btn-continuar-carrito">Continuar</button>
 
         </div>
 

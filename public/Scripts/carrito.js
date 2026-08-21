@@ -9,6 +9,230 @@ const contenedorCardsCarrito = document.getElementById("cont-cards-carrito")
 const cantProductos = document.getElementById("cant-productos");
 const montoProductos = document.getElementById("monto-productos");
 const montoFinal = document.getElementById("monto-final");
+const montoEnvio = document.getElementById("monto-envio");
+const btnContinuar = document.getElementById("btn-continuar-carrito")
+const btnEnvio = document.getElementById("btn-envio")
+const btnRetiro = document.getElementById("btn-retiro")
+const btnUbicacion = document.getElementById("btn-ubicacion")
+const formEnvio = document.getElementById("info-ubicacion")
+const btnUbicacionSeleccionada = document.getElementById("btn-ubicacion-seleccionada");
+
+const PUNTO_VIBE = {
+    lat: -37.314807489279154, 
+    lon: -59.11806689340413
+};
+
+const PRECIO_POR_CUADRA = 100;
+const METROS_POR_CUADRA = 100;
+let precioEnvio = 0;
+let totalCompra = 0;
+
+function calcularDistancia(lat1, lon1, lat2, lon2) {
+
+    const R = 6371000;
+
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+
+    const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) ** 2;
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c;
+}
+
+function actualizarPrecioEnvio(latitud, longitud) {
+
+    const distancia = calcularDistancia(
+        PUNTO_VIBE.lat,
+        PUNTO_VIBE.lon,
+        latitud,
+        longitud
+    );
+
+    const cuadras = Math.ceil(distancia / METROS_POR_CUADRA);
+
+    precioEnvio = cuadras * PRECIO_POR_CUADRA;
+
+    montoEnvio.textContent =
+        `$${precioEnvio.toLocaleString("es-AR")}`;
+
+    montoFinal.textContent =
+        `$${(totalCompra + precioEnvio).toLocaleString("es-AR")}`;
+
+    console.log("Distancia:", distancia, "metros");
+    console.log("Cuadras:", cuadras);
+    console.log("Precio envío:", precioEnvio);
+}
+
+if(btnEnvio){
+
+    btnEnvio.addEventListener("click", () => {
+    btnEnvio.style.opacity = 1
+    btnUbicacion.style.display= "flex"
+    btnRetiro.style.opacity = 0.5
+    formEnvio.style.display="flex"
+    btnUbicacionSeleccionada.style.display= "flex"
+    })
+
+}
+
+if(btnRetiro){
+
+    btnRetiro.addEventListener("click", () => {
+    btnRetiro.style.opacity = 1
+    btnUbicacion.style.display= "none"
+    btnEnvio.style.opacity = 0.5
+    formEnvio.style.display="none"
+    btnUbicacionSeleccionada.style.display= "none"
+    })
+
+}
+
+if(btnUbicacion){
+
+    btnUbicacion.addEventListener("click", () => {
+
+    if (!navigator.geolocation) {
+        alert("Tu navegador no permite obtener la ubicación.");
+        return;
+    }
+
+    btnUbicacion.textContent = "Obteniendo ubicación...";
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+
+            const latitud = position.coords.latitude;
+            const longitud = position.coords.longitude;
+
+            actualizarPrecioEnvio(latitud, longitud);
+
+            try {
+
+                const respuesta = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?lat=${latitud}&lon=${longitud}&format=json&addressdetails=1`
+                );
+
+                if (!respuesta.ok) {
+                    throw new Error("No se pudo obtener la dirección.");
+                }
+
+                const datos = await respuesta.json();
+
+                const direccion = document.getElementById("direccion");
+                const ciudad = document.getElementById("ciudad");
+                const codigoPostal = document.getElementById("codigo-postal");
+
+                const address = datos.address;
+
+                direccion.value = `${address.road || ""} ${address.house_number || ""}`.trim();
+
+                ciudad.value =
+                    address.city ||
+                    address.town ||
+                    address.village ||
+                    "";
+
+                codigoPostal.value = address.postcode || "";
+
+                btnUbicacion.textContent = "Ubicación obtenida";
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("No pudimos obtener tu dirección.");
+
+                btnUbicacion.textContent = "Usar mi ubicación";
+            }
+            
+        },
+
+        (error) => {
+
+            console.error(error);
+
+            if (error.code === error.PERMISSION_DENIED) {
+                alert("Necesitamos permiso para acceder a tu ubicación.");
+            } else {
+                alert("No pudimos obtener tu ubicación.");
+            }
+
+            btnUbicacion.textContent = "Usar mi ubicación";
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+});
+
+}
+
+if (btnUbicacionSeleccionada) {
+
+    btnUbicacionSeleccionada.addEventListener("click", async () => {
+
+        const direccion = document.getElementById("direccion").value.trim();
+        const ciudad = document.getElementById("ciudad").value.trim();
+        const codigoPostal = document.getElementById("codigo-postal").value.trim();
+
+        if (!direccion || !ciudad || !codigoPostal) {
+            alert("Completá la dirección, ciudad y código postal.");
+            return;
+        }
+
+        try {
+
+            btnUbicacionSeleccionada.textContent = "...";
+
+            const consulta = encodeURIComponent(
+                `${direccion}, ${ciudad}, ${codigoPostal}, Argentina`
+            );
+
+            const respuesta = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${consulta}`
+            );
+
+            if (!respuesta.ok) {
+                throw new Error("No se pudo encontrar la dirección.");
+            }
+
+            const datos = await respuesta.json();
+
+            if (datos.length === 0) {
+                alert("No encontramos esa dirección.");
+                return;
+            }
+
+            const latitud = parseFloat(datos[0].lat);
+            const longitud = parseFloat(datos[0].lon);
+
+            console.log("Ubicación ingresada:");
+            console.log("Latitud:", latitud);
+            console.log("Longitud:", longitud);
+
+            actualizarPrecioEnvio(latitud, longitud);
+
+            btnUbicacionSeleccionada.textContent = "✓";
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("No pudimos calcular el costo del envío.");
+
+            btnUbicacionSeleccionada.textContent = "✓";
+        }
+    });
+}
 
 if (btnAbrirCarrito) {
     btnAbrirCarrito.addEventListener("click", () => {
@@ -137,6 +361,16 @@ async function cargarCarrito(){
         }
     });
 
+    if (respuesta.status === 401) {
+        localStorage.removeItem("token");
+
+        alert("Tu sesión expiró. Iniciá sesión nuevamente.");
+
+        window.location.href = "/login.html";
+
+        return;
+    }
+
     if(!respuesta.ok){
         throw new Error("No se pudo obtener el carrito");
     }
@@ -173,7 +407,9 @@ function actualizarBtnCarrito() {
 
 const cargarProductos = async () => {
 
-    mostrarCarga(contenedorCardsCarrito)
+    if (contenedorCardsCarrito) {
+        mostrarCarga(contenedorCardsCarrito)
+    }
 
     let total = 0;
     let cantidadTotal = 0;
@@ -197,6 +433,20 @@ const cargarProductos = async () => {
 
         const productos = await respuesta.json();
 
+        if (btnContinuar) {
+            
+            btnContinuar.addEventListener("click", () => {
+
+                if (productos.length === 0) {
+                    mostrarError("Tu carrito está vacío.");
+                    return;
+                }
+
+                window.location.href = "checkout.html";
+            });
+
+        }
+
         if (contenedorCardsCarrito) contenedorCardsCarrito.innerHTML = "";
 
         productos.forEach(producto => {
@@ -206,6 +456,8 @@ const cargarProductos = async () => {
 
             total += precio * cantidad;
             cantidadTotal += cantidad;
+
+            totalCompra = total;
 
             if (contenedorCardsCarrito) {
                 
@@ -239,11 +491,8 @@ const cargarProductos = async () => {
 
     cantProductos.textContent = `Productos (${cantidadTotal})`;
     montoProductos.textContent = `$${total.toLocaleString("es-AR")}`;
-    const totalCompra = document.querySelector(".monto p:last-child");
-    totalCompra.textContent = `$${total.toLocaleString("es-AR")}`;
+    montoFinal.textContent = `$${total.toLocaleString("es-AR")}`;
 
 }
 
-if (contenedorCardsCarrito) {
-    cargarProductos();
-}
+cargarProductos();
