@@ -66,6 +66,9 @@ if (btnGenerarQR) {
 
             console.log("Order Mercado Pago:", datos);
 
+            console.log("QR DATA:", datos.qr_data);
+            console.log("ORDER COMPLETA:", datos);
+
             if (!datos.qr_data) {
                 throw new Error("Mercado Pago no devolvió el QR.");
             }
