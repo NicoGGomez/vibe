@@ -25,6 +25,7 @@ app.use("/categorias", categoriasRoutes);
 app.use("/productos", productosRoutes);
 app.use("/carrito", carritoRoutes);
 app.use("/pagos", pagoRoutes);
+app.use("/pagos/setup",mercadoPagoSetupRoutes);
 
 module.exports = app;
 
