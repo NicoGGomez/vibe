@@ -47,8 +47,9 @@ const crearSucursal = async () => {
 const obtenerSucursales = async () => {
 
     const respuesta = await fetch(
-        `https://api.mercadopago.com/users/${process.env.MP_USER_ID}/stores`,
+        `https://api.mercadopago.com/users/${process.env.MP_USER_ID}/stores/search?external_id=VIBE001`,
         {
+            method: "GET",
             headers: {
                 "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
             }
@@ -57,12 +58,13 @@ const obtenerSucursales = async () => {
 
     const datos = await respuesta.json();
 
-    console.log("Sucursales:", respuesta.status);
+    console.log("Buscar sucursal:", respuesta.status);
     console.log(datos);
 
     if (!respuesta.ok) {
         throw new Error(
             datos.message ||
+            datos.error ||
             JSON.stringify(datos)
         );
     }
