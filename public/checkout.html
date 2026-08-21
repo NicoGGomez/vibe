@@ -70,8 +70,10 @@
                     </div>
                 </div>
                 <div class="cont-qr">
-                    <button>Generar QR de pago</button>
+                    <button id="btn-generar-qr">Generar QR de pago</button>
                 </div>
+
+                <div class="qr" id="qr"></div>
             </div>
         </div>
 
@@ -113,6 +115,7 @@
 
     <!-- link a scripts -->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="Components/BreadCrumb.js"></script>
     <script src="Components/Footer.js"></script>
     <script src="Components/carritoCard.js"></script>

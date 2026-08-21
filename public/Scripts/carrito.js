@@ -16,6 +16,82 @@ const btnRetiro = document.getElementById("btn-retiro")
 const btnUbicacion = document.getElementById("btn-ubicacion")
 const formEnvio = document.getElementById("info-ubicacion")
 const btnUbicacionSeleccionada = document.getElementById("btn-ubicacion-seleccionada");
+const btnGenerarQR = document.getElementById("btn-generar-qr");
+const contenedorQR = document.getElementById("qr");
+
+if (btnGenerarQR) {
+
+    btnGenerarQR.addEventListener("click", async () => {
+
+        if (totalCompra <= 0) {
+            alert("No hay productos para pagar.");
+            return;
+        }
+
+        try {
+
+            btnGenerarQR.textContent = "Generando QR...";
+            btnGenerarQR.disabled = true;
+
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("Debés iniciar sesión.");
+                return;
+            }
+
+            const total = totalCompra + precioEnvio;
+
+            const respuesta = await fetch(
+                "https://vibe-n9dy.onrender.com/pagos/qr",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        monto: total
+                    })
+                }
+            );
+
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                throw new Error(
+                    datos.mensaje || "No se pudo generar el QR."
+                );
+            }
+
+            console.log("Order Mercado Pago:", datos);
+
+            if (!datos.qr_data) {
+                throw new Error("Mercado Pago no devolvió el QR.");
+            }
+
+            // Generar QR
+            contenedorQR.innerHTML = "";
+
+            new QRCode(contenedorQR, {
+                text: datos.qr_data,
+                width: 250,
+                height: 250
+            });
+
+            btnGenerarQR.textContent = "QR generado ✓";
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(error.message);
+
+            btnGenerarQR.textContent = "Generar QR de pago";
+            btnGenerarQR.disabled = false;
+        }
+    });
+}
 
 const PUNTO_VIBE = {
     lat: -37.314807489279154, 
