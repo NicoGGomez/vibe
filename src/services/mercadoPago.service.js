@@ -4,42 +4,56 @@ const crearOrdenQR = async (monto, referencia) => {
 
     const idempotencyKey = randomUUID();
 
+    const body = {
+        type: "qr",
+        total_amount: Number(monto).toFixed(2),
+        description: "Compra Vibe",
+        external_reference: referencia,
+
+        config: {
+            qr: {
+                mode: "dynamic"
+            }
+        },
+
+        transactions: {
+            payments: [
+                {
+                    amount: Number(monto).toFixed(2)
+                }
+            ]
+        }
+    };
+
+    console.log("Enviando a Mercado Pago:");
+    console.log(JSON.stringify(body, null, 2));
+
     const respuesta = await fetch(
         "https://api.mercadopago.com/v1/orders",
         {
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`,
                 "X-Idempotency-Key": idempotencyKey
             },
-            body: JSON.stringify({
-                type: "qr",
-                total_amount: monto.toFixed(2),
-                description: "Compra Vibe",
-                external_reference: referencia,
-                config: {
-                    qr: {
-                        mode: "dynamic"
-                    }
-                },
-                transactions: {
-                    payments: [
-                        {
-                            amount: monto.toFixed(2)
-                        }
-                    ]
-                }
-            })
+
+            body: JSON.stringify(body)
         }
     );
 
     const datos = await respuesta.json();
 
+    console.log("Status Mercado Pago:", respuesta.status);
+    console.log("Respuesta Mercado Pago:");
+    console.log(JSON.stringify(datos, null, 2));
+
     if (!respuesta.ok) {
-        console.error("Error Mercado Pago:", datos);
         throw new Error(
-            datos.message || "No se pudo crear la orden de Mercado Pago"
+            datos.message ||
+            datos.error ||
+            JSON.stringify(datos)
         );
     }
 
