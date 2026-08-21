@@ -12,6 +12,7 @@ const crearOrdenQR = async (monto, referencia) => {
 
         config: {
             qr: {
+                external_pos_id: process.env.MP_EXTERNAL_POS_ID,
                 mode: "dynamic"
             }
         },
