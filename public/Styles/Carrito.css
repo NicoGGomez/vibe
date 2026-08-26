@@ -99,6 +99,13 @@
     align-items: center;
 }
 
+.qr {
+    display: none;
+    width:40%;
+    justify-content: center;
+    align-items: center;
+}
+
 /* carrito */
 
 .contenedor-carrito .contenedor-info-pago {

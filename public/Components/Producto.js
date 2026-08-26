@@ -10,55 +10,122 @@ class Producto extends HTMLElement {
         const nombre = this.getAttribute("nombre");
         const precio = this.getAttribute("precio");
         const descripcion = this.getAttribute("descripcion");
+
         const imagen = this.getAttribute("imagen");
         const imagenExtraUno = this.getAttribute("imagenExUno");
         const imagenExtraDos = this.getAttribute("imagenExDos");
         const imagenExtraTres = this.getAttribute("imagenExTres");
 
-        const hayImagenes =
-                imagenExtraUno ||
-                imagenExtraDos ||
-                imagenExtraTres;
+        // Todas las imágenes disponibles
+        let imagenes = [
+            imagen,
+            imagenExtraUno,
+            imagenExtraDos,
+            imagenExtraTres
+        ].filter(img => img);
 
         this.innerHTML = `
             <div class="cont contenedor-producto" data-id="${id}">
-                <img class="img-producto-prin" src="${imagen}" alt="">
+
+                <img 
+                    class="img-producto-prin" 
+                    id="imagen-principal-producto"
+                    src="${imagenes[0] || ""}" 
+                    alt="${nombre}"
+                >
 
                 <div class="cont producto-informacion">
 
                     <div class="producto-texto">
+
                         <div class="informacion-principal">
                             <p class="nombre">${nombre}</p>
                             <p class="precio">$${precio}</p>
                         </div>
 
                         <p>${descripcion}</p>
+
                     </div>
 
-                    ${hayImagenes ? `
-                        <div class="cont imagenes">
-                            ${imagenExtraUno ? `<img src="${imagenExtraUno}" alt="">` : ""}
-                            ${imagenExtraDos ? `<img src="${imagenExtraDos}" alt="">` : ""}
-                            ${imagenExtraTres ? `<img src="${imagenExtraTres}" alt="">` : ""}
-                        </div>
-                    ` : ""}
+                    ${
+                        imagenes.length > 1
+                        ? `
+                            <div class="cont imagenes" id="imagenes-producto">
+                                ${imagenes.slice(1).map((img, index) => `
+                                    <img 
+                                        src="${img}" 
+                                        alt="${nombre}"
+                                        data-index="${index + 1}"
+                                    >
+                                `).join("")}
+                            </div>
+                        `
+                        : ""
+                    }
 
                     <div class="cont contenedor-botones">
+
                         <div class="separador separador-producto"></div>
 
                         <div class="cont botones">
                             <button>Comprar</button>
-                            <button id="btn-agregar-carrito-prod">Agregar al carrito</button>
+                            <button id="btn-agregar-carrito-prod">
+                                Agregar al carrito
+                            </button>
                         </div>
+
                     </div>
 
                 </div>
+
             </div>
         `;
 
-        const btnCarritoProducto = this.querySelector("#btn-agregar-carrito-prod");
+        // ==========================
+        // GALERÍA DE IMÁGENES
+        // ==========================
+
+        const imagenPrincipal = this.querySelector(
+            "#imagen-principal-producto"
+        );
+
+        const contenedorImagenes = this.querySelector(
+            "#imagenes-producto"
+        );
+
+        if (contenedorImagenes) {
+
+            contenedorImagenes
+                .querySelectorAll("img")
+                .forEach(img => {
+
+                    img.addEventListener("click", () => {
+
+                        const imagenSeleccionada = img.src;
+                        const imagenAnterior = imagenPrincipal.src;
+
+                        // Cambiamos la principal
+                        imagenPrincipal.src = imagenSeleccionada;
+
+                        // La imagen principal anterior pasa al menú
+                        img.src = imagenAnterior;
+
+                    });
+
+                });
+        }
+
+
+        // ==========================
+        // AGREGAR AL CARRITO
+        // ==========================
+
+        const btnCarritoProducto = this.querySelector(
+            "#btn-agregar-carrito-prod"
+        );
 
         btnCarritoProducto.addEventListener("click", (e) => {
+
             e.preventDefault();
             e.stopPropagation();
 
@@ -70,9 +137,10 @@ class Producto extends HTMLElement {
                     }
                 })
             );
-        });
-    }
 
+        });
+
+    }
 }
 
 customElements.define("producto-comp", Producto);

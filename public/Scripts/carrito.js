@@ -18,10 +18,56 @@ const formEnvio = document.getElementById("info-ubicacion")
 const btnUbicacionSeleccionada = document.getElementById("btn-ubicacion-seleccionada");
 const btnGenerarQR = document.getElementById("btn-generar-qr");
 const contenedorQR = document.getElementById("qr");
+const contenedorBtnQR = document.getElementById("cont-qr");
+
+let tipoEntrega = null;
+let ubicacionConfirmada = false;
 
 if (btnGenerarQR) {
 
     btnGenerarQR.addEventListener("click", async () => {
+
+        // Obtener datos del comprador
+        const nombreApellido = document
+            .getElementById("nombre-apellido")
+            .value.trim();
+
+        const telefono = document
+            .getElementById("telefono")
+            .value.trim();
+
+        // Validar datos
+        if (!nombreApellido || !telefono) {
+            alert("Completá tu nombre, apellido y teléfono para generar el QR.");
+            return;
+        }
+
+        // Si eligió ENVÍO, validar datos de envío
+        if (tipoEntrega === "envio") {
+
+            const direccion = document
+                .getElementById("direccion")
+                .value.trim();
+
+            const ciudad = document
+                .getElementById("ciudad")
+                .value.trim();
+
+            const codigoPostal = document
+                .getElementById("codigo-postal")
+                .value.trim();
+
+            if (!direccion || !ciudad || !codigoPostal) {
+                alert("Completá todos los datos de envío.");
+                return;
+            }
+
+            if (!ubicacionConfirmada) {
+                alert("Confirmá la ubicación presionando ✓.");
+                return;
+            }
+
+        }
 
         if (totalCompra <= 0) {
             alert("No hay productos para pagar.");
@@ -82,7 +128,11 @@ if (btnGenerarQR) {
                 height: 250
             });
 
+            contenedorQR.style.display = "flex"
+
             btnGenerarQR.textContent = "QR generado ✓";
+
+            contenedorBtnQR.style.display = "none";
 
         } catch (error) {
 
@@ -151,6 +201,9 @@ function actualizarPrecioEnvio(latitud, longitud) {
 if(btnEnvio){
 
     btnEnvio.addEventListener("click", () => {
+    tipoEntrega = "envio";
+    ubicacionConfirmada = false;
+    resetearQR();
     btnEnvio.style.opacity = 1
     btnUbicacion.style.display= "flex"
     btnRetiro.style.opacity = 0.5
@@ -163,18 +216,32 @@ if(btnEnvio){
 if(btnRetiro){
 
     btnRetiro.addEventListener("click", () => {
-    btnRetiro.style.opacity = 1
-    btnUbicacion.style.display= "none"
-    btnEnvio.style.opacity = 0.5
-    formEnvio.style.display="none"
-    btnUbicacionSeleccionada.style.display= "none"
-    })
+        tipoEntrega = "retiro";
+        ubicacionConfirmada = false;
+
+        resetearQR();
+
+        // El retiro no tiene costo de envío
+        precioEnvio = 0;
+
+        montoEnvio.textContent = "$0";
+
+        montoFinal.textContent =
+            `$${totalCompra.toLocaleString("es-AR")}`;
+
+        btnRetiro.style.opacity = 1;
+        btnUbicacion.style.display = "none";
+        btnEnvio.style.opacity = 0.5;
+        formEnvio.style.display = "none";
+        btnUbicacionSeleccionada.style.display = "none";
+    });
 
 }
 
 if(btnUbicacion){
 
     btnUbicacion.addEventListener("click", () => {
+    resetearQR();
 
     if (!navigator.geolocation) {
         alert("Tu navegador no permite obtener la ubicación.");
@@ -259,6 +326,8 @@ if (btnUbicacionSeleccionada) {
 
     btnUbicacionSeleccionada.addEventListener("click", async () => {
 
+        resetearQR();
+
         const direccion = document.getElementById("direccion").value.trim();
         const ciudad = document.getElementById("ciudad").value.trim();
         const codigoPostal = document.getElementById("codigo-postal").value.trim();
@@ -300,6 +369,7 @@ if (btnUbicacionSeleccionada) {
 
             actualizarPrecioEnvio(latitud, longitud);
 
+            ubicacionConfirmada = true;
             btnUbicacionSeleccionada.textContent = "✓";
 
         } catch (error) {
@@ -572,6 +642,16 @@ const cargarProductos = async () => {
     montoProductos.textContent = `$${total.toLocaleString("es-AR")}`;
     montoFinal.textContent = `$${total.toLocaleString("es-AR")}`;
 
+}
+
+function resetearQR() {
+    contenedorQR.innerHTML = "";
+    contenedorQR.style.display = "none";
+
+    contenedorBtnQR.style.display = "flex";
+
+    btnGenerarQR.textContent = "Generar QR de pago";
+    btnGenerarQR.disabled = false;
 }
 
 cargarProductos();
