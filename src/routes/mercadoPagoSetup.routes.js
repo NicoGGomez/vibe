@@ -28,4 +28,12 @@ router.get(
     controller.obtenerCaja
 );
 
+router.post("/webhook", async (req, res) => {
+
+    console.log("🔔 WEBHOOK MERCADO PAGO");
+    console.log(req.body);
+
+    res.sendStatus(200);
+});
+
 module.exports = router;
