@@ -1,5 +1,3 @@
-
-
 class carritoCard extends HTMLElement {
     connectedCallback() {
 

@@ -1,5 +1,3 @@
-
-
 class Card extends HTMLElement {
     connectedCallback() {
 

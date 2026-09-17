@@ -1,5 +1,11 @@
+// Model de Usuario
+
+// Importación de la BD y hash
+
 const db = require("../config/database");
 const bcrypt = require("bcrypt");
+
+// Función para obtener usuarios
 
 const obtenerUsuarios = async () => {
 
@@ -9,6 +15,8 @@ const obtenerUsuarios = async () => {
 
     return resultado.rows;
 };
+
+// Función para crear un usuario
 
 const cargarUsuario = async (nombreUsuario, apellidoUsuario, emailUsuario, passwordUsuario) => {
 
@@ -32,6 +40,8 @@ const cargarUsuario = async (nombreUsuario, apellidoUsuario, emailUsuario, passw
     return resultado.rows[0];
 };
 
+// Función para obtener un usuario por mail
+
 const obtenerUsuarioPorEmail = async (emailUsuario) => {
 
     const resultado = await db.query(
@@ -45,6 +55,8 @@ const obtenerUsuarioPorEmail = async (emailUsuario) => {
 
     return resultado.rows[0];
 };
+
+// Exportación de funciones
 
 module.exports = {
     obtenerUsuarios,

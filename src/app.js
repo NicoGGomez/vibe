@@ -1,6 +1,12 @@
+// app
+
+// Importaciones
+
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+
+// Importaciones de clases de rutas
 
 const usuarioRoutes = require("./routes/usuario.routes");
 const categoriasRoutes = require("./routes/categoria.routes");

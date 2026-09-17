@@ -1,32 +1,23 @@
-const express = require("express");
+// Ruta de Mercado pago
 
+// Importaciones
+
+const express = require("express");
 const router = express.Router();
 
-const controller = require(
-    "../controllers/mercadoPagoSetup.controller"
-);
+// Importación de clases
 
+const controller = require("../controllers/mercadoPagoSetup.controller");
 
-router.post(
-    "/sucursal",
-    controller.crearSucursal
-);
+// Rutas
 
+router.post("/sucursal", controller.crearSucursal);
 
-router.post(
-    "/caja",
-    controller.crearCaja
-);
+router.post("/caja", controller.crearCaja);
 
-router.get(
-    "/sucursales",
-    controller.obtenerSucursales
-);
+router.get("/sucursales", controller.obtenerSucursales);
 
-router.get(
-    "/caja",
-    controller.obtenerCaja
-);
+router.get("/caja", controller.obtenerCaja);
 
 router.post("/webhook", async (req, res) => {
 
@@ -35,5 +26,7 @@ router.post("/webhook", async (req, res) => {
 
     res.sendStatus(200);
 });
+
+// Exportación de rutas
 
 module.exports = router;

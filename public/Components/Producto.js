@@ -115,7 +115,6 @@ class Producto extends HTMLElement {
                 });
         }
 
-
         // ==========================
         // AGREGAR AL CARRITO
         // ==========================

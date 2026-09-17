@@ -1,5 +1,11 @@
+// Producto
+
+// Instansiación de variables y constantes
+
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+
+// Función para crear un producto 
 
 const cargarProducto = async () => {
 

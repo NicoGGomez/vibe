@@ -1,3 +1,5 @@
+// Middleware para proteger rutas verificando que el usuario tenga un JWT válido
+
 const jwt = require("jsonwebtoken");
 
 const verificarToken = (req,res,next)=>{
@@ -35,5 +37,7 @@ const verificarToken = (req,res,next)=>{
     }
 
 }
+
+// Exportación de Función
 
 module.exports = verificarToken;

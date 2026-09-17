@@ -1,16 +1,29 @@
-const usuarioModel = require("../models/usuario.model");
+// Servicio de Usuario
+
+// Importaciones
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+// Importación de clases
+
+const usuarioModel = require("../models/usuario.model");
+
+// Función para obtener todos los usuarios
 
 const listarUsuarios = async () => {
     return await usuarioModel.obtenerUsuarios();
 };
+
+// Función para crear un nuevo usuario
 
 const cargarUsuario = async (nombreUsuario, apellidoUsuario, emailUsuario, passwordUsuario) => {
 
     return await usuarioModel.cargarUsuario(nombreUsuario, apellidoUsuario, emailUsuario, passwordUsuario);
 
 }
+
+// Función para loguear un usuario
 
 const loguearUsuario = async (emailUsuario, passwordUsuario) => {
 
@@ -44,6 +57,8 @@ const loguearUsuario = async (emailUsuario, passwordUsuario) => {
     return {token, usuario: usuarioSinPassword} ;
 
 };
+
+// Exportación de funciones
 
 module.exports = {
     listarUsuarios,

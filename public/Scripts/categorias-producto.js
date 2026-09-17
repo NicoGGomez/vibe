@@ -1,4 +1,10 @@
+// Cargar categoría
+
+// Obtención de elementos del DOM
+
 const selectCategorias = document.getElementById("categoria");
+
+// Función añadir una nueva categoría 
 
 const cargarCategorias = async () => {
 

@@ -1,3 +1,6 @@
+// Carrusel
+
+// Función para generar el carrusel
 
 function iniciarCarrusel(){
 

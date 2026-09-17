@@ -1,4 +1,8 @@
+// Controlador de Pago
+
 const mercadoPagoService = require("../services/mercadoPago.service");
+
+// Función para crear un código QR de pago
 
 const crearQR = async (req, res) => {
 
@@ -35,6 +39,8 @@ const crearQR = async (req, res) => {
         });
     }
 };
+
+// Exportación de Función
 
 module.exports = {
     crearQR

@@ -1,7 +1,8 @@
-const mercadoPagoSetupService = require(
-    "../services/mercadoPagoSetup.service"
-);
+// Controlador del servicio de Mercado Pago
 
+const mercadoPagoSetupService = require("../services/mercadoPagoSetup.service");
+
+// Función para crear una sucursal
 
 const crearSucursal = async (req, res) => {
 
@@ -22,6 +23,7 @@ const crearSucursal = async (req, res) => {
     }
 };
 
+// Función para crear una caja
 
 const crearCaja = async (req, res) => {
 
@@ -50,6 +52,8 @@ const crearCaja = async (req, res) => {
     }
 };
 
+// Función para obtener una sucursal
+
 const obtenerSucursales = async (req, res) => {
 
     try {
@@ -69,6 +73,8 @@ const obtenerSucursales = async (req, res) => {
     }
 };
 
+// Función para obtener una caja ya creada
+
 const obtenerCaja = async (req, res) => {
 
     try {
@@ -87,6 +93,8 @@ const obtenerCaja = async (req, res) => {
         });
     }
 };
+
+// Exportación de Funciones
 
 module.exports = {
     crearSucursal,

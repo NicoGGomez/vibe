@@ -1,4 +1,8 @@
+// Servicio de Via cargo
+
 const PUBLIC_KEY = process.env.VIACARGO_PUBLIC_KEY;
+
+// Función para cotizar envíos 
 
 const cotizarViaCargo = async ({
     cpOrigen,
@@ -37,6 +41,8 @@ const cotizarViaCargo = async ({
 
     return await response.json();
 };
+
+// Exportacion de función
 
 module.exports = {
     cotizarViaCargo

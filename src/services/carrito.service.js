@@ -1,5 +1,11 @@
+// Servicios de Carrito
+
+// Importación de clases
+
 const carritoModel = require("../models/carrito.model");
 const productoModel = require("../models/producto.model")
+
+// Función para agregar un producto 
 
 const agregarProducto = async (idUsuario, idProducto, cantidad) => {
 
@@ -42,9 +48,13 @@ const agregarProducto = async (idUsuario, idProducto, cantidad) => {
     }
 };
 
+// Función para obtener los productos de un carrito
+
 const getProductosCarrito = async (idUsuario) => {
     return await carritoModel.getProductosCarrito(idUsuario);
 };
+
+// Función para eliminar un producto de un carrito
 
 const eliminarProductoCarrito = async (idUsuario, idProducto) => {
     const carrito = await carritoModel.obtenerCarritoPorUsuario(idUsuario);
@@ -62,6 +72,8 @@ const eliminarProductoCarrito = async (idUsuario, idProducto) => {
         throw new Error("El producto no se encuentra en el carrito.");
     }
 }
+
+// Exportación de funciones
 
 module.exports = {
     agregarProducto,

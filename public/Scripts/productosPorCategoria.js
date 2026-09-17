@@ -1,12 +1,21 @@
+// Producto por categoría
+
+// Importación de función de "getUsuario()" de "auth.js"
+
 import { getUsuario } from "./auth.js";
 
-const parametros = new URLSearchParams(window.location.search);
-const idProducto = parametros.get("id");
+// Obtención de elementos del dom 
 
 const contenedorCards = document.getElementById("lista-cards-productos-similares");
 
+// Instansiación de variables y constantes
+
+const parametros = new URLSearchParams(window.location.search);
+const idProducto = parametros.get("id");
 const usuario = getUsuario();
 const esAdmin = usuario?.rol === "admin";
+
+// Función para cargar obtener productos de categoría específica
 
 const cargarProductosRelacionados = async () => {
 

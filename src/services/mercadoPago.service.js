@@ -1,4 +1,10 @@
+// Servicio de Mercado pago
+
+// Importaciones
+
 const { randomUUID } = require("crypto");
+
+// Función para generar un código QR
 
 const crearOrdenQR = async (monto, referencia) => {
 
@@ -60,6 +66,8 @@ const crearOrdenQR = async (monto, referencia) => {
 
     return datos;
 };
+
+// Exportación de Función
 
 module.exports = {
     crearOrdenQR

@@ -1,5 +1,9 @@
+// Controlador de producto 
+
 const productoService = require("../services/producto.service");
 const supabase = require("../config/supabase");
+
+// Función para subir imagen de un producto
 
 const subirImagen = async (archivo) => {
 
@@ -22,6 +26,8 @@ const subirImagen = async (archivo) => {
     return data.publicUrl;
 };
 
+// Función para obtener los productos
+
 const getProductos = async (req,res)=>{
 
     try {
@@ -41,6 +47,8 @@ const getProductos = async (req,res)=>{
     }
 
 };
+
+// Función para obtener un producto por ID
 
 const getProducto = async (req,res)=>{
 
@@ -64,6 +72,8 @@ const getProducto = async (req,res)=>{
 
 };
 
+// Función para obtener todos los productos de una categoría
+
 const getProductoPorCategoria = async (req,res)=>{
 
     try {
@@ -85,6 +95,8 @@ const getProductoPorCategoria = async (req,res)=>{
     }
 
 };
+
+// Función para crear un nuevo producto 
 
 const cargarProducto = async (req, res) => {
 
@@ -136,6 +148,8 @@ const cargarProducto = async (req, res) => {
 
 };
 
+// Función para eliminar un producto
+
 const eliminarProducto = async (req,res)=>{
 
     try {
@@ -158,6 +172,7 @@ const eliminarProducto = async (req,res)=>{
 
 };
 
+// Exportación de Funciones
 
 module.exports = {
     getProducto,

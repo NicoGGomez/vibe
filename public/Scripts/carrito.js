@@ -1,4 +1,10 @@
-import { mostrarCarga, generarSkeleton } from "./carga.js";
+// Carrito
+
+// Importación de función de "mostrarCarga()" de "carga.js"
+
+import { mostrarCarga } from "./carga.js";
+
+// Obtención de elementos del DOM
 
 const btnAbrirCarrito = document.getElementById("btn-abrir-carrito");
 const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
@@ -20,10 +26,26 @@ const btnGenerarQR = document.getElementById("btn-generar-qr");
 const contenedorQR = document.getElementById("qr");
 const contenedorBtnQR = document.getElementById("cont-qr");
 
+// Instansiación de variables y constantes
+
+const PUNTO_VIBE = {
+    lat: -37.314807489279154, 
+    lon: -59.11806689340413
+};
+
+const PRECIO_POR_CUADRA = 100;
+const METROS_POR_CUADRA = 100;
+let precioEnvio = 0;
+let totalCompra = 0;
+
 let tipoEntrega = null;
 let ubicacionConfirmada = false;
 
+// Verificación de existencia de elemento del DOM
+
 if (btnGenerarQR) {
+
+    // Función para generar un código QR
 
     btnGenerarQR.addEventListener("click", async () => {
 
@@ -146,15 +168,7 @@ if (btnGenerarQR) {
     });
 }
 
-const PUNTO_VIBE = {
-    lat: -37.314807489279154, 
-    lon: -59.11806689340413
-};
-
-const PRECIO_POR_CUADRA = 100;
-const METROS_POR_CUADRA = 100;
-let precioEnvio = 0;
-let totalCompra = 0;
+// Función para calcular la distancia del punto inicial 
 
 function calcularDistancia(lat1, lon1, lat2, lon2) {
 
@@ -173,6 +187,8 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
 
     return R * c;
 }
+
+// Función para actualizar un precio de envío
 
 function actualizarPrecioEnvio(latitud, longitud) {
 
@@ -198,6 +214,8 @@ function actualizarPrecioEnvio(latitud, longitud) {
     console.log("Precio envío:", precioEnvio);
 }
 
+// Verificación de existencia del DOM
+
 if(btnEnvio){
 
     btnEnvio.addEventListener("click", () => {
@@ -212,6 +230,8 @@ if(btnEnvio){
     })
 
 }
+
+// Verificación de existencia del DOM
 
 if(btnRetiro){
 
@@ -238,89 +258,94 @@ if(btnRetiro){
 
 }
 
+// Verificación de existencia del DOM
+
 if(btnUbicacion){
 
     btnUbicacion.addEventListener("click", () => {
-    resetearQR();
+        resetearQR();
 
-    if (!navigator.geolocation) {
-        alert("Tu navegador no permite obtener la ubicación.");
-        return;
-    }
+        if (!navigator.geolocation) {
+            alert("Tu navegador no permite obtener la ubicación.");
+            return;
+        }
 
-    btnUbicacion.textContent = "Obteniendo ubicación...";
+        btnUbicacion.textContent = "Obteniendo ubicación...";
 
-    navigator.geolocation.getCurrentPosition(
-        async (position) => {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
 
-            const latitud = position.coords.latitude;
-            const longitud = position.coords.longitude;
+                const latitud = position.coords.latitude;
+                const longitud = position.coords.longitude;
 
-            actualizarPrecioEnvio(latitud, longitud);
+                actualizarPrecioEnvio(latitud, longitud);
 
-            try {
+                try {
 
-                const respuesta = await fetch(
-                    `https://nominatim.openstreetmap.org/reverse?lat=${latitud}&lon=${longitud}&format=json&addressdetails=1`
-                );
+                    const respuesta = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${latitud}&lon=${longitud}&format=json&addressdetails=1`
+                    );
 
-                if (!respuesta.ok) {
-                    throw new Error("No se pudo obtener la dirección.");
+                    if (!respuesta.ok) {
+                        throw new Error("No se pudo obtener la dirección.");
+                    }
+
+                    const datos = await respuesta.json();
+
+                    const direccion = document.getElementById("direccion");
+                    const ciudad = document.getElementById("ciudad");
+                    const codigoPostal = document.getElementById("codigo-postal");
+
+                    const address = datos.address;
+
+                    direccion.value = `${address.road || ""} ${address.house_number || ""}`.trim();
+
+                    ciudad.value =
+                        address.city ||
+                        address.town ||
+                        address.village ||
+                        "";
+
+                    codigoPostal.value = address.postcode || "";
+
+                    btnUbicacion.textContent = "Ubicación obtenida";
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert("No pudimos obtener tu dirección.");
+
+                    btnUbicacion.textContent = "Usar mi ubicación";
                 }
+                
+            },
 
-                const datos = await respuesta.json();
-
-                const direccion = document.getElementById("direccion");
-                const ciudad = document.getElementById("ciudad");
-                const codigoPostal = document.getElementById("codigo-postal");
-
-                const address = datos.address;
-
-                direccion.value = `${address.road || ""} ${address.house_number || ""}`.trim();
-
-                ciudad.value =
-                    address.city ||
-                    address.town ||
-                    address.village ||
-                    "";
-
-                codigoPostal.value = address.postcode || "";
-
-                btnUbicacion.textContent = "Ubicación obtenida";
-
-            } catch (error) {
+            (error) => {
 
                 console.error(error);
 
-                alert("No pudimos obtener tu dirección.");
+                if (error.code === error.PERMISSION_DENIED) {
+                    alert("Necesitamos permiso para acceder a tu ubicación.");
+                } else {
+                    alert("No pudimos obtener tu ubicación.");
+                }
 
                 btnUbicacion.textContent = "Usar mi ubicación";
+            },
+
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
             }
-            
-        },
+        );
 
-        (error) => {
-
-            console.error(error);
-
-            if (error.code === error.PERMISSION_DENIED) {
-                alert("Necesitamos permiso para acceder a tu ubicación.");
-            } else {
-                alert("No pudimos obtener tu ubicación.");
-            }
-
-            btnUbicacion.textContent = "Usar mi ubicación";
-        },
-
-        {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0
-        }
-    );
-});
+    });
 
 }
+
+// Verificación de existencia del DOM
 
 if (btnUbicacionSeleccionada) {
 
@@ -383,6 +408,8 @@ if (btnUbicacionSeleccionada) {
     });
 }
 
+// Verificación de existencia del DOM
+
 if (btnAbrirCarrito) {
     btnAbrirCarrito.addEventListener("click", () => {
         carritoAbierto.style.display = "flex";
@@ -392,12 +419,16 @@ if (btnAbrirCarrito) {
     });
 }
 
+// Verificación de existencia del DOM
+
 if (btnCerrarCarrito) {
     btnCerrarCarrito.addEventListener("click", () => {
         carritoAbierto.style.display = "none";
         btnAbrirCarrito.style.display = "flex";
     });
 }
+
+// Función para agregar un producto al carrito
 
 document.addEventListener("agregar-carrito", async (e) => {
     try {
@@ -406,6 +437,8 @@ document.addEventListener("agregar-carrito", async (e) => {
         console.error(error);
     }
 });
+
+// Función para agregar un producto al carrito
 
 async function agregarAlCarrito(idProducto) {
 
@@ -445,6 +478,8 @@ async function agregarAlCarrito(idProducto) {
     await cargarCarrito();
 }
 
+// Función para borrar carrito
+
 document.addEventListener("borrar-carrito", async (e) => {
     try {
         console.log("borrar-carrito", e.detail);
@@ -473,6 +508,8 @@ document.addEventListener("borrar-carrito", async (e) => {
     }
 });
 
+// Función para borrar producto por ID del carrito
+
 async function borrarDelCarrito(idProducto) {
 
     const token = localStorage.getItem("token");
@@ -497,6 +534,8 @@ async function borrarDelCarrito(idProducto) {
         throw new Error(error.mensaje);
     }
 }
+
+// Función para crear un carrito 
 
 async function cargarCarrito(){
 
@@ -548,11 +587,15 @@ async function cargarCarrito(){
 
 }
 
+// Función para actualizar el boton de cantidad
+
 function actualizarBtnCarrito() {
     if (!btnIrCarrito) return;
     const cantidad = document.querySelectorAll("carrito-producto").length;
     btnIrCarrito.style.display = cantidad > 0 ? "block" : "none";
 }
+
+// Función para agregar un nuevo producto
 
 const cargarProductos = async () => {
 
@@ -643,6 +686,8 @@ const cargarProductos = async () => {
     montoFinal.textContent = `$${total.toLocaleString("es-AR")}`;
 
 }
+
+// Función para resetear un QR
 
 function resetearQR() {
     contenedorQR.innerHTML = "";

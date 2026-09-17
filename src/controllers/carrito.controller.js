@@ -1,4 +1,8 @@
+// Controlador de Carrito
+
 const carritoService = require("../services/carrito.service");
+
+// Función para agregar un producto al carrito
 
 const agregarProductoCarrito = async (req, res) => {
 
@@ -25,6 +29,8 @@ const agregarProductoCarrito = async (req, res) => {
 
 };
 
+// Función para obtener los productos del carrito
+
 const getProductosCarrito = async (req, res) => {
 
     try {
@@ -44,6 +50,8 @@ const getProductosCarrito = async (req, res) => {
     }
 
 };
+
+// Función para eliminar los productos del carrito
 
 const eliminarProductoCarrito = async (req, res) => {
 
@@ -69,6 +77,8 @@ const eliminarProductoCarrito = async (req, res) => {
     }
 
 }
+
+// Exportación de Funciones
 
 module.exports = {
     agregarProductoCarrito,

@@ -1,3 +1,7 @@
+// Servicio del Setup de Mercado pago
+
+// Función para crear una sucursal para mercado pago
+
 const crearSucursal = async () => {
 
     const respuesta = await fetch(
@@ -44,6 +48,8 @@ const crearSucursal = async () => {
     return datos;
 };
 
+// Función para obtener sucursales creadas de Mercado pago
+
 const obtenerSucursales = async () => {
 
     const respuesta = await fetch(
@@ -72,6 +78,7 @@ const obtenerSucursales = async () => {
     return datos;
 };
 
+// Función para obtener una caja de Mercado pago
 
 const obtenerCaja = async () => {
 
@@ -100,6 +107,8 @@ const obtenerCaja = async () => {
 
     return datos;
 };
+
+// Función para crear una caja de Mercado pago
 
 const crearCaja = async (storeId) => {
 
@@ -144,6 +153,7 @@ const crearCaja = async (storeId) => {
     return datos;
 };
 
+// Exportación de funciones
 
 module.exports = {
     crearSucursal,

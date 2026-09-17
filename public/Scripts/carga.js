@@ -1,3 +1,7 @@
+// Carga 
+
+// Función para generar el esquelto una card de producto
+
 export function generarSkeleton() {
     return `
         <div class="card-skeleton">
@@ -9,17 +13,7 @@ export function generarSkeleton() {
     `;
 }
 
-// export function mostrarCarga(contenedorCards, contenedor) {
-//     const skeletons = Array(8).fill(generarSkeleton()).join("");
-
-//     if (contenedorCards) {
-//         contenedorCards.innerHTML = skeletons;
-//     }
-
-//     if (contenedor) {
-//         contenedor.innerHTML = skeletons;
-//     }
-// }
+// Función para mostrar el esqueleto generado
 
 export function mostrarCarga(...contenedores) {
     const skeletons = Array(8).fill(generarSkeleton()).join("");

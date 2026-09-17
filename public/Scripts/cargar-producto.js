@@ -1,4 +1,10 @@
+// Cargar producto
+
+// Importación de función de "getUsuario()" de "auth.js"
+
 import { getUsuario } from "./auth.js";
+
+// Obtención de usuario y verificación de rol
 
 const usuario = getUsuario();
 
@@ -6,6 +12,8 @@ if (!usuario || usuario.rol !== "admin") {
     window.location.replace("index.html");
     throw new Error("Acceso denegado");
 }
+
+// Obtención de elementos del DOM
 
 const formProducto = document.getElementById("form-carga-producto");
 const inputNombre = document.getElementById("input-pr-nombre");
@@ -17,6 +25,8 @@ const inputImagenex2 = document.getElementById("input-pr-img-ex2");
 const inputImagenex3 = document.getElementById("input-pr-img-ex3");
 const inputStock = document.getElementById("input-pr-stock");
 const selectCategoria = document.getElementById("categoria");
+
+// Función de carga de nueva categoría
 
 formProducto.addEventListener("submit", async (e) => {
 

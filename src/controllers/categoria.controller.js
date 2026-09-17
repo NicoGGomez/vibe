@@ -1,5 +1,8 @@
+// Controlador de Categoria
+
 const categoriaService = require("../services/categoria.service");
 
+// Función para obtener categorias
 
 const getCategorias = async (req,res)=>{
 
@@ -20,6 +23,8 @@ const getCategorias = async (req,res)=>{
     }
 
 };
+
+// Función para crear una categoria
 
 const cargarCategoria = async (req, res) => {
 
@@ -45,6 +50,8 @@ const cargarCategoria = async (req, res) => {
 
 };
 
+// Función para obtener una categoria
+
 const getCategoria = async (req,res)=>{
 
     try {
@@ -67,6 +74,7 @@ const getCategoria = async (req,res)=>{
 
 };
 
+// Exportación de Funciones
 
 module.exports = {
     getCategorias,

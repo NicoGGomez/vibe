@@ -1,14 +1,23 @@
+// Ruta de Producto
+
+// Importaciones
+
 const express = require("express");
 const router = express.Router();
 const upload = require("../middlewares/upload");
+
+// Importación de clases
+
 const verificarToken = require("../middlewares/auth.middleware");
 const verificarRol = require("../middlewares/verificarAdmin.middleware");
-
 const productoController = require("../controllers/producto.controller");
+
+// Rutas
 
 router.get("/", productoController.getProductos);
 router.get("/categoria/:id", productoController.getProductoPorCategoria);
 router.get("/:id", productoController.getProducto);
+
 router.post(
     "/",
     verificarToken,
@@ -33,11 +42,14 @@ router.post(
     ]),
     productoController.cargarProducto
 );
+
 router.delete(
     "/:id",
     verificarToken,
     verificarRol("admin"),
     productoController.eliminarProducto
 );
+
+// Exportación de rutas
 
 module.exports = router;

@@ -1,3 +1,5 @@
+// Middleware verificador de rol de usuario
+
 const verificarRol = (...rolesPermitidos) => {
 
     return (req, res, next) => {
@@ -12,5 +14,7 @@ const verificarRol = (...rolesPermitidos) => {
     };
 
 };
+
+// Exportación de función
 
 module.exports = verificarRol;

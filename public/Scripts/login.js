@@ -1,4 +1,10 @@
+// Login
+
+// Importación de función de "getUsuario()" de "auth.js"    
+
 import { getUsuario } from "./auth.js";
+
+// Obtención de usuario y verificación de que este logueado
 
 const usuario = getUsuario();
 
@@ -7,10 +13,14 @@ if (usuario) {
     throw new Error("Ya estas logueado");
 }
 
+// Obtención de elementos del DOM
+
 const formLogin = document.getElementById("form-login");
 const inputEmail = document.getElementById("input-lg-email");
 const inputPassword = document.getElementById("input-lg-password");
 const divError = document.getElementById("msg-error");
+
+// Función de envío de form de login de usuario
 
 formLogin.addEventListener("submit", async (e) => {
 

@@ -1,5 +1,10 @@
+// Model de Producto
+
+// Importación de la DB
+
 const db = require("../config/database");
 
+// Función para obtener todos los productos
 
 const obtenerProductos = async () => {
 
@@ -9,6 +14,8 @@ const obtenerProductos = async () => {
 
     return resultado.rows;
 };
+
+// Función para obtener un producto por ID 
 
 const obtenerProducto = async (id) => {
 
@@ -20,6 +27,8 @@ const obtenerProducto = async (id) => {
     return resultado.rows[0];
 };
 
+// Función para obtener un prodcuto por categoría 
+
 const obtenerProductoPorCategoria = async (id) => {
 
     const resultado = await db.query(
@@ -29,6 +38,8 @@ const obtenerProductoPorCategoria = async (id) => {
 
     return resultado.rows;
 };
+
+// Función para cargar un producto
 
 const cargarProductos = async (nombre, precio, descr, imgP, img1, img2, img3, stock, categoria) => {
     const resultado = await db.query(
@@ -54,6 +65,8 @@ const cargarProductos = async (nombre, precio, descr, imgP, img1, img2, img3, st
     return resultado.rows[0];
 };
 
+// Función para eliminar un producto
+
 const eliminarProducto = async (id) => {
 
     const resultado = await db.query(
@@ -63,6 +76,8 @@ const eliminarProducto = async (id) => {
 
     return resultado.rows[0];
 };
+
+// Exportación de funciones
 
 module.exports = {
     obtenerProducto,

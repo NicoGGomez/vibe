@@ -1,13 +1,24 @@
-import { getUsuario } from "./auth.js";
-import { generarSkeleton, mostrarCarga } from "./carga.js";
+// Productos
 
-const parametros = new URLSearchParams(window.location.search);
+// Importación de función de "getUsuario()" de "auth.js"
+// Importación de función de "mostrarCarga()" de "carga.js"        
+
+import { getUsuario } from "./auth.js";
+import { mostrarCarga } from "./carga.js";
+
+// Obtención de elementos del dom 
+
 const categoriaSeleccionada = parametros.get("categoria");
 const contenedor = document.getElementById("lista-productos");
 const contenedorCards = document.getElementById("lista-cards-productos");
 
+// Instansiación de variables y constantes
+
+const parametros = new URLSearchParams(window.location.search);
 const usuario = getUsuario();
 const esAdmin = usuario?.rol === "admin";
+
+// Función para obtener los productos y agregarlos a un contenedor del DOM 
 
 const cargarProductos = async () => {
     mostrarCarga(contenedorCards, contenedor);
@@ -71,6 +82,8 @@ const cargarProductos = async () => {
 };
 
 cargarProductos();
+
+// Función para eliminar un producto 
 
 document.addEventListener("click", async (e) => {
     if (!e.target.classList.contains("btn-eliminar")) return;

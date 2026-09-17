@@ -1,6 +1,11 @@
+// Model de un Carrito 
+
+// Importación de la DB
+
 const db = require("../config/database");
 
-// Buscar el carrito de un usuario
+// Función para buscar el carrito de un usuario
+
 const obtenerCarritoPorUsuario = async (idUsuario) => {
 
     const resultado = await db.query(
@@ -11,7 +16,8 @@ const obtenerCarritoPorUsuario = async (idUsuario) => {
     return resultado.rows[0];
 };
 
-// Crear un carrito para un usuario
+// Función para crear un carrito para un usuario
+
 const crearCarrito = async (idUsuario) => {
 
     const resultado = await db.query(
@@ -24,7 +30,8 @@ const crearCarrito = async (idUsuario) => {
     return resultado.rows[0];
 };
 
-// Buscar si un producto ya está en el carrito
+// Función para buscar si un producto ya está en el carrito
+
 const obtenerProductoCarrito = async (idCarrito, idProducto) => {
 
     const resultado = await db.query(
@@ -38,7 +45,8 @@ const obtenerProductoCarrito = async (idCarrito, idProducto) => {
     return resultado.rows[0];
 };
 
-// Aumentar la cantidad de un producto existente
+// Función para Aumentar la cantidad de un producto existente
+
 const aumentarCantidad = async (idCarrito, idProducto, cantidad) => {
 
     await db.query(
@@ -50,7 +58,8 @@ const aumentarCantidad = async (idCarrito, idProducto, cantidad) => {
     );
 };
 
-// Agregar un producto nuevo al carrito
+// Función para Agregar un producto nuevo al carrito
+
 const agregarProducto = async (idCarrito, idProducto, cantidad) => {
 
     await db.query(
@@ -60,6 +69,8 @@ const agregarProducto = async (idCarrito, idProducto, cantidad) => {
         [cantidad, idCarrito, idProducto]
     );
 };
+
+// Función para obtener productos de un carrito
 
 const getProductosCarrito = async (idUsuario) => {
 
@@ -88,6 +99,8 @@ const getProductosCarrito = async (idUsuario) => {
     return resultado.rows;
 };
 
+// Función para eliminar un producto de un carrito
+
 const eliminarProducto = async (idCarrito, idProducto) => {
 
     const resultado = await db.query(
@@ -99,6 +112,8 @@ const eliminarProducto = async (idCarrito, idProducto) => {
 
     return resultado.rowCount;
 }
+
+// Exportación de funciones
 
 module.exports = {
     obtenerCarritoPorUsuario,

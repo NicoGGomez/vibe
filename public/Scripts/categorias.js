@@ -1,4 +1,10 @@
+// Categorías
+
+// Obtención de elementos del DOM
+
 const listaCategorias = document.getElementById("lista-categorias");
+
+// Función para crear una nueva categoría 
 
 const cargarCategorias = async () => {
 

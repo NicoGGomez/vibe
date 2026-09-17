@@ -1,12 +1,18 @@
-const app = require("./src/app");
-// const { cotizarViaCargo } = require("./src/services/viaCargo.service");
+// Server
 
+// Importación de app
+
+const app = require("./src/app");
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
+
+// PRUEBA DE COTIZACIÓN DE ENVÍO
+
+// const { cotizarViaCargo } = require("./src/services/viaCargo.service");
 
 // (async () => {
 //     try {

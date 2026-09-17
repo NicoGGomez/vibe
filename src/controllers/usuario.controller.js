@@ -1,5 +1,8 @@
+// Controlador de Usuario
+
 const usuarioService = require("../services/usuario.service");
 
+// Función para obtener todos los usuarios
 
 const getUsuarios = async (req,res)=>{
 
@@ -18,6 +21,8 @@ const getUsuarios = async (req,res)=>{
     }
 
 };
+
+// Función para registrar un nuevo usuario
 
 const registrarUsuario = async (req, res) => {
 
@@ -70,6 +75,8 @@ const registrarUsuario = async (req, res) => {
 
 };
 
+// Función para loguear un usuario ya registrado
+
 const loguearUsuario = async (req, res) => {
 
     try {
@@ -109,6 +116,8 @@ const loguearUsuario = async (req, res) => {
     }
 
 };
+
+// Exportación de Funciones
 
 module.exports = {
     getUsuarios,
