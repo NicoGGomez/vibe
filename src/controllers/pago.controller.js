@@ -2,7 +2,7 @@
 
 const mercadoPagoService = require("../services/mercadoPago.service");
 
-// Función para crear un código QR de pago
+// Función para crear un código QR y una preferencia de pago
 
 const crearQR = async (req, res) => {
 
@@ -18,7 +18,14 @@ const crearQR = async (req, res) => {
 
         const referencia = `VIBE-${req.usuario.id}-${Date.now()}`;
 
+        // Crear QR
         const orden = await mercadoPagoService.crearOrdenQR(
+            Number(monto),
+            referencia
+        );
+
+        // Crear preferencia de Checkout Pro
+        const preferencia = await mercadoPagoService.crearPreferencia(
             Number(monto),
             referencia
         );
@@ -27,7 +34,12 @@ const crearQR = async (req, res) => {
             id: orden.id,
             estado: orden.status,
             monto: orden.total_amount,
-            qr_data: orden.type_response?.qr_data
+
+            // QR
+            qr_data: orden.type_response?.qr_data,
+
+            // Checkout Mercado Pago
+            init_point: preferencia.init_point
         });
 
     } catch (error) {
@@ -40,7 +52,7 @@ const crearQR = async (req, res) => {
     }
 };
 
-// Exportación de Función
+// Exportación de funciones
 
 module.exports = {
     crearQR

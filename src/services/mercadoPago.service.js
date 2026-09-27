@@ -67,8 +67,59 @@ const crearOrdenQR = async (monto, referencia) => {
     return datos;
 };
 
+const crearPreferencia = async (monto, referencia) => {
+
+    const body = {
+        items: [
+            {
+                title: "Compra Vibe",
+                quantity: 1,
+                unit_price: Number(monto),
+                currency_id: "ARS"
+            }
+        ],
+
+        external_reference: referencia,
+
+        back_urls: {
+            success: "https://TU-FRONTEND/pago-exitoso.html",
+            failure: "https://TU-FRONTEND/pago-error.html",
+            pending: "https://TU-FRONTEND/pago-pendiente.html"
+        },
+
+        auto_return: "approved"
+    };
+
+    const respuesta = await fetch(
+        "https://api.mercadopago.com/checkout/preferences",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
+            },
+
+            body: JSON.stringify(body)
+        }
+    );
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.message ||
+            datos.error ||
+            JSON.stringify(datos)
+        );
+    }
+
+    return datos;
+};
+
 // Exportación de Función
 
 module.exports = {
-    crearOrdenQR
+    crearOrdenQR,
+    crearPreferencia
 };

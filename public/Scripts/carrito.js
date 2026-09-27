@@ -25,6 +25,7 @@ const btnUbicacionSeleccionada = document.getElementById("btn-ubicacion-seleccio
 const btnGenerarQR = document.getElementById("btn-generar-qr");
 const contenedorQR = document.getElementById("qr");
 const contenedorBtnQR = document.getElementById("cont-qr");
+const btnPagarMercadoPago = document.getElementById("btn-pagar-mercado-pago");
 
 // Instansiación de variables y constantes
 
@@ -128,9 +129,15 @@ if (btnGenerarQR) {
 
             if (!respuesta.ok) {
                 throw new Error(
-                    datos.mensaje || "No se pudo generar el QR."
+                    datos.mensaje || "No se pudo generar el pago."
                 );
             }
+
+            // if (!respuesta.ok) {
+            //     throw new Error(
+            //         datos.mensaje || "No se pudo generar el QR."
+            //     );
+            // }
 
             console.log("Order Mercado Pago:", datos);
 
@@ -155,6 +162,16 @@ if (btnGenerarQR) {
             btnGenerarQR.textContent = "QR generado ✓";
 
             contenedorBtnQR.style.display = "none";
+
+            if (datos.init_point) {
+
+                btnPagarMercadoPago.style.display = "block";
+
+                btnPagarMercadoPago.onclick = () => {
+                    window.location.href = datos.init_point;
+                };
+
+            }
 
         } catch (error) {
 
@@ -690,6 +707,7 @@ const cargarProductos = async () => {
 // Función para resetear un QR
 
 function resetearQR() {
+
     contenedorQR.innerHTML = "";
     contenedorQR.style.display = "none";
 
@@ -697,6 +715,8 @@ function resetearQR() {
 
     btnGenerarQR.textContent = "Generar QR de pago";
     btnGenerarQR.disabled = false;
+
+    btnPagarMercadoPago.style.display = "none";
 }
 
 cargarProductos();
