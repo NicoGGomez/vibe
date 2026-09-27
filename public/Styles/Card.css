@@ -86,6 +86,27 @@ a {
     background: #c40000;
 }
 
+.sin-stock-card img {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+.sin-stock {
+    position: absolute;
+    /* top: 50%; */
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+
+    padding: 8px 14px;
+    border-radius: 6px;
+
+    font-weight: bold;
+    z-index: 2;
+}
+
 @media (max-width: 900px) {
 
     .btn-eliminar{

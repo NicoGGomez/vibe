@@ -6,17 +6,17 @@
 import { getUsuario } from "./auth.js";
 import { mostrarCarga } from "./carga.js";
 
-// Obtención de elementos del dom 
-
-const categoriaSeleccionada = parametros.get("categoria");
-const contenedor = document.getElementById("lista-productos");
-const contenedorCards = document.getElementById("lista-cards-productos");
-
 // Instansiación de variables y constantes
 
 const parametros = new URLSearchParams(window.location.search);
 const usuario = getUsuario();
 const esAdmin = usuario?.rol === "admin";
+
+// Obtención de elementos del dom 
+
+const categoriaSeleccionada = parametros.get("categoria");
+const contenedor = document.getElementById("lista-productos");
+const contenedorCards = document.getElementById("lista-cards-productos");
 
 // Función para obtener los productos y agregarlos a un contenedor del DOM 
 
@@ -36,6 +36,10 @@ const cargarProductos = async () => {
             );
         }
 
+        productosFiltrados.sort((a, b) => {
+            return (a.stock === 0) - (b.stock === 0);
+        });
+
         if (contenedorCards) contenedorCards.innerHTML = "";
         if (contenedor) contenedor.innerHTML = "";
 
@@ -52,7 +56,8 @@ const cargarProductos = async () => {
                         data-id="${producto.id_producto}"
                         imagen="${producto.imagen_principal}"
                         nombre="${producto.nombre}"
-                        precio="${producto.precio}">
+                        precio="${producto.precio}"
+                        stock="${producto.stock}">
                     </card-comp>
                 </div>
             `;
@@ -68,7 +73,8 @@ const cargarProductos = async () => {
                         imagen="${producto.imagen_principal}"
                         imagenExUno="${producto.imagen_extra_uno ?? ""}"
                         imagenExDos="${producto.imagen_extra_dos ?? ""}"
-                        imagenExTres="${producto.imagen_extra_tres ?? ""}">
+                        imagenExTres="${producto.imagen_extra_tres ?? ""}"
+                        stock="${producto.stock}">
                     </producto-comp>
                 `;
             }

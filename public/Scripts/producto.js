@@ -1,11 +1,11 @@
 // Producto
 
-// Instansiación de variables y constantes
+// Instanciación de variables y constantes
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-// Función para crear un producto 
+// Función para crear un producto
 
 const cargarProducto = async () => {
 
@@ -29,6 +29,7 @@ const cargarProducto = async () => {
         componente.setAttribute("nombre", producto.nombre);
         componente.setAttribute("precio", producto.precio);
         componente.setAttribute("descripcion", producto.descripcion);
+        componente.setAttribute("stock", producto.stock);
 
         document.title = `Vibe - ${producto.nombre}`;
 

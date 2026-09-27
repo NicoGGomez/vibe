@@ -5,6 +5,7 @@ class Card extends HTMLElement {
         const nombre = this.getAttribute("nombre");
         const precio = this.getAttribute("precio");
         const imagen = this.getAttribute("imagen");
+        const stock = Number(this.getAttribute("stock"));
 
         this.innerHTML = `
             <div class="cont card" data-id="${id}">
@@ -22,24 +23,46 @@ class Card extends HTMLElement {
 
                     <i id="btn-agregar-carrito" class="fa-solid fa-cart-shopping btn-carrito"></i>
                 </div>
+
+                ${
+                    stock === 0
+                    ? `<div class="sin-stock">Sin stock</div>`
+                    : ""
+                }
+
             </div>
         `;
 
+        // Si no hay stock
+        if (stock === 0) {
+
+            const card = this.querySelector(".card");
+
+            card.classList.add("sin-stock-card");
+
+        }
+
         const btnCarrito = this.querySelector(".btn-carrito");
 
-        btnCarrito.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+        if (stock === 0) {
+            btnCarrito.style.display = "none";
+        }
 
-            this.dispatchEvent(
-                new CustomEvent("agregar-carrito", {
-                    bubbles: true,
-                    detail: {
-                        idProducto: id
-                    }
-                })
-            );
-        });
+        if (btnCarrito) {
+            btnCarrito.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                this.dispatchEvent(
+                    new CustomEvent("agregar-carrito", {
+                        bubbles: true,
+                        detail: {
+                            idProducto: id
+                        }
+                    })
+                );
+            });
+        }
 
     }
 }

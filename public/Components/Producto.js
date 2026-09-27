@@ -10,11 +10,14 @@ class Producto extends HTMLElement {
         const nombre = this.getAttribute("nombre");
         const precio = this.getAttribute("precio");
         const descripcion = this.getAttribute("descripcion");
+        const stock = Number(this.getAttribute("stock"));
 
         const imagen = this.getAttribute("imagen");
         const imagenExtraUno = this.getAttribute("imagenExUno");
         const imagenExtraDos = this.getAttribute("imagenExDos");
         const imagenExtraTres = this.getAttribute("imagenExTres");
+
+        const sinStock = stock === 0;
 
         // Todas las imágenes disponibles
         let imagenes = [
@@ -25,14 +28,24 @@ class Producto extends HTMLElement {
         ].filter(img => img);
 
         this.innerHTML = `
-            <div class="cont contenedor-producto" data-id="${id}">
+            <div class="cont contenedor-producto ${sinStock ? "producto-sin-stock" : ""}" data-id="${id}">
 
-                <img 
-                    class="img-producto-prin" 
-                    id="imagen-principal-producto"
-                    src="${imagenes[0] || ""}" 
-                    alt="${nombre}"
-                >
+                <div class="contenedor-imagen-producto">
+
+                    <img 
+                        class="img-producto-prin" 
+                        id="imagen-principal-producto"
+                        src="${imagenes[0] || ""}" 
+                        alt="${nombre}"
+                    >
+
+                    ${
+                        sinStock
+                        ? `<div class="cartel-sin-stock">Sin stock</div>`
+                        : ""
+                    }
+
+                </div>
 
                 <div class="cont producto-informacion">
 
@@ -68,10 +81,24 @@ class Producto extends HTMLElement {
                         <div class="separador separador-producto"></div>
 
                         <div class="cont botones">
-                            <button>Comprar</button>
-                            <button id="btn-agregar-carrito-prod">
-                                Agregar al carrito
+
+                            <button 
+                                ${sinStock ? "disabled" : ""}
+                            >
+                                Comprar
                             </button>
+
+                            <button 
+                                id="btn-agregar-carrito-prod"
+                                ${sinStock ? "disabled" : ""}
+                            >
+                                ${
+                                    sinStock
+                                    ? "Sin stock"
+                                    : "Agregar al carrito"
+                                }
+                            </button>
+
                         </div>
 
                     </div>
@@ -104,10 +131,7 @@ class Producto extends HTMLElement {
                         const imagenSeleccionada = img.src;
                         const imagenAnterior = imagenPrincipal.src;
 
-                        // Cambiamos la principal
                         imagenPrincipal.src = imagenSeleccionada;
-
-                        // La imagen principal anterior pasa al menú
                         img.src = imagenAnterior;
 
                     });
@@ -123,21 +147,25 @@ class Producto extends HTMLElement {
             "#btn-agregar-carrito-prod"
         );
 
-        btnCarritoProducto.addEventListener("click", (e) => {
+        if (btnCarritoProducto && !sinStock) {
 
-            e.preventDefault();
-            e.stopPropagation();
+            btnCarritoProducto.addEventListener("click", (e) => {
 
-            this.dispatchEvent(
-                new CustomEvent("agregar-carrito", {
-                    bubbles: true,
-                    detail: {
-                        idProducto: id
-                    }
-                })
-            );
+                e.preventDefault();
+                e.stopPropagation();
 
-        });
+                this.dispatchEvent(
+                    new CustomEvent("agregar-carrito", {
+                        bubbles: true,
+                        detail: {
+                            idProducto: id
+                        }
+                    })
+                );
+
+            });
+
+        }
 
     }
 }

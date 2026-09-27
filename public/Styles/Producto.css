@@ -13,9 +13,17 @@ producto-comp {
     grid-template-columns: 30% 70%;
 }
 
-.contenedor-producto .img-producto-prin {
+.contenedor-imagen-producto {
+    position: relative;
     width: 100%;
+    height: fit-content;
     margin: 2vh;
+}
+
+.contenedor-imagen-producto .img-producto-prin {
+    width: 100%;
+    margin: 0;
+    display: block;
 }
 
 .contenedor-producto .producto-informacion {
@@ -88,6 +96,57 @@ producto-comp {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
+}
+
+/* ==========================
+   PRODUCTO SIN STOCK
+========================== */
+
+.producto-sin-stock .img-producto-prin {
+    filter: grayscale(100%);
+    opacity: 0.55;
+}
+
+.producto-sin-stock .imagenes img {
+    filter: grayscale(100%);
+    opacity: 0.55;
+}
+
+.contenedor-imagen-producto {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
+
+.contenedor-imagen-producto .img-producto-prin {
+    display: block;
+}
+
+.cartel-sin-stock {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+
+    padding: 10px 18px;
+    border-radius: 8px;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Botones cuando no hay stock */
+.producto-sin-stock .botones button {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 @media (max-width: 900px) {
