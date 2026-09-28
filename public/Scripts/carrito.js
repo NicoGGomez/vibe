@@ -856,7 +856,7 @@ async function esperarPago(idOrden) {
 
                 console.log("✅ Pago confirmado.");
 
-                window.location.href = "mis-compras.html";
+                window.location.href = "misCompras.html";
             }
 
             if (
