@@ -65,6 +65,11 @@ if (btnGenerarQR) {
             return;
         }
 
+        if (!tipoEntrega) {
+            alert("Seleccioná una forma de entrega: Retiro o Envío.");
+            return;
+        }
+
         // Si eligió ENVÍO, validar datos de envío
         if (tipoEntrega === "envio") {
 
@@ -133,12 +138,6 @@ if (btnGenerarQR) {
                 );
             }
 
-            // if (!respuesta.ok) {
-            //     throw new Error(
-            //         datos.mensaje || "No se pudo generar el QR."
-            //     );
-            // }
-
             console.log("Order Mercado Pago:", datos);
 
             console.log("QR DATA:", datos.qr_data);
@@ -157,12 +156,13 @@ if (btnGenerarQR) {
                 height: 250
             });
 
-            contenedorQR.style.display = "flex"
+            // Mostrar QR
+            contenedorQR.style.display = "flex";
 
-            btnGenerarQR.textContent = "QR generado ✓";
+            // Ocultar solamente el botón de generar
+            btnGenerarQR.style.display = "none";
 
-            contenedorBtnQR.style.display = "none";
-
+            // Mostrar botón de Mercado Pago
             if (datos.init_point) {
 
                 btnPagarMercadoPago.style.display = "block";
@@ -170,7 +170,6 @@ if (btnGenerarQR) {
                 btnPagarMercadoPago.onclick = () => {
                     window.location.href = datos.init_point;
                 };
-
             }
 
         } catch (error) {
