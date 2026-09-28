@@ -353,6 +353,7 @@ const obtenerPedidosUsuario = async (idUsuario) => {
             ON pp.id_producto = pr.id_producto
 
         WHERE p.id_usuario = $1
+        AND p.estado IN ('pagado', 'enviado')
 
         GROUP BY p.id_pedido
 
