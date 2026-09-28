@@ -234,6 +234,39 @@ const webhook = async (req, res) => {
         // 4. VALIDAR FIRMA
         // ==========================================
 
+        console.log("=================================");
+        console.log("DEBUG FIRMA WEBHOOK");
+        console.log("=================================");
+
+        console.log("dataId:", dataId);
+        console.log("requestId:", requestId);
+        console.log("ts:", ts);
+        console.log("v1 recibido:", v1);
+        console.log("manifest:", manifest);
+
+        const firmaCalculadaDebug = crypto
+            .createHmac(
+                "sha256",
+                process.env.MP_WEBHOOK_SECRET
+            )
+            .update(manifest)
+            .digest("hex");
+
+        console.log(
+            "firma calculada:",
+            firmaCalculadaDebug
+        );
+
+        console.log(
+            "firma recibida:",
+            v1
+        );
+
+        console.log(
+            "¿coinciden?:",
+            firmaCalculadaDebug === v1
+        );
+
         const firmaCalculada = crypto
             .createHmac(
                 "sha256",
