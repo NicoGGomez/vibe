@@ -213,9 +213,12 @@ const webhook = async (req, res) => {
          */
 
         const manifest =
-            `id:${dataId.toLowerCase()};` +
+            `id:${dataId};` +
             `request-id:${requestId};` +
             `ts:${ts};`;
+
+            console.log("Manifest:", manifest);
+            console.log("Secret configurado:", !!process.env.MP_WEBHOOK_SECRET);
 
         const firmaCalculada = crypto
             .createHmac(
