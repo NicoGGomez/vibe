@@ -1,5 +1,6 @@
 
 const mercadoPagoService = require("../services/mercadoPago.service");
+const pedidoService = require("../services/pedido.service");
 const pedidoModel = require("../models/pedido.model");
 const crypto = require("crypto");
 
@@ -255,6 +256,32 @@ const webhook = async (req, res) => {
         console.log("Referencia:");
         console.log(orden.external_reference);
 
+        const referenciaPago = orden.external_reference;
+
+        const resultado =
+            await pedidoService.procesarPagoAprobado(
+                referenciaPago
+            );
+
+        console.log("=================================");
+        console.log("PEDIDO PROCESADO");
+        console.log("=================================");
+
+        console.log(
+            "Pedido:",
+            resultado.pedido.id_pedido
+        );
+
+        console.log(
+            "Estado:",
+            resultado.pedido.estado
+        );
+
+        console.log(
+            "Ya estaba procesado:",
+            resultado.yaProcesado
+        );
+
         /*
          * Por ahora solamente verificamos
          * que el webhook funciona.
@@ -263,7 +290,9 @@ const webhook = async (req, res) => {
         return res.status(200).json({
             recibido: true,
             orden: orden.id,
-            estado: orden.status
+            estado: orden.status,
+            pedido: resultado.pedido.id_pedido,
+            ya_procesado: resultado.yaProcesado
         });
 
     } catch (error) {

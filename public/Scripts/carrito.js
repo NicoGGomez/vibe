@@ -102,83 +102,282 @@ if (btnGenerarQR) {
             return;
         }
 
+        // try {
+
+        //     btnGenerarQR.textContent = "Generando QR...";
+        //     btnGenerarQR.disabled = true;
+
+        //     const token = localStorage.getItem("token");
+
+        //     if (!token) {
+        //         alert("Debés iniciar sesión.");
+        //         return;
+        //     }
+
+        //     const total = totalCompra + precioEnvio;
+
+        //     const respuesta = await fetch(
+        //         "https://vibe-n9dy.onrender.com/pagos/qr",
+        //         {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 Authorization: `Bearer ${token}`
+        //             },
+        //             body: JSON.stringify({
+        //                 monto: total
+        //             })
+        //         }
+        //     );
+
+        //     const datos = await respuesta.json();
+
+        //     if (!respuesta.ok) {
+        //         throw new Error(
+        //             datos.mensaje || "No se pudo generar el pago."
+        //         );
+        //     }
+
+        //     console.log("Order Mercado Pago:", datos);
+
+        //     console.log("QR DATA:", datos.qr_data);
+        //     console.log("ORDER COMPLETA:", datos);
+
+        //     if (!datos.qr_data) {
+        //         throw new Error("Mercado Pago no devolvió el QR.");
+        //     }
+
+        //     // Generar QR
+        //     contenedorQR.innerHTML = "";
+
+        //     new QRCode(contenedorQR, {
+        //         text: datos.qr_data,
+        //         width: 250,
+        //         height: 250
+        //     });
+
+        //     // Mostrar QR
+        //     contenedorQR.style.display = "flex";
+
+        //     // Ocultar solamente el botón de generar
+        //     btnGenerarQR.style.display = "none";
+
+        //     // Mostrar botón de Mercado Pago
+        //     if (datos.init_point) {
+
+        //         btnPagarMercadoPago.style.display = "block";
+
+        //         btnPagarMercadoPago.onclick = () => {
+        //             window.location.href = datos.init_point;
+        //         };
+        //     }
+
+        // } catch (error) {
+
+        //     console.error(error);
+
+        //     alert(error.message);
+
+        //     btnGenerarQR.textContent = "Generar QR de pago";
+        //     btnGenerarQR.disabled = false;
+        // }
+
         try {
 
-            btnGenerarQR.textContent = "Generando QR...";
+            btnGenerarQR.textContent = "Creando pedido...";
             btnGenerarQR.disabled = true;
 
             const token = localStorage.getItem("token");
 
             if (!token) {
                 alert("Debés iniciar sesión.");
+                btnGenerarQR.disabled = false;
+                btnGenerarQR.textContent = "Generar QR de pago";
                 return;
             }
 
             const total = totalCompra + precioEnvio;
 
-            const respuesta = await fetch(
-                "https://vibe-n9dy.onrender.com/pagos/qr",
+            // ==========================================
+            // 1. CREAR PEDIDO
+            // ==========================================
+
+            const direccion =
+                document.getElementById("direccion")?.value.trim() || "";
+
+            const ciudad =
+                document.getElementById("ciudad")?.value.trim() || "";
+
+            const codigoPostal =
+                document.getElementById("codigo-postal")?.value.trim() || "";
+
+            const pedidoRespuesta = await fetch(
+                "https://vibe-n9dy.onrender.com/pedidos",
                 {
                     method: "POST",
+
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`
                     },
+
                     body: JSON.stringify({
-                        monto: total
+
+                        tipo_entrega: tipoEntrega,
+
+                        direccion:
+                            tipoEntrega === "envio"
+                                ? direccion
+                                : null,
+
+                        ciudad:
+                            tipoEntrega === "envio"
+                                ? ciudad
+                                : null,
+
+                        codigo_postal:
+                            tipoEntrega === "envio"
+                                ? codigoPostal
+                                : null,
+
+                        nombre_apellido: nombreApellido,
+
+                        telefono: telefono,
+
+                        metodo_pago: "mercado_pago"
+
                     })
                 }
             );
 
-            const datos = await respuesta.json();
+            const pedidoDatos = await pedidoRespuesta.json();
 
-            if (!respuesta.ok) {
+            if (!pedidoRespuesta.ok) {
+
                 throw new Error(
-                    datos.mensaje || "No se pudo generar el pago."
+                    pedidoDatos.mensaje ||
+                    "No se pudo crear el pedido."
                 );
+
             }
 
-            console.log("Order Mercado Pago:", datos);
+            console.log(
+                "Pedido creado:",
+                pedidoDatos
+            );
 
-            console.log("QR DATA:", datos.qr_data);
-            console.log("ORDER COMPLETA:", datos);
+            const idPedido =
+                pedidoDatos.pedido.id_pedido;
+
+            console.log(
+                "ID del pedido:",
+                idPedido
+            );
+
+
+            // ==========================================
+            // 2. GENERAR PAGO
+            // ==========================================
+
+            btnGenerarQR.textContent = "Generando QR...";
+
+            const pagoRespuesta = await fetch(
+                "https://vibe-n9dy.onrender.com/pagos/qr",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+
+                        id_pedido: idPedido
+
+                    })
+                }
+            );
+
+            const datos = await pagoRespuesta.json();
+
+            if (!pagoRespuesta.ok) {
+
+                throw new Error(
+                    datos.mensaje ||
+                    "No se pudo generar el pago."
+                );
+
+            }
+
+            console.log(
+                "Pago Mercado Pago:",
+                datos
+            );
+
+
+            // ==========================================
+            // 3. GENERAR QR VISUAL
+            // ==========================================
 
             if (!datos.qr_data) {
-                throw new Error("Mercado Pago no devolvió el QR.");
+
+                throw new Error(
+                    "Mercado Pago no devolvió el QR."
+                );
+
             }
 
-            // Generar QR
             contenedorQR.innerHTML = "";
 
-            new QRCode(contenedorQR, {
-                text: datos.qr_data,
-                width: 250,
-                height: 250
-            });
+            new QRCode(
+                contenedorQR,
+                {
+                    text: datos.qr_data,
+                    width: 250,
+                    height: 250
+                }
+            );
 
-            // Mostrar QR
             contenedorQR.style.display = "flex";
 
-            // Ocultar solamente el botón de generar
+
+            // ==========================================
+            // 4. OCULTAR BOTÓN GENERAR
+            // ==========================================
+
             btnGenerarQR.style.display = "none";
 
-            // Mostrar botón de Mercado Pago
+
+            // ==========================================
+            // 5. MOSTRAR CHECKOUT PRO
+            // ==========================================
+
             if (datos.init_point) {
 
                 btnPagarMercadoPago.style.display = "block";
 
                 btnPagarMercadoPago.onclick = () => {
-                    window.location.href = datos.init_point;
+
+                    window.location.href =
+                        datos.init_point;
+
                 };
+
             }
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Error en checkout:",
+                error
+            );
 
             alert(error.message);
 
-            btnGenerarQR.textContent = "Generar QR de pago";
+            btnGenerarQR.textContent =
+                "Generar QR de pago";
+
             btnGenerarQR.disabled = false;
         }
     });

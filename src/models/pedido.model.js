@@ -136,11 +136,23 @@ const vaciarCarrito = async (idUsuario) => {
     );
 };
 
+const obtenerPedidoPorReferenciaPago = async (referenciaPago) => {
+
+    const resultado = await db.query(
+        `SELECT *
+         FROM pedido
+         WHERE referencia_pago = $1`,
+        [referenciaPago]
+    );
+
+    return resultado.rows[0];
+};
 
 module.exports = {
     obtenerProductosCarrito,
     crearPedido,
     crearPedidoProducto,
     vaciarCarrito,
-    obtenerPedidoPorIdUsuario
+    obtenerPedidoPorIdUsuario,
+    obtenerPedidoPorReferenciaPago
 };

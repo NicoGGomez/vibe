@@ -176,7 +176,141 @@ const crearPedido = async ({
     }
 };
 
+const procesarPagoAprobado = async (referenciaPago) => {
+
+    const client = await db.connect();
+
+    try {
+
+        await client.query("BEGIN");
+
+        // Buscar el pedido y bloquearlo
+        const pedidoResultado = await client.query(
+            `SELECT *
+             FROM pedido
+             WHERE referencia_pago = $1
+             FOR UPDATE`,
+            [referenciaPago]
+        );
+
+        const pedido = pedidoResultado.rows[0];
+
+        if (!pedido) {
+            throw new Error("Pedido no encontrado.");
+        }
+
+        // Si ya fue aprobado, no hacemos nada.
+        // Esto evita descontar stock dos veces
+        // si Mercado Pago manda el webhook nuevamente.
+        if (pedido.estado === "aprobado") {
+
+            await client.query("COMMIT");
+
+            return {
+                yaProcesado: true,
+                pedido
+            };
+        }
+
+        // Solamente procesamos pedidos pendientes
+        if (pedido.estado !== "pendiente") {
+
+            await client.query("ROLLBACK");
+
+            throw new Error(
+                `El pedido tiene estado "${pedido.estado}" y no puede ser aprobado.`
+            );
+        }
+
+        // Obtener productos del pedido
+        const productosResultado = await client.query(
+            `SELECT
+                pp.id_producto,
+                pp.cantidad,
+                pp.precio_unidad,
+                p.nombre,
+                p.stock
+             FROM pedido_producto pp
+             JOIN producto p
+                ON p.id_producto = pp.id_producto
+             WHERE pp.id_pedido = $1
+             FOR UPDATE`,
+            [pedido.id_pedido]
+        );
+
+        const productos = productosResultado.rows;
+
+        // Verificar stock nuevamente
+        for (const producto of productos) {
+
+            if (producto.cantidad > producto.stock) {
+
+                throw new Error(
+                    `No hay stock suficiente para "${producto.nombre}".`
+                );
+
+            }
+        }
+
+        // Descontar stock
+        for (const producto of productos) {
+
+            await client.query(
+                `UPDATE producto
+                 SET stock = stock - $1
+                 WHERE id_producto = $2`,
+                [
+                    producto.cantidad,
+                    producto.id_producto
+                ]
+            );
+        }
+
+        // Aprobar pedido
+        const pedidoActualizadoResultado = await client.query(
+            `UPDATE pedido
+             SET estado = 'aprobado'
+             WHERE id_pedido = $1
+             RETURNING *`,
+            [pedido.id_pedido]
+        );
+
+        const pedidoActualizado =
+            pedidoActualizadoResultado.rows[0];
+
+        // Vaciar carrito del usuario
+        await client.query(
+            `DELETE FROM carrito_producto
+             WHERE id_carrito = (
+                 SELECT id_carrito
+                 FROM carrito
+                 WHERE id_usuario = $1
+             )`,
+            [pedido.id_usuario]
+        );
+
+        await client.query("COMMIT");
+
+        return {
+            yaProcesado: false,
+            pedido: pedidoActualizado,
+            productos
+        };
+
+    } catch (error) {
+
+        await client.query("ROLLBACK");
+
+        throw error;
+
+    } finally {
+
+        client.release();
+
+    }
+};
 
 module.exports = {
-    crearPedido
+    crearPedido,
+    procesarPagoAprobado
 };
