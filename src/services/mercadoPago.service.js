@@ -82,7 +82,7 @@ const crearPreferencia = async (monto, referencia) => {
         external_reference: referencia,
 
         back_urls: {
-            success: "https://TU-FRONTEND/pago-exitoso.html",
+            success: "misCompras.html",
             failure: "https://TU-FRONTEND/pago-error.html",
             pending: "https://TU-FRONTEND/pago-pendiente.html"
         },

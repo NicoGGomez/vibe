@@ -86,7 +86,7 @@ const crearQR = async (req, res) => {
 
 
         res.status(201).json({
-
+ 
             id_pedido: pedido.id_pedido,
 
             referencia_pago: referencia,
