@@ -157,13 +157,17 @@ const webhook = async (req, res) => {
 
         const signature = req.headers["x-signature"];
         const requestId = req.headers["x-request-id"];
-
         const dataId = req.query["data.id"];
 
         console.log("Data ID:", dataId);
         console.log("Request ID:", requestId);
         console.log("Signature:", signature);
         console.log("Body:", req.body);
+
+
+        // ==========================================
+        // 1. VALIDAR DATOS DEL WEBHOOK
+        // ==========================================
 
         if (!signature || !requestId || !dataId) {
 
@@ -175,7 +179,11 @@ const webhook = async (req, res) => {
 
         }
 
-        // Extraer ts y v1
+
+        // ==========================================
+        // 2. EXTRAER FIRMA
+        // ==========================================
+
         const partes = signature.split(",");
 
         let ts = null;
@@ -195,6 +203,7 @@ const webhook = async (req, res) => {
 
         }
 
+
         if (!ts || !v1) {
 
             return res.status(400).json({
@@ -203,23 +212,27 @@ const webhook = async (req, res) => {
 
         }
 
-        /*
-         * Mercado Pago indica utilizar:
-         *
-         * id:[data.id_url];
-         * request-id:[x-request-id];
-         * ts:[ts];
-         *
-         * El data.id debe ir en minúsculas.
-         */
+
+        // ==========================================
+        // 3. CREAR MANIFEST
+        // ==========================================
 
         const manifest =
             `id:${dataId};` +
             `request-id:${requestId};` +
             `ts:${ts};`;
 
-            console.log("Manifest:", manifest);
-            console.log("Secret configurado:", !!process.env.MP_WEBHOOK_SECRET);
+
+        console.log("Manifest:", manifest);
+        console.log(
+            "Secret configurado:",
+            !!process.env.MP_WEBHOOK_SECRET
+        );
+
+
+        // ==========================================
+        // 4. VALIDAR FIRMA
+        // ==========================================
 
         const firmaCalculada = crypto
             .createHmac(
@@ -229,15 +242,19 @@ const webhook = async (req, res) => {
             .update(manifest)
             .digest("hex");
 
+
         const firmaValida =
             crypto.timingSafeEqual(
                 Buffer.from(firmaCalculada),
                 Buffer.from(v1)
             );
 
+
         if (!firmaValida) {
 
-            console.log("❌ Firma de Mercado Pago inválida.");
+            console.log(
+                "❌ Firma de Mercado Pago inválida."
+            );
 
             return res.status(401).json({
                 mensaje: "Firma inválida."
@@ -245,23 +262,159 @@ const webhook = async (req, res) => {
 
         }
 
-        console.log("✅ Firma de Mercado Pago válida.");
+
+        console.log(
+            "✅ Firma de Mercado Pago válida."
+        );
+
+
+        // ==========================================
+        // 5. CONSULTAR ORDER REAL
+        // ==========================================
 
         const orden =
-            await mercadoPagoService.obtenerOrdenQR(dataId);
+            await mercadoPagoService.obtenerOrdenQR(
+                dataId
+            );
 
-        console.log("Estado real de la Order:");
-        console.log(orden.status);
 
-        console.log("Referencia:");
-        console.log(orden.external_reference);
+        console.log(
+            "Estado real de la Order:",
+            orden.status
+        );
 
-        const referenciaPago = orden.external_reference;
+        console.log(
+            "Detalle:",
+            orden.status_detail
+        );
+
+        console.log(
+            "Referencia:",
+            orden.external_reference
+        );
+
+        console.log(
+            "Monto Mercado Pago:",
+            orden.total_amount
+        );
+
+
+        // ==========================================
+        // 6. VERIFICAR ESTADO DEL PAGO
+        // ==========================================
+
+        if (orden.status !== "processed") {
+
+            console.log(
+                "La Order todavía no está procesada."
+            );
+
+            return res.status(200).json({
+                recibido: true,
+                orden: orden.id,
+                estado: orden.status,
+                procesado: false
+            });
+
+        }
+
+
+        // ==========================================
+        // 7. OBTENER REFERENCIA DEL PEDIDO
+        // ==========================================
+
+        const referenciaPago =
+            orden.external_reference;
+
+
+        if (!referenciaPago) {
+
+            console.log(
+                "La Order no tiene external_reference."
+            );
+
+            return res.status(400).json({
+                mensaje:
+                    "La Order no tiene referencia de pago."
+            });
+
+        }
+
+
+        // ==========================================
+        // 8. BUSCAR PEDIDO LOCAL
+        // ==========================================
+
+        const pedido =
+            await pedidoModel.obtenerPedidoPorReferenciaPago(
+                referenciaPago
+            );
+
+
+        if (!pedido) {
+
+            console.log(
+                "No existe un pedido con esa referencia."
+            );
+
+            return res.status(404).json({
+                mensaje: "Pedido no encontrado."
+            });
+
+        }
+
+
+        console.log(
+            "Pedido encontrado:",
+            pedido.id_pedido
+        );
+
+
+        // ==========================================
+        // 9. VERIFICAR MONTO
+        // ==========================================
+
+        const montoMercadoPago =
+            Number(orden.total_amount);
+
+        const montoPedido =
+            Number(pedido.total);
+
+
+        console.log(
+            "Monto pedido:",
+            montoPedido
+        );
+
+        console.log(
+            "Monto Mercado Pago:",
+            montoMercadoPago
+        );
+
+
+        if (montoMercadoPago !== montoPedido) {
+
+            console.log(
+                "❌ El monto no coincide."
+            );
+
+            return res.status(400).json({
+                mensaje:
+                    "El monto del pago no coincide con el pedido."
+            });
+
+        }
+
+
+        // ==========================================
+        // 10. PROCESAR PEDIDO
+        // ==========================================
 
         const resultado =
             await pedidoService.procesarPagoAprobado(
                 referenciaPago
             );
+
 
         console.log("=================================");
         console.log("PEDIDO PROCESADO");
@@ -282,18 +435,29 @@ const webhook = async (req, res) => {
             resultado.yaProcesado
         );
 
-        /*
-         * Por ahora solamente verificamos
-         * que el webhook funciona.
-         */
+
+        // ==========================================
+        // 11. RESPUESTA
+        // ==========================================
 
         return res.status(200).json({
+
             recibido: true,
+
             orden: orden.id,
+
             estado: orden.status,
+
             pedido: resultado.pedido.id_pedido,
-            ya_procesado: resultado.yaProcesado
+
+            estado_pedido:
+                resultado.pedido.estado,
+
+            ya_procesado:
+                resultado.yaProcesado
+
         });
+
 
     } catch (error) {
 
@@ -307,6 +471,7 @@ const webhook = async (req, res) => {
         });
 
     }
+
 };
 
 // Exportación de funciones
