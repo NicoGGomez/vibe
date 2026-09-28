@@ -202,7 +202,7 @@ const procesarPagoAprobado = async (referenciaPago) => {
         // Si ya fue aprobado, no hacemos nada.
         // Esto evita descontar stock dos veces
         // si Mercado Pago manda el webhook nuevamente.
-        if (pedido.estado === "aprobado") {
+        if (pedido.estado === "pagado") {
 
             await client.query("COMMIT");
 
@@ -218,7 +218,7 @@ const procesarPagoAprobado = async (referenciaPago) => {
             await client.query("ROLLBACK");
 
             throw new Error(
-                `El pedido tiene estado "${pedido.estado}" y no puede ser aprobado.`
+                `El pedido tiene estado "${pedido.estado}" y no puede ser procesado.`
             );
         }
 
@@ -269,9 +269,9 @@ const procesarPagoAprobado = async (referenciaPago) => {
         // Aprobar pedido
         const pedidoActualizadoResultado = await client.query(
             `UPDATE pedido
-             SET estado = 'aprobado'
-             WHERE id_pedido = $1
-             RETURNING *`,
+            SET estado = 'pagado'
+            WHERE id_pedido = $1
+            RETURNING *`,
             [pedido.id_pedido]
         );
 
