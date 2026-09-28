@@ -1,0 +1,391 @@
+/* =========================================
+   COMPRAS ADMIN
+========================================= */
+
+.contenedor-compras-admin {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+
+/* =========================================
+   TITULO
+========================================= */
+
+.titulo-compras-admin {
+    margin-bottom: 35px;
+}
+
+.titulo-compras-admin h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.titulo-compras-admin p {
+    margin-top: 8px;
+    color: #777;
+    font-size: 15px;
+}
+
+
+/* =========================================
+   CONTENEDOR DE PEDIDOS
+========================================= */
+
+.contenedor-compras {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+/* =========================================
+   TARJETA PEDIDO
+========================================= */
+
+.pedido-admin {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   HEADER PEDIDO
+========================================= */
+
+.pedido-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.pedido-admin-header h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.pedido-admin-header p {
+    margin: 5px 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ESTADO
+========================================= */
+
+.estado-pedido {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.estado-pagado {
+    background: #e8f7ed;
+    color: #218838;
+}
+
+.estado-enviado {
+    background: #e8f0ff;
+    color: #2864d7;
+}
+
+
+/* =========================================
+   CLIENTE
+========================================= */
+
+.cliente-pedido-admin {
+    padding: 20px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.cliente-pedido-admin h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+.cliente-pedido-admin h3 i {
+    margin-right: 7px;
+}
+
+.cliente-pedido-admin p {
+    margin: 6px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.cliente-pedido-admin p i {
+    margin-right: 6px;
+    color: #777;
+}
+
+
+/* =========================================
+   PRODUCTOS
+========================================= */
+
+.pedido-productos-admin {
+    padding: 20px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.pedido-productos-admin > h3 {
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+
+.pedido-productos-admin > h3 i {
+    margin-right: 7px;
+}
+
+.producto-pedido-admin {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+}
+
+.producto-pedido-admin img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 9px;
+    border: 1px solid #eeeeee;
+}
+
+.producto-pedido-admin h3 {
+    margin: 0 0 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.producto-pedido-admin p {
+    margin: 0 0 5px;
+    color: #777;
+    font-size: 13px;
+}
+
+.producto-pedido-admin span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   ENTREGA
+========================================= */
+
+.pedido-entrega-admin {
+    padding: 20px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.dato-pedido-admin {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.dato-pedido-admin > i {
+    margin-top: 3px;
+    font-size: 17px;
+}
+
+.dato-pedido-admin strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.dato-pedido-admin p {
+    margin: 3px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FOOTER DEL PEDIDO
+========================================= */
+
+.pedido-admin-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.total-pedido-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.total-pedido-admin span {
+    color: #777;
+    font-size: 13px;
+}
+
+.total-pedido-admin strong {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   BOTON MARCAR ENVIADO
+========================================= */
+
+.btn-marcar-enviado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    background: #111;
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.btn-marcar-enviado:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+.btn-marcar-enviado:active {
+    transform: translateY(0);
+}
+
+.btn-marcar-enviado:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+
+/* =========================================
+   CARGANDO
+========================================= */
+
+#cargando-compras {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 20px;
+
+    color: #777;
+}
+
+#cargando-compras i {
+    margin-bottom: 12px;
+    font-size: 25px;
+}
+
+
+/* =========================================
+   SIN COMPRAS
+========================================= */
+
+.sin-compras {
+    text-align: center;
+    padding: 70px 20px;
+    color: #777;
+}
+
+.sin-compras i {
+    margin-bottom: 15px;
+    font-size: 40px;
+    color: #aaa;
+}
+
+.sin-compras h2 {
+    margin: 0 0 8px;
+    color: #333;
+    font-size: 21px;
+}
+
+.sin-compras p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .contenedor-compras-admin {
+        width: 94%;
+        margin: 30px auto;
+    }
+
+    .titulo-compras-admin h1 {
+        font-size: 26px;
+    }
+
+    .pedido-admin {
+        padding: 18px;
+    }
+
+    .pedido-admin-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .pedido-admin-header h2 {
+        font-size: 18px;
+    }
+
+    .pedido-admin-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .total-pedido-admin {
+        margin-bottom: 5px;
+    }
+
+    .btn-marcar-enviado {
+        width: 100%;
+    }
+
+    .producto-pedido-admin img {
+        width: 60px;
+        height: 60px;
+    }
+
+}

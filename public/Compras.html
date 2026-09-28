@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <!-- sacar dsp -->
+    <meta name="google" content="notranslate"> 
+    <!--  -->
+
+    <!-- metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- info general -->
+    <title>Vibe - Perfil</title>
+    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="Styles/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+<body>
+
+    <!-- Navbar -->
+
+    <nav-bar class="cont"></nav-bar>
+
+
+    <!-- Contenido -->
+
+    <main class="cont contenedor-compras-admin">
+
+        <div class="titulo-compras-admin">
+
+            <h1>
+                Compras
+            </h1>
+
+            <p>
+                Pedidos realizados por los usuarios
+            </p>
+
+        </div>
+
+
+        <!-- Mensaje de error -->
+
+        <div
+            id="msg-error"
+            class="error"
+            style="display: none;"
+        ></div>
+
+
+        <!-- Cargando -->
+
+        <div id="cargando-compras">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>
+                Cargando compras...
+            </p>
+
+        </div>
+
+
+        <!-- Contenedor de pedidos -->
+
+        <div
+            id="contenedor-compras"
+            class="contenedor-compras"
+        ></div>
+
+
+        <!-- Sin compras -->
+
+        <div
+            id="sin-compras"
+            class="sin-compras"
+            style="display: none;"
+        >
+
+            <i class="fa-solid fa-box-open"></i>
+
+            <h2>
+                No hay compras pendientes
+            </h2>
+
+            <p>
+                Cuando un usuario realice una compra,
+                aparecerá acá.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer-comp class="cont"></footer-comp>
+
+
+    <!-- Scripts -->
+
+    <script src="Components/Footer.js"></script>
+
+    <script
+        type="module"
+        src="Components/NavBar.js"
+    ></script>
+
+    <script
+        type="module"
+        src="Scripts/compras.js"
+    ></script>
+
+</body>
+</html>

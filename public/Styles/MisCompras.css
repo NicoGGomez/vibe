@@ -1,0 +1,369 @@
+/* =========================================
+   MIS COMPRAS
+========================================= */
+
+.mis-compras {
+    width: 100%;
+    padding: 50px 20px 80px;
+    box-sizing: border-box;
+}
+
+.contenedor-mis-compras {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.contenedor-mis-compras > h1 {
+    margin: 0 0 35px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   CONTENEDOR PEDIDOS
+========================================= */
+
+#contenedor-pedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+/* =========================================
+   TARJETA PEDIDO
+========================================= */
+
+.pedido-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 14px;
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 22px 25px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.pedido-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.pedido-header p {
+    margin: 5px 0 0;
+    color: #888;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   ESTADOS
+========================================= */
+
+.estado-pedido {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+}
+
+.estado-pagado {
+    background: #e8f7ed;
+    color: #218838;
+}
+
+.estado-enviado {
+    background: #e8f0ff;
+    color: #2864d7;
+}
+
+
+/* =========================================
+   PRODUCTOS
+========================================= */
+
+.pedido-productos {
+    padding: 10px 25px;
+}
+
+.producto-pedido {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.producto-pedido:last-child {
+    border-bottom: none;
+}
+
+.producto-pedido img {
+    width: 75px;
+    height: 75px;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+
+    border: 1px solid #eeeeee;
+}
+
+.producto-info {
+    flex: 1;
+}
+
+.producto-info h3 {
+    margin: 0 0 7px;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.producto-info p {
+    margin: 0 0 5px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.producto-info span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   FOOTER PEDIDO
+========================================= */
+
+.pedido-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 20px 25px;
+
+    background: #fafafa;
+
+    border-top: 1px solid #eeeeee;
+}
+
+
+/* =========================================
+   ENTREGA
+========================================= */
+
+.dato-pedido {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    color: #555;
+
+    font-size: 13px;
+}
+
+.dato-pedido i {
+    margin-top: 2px;
+
+    font-size: 15px;
+}
+
+.dato-pedido span {
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   TOTAL
+========================================= */
+
+.total-pedido {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 3px;
+}
+
+.total-pedido span {
+    color: #777;
+
+    font-size: 12px;
+}
+
+.total-pedido strong {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   CARGANDO
+========================================= */
+
+#cargando-pedidos {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SIN COMPRAS
+========================================= */
+
+.sin-compras {
+    padding: 70px 20px;
+
+    text-align: center;
+
+    color: #777;
+}
+
+.sin-compras i {
+    margin-bottom: 15px;
+
+    font-size: 42px;
+
+    color: #aaa;
+}
+
+.sin-compras h2 {
+    margin: 0 0 8px;
+
+    color: #333;
+
+    font-size: 21px;
+}
+
+.sin-compras p {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error-pedidos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #777;
+}
+
+.error-pedidos i {
+    margin-bottom: 12px;
+
+    font-size: 35px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .mis-compras {
+        padding: 30px 15px 60px;
+    }
+
+    .contenedor-mis-compras > h1 {
+        margin-bottom: 25px;
+
+        font-size: 26px;
+    }
+
+    .pedido-header {
+        padding: 18px;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .pedido-header h2 {
+        font-size: 18px;
+    }
+
+    .pedido-productos {
+        padding: 8px 18px;
+    }
+
+    .producto-pedido {
+        gap: 12px;
+    }
+
+    .producto-pedido img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .producto-info h3 {
+        font-size: 14px;
+    }
+
+    .pedido-footer {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 18px;
+    }
+
+    .total-pedido {
+        align-items: flex-start;
+    }
+
+    .total-pedido strong {
+        font-size: 20px;
+    }
+
+}

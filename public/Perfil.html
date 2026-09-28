@@ -31,22 +31,65 @@
 
     <!-- seccion perfil -->
 
-    <div class="cont contenedor-perfil">
+    <main class="contenedor-perfil">
 
-            <div class="cont-info-perfil">
-                
-                <div class="cont-info">
-                    <p>Nombre</p>
-                </div>
+        <div class="perfil-card">
+
+            <div class="perfil-avatar">
+
+                <i class="fa-solid fa-user"></i>
 
             </div>
 
-            <button><a href="misCompras.html">Ir a mis compras</a></button>
+            <div class="cont-info-perfil">
 
-            <button id="btn-logout" type="submit">Cerrar sesion</button>
+                <h1 id="nombre-usuario">
+                    Mi perfil
+                </h1>
+
+                <p id="rol-usuario">
+                    Usuario
+                </p>
+
+            </div>
+
+        </div>
 
 
-    </div>
+        <div class="perfil-acciones">
+
+            <a
+                id="link-compras"
+                class="btn-perfil btn-compras"
+                href="misCompras.html"
+            >
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span>
+                    Mis compras
+                </span>
+
+            </a>
+
+
+            <button
+                id="btn-logout"
+                class="btn-perfil btn-logout"
+                type="button"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Cerrar sesión
+                </span>
+
+            </button>
+
+        </div>
+
+    </main>
 
     <!-- footer -->
 
@@ -56,6 +99,7 @@
 
     <script type="module" src="Scripts/logut.js"></script>
     <script src="Components/Footer.js"></script>
+    <script type="module" src="Scripts/perfil.js"></script>
     <script type="module" src="Components/NavBar.js"></script>
 </body>
 </html>
