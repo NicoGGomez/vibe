@@ -164,7 +164,9 @@ if (btnGenerarQR) {
 
                         telefono: telefono,
 
-                        metodo_pago: "mercado_pago"
+                        metodo_pago: "mercado_pago",
+
+                        precio_envio: precioEnvio
 
                     })
                 }
@@ -235,6 +237,7 @@ if (btnGenerarQR) {
                 datos
             );
 
+            esperarPago(datos.id);
 
             // ==========================================
             // 3. GENERAR QR VISUAL
@@ -820,6 +823,63 @@ const cargarProductos = async () => {
     montoProductos.textContent = `$${total.toLocaleString("es-AR")}`;
     montoFinal.textContent = `$${total.toLocaleString("es-AR")}`;
 
+}
+
+async function esperarPago(idOrden) {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    console.log("Esperando confirmación del pago...");
+
+    const intervalo = setInterval(async () => {
+
+        try {
+
+            const respuesta = await fetch(
+                `https://vibe-n9dy.onrender.com/pagos/qr/${idOrden}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const datos = await respuesta.json();
+
+            console.log("Estado del pago:", datos.estado);
+
+            if (datos.estado === "processed") {
+
+                clearInterval(intervalo);
+
+                console.log("✅ Pago confirmado.");
+
+                window.location.href = "mis-compras.html";
+            }
+
+            if (
+                datos.estado === "expired" ||
+                datos.estado === "cancelled"
+            ) {
+
+                clearInterval(intervalo);
+
+                alert("El pago expiró o fue cancelado.");
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Error consultando estado del pago:",
+                error
+            );
+
+        }
+
+    }, 3000);
 }
 
 // Función para resetear un QR

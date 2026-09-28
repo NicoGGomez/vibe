@@ -13,7 +13,8 @@ const crearPedido = async ({
     codigoPostal,
     nombreApellido,
     telefono,
-    metodoPago
+    metodoPago,
+    precioEnvio
 }) => {
 
     const client = await db.connect();
@@ -69,10 +70,13 @@ const crearPedido = async ({
             0
         );
 
+        const envio = Number(precioEnvio) || 0;
 
-        // Por ahora el envío se calcula en el frontend.
-        // Más adelante podemos mover este cálculo al backend.
-        const total = subtotal;
+        if (envio < 0) {
+            throw new Error("El precio de envío no puede ser negativo.");
+        }
+
+        const total = subtotal + envio;
 
 
         // Generar referencia única para Mercado Pago
