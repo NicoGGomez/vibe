@@ -13,6 +13,11 @@ const verificarToken = require("../middlewares/auth.middleware");
 // Rutas
 
 router.post("/qr", verificarToken, pagoController.crearQR);
+router.get(
+    "/qr/:idOrden",
+    verificarToken,
+    pagoController.obtenerEstadoQR
+);
 
 // Exportación de rutas
 

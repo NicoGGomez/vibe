@@ -117,9 +117,35 @@ const crearPreferencia = async (monto, referencia) => {
     return datos;
 };
 
+const obtenerOrdenQR = async (idOrden) => {
+
+    const respuesta = await fetch(
+        `https://api.mercadopago.com/v1/orders/${idOrden}`,
+        {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
+            }
+        }
+    );
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.message ||
+            datos.error ||
+            JSON.stringify(datos)
+        );
+    }
+
+    return datos;
+};
+
 // Exportación de Función
 
 module.exports = {
     crearOrdenQR,
-    crearPreferencia
+    crearPreferencia,
+    obtenerOrdenQR
 };

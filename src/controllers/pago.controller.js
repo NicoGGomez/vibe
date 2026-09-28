@@ -175,9 +175,41 @@ const crearQR = async (req, res) => {
 
 };
 
+const obtenerEstadoQR = async (req, res) => {
+
+    try {
+
+        const { idOrden } = req.params;
+
+        if (!idOrden) {
+            return res.status(400).json({
+                mensaje: "El ID de la orden es obligatorio."
+            });
+        }
+
+        const orden = await mercadoPagoService.obtenerOrdenQR(idOrden);
+
+        res.status(200).json({
+            id: orden.id,
+            estado: orden.status,
+            detalle: orden.status_detail,
+            referencia_pago: orden.external_reference,
+            monto: orden.total_amount
+        });
+
+    } catch (error) {
+
+        console.error("Error al consultar orden QR:", error);
+
+        res.status(500).json({
+            mensaje: error.message
+        });
+    }
+};
 
 // Exportación de funciones
 
 module.exports = {
-    crearQR
+    crearQR,
+    obtenerEstadoQR
 };
