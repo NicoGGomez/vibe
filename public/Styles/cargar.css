@@ -1,4 +1,4 @@
-.contenedor-cargar-producto, .contenedor-cargar-categoria, .contenedor-registro, .contenedor-login {
+/* .contenedor-cargar-producto, .contenedor-cargar-categoria, .contenedor-registro, .contenedor-login {
     width: 100%;
 }
 
@@ -55,6 +55,330 @@
     .contenedor-lista-productos .contenedor-productos, .contenedor-registro, .contenedor-login {
         margin: 4vh 0;
         flex-direction: column;
+    }
+
+} */
+
+/* =========================================
+   CONTENEDORES DE FORMULARIOS
+========================================= */
+
+.contenedor-cargar-producto,
+.contenedor-cargar-categoria,
+.contenedor-registro,
+.contenedor-login {
+    width: 100%;
+    padding: 50px 20px 80px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================================
+   FORMULARIOS
+========================================= */
+
+.form-carga-producto,
+.form-carga-categoria,
+.form-registro,
+.form-login {
+    width: 100%;
+    max-width: 550px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 35px;
+
+    background-color: #fff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-carga-producto input,
+.form-carga-producto select,
+.form-carga-producto textarea,
+
+.form-carga-categoria input,
+.form-carga-categoria select,
+.form-carga-categoria textarea,
+
+.form-registro input,
+.form-registro select,
+.form-registro textarea,
+
+.form-login input,
+.form-login select,
+.form-login textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    background-color: #fff;
+
+    color: #222;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.form-carga-producto input:focus,
+.form-carga-producto select:focus,
+.form-carga-producto textarea:focus,
+
+.form-carga-categoria input:focus,
+.form-carga-categoria select:focus,
+.form-carga-categoria textarea:focus,
+
+.form-registro input:focus,
+.form-registro select:focus,
+.form-registro textarea:focus,
+
+.form-login input:focus,
+.form-login select:focus,
+.form-login textarea:focus {
+    border-color: #999;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.form-carga-producto textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* =========================================
+   BOTONES
+========================================= */
+
+.form-carga-producto button,
+.form-carga-categoria button,
+.form-registro button,
+.form-login button {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background-color: #111;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.form-carga-producto button:hover,
+.form-carga-categoria button:hover,
+.form-registro button:hover,
+.form-login button:hover {
+    background-color: #333;
+
+    transform: translateY(-1px);
+}
+
+
+.form-carga-producto button:active,
+.form-carga-categoria button:active,
+.form-registro button:active,
+.form-login button:active {
+    transform: translateY(0);
+}
+
+
+.form-carga-producto button:disabled,
+.form-carga-categoria button:disabled,
+.form-registro button:disabled,
+.form-login button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+.form-carga-producto label,
+.form-carga-categoria label,
+.form-registro label,
+.form-login label {
+    width: 100%;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #333;
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+.form-registro a,
+.form-login a {
+    color: #333;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    transition: opacity 0.2s ease;
+}
+
+
+.form-registro a:hover,
+.form-login a:hover {
+    opacity: 0.65;
+}
+
+
+/* =========================================
+   LISTA DE PRODUCTOS
+========================================= */
+
+.contenedor-lista-productos {
+    width: 100%;
+
+    margin: 50px 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 25px;
+}
+
+.contenedor-lista-productos .contenedor-productos {
+    width: 100%;
+
+    margin: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .contenedor-cargar-producto,
+    .contenedor-cargar-categoria,
+    .contenedor-registro,
+    .contenedor-login {
+        padding: 40px 20px 60px;
+    }
+
+    .form-carga-producto,
+    .form-carga-categoria,
+    .form-registro,
+    .form-login {
+        max-width: 600px;
+
+        padding: 30px;
+    }
+
+    .contenedor-lista-productos .contenedor-productos {
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .contenedor-cargar-producto,
+    .contenedor-cargar-categoria,
+    .contenedor-registro,
+    .contenedor-login {
+        padding: 30px 15px 50px;
+    }
+
+    .form-carga-producto,
+    .form-carga-categoria,
+    .form-registro,
+    .form-login {
+        width: 100%;
+
+        padding: 25px 20px;
+
+        border-radius: 13px;
+    }
+
+    .form-carga-producto button,
+    .form-carga-categoria button,
+    .form-registro button,
+    .form-login button {
+        min-height: 46px;
     }
 
 }

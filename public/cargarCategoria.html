@@ -1,66 +1,157 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    
+
     <!-- sacar dsp -->
-    <meta name="google" content="notranslate"> 
-    <!--  -->
+    <meta name="google" content="notranslate">
 
     <!-- metadata -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <!-- info general -->
     <title>Vibe - Cargar categoria</title>
-    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <link
+        rel="icon"
+        href="Imgs/logo-vibe.png"
+        type="image/png"
+    >
 
     <!-- estilos -->
-    <link rel="stylesheet" href="Styles/Style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    
+    <link
+        rel="stylesheet"
+        href="Styles/Style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
 </head>
+
 <body>
 
     <!-- nav -->
 
     <nav-bar class="cont"></nav-bar>
 
+
     <!-- mensaje error -->
 
-    <div id="msg-error" class="error" style="display: none;"></div>
+    <div
+        id="msg-error"
+        class="error"
+        style="display: none;"
+    ></div>
 
-    <!-- seccion producto cargar producto -->
 
-    <div class="cont contenedor-cargar-categoria">
+    <!-- cargar categoria -->
 
-        <form class="form-carga-categoria" id="form-carga-categoria" >
+    <main class="contenedor-cargar-categoria">
 
-            <div class="input">
-                <label for="input-ca-nombre">Nombre de la categoria</label>
-                <input type="text" name="nombreCategoria" id="input-ca-nombre" required>
+        <form
+            class="form-carga-categoria"
+            id="form-carga-categoria"
+        >
+
+            <div class="titulo-formulario">
+
+                <div class="icono-formulario">
+
+                    <i class="fa-solid fa-tags"></i>
+
+                </div>
+
+                <h1>
+                    Cargar categoría
+                </h1>
+
+                <p>
+                    Agregá una nueva categoría a Vibe
+                </p>
+
             </div>
 
-            <button type="submit">Cargar categoria</button>
+
+            <div class="input">
+
+                <label for="input-ca-nombre">
+                    Nombre de la categoría
+                </label>
+
+                <input
+                    type="text"
+                    name="nombreCategoria"
+                    id="input-ca-nombre"
+                    placeholder="Ej: Remeras"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Cargar categoría
+
+            </button>
 
         </form>
 
-    </div>
 
-    <div class="contenedor-lista-categorias">
-        <h2>Categorías cargadas</h2>
+        <!-- categorías -->
 
-        <ul id="lista-categorias"></ul>
-    </div>
-    
+        <section class="contenedor-lista-categorias">
+
+            <div class="titulo-lista-categorias">
+
+                <h2>
+                    Categorías cargadas
+                </h2>
+
+                <span>
+                    <i class="fa-solid fa-list"></i>
+                </span>
+
+            </div>
+
+
+            <ul id="lista-categorias"></ul>
+
+        </section>
+
+    </main>
+
+
     <!-- footer -->
 
     <footer-comp class="cont"></footer-comp>
 
-    <!-- link a scripts -->
 
-    <script type="module" src="Scripts/cargar-categoria.js"></script>
+    <!-- scripts -->
+
+    <script
+        type="module"
+        src="Scripts/cargar-categoria.js"
+    ></script>
+
     <script src="Scripts/categorias.js"></script>
+
     <script src="Components/Footer.js"></script>
-    <script type="module" src="Components/NavBar.js"></script>
+
+    <script
+        type="module"
+        src="Components/NavBar.js"
+    ></script>
+
 </body>
+
 </html>

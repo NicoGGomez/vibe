@@ -16,13 +16,14 @@
 @import url(Nosotros.css);
 @import url(Contacto.css);
 @import url(Producto.css);
-@import url(Productos.css);
 @import url(cargar.css);
 @import url(Perfil.css);
 @import url(MsgError.css);
 @import url(Carrito.css);
 @import url(carga.css);
 @import url(MisCompras.css);
+@import url(cargarCategoria.css);
+@import url(CargarProducto.css);
 @import url(ComprasAdmin.css);
 
 /* Variables */

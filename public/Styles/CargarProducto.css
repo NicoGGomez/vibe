@@ -1,0 +1,391 @@
+/* =========================================
+   CARGAR PRODUCTO
+========================================= */
+
+.contenedor-cargar-producto {
+    width: 100%;
+
+    padding: 50px 20px 80px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* =========================================
+   FORMULARIO
+========================================= */
+
+.form-carga-producto {
+    width: 100%;
+    max-width: 700px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+
+    padding: 40px;
+
+    background: #fff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   TITULO
+========================================= */
+
+.form-carga-producto
+.titulo-formulario {
+    width: 100%;
+
+    text-align: center;
+}
+
+.form-carga-producto
+.icono-formulario {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f3f3;
+}
+
+.form-carga-producto
+.icono-formulario i {
+    font-size: 24px;
+
+    color: #333;
+}
+
+.form-carga-producto
+.titulo-formulario h1 {
+    margin: 0;
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+.form-carga-producto
+.titulo-formulario p {
+    margin: 7px 0 0;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SECCIONES
+========================================= */
+
+.seccion-formulario {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.seccion-formulario h2 {
+    margin: 0;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+.descripcion-seccion {
+    margin: -8px 0 0;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-carga-producto .input {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-carga-producto .input label {
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #333;
+}
+
+.form-carga-producto .input label i {
+    margin-right: 5px;
+
+    color: #777;
+}
+
+.form-carga-producto .input input,
+.form-carga-producto .input textarea,
+.form-carga-producto .input select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #222;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-carga-producto
+.input input:focus,
+
+.form-carga-producto
+.input textarea:focus,
+
+.form-carga-producto
+.input select:focus {
+    border-color: #999;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   DESCRIPCIÓN
+========================================= */
+
+.form-carga-producto
+.input textarea {
+    min-height: 130px;
+
+    resize: vertical;
+}
+
+
+/* =========================================
+   INPUT FILE
+========================================= */
+
+.form-carga-producto
+.input input[type="file"] {
+    padding: 10px;
+
+    cursor: pointer;
+
+    background: #fafafa;
+}
+
+
+/* =========================================
+   LINK CATEGORÍA
+========================================= */
+
+.form-carga-producto
+.input a {
+    width: fit-content;
+
+    color: #555;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition: opacity 0.2s ease;
+}
+
+.form-carga-producto
+.input a:hover {
+    opacity: 0.6;
+}
+
+
+/* =========================================
+   BOTÓN
+========================================= */
+
+.form-carga-producto > button {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #111;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.form-carga-producto > button:hover {
+    background: #333;
+
+    transform: translateY(-1px);
+}
+
+.form-carga-producto > button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   LISTA / PREVIEW
+========================================= */
+
+.contenedor-lista-productos {
+    width: 100%;
+    max-width: 1200px;
+
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.titulo-lista-productos {
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+
+.titulo-lista-productos h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+.titulo-lista-productos p {
+    margin: 6px 0 0;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   PRODUCTOS PREVIEW
+========================================= */
+
+.contenedor-lista-productos
+.contenedor-productos {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .contenedor-cargar-producto {
+        padding: 30px 15px 60px;
+    }
+
+    .form-carga-producto {
+        padding: 25px 20px;
+
+        border-radius: 13px;
+
+        gap: 25px;
+    }
+
+    .form-carga-producto
+    .titulo-formulario h1 {
+        font-size: 22px;
+    }
+
+    .seccion-formulario h2 {
+        font-size: 16px;
+    }
+
+    .contenedor-lista-productos {
+        margin-top: 30px;
+    }
+
+    .titulo-lista-productos h2 {
+        font-size: 20px;
+    }
+
+}

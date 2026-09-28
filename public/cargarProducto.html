@@ -1,114 +1,335 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    
+
     <!-- sacar dsp -->
-    <meta name="google" content="notranslate"> 
-    <!--  -->
+    <meta name="google" content="notranslate">
 
     <!-- metadata -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <!-- info general -->
     <title>Vibe - Cargar producto</title>
-    <link rel="icon" href="Imgs/logo-vibe.png" type="image/png">
+
+    <link
+        rel="icon"
+        href="Imgs/logo-vibe.png"
+        type="image/png"
+    >
 
     <!-- estilos -->
-    <link rel="stylesheet" href="Styles/Style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    
+    <link
+        rel="stylesheet"
+        href="Styles/Style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
 </head>
+
 <body>
 
     <!-- nav -->
 
     <nav-bar class="cont"></nav-bar>
 
+
     <!-- mensaje error -->
 
-    <div id="msg-error" class="error" style="display: none;"></div>
+    <div
+        id="msg-error"
+        class="error"
+        style="display: none;"
+    ></div>
 
-    <!-- seccion producto cargar producto -->
 
-    <div class="cont contenedor-cargar-producto">
+    <!-- cargar producto -->
 
-        <form class="form-carga-producto" id="form-carga-producto" action="">
+    <main class="contenedor-cargar-producto">
 
-            <div class="input">
-                <label for="input-pr-nombre">Nombre del producto</label>
-                <input type="text" id="input-pr-nombre" required>
+        <form
+            class="form-carga-producto"
+            id="form-carga-producto"
+            action=""
+        >
+
+            <!-- título -->
+
+            <div class="titulo-formulario">
+
+                <div class="icono-formulario">
+
+                    <i class="fa-solid fa-box"></i>
+
+                </div>
+
+                <h1>
+                    Cargar producto
+                </h1>
+
+                <p>
+                    Agregá un nuevo producto a Vibe
+                </p>
+
             </div>
 
-            <div class="input">
-                <label for="input-pr-precio">Precio</label>
-                <input type="number" min="0" step="0.01" id="input-pr-precio" required>
-            </div>
 
-            <div class="input">
-                <label for="input-pr-descr">Descripción</label>
-                <textarea name="" id="input-pr-descr" required></textarea>
-            </div>
+            <!-- información -->
 
-            <div class="input">
-                <label for="input-pr-img">cargar imagen principal</label>
-                <input type="file" accept="image/*" name="" id="input-pr-img" required>
-            </div>
+            <div class="seccion-formulario">
 
-            <div class="input">
-                <label for="input-pr-img-ex1">cargar imagen extra uno</label>
-                <input type="file" accept="image/*" name="" id="input-pr-img-ex1">
-            </div>
+                <h2>
+                    Información del producto
+                </h2>
 
-            <div class="input">
-                <label for="input-pr-img-ex2">cargar imagen extra dos</label>
-                <input type="file" accept="image/*" name="" id="input-pr-img-ex2">
-            </div>
 
-            <div class="input">
-                <label for="input-pr-img-ex3">cargar imagen extra tres</label>
-                <input type="file" accept="image/*" name=""id="input-pr-img-ex3">                
-            </div>
+                <div class="input">
 
-            <div class="input">
-                <label for="input-pr-stock">Stock</label>
-                <input type="number" min="0" id="input-pr-stock" required>
-            </div>
+                    <label for="input-pr-nombre">
+                        Nombre del producto
+                    </label>
 
-            <div class="input">
-                <label for="">selecciona la categoria</label>
-                    <select id="categoria" name="categoria" required>
+                    <input
+                        type="text"
+                        id="input-pr-nombre"
+                        placeholder="Ej: Remera Oversize"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="input-pr-precio">
+                        Precio
+                    </label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        id="input-pr-precio"
+                        placeholder="Ej: 25000"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="input-pr-descr">
+                        Descripción
+                    </label>
+
+                    <textarea
+                        id="input-pr-descr"
+                        placeholder="Descripción del producto..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="input-pr-stock">
+                        Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="input-pr-stock"
+                        placeholder="Ej: 10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="categoria">
+                        Categoría
+                    </label>
+
+                    <select
+                        id="categoria"
+                        name="categoria"
+                        required
+                    >
                     </select>
-                <a href="cargarCategoria.html">¿No ves la categoría? cargala aca</a>
+
+                    <a href="cargarCategoria.html">
+                        ¿No ves la categoría? Cargala acá
+                    </a>
+
+                </div>
+
             </div>
 
-            <button type="submit">Cargar producto</button>
+
+            <!-- imágenes -->
+
+            <div class="seccion-formulario">
+
+                <h2>
+                    Imágenes del producto
+                </h2>
+
+                <p class="descripcion-seccion">
+                    La imagen principal es obligatoria.
+                </p>
+
+
+                <div class="input">
+
+                    <label for="input-pr-img">
+                        <i class="fa-solid fa-image"></i>
+                        Imagen principal
+                    </label>
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        id="input-pr-img"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="input-pr-img-ex1">
+                        <i class="fa-solid fa-image"></i>
+                        Imagen extra 1
+                    </label>
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        id="input-pr-img-ex1"
+                    >
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="input-pr-img-ex2">
+                        <i class="fa-solid fa-image"></i>
+                        Imagen extra 2
+                    </label>
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        id="input-pr-img-ex2"
+                    >
+
+                </div>
+
+
+                <div class="input">
+
+                    <label for="input-pr-img-ex3">
+                        <i class="fa-solid fa-image"></i>
+                        Imagen extra 3
+                    </label>
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        id="input-pr-img-ex3"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- botón -->
+
+            <button type="submit">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Cargar producto
+
+            </button>
 
         </form>
 
-    </div>
 
-    <div class="contenedor-lista-productos">
-        <h2>Productos cargados (preview)</h2>
+        <!-- preview -->
 
-        <div class="contenedor-productos">
-            <div id="lista-cards-productos"></div>
-            <div id="lista-productos"></div>
-        </div>
-    </div>
-    
+        <section class="contenedor-lista-productos">
+
+            <div class="titulo-lista-productos">
+
+                <h2>
+                    Productos cargados
+                </h2>
+
+                <p>
+                    Preview de los productos existentes
+                </p>
+
+            </div>
+
+
+            <div class="contenedor-productos">
+
+                <div id="lista-cards-productos"></div>
+
+                <div id="lista-productos"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
     <!-- footer -->
 
     <footer-comp class="cont"></footer-comp>
 
-    <!-- link a scripts -->
 
-    <script type="module" src="Scripts/cargar-producto.js"></script>
+    <!-- scripts -->
+
+    <script
+        type="module"
+        src="Scripts/cargar-producto.js"
+    ></script>
+
     <script src="Components/Card.js"></script>
-    <script src="Components/Producto.js"></script>
-    <script src="Scripts/productos.js"></script>
+
+    <script type="module" src="Components/Producto.js"></script>
+
+    <script type="module" src="Scripts/productos.js"></script>
+
     <script src="Scripts/categorias-producto.js"></script>
+
     <script src="Components/Footer.js"></script>
-    <script type="module" src="Components/NavBar.js"></script>
+
+    <script
+        type="module"
+        src="Components/NavBar.js"
+    ></script>
+
 </body>
+
 </html>

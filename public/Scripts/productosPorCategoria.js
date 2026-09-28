@@ -58,7 +58,8 @@ const cargarProductosRelacionados = async () => {
                         data-id="${producto.id_producto}"
                         imagen="${producto.imagen_principal}"
                         nombre="${producto.nombre}"
-                        precio="${producto.precio}">
+                        precio="${producto.precio}"
+                        stock="${producto.stock}">
                     </card-comp>
                 </div>
             `;
