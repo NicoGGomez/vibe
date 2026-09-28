@@ -218,7 +218,7 @@ const webhook = async (req, res) => {
         // ==========================================
 
         const manifest =
-            `id:${dataId};` +
+            `id:${dataId.toLowerCase()};` +
             `request-id:${requestId};` +
             `ts:${ts};`;
 
