@@ -131,8 +131,70 @@ const obtenerPedidos = async (req, res) => {
 
 };
 
+const obtenerPedidosAdmin = async (req, res) => {
+
+    try {
+
+        if (req.usuario.rol !== "admin") {
+            return res.status(403).json({
+                mensaje: "No tenés permisos para realizar esta acción."
+            });
+        }
+
+        const pedidos =
+            await pedidoService.obtenerPedidosAdmin();
+
+        res.status(200).json(pedidos);
+
+    } catch (error) {
+
+        console.error(
+            "Error al obtener pedidos del admin:",
+            error
+        );
+
+        res.status(500).json({
+            mensaje: "No se pudieron obtener los pedidos."
+        });
+    }
+};
+
+const marcarPedidoEnviado = async (req, res) => {
+
+    try {
+
+        if (req.usuario.rol !== "admin") {
+            return res.status(403).json({
+                mensaje: "No tenés permisos para realizar esta acción."
+            });
+        }
+
+        const { id } = req.params;
+
+        const pedido =
+            await pedidoService.marcarPedidoEnviado(id);
+
+        res.status(200).json({
+            mensaje: "Pedido marcado como enviado.",
+            pedido
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Error al marcar pedido como enviado:",
+            error
+        );
+
+        res.status(400).json({
+            mensaje: error.message
+        });
+    }
+};
 
 module.exports = {
     crearPedido,
-    obtenerPedidos
+    obtenerPedidos,
+    obtenerPedidosAdmin,
+    marcarPedidoEnviado
 };

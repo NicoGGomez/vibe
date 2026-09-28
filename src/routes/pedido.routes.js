@@ -20,4 +20,16 @@ router.get(
     pedidoController.obtenerPedidos
 );
 
+router.get(
+    "/admin",
+    verificarToken,
+    pedidoController.obtenerPedidosAdmin
+);
+
+router.patch(
+    "/:id/enviado",
+    verificarToken,
+    pedidoController.marcarPedidoEnviado
+);
+
 module.exports = router;

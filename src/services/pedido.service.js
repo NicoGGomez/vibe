@@ -363,8 +363,80 @@ const obtenerPedidosUsuario = async (idUsuario) => {
     return resultado.rows;
 };
 
+const obtenerPedidosAdmin = async () => {
+
+    const resultado = await db.query(`
+        SELECT
+            p.id_pedido,
+            p.fecha,
+            p.estado,
+            p.total,
+            p.tipo_entrega,
+            p.direccion,
+            p.ciudad,
+            p.codigo_postal,
+            p.nombre_apellido,
+            p.telefono,
+            p.metodo_pago,
+            p.referencia_pago,
+
+            COALESCE(
+                json_agg(
+                    json_build_object(
+                        'id_producto', pr.id_producto,
+                        'nombre', pr.nombre,
+                        'imagen_principal', pr.imagen_principal,
+                        'cantidad', pp.cantidad,
+                        'precio_unidad', pp.precio_unidad
+                    )
+                ) FILTER (WHERE pr.id_producto IS NOT NULL),
+                '[]'
+            ) AS productos
+
+        FROM pedido p
+
+        LEFT JOIN pedido_producto pp
+            ON p.id_pedido = pp.id_pedido
+
+        LEFT JOIN producto pr
+            ON pp.id_producto = pr.id_producto
+
+        WHERE p.estado = 'pagado'
+
+        GROUP BY p.id_pedido
+
+        ORDER BY p.fecha DESC
+    `);
+
+    return resultado.rows;
+};
+
+const marcarPedidoEnviado = async (idPedido) => {
+
+    const resultado = await db.query(
+        `
+        UPDATE pedido
+        SET estado = 'enviado'
+        WHERE id_pedido = $1
+        AND estado = 'pagado'
+        RETURNING *
+        `,
+        [idPedido]
+    );
+
+    if (resultado.rows.length === 0) {
+        throw new Error(
+            "El pedido no existe o no está en estado pagado."
+        );
+    }
+
+    return resultado.rows[0];
+};
+
 module.exports = {
     crearPedido,
     procesarPagoAprobado,
-    obtenerPedidosUsuario
+    obtenerPedidosUsuario,
+    obtenerPedidosAdmin,
+    marcarPedidoEnviado
 };
