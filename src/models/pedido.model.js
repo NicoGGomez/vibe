@@ -23,6 +23,19 @@ const obtenerProductosCarrito = async (idUsuario) => {
     return resultado.rows;
 };
 
+// Obtener un pedido perteneciente a un usuario
+const obtenerPedidoPorIdUsuario = async (idPedido, idUsuario) => {
+
+    const resultado = await db.query(
+        `SELECT *
+         FROM pedido
+         WHERE id_pedido = $1
+         AND id_usuario = $2`,
+        [idPedido, idUsuario]
+    );
+
+    return resultado.rows[0];
+};
 
 // Crear un pedido
 const crearPedido = async ({
@@ -128,5 +141,6 @@ module.exports = {
     obtenerProductosCarrito,
     crearPedido,
     crearPedidoProducto,
-    vaciarCarrito
+    vaciarCarrito,
+    obtenerPedidoPorIdUsuario
 };
