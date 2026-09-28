@@ -108,7 +108,31 @@ const crearPedido = async (req, res) => {
 
 };
 
+const obtenerPedidos = async (req, res) => {
+
+    try {
+
+        const idUsuario = req.usuario.id;
+
+        const pedidos =
+            await pedidoService.obtenerPedidosUsuario(idUsuario);
+
+        res.status(200).json(pedidos);
+
+    } catch (error) {
+
+        console.error("Error al obtener pedidos:", error);
+
+        res.status(500).json({
+            mensaje: "No se pudieron obtener los pedidos."
+        });
+
+    }
+
+};
+
 
 module.exports = {
-    crearPedido
+    crearPedido,
+    obtenerPedidos
 };

@@ -14,5 +14,10 @@ router.post(
     pedidoController.crearPedido
 );
 
+router.get(
+    "/",
+    verificarToken,
+    pedidoController.obtenerPedidos
+);
 
 module.exports = router;
