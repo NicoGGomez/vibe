@@ -190,159 +190,272 @@ class Producto extends HTMLElement {
                 "#admin-stock"
             );
 
+
             // ==========================
-// MODIFICAR STOCK
-// ==========================
+            // STOCK TEMPORAL
+            // ==========================
 
-const cambiarStock = async (cantidad) => {
+            const stockOriginal = stock;
 
-    try {
-
-        const token = getToken();
-
-        const respuesta = await fetch(
-            `https://vibe-n9dy.onrender.com/productos/${id}/stock`,
-            {
-                method: "PATCH",
-
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-
-                body: JSON.stringify({
-                    cantidad: cantidad
-                })
-            }
-        );
-
-        const datos = await respuesta.json();
-
-        if (!respuesta.ok) {
-
-            throw new Error(
-                datos.error || "No se pudo modificar el stock"
-            );
-
-        }
-
-        const productoActualizado = datos.producto;
-
-        // Actualizar el atributo del componente
-
-        this.setAttribute(
-            "stock",
-            productoActualizado.stock
-        );
-
-        // Actualizar el número mostrado
-
-        stockAdmin.textContent =
-            productoActualizado.stock;
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(error.message);
-
-            }
-
-        };
+            let stockNuevo = stockOriginal;
 
 
-            // Reducir stock
+            // ==========================
+            // REDUCIR STOCK
+            // ==========================
 
             btnStockMenos.addEventListener(
                 "click",
-                () => cambiarStock(-1)
+                () => {
+
+                    if (stockNuevo <= 0) {
+                        return;
+                    }
+
+                    stockNuevo--;
+
+                    stockAdmin.textContent = stockNuevo;
+
+                }
             );
 
 
-            // Aumentar stock
+            // ==========================
+            // AUMENTAR STOCK
+            // ==========================
 
             btnStockMas.addEventListener(
                 "click",
-                () => cambiarStock(1)
-            );
+                () => {
 
-            // Guardar cambios
+                    stockNuevo++;
 
-            btnGuardar.addEventListener("click", async () => {
-
-                try {
-
-                    const nuevoNombre = this.querySelector(
-                        "#admin-nombre"
-                    ).value.trim();
-
-                    const nuevoPrecio = Number(
-                        this.querySelector("#admin-precio").value
-                    );
-
-                    const nuevaDescripcion = this.querySelector(
-                        "#admin-descripcion"
-                    ).value.trim();
-
-                    if (!nuevoNombre) {
-                        alert("El nombre no puede estar vacío");
-                        return;
-                    }
-
-                    if (nuevoPrecio < 0) {
-                        alert("El precio no puede ser negativo");
-                        return;
-                    }
-
-                    const token = getToken();
-
-                    const respuesta = await fetch(
-                        `https://vibe-n9dy.onrender.com/productos/${id}`,
-                        {
-                            method: "PUT",
-
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`
-                            },
-
-                            body: JSON.stringify({
-                                nombre: nuevoNombre,
-                                precio: nuevoPrecio,
-                                descripcion: nuevaDescripcion
-                            })
-                        }
-                    );
-
-                    const datos = await respuesta.json();
-
-                    if (!respuesta.ok) {
-                        throw new Error(
-                            datos.error || "Error al actualizar producto"
-                        );
-                    }
-
-                    alert("Producto actualizado correctamente");
-
-                    // Actualizamos los atributos del componente
-
-                    this.setAttribute("nombre", nuevoNombre);
-                    this.setAttribute("precio", nuevoPrecio);
-                    this.setAttribute("descripcion", nuevaDescripcion);
-
-                    document.title = `Vibe - ${nuevoNombre}`;
-
-                    this.render();
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    alert(error.message);
+                    stockAdmin.textContent = stockNuevo;
 
                 }
+            );
 
-            });
+
+            // ==========================
+            // GUARDAR CAMBIOS
+            // ==========================
+
+            btnGuardar.addEventListener(
+                "click",
+                async () => {
+
+                    try {
+
+                        const nuevoNombre =
+                            this
+                            .querySelector("#admin-nombre")
+                            .value
+                            .trim();
+
+
+                        const nuevoPrecio =
+                            Number(
+                                this
+                                .querySelector("#admin-precio")
+                                .value
+                            );
+
+
+                        const nuevaDescripcion =
+                            this
+                            .querySelector("#admin-descripcion")
+                            .value
+                            .trim();
+
+
+                        // ==========================
+                        // VALIDACIONES
+                        // ==========================
+
+                        if (!nuevoNombre) {
+
+                            alert(
+                                "El nombre no puede estar vacío"
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (nuevoPrecio < 0) {
+
+                            alert(
+                                "El precio no puede ser negativo"
+                            );
+
+                            return;
+
+                        }
+
+
+                        // ==========================
+                        // TOKEN
+                        // ==========================
+
+                        const token = getToken();
+
+
+                        // ==========================
+                        // CAMBIO DE STOCK
+                        // ==========================
+
+                        const diferenciaStock =
+                            stockNuevo - stockOriginal;
+
+
+                        // Si cambió el stock,
+                        // lo guardamos en la BD
+
+                        if (diferenciaStock !== 0) {
+
+                            const respuestaStock =
+                                await fetch(
+                                    `https://vibe-n9dy.onrender.com/productos/${id}/stock`,
+                                    {
+                                        method: "PATCH",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json",
+
+                                            "Authorization":
+                                                `Bearer ${token}`
+                                        },
+
+                                        body: JSON.stringify({
+                                            cantidad:
+                                                diferenciaStock
+                                        })
+                                    }
+                                );
+
+
+                            const datosStock =
+                                await respuestaStock.json();
+
+
+                            if (!respuestaStock.ok) {
+
+                                throw new Error(
+                                    datosStock.error ||
+                                    "No se pudo actualizar el stock"
+                                );
+
+                            }
+
+
+                            // Usamos el stock real
+                            // devuelto por el backend
+
+                            stockNuevo =
+                                datosStock.producto.stock;
+
+                        }
+
+
+                        // ==========================
+                        // ACTUALIZAR PRODUCTO
+                        // ==========================
+
+                        const respuesta =
+                            await fetch(
+                                `https://vibe-n9dy.onrender.com/productos/${id}`,
+                                {
+                                    method: "PUT",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Authorization":
+                                            `Bearer ${token}`
+                                    },
+
+                                    body: JSON.stringify({
+
+                                        nombre:
+                                            nuevoNombre,
+
+                                        precio:
+                                            nuevoPrecio,
+
+                                        descripcion:
+                                            nuevaDescripcion
+
+                                    })
+                                }
+                            );
+
+
+                        const datos =
+                            await respuesta.json();
+
+
+                        if (!respuesta.ok) {
+
+                            throw new Error(
+                                datos.error ||
+                                "Error al actualizar producto"
+                            );
+
+                        }
+
+
+                        // ==========================
+                        // ACTUALIZAR COMPONENTE
+                        // ==========================
+
+                        this.setAttribute(
+                            "nombre",
+                            nuevoNombre
+                        );
+
+                        this.setAttribute(
+                            "precio",
+                            nuevoPrecio
+                        );
+
+                        this.setAttribute(
+                            "descripcion",
+                            nuevaDescripcion
+                        );
+
+                        this.setAttribute(
+                            "stock",
+                            stockNuevo
+                        );
+
+
+                        document.title =
+                            `Vibe - ${nuevoNombre}`;
+
+
+                        alert(
+                            "Producto actualizado correctamente"
+                        );
+
+
+                        // Volvemos a renderizar
+
+                        this.render();
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        alert(error.message);
+
+                    }
+
+                }
+            );
 
         }
 
