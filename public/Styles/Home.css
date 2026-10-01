@@ -56,7 +56,7 @@
 
 /* seccion ofertas */
 
-.ofertas {
+/* .ofertas {
     width: 100%;
     margin: 2vh 0;
 }
@@ -86,6 +86,64 @@
 
 .productos-oferta .card{
     flex-shrink: 0;
+} */
+
+
+/* =========================
+   SECCIÓN OFERTAS
+========================= */
+
+.ofertas {
+    width: 100%;
+    margin: 2vh 0;
+}
+
+.logo {
+    padding: 20px;
+    margin: 2vh;
+}
+
+
+/* =========================
+   CONTENEDOR DEL CARRUSEL
+========================= */
+
+.carrusel-oferta {
+    width: 100%;
+    overflow: hidden;
+}
+
+.productos-oferta {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+
+    background-color: rgb(162, 136, 136);
+
+    /* Evita que el contenido se salga */
+    position: relative;
+}
+
+
+/* =========================
+   CARDS QUE SE MUEVEN
+========================= */
+
+.carrusel-cards {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: max-content;
+
+    will-change: transform;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.carrusel-cards card-comp {
+    flex: 0 0 auto;
 }
 
 /* seccion destacados */

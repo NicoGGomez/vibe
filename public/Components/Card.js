@@ -53,6 +53,14 @@ class Card extends HTMLElement {
                 e.preventDefault();
                 e.stopPropagation();
 
+                // Reiniciar animación
+                btnCarrito.classList.remove("animar-carrito");
+                void btnCarrito.offsetWidth;
+
+                // Ejecutar animación
+                btnCarrito.classList.add("animar-carrito");
+
+                // Agregar producto
                 this.dispatchEvent(
                     new CustomEvent("agregar-carrito", {
                         bubbles: true,

@@ -322,3 +322,213 @@ producto-comp {
     }
 
 }
+
+@media (max-width: 900px) {
+
+    /* ==========================
+       PRODUCTO
+    ========================== */
+
+    .productos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contenedor-producto {
+        display: flex;
+        flex-direction: column;
+
+        width: 90%;
+
+        padding: 1vh;
+        gap: 0;
+    }
+
+
+    /* ==========================
+       IMAGEN
+    ========================== */
+
+    .contenedor-imagen-producto {
+        width: 100%;
+        margin: 1vh 0;
+    }
+
+    .contenedor-imagen-producto .img-producto-prin {
+        width: 100%;
+    }
+
+
+    /* ==========================
+       INFORMACIÓN
+    ========================== */
+
+    .contenedor-producto .producto-informacion {
+        width: 100%;
+
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+
+        margin: 0;
+        padding: 2vh 1vh;
+
+        gap: 2vh;
+    }
+
+    .producto-texto {
+        width: 100%;
+    }
+
+
+    /* ==========================
+       NOMBRE Y PRECIO
+    ========================== */
+
+    .informacion-principal {
+        flex-direction: column;
+
+        gap: 1.5vh !important;
+    }
+
+    .campo-producto {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .campo-producto p {
+        max-width: 100%;
+    }
+
+
+    /* ==========================
+       INPUT NOMBRE
+    ========================== */
+
+    #input-editar-nombre {
+        width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ==========================
+       INPUT PRECIO
+    ========================== */
+
+    #input-editar-precio {
+        width: 140px;
+        max-width: 60%;
+    }
+
+
+    /* ==========================
+       DESCRIPCIÓN
+    ========================== */
+
+    .campo-descripcion {
+        width: 100%;
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+    .campo-descripcion p {
+        width: 100%;
+    }
+
+    #input-editar-descripcion {
+        width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+
+        min-height: 120px;
+    }
+
+
+    /* ==========================
+       BOTONES EDITAR
+    ========================== */
+
+    .btn-editar-campo {
+        font-size: 13px;
+        padding: 5px;
+    }
+
+    .btn-guardar-campo,
+    .btn-cancelar-campo {
+        font-size: 15px;
+        padding: 6px;
+    }
+
+
+    /* ==========================
+       STOCK
+    ========================== */
+
+    .campo-stock {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        margin-top: 1vh;
+    }
+
+    .btn-stock {
+        width: 32px;
+        height: 32px;
+
+        font-size: 18px;
+    }
+
+
+    /* ==========================
+       GALERÍA
+    ========================== */
+
+    .imagenes {
+        overflow-x: auto;
+
+        width: 100%;
+
+        padding-bottom: 5px;
+    }
+
+    .contenedor-producto .imagenes img {
+        width: 12vh;
+
+        flex-shrink: 0;
+    }
+
+
+    /* ==========================
+       BOTONES
+    ========================== */
+
+    .contenedor-botones {
+        width: 100%;
+    }
+
+    .contenedor-botones .botones {
+        flex-direction: column;
+
+        width: 100%;
+
+        gap: 1vh;
+    }
+
+    .contenedor-botones .botones button {
+        width: 100%;
+    }
+}

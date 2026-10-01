@@ -1,81 +1,85 @@
-// Carrusel
+// Carrusel infinito
 
-// Función para generar el carrusel
+function iniciarCarrusel() {
 
-function iniciarCarrusel(){
+    const carrusel = document.querySelector(".carrusel-cards");
 
-    const cards = document.querySelector(".carrusel-cards");
-
-    if (!cards) {
+    if (!carrusel) {
         console.log("No existe carrusel");
         return;
     }
 
-
-    const originales = [...cards.children];
-
-
-    // duplicamos
-    originales.forEach(card => {
-        console.log(card.getBoundingClientRect().width);
-        const clon = card.cloneNode(true);
-        cards.appendChild(clon);
-    });
-
-
-    let x = 0;
-    const velocidad = 0.5;
+    let posicion = 0;
+    const velocidad = 0.7;
 
     let pausado = false;
 
 
-    cards.addEventListener("mouseenter", () => pausado = true);
-    cards.addEventListener("mouseleave", () => pausado = false);
+    // =========================
+    // PAUSAR CON EL MOUSE
+    // =========================
+
+    carrusel.addEventListener("mouseenter", () => {
+        pausado = true;
+    });
+
+    carrusel.addEventListener("mouseleave", () => {
+        pausado = false;
+    });
 
 
-    function calcularAnchoOriginal(){
+    // =========================
+    // ANIMACIÓN
+    // =========================
 
-        let ancho = 0;
+    function animar() {
 
-        originales.forEach(card => {
-            ancho += card.getBoundingClientRect().width;
-        });
+        if (!pausado) {
 
-        const gap = parseInt(getComputedStyle(cards).gap) || 0;
-
-        return ancho + gap * (originales.length - 1);
-    }
+            posicion += velocidad;
 
 
-    let anchoOriginal;
+            /*
+             * Miramos la primera card.
+             */
+            const primeraCard = carrusel.children[0];
 
 
-    // Esperamos que rendericen los card-comp
-    setTimeout(() => {
-        anchoOriginal = calcularAnchoOriginal();
+            if (primeraCard) {
 
-        console.log("ancho carrusel:", anchoOriginal);
-        console.log("ancho real:", cards.scrollWidth);
+                const estilos = getComputedStyle(carrusel);
+                const gap = parseFloat(estilos.gap) || 0;
 
-        animar();
-    }, 100);
+                const anchoCard =
+                    primeraCard.getBoundingClientRect().width;
 
 
-    function animar(){
+                /*
+                 * Cuando la primera card salió
+                 * completamente de la pantalla...
+                 */
+                if (posicion >= anchoCard + gap) {
 
-        if(!pausado && anchoOriginal){
+                    /*
+                     * Sacamos la primera card
+                     * y la mandamos al final.
+                     */
+                    carrusel.appendChild(primeraCard);
 
-            x += velocidad;
 
+                    /*
+                     * Compensamos el movimiento.
+                     *
+                     * De esta forma no hay salto.
+                     */
+                    posicion -= anchoCard + gap;
 
-            if (x >= anchoOriginal) {
-                cards.style.transition = "none";
-                x = 0;
-                cards.style.transform = `translate3d(-${x}px,0,0)`;
+                }
             }
 
 
-            cards.style.transform = `translate3d(-${x}px,0,0)`;
+            carrusel.style.transform =
+                `translate3d(-${posicion}px, 0, 0)`;
         }
 
 
@@ -83,11 +87,7 @@ function iniciarCarrusel(){
     }
 
 
-    window.addEventListener("load", () => {
-        anchoOriginal = calcularAnchoOriginal();
-        animar();
-    });
-
+    animar();
 }
 
 
