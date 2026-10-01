@@ -83,8 +83,7 @@ const actualizarProducto = async (
     id,
     nombre,
     precio,
-    descripcion,
-    stock
+    descripcion
 ) => {
 
     const resultado = await db.query(
@@ -92,20 +91,19 @@ const actualizarProducto = async (
          SET
             nombre = $1,
             precio = $2,
-            descripcion = $3,
-            stock = $4
-         WHERE id_producto = $5
+            descripcion = $3
+         WHERE id_producto = $4
          RETURNING *`,
         [
             nombre,
             precio,
             descripcion,
-            stock,
             id
         ]
     );
 
     return resultado.rows[0];
+
 };
 
 // Función para modificar el stock de un producto

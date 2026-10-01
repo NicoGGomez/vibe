@@ -40,16 +40,14 @@ const actualizarProducto = async (
     id,
     nombre,
     precio,
-    descripcion,
-    stock
+    descripcion
 ) => {
 
     return await productoModel.actualizarProducto(
         id,
         nombre,
         precio,
-        descripcion,
-        stock
+        descripcion
     );
 
 };

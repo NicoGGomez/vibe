@@ -149,6 +149,151 @@ producto-comp {
     cursor: not-allowed;
 }
 
+/* =========================
+   EDICIÓN ADMIN
+   ========================= */
+
+.campo-producto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.campo-producto .precio, .nombre {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1vh;
+}
+
+.campo-producto p {
+    margin: 0;
+}
+
+.btn-editar-campo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    /* background: transparent; */
+    background-color: var(--color-secundario);
+
+    padding: 4px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    opacity: 0.45;
+
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-editar-campo:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+
+/* DESCRIPCIÓN */
+
+.campo-descripcion {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.campo-descripcion p {
+    margin: 0;
+}
+
+
+/* STOCK */
+
+.campo-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 1vh;
+}
+
+.campo-stock span:first-child {
+    margin-right: 2px;
+}
+
+.btn-stock {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+
+    background-color: var(--color-secundario);
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color 0.2s;
+}
+
+.btn-stock:hover {
+    background-color: #f2f2f2;
+}
+
+.input-editar-producto {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+
+    padding: 4px 8px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    outline: none;
+}
+
+.input-editar-producto:focus {
+    border-color: #974fc2;
+}
+
+
+.btn-guardar-campo,
+.btn-cancelar-campo {
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    padding: 4px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.btn-guardar-campo {
+    color: #4caf50;
+}
+
+.btn-cancelar-campo {
+    color: #d9534f;
+}
+
+.btn-guardar-campo:hover,
+.btn-cancelar-campo:hover {
+    transform: scale(1.15);
+}
+
+
 @media (max-width: 900px) {
 
     .productos {
@@ -174,10 +319,6 @@ producto-comp {
 
     .imagenes {
         overflow-x: scroll;
-    }
-
-    .cards {
-        /* grid-template-columns: repeat(1, 1fr); */
     }
 
 }

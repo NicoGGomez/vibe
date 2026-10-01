@@ -183,11 +183,10 @@ const actualizarProducto = async (req, res) => {
         const {
             nombre,
             precio,
-            descripcion,
-            stock
+            descripcion
         } = req.body;
 
-        if (!nombre || precio === undefined || stock === undefined) {
+        if (!nombre || precio === undefined || descripcion === undefined) {
 
             return res.status(400).json({
                 error: "Faltan datos del producto"
@@ -203,21 +202,12 @@ const actualizarProducto = async (req, res) => {
 
         }
 
-        if (Number(stock) < 0) {
-
-            return res.status(400).json({
-                error: "El stock no puede ser negativo"
-            });
-
-        }
-
         const producto =
             await productoService.actualizarProducto(
                 id,
                 nombre,
                 precio,
-                descripcion,
-                stock
+                descripcion
             );
 
         if (!producto) {

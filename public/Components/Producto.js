@@ -57,18 +57,106 @@ class Producto extends HTMLElement {
                     <div class="producto-texto">
 
                         <div class="informacion-principal">
-                            <p class="nombre">${nombre}</p>
-                            <p class="precio">$${precio}</p>
+
+                            <div class="campo-producto campo-nombre">
+
+                                <p class="nombre">${nombre} ${
+                                    esAdmin
+                                    ? `
+                                        <button
+                                            class="btn-editar-campo"
+                                            data-campo="nombre"
+                                            title="Modificar nombre"
+                                        >
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    `
+                                    : ""
+                                }</p>
+
+                            </div>
+
+
+                            <div class="campo-producto campo-precio">
+
+                                <p class="precio">$${precio} ${
+                                    esAdmin
+                                    ? `
+                                        <button
+                                            class="btn-editar-campo"
+                                            data-campo="precio"
+                                            title="Modificar precio"
+                                        >
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    `
+                                    : ""
+                                }</p>
+
+                            </div>
+
                         </div>
 
-                        <p>${descripcion}</p>
+
+                        <div class="campo-producto campo-descripcion">
+
+                            <p>${descripcion} ${
+                                esAdmin
+                                ? `
+                                    <button
+                                        class="btn-editar-campo"
+                                        data-campo="descripcion"
+                                        title="Modificar descripción"
+                                    >
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                `
+                                : ""
+                            }</p>
+
+                            
+
+                        </div>
+
+
+                        ${
+                            esAdmin
+                            ? `
+                                <div class="campo-stock">
+
+                                    <span>Stock:</span>
+
+                                    <button
+                                        id="admin-stock-menos"
+                                        class="btn-stock"
+                                    >
+                                        −
+                                    </button>
+
+                                    <span id="admin-stock">
+                                        ${stock}
+                                    </span>
+
+                                    <button
+                                        id="admin-stock-mas"
+                                        class="btn-stock"
+                                    >
+                                        +
+                                    </button>
+
+                                </div>
+                            `
+                            : ""
+                        }
 
                     </div>
+
 
                     ${
                         imagenes.length > 1
                         ? `
                             <div class="cont imagenes" id="imagenes-producto">
+
                                 ${imagenes.slice(1).map((img, index) => `
                                     <img 
                                         src="${img}" 
@@ -76,10 +164,12 @@ class Producto extends HTMLElement {
                                         data-index="${index + 1}"
                                     >
                                 `).join("")}
+
                             </div>
                         `
                         : ""
                     }
+
 
                     <div class="cont contenedor-botones">
 
@@ -108,64 +198,6 @@ class Producto extends HTMLElement {
 
                     </div>
 
-                </div>
-
-            </div>
-
-
-            ${
-                esAdmin
-                ? `
-                    <div class="panel-admin-producto">
-
-                        <h3>Administración</h3>
-
-                        <label>Título</label>
-                        <input 
-                            type="text" 
-                            id="admin-nombre"
-                            value="${nombre}"
-                        >
-
-                        <label>Precio</label>
-                        <input 
-                            type="number" 
-                            id="admin-precio"
-                            value="${precio}"
-                        >
-
-                        <label>Stock</label>
-
-                        <div class="control-stock">
-
-                            <button id="admin-stock-menos">
-                                -1
-                            </button>
-
-                            <span id="admin-stock">
-                                ${stock}
-                            </span>
-
-                            <button id="admin-stock-mas">
-                                +1
-                            </button>
-
-                        </div>
-
-                        <label>Descripción</label>
-
-                        <textarea id="admin-descripcion">${descripcion}</textarea>
-
-                        <button id="admin-guardar-producto">
-                            Guardar cambios
-                        </button>
-
-                    </div>
-                `
-                : ""
-            }
-
-
         `;
 
         // ==========================
@@ -174,9 +206,377 @@ class Producto extends HTMLElement {
 
         if (esAdmin) {
 
-            const btnGuardar = this.querySelector(
-                "#admin-guardar-producto"
+            // ==========================
+            // EDITAR NOMBRE
+            // ==========================
+
+            const btnEditarNombre = this.querySelector(
+                '[data-campo="nombre"]'
             );
+
+            btnEditarNombre?.addEventListener("click", () => {
+
+                const campoNombre = this.querySelector(
+                    ".campo-nombre"
+                );
+
+                const nombreActual = this.getAttribute("nombre");
+
+                campoNombre.innerHTML = `
+
+                    <input
+                        type="text"
+                        class="input-editar-producto"
+                        id="input-editar-nombre"
+                        value="${nombreActual}"
+                    >
+
+                    <button
+                        class="btn-guardar-campo"
+                        id="guardar-nombre"
+                        title="Guardar"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+                    <button
+                        class="btn-cancelar-campo"
+                        id="cancelar-nombre"
+                        title="Cancelar"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                `;
+
+                const input = this.querySelector(
+                    "#input-editar-nombre"
+                );
+
+                input.focus();
+
+                // CANCELAR
+                this.querySelector(
+                    "#cancelar-nombre"
+                ).addEventListener("click", () => {
+                    this.render();
+                });
+
+                // GUARDAR
+                this.querySelector(
+                    "#guardar-nombre"
+                ).addEventListener("click", async () => {
+
+                    const nuevoNombre = input.value.trim();
+
+                    if (!nuevoNombre) {
+                        alert("El nombre no puede estar vacío");
+                        return;
+                    }
+
+                    try {
+
+                        const token = getToken();
+
+                        const respuesta = await fetch(
+                            `https://vibe-n9dy.onrender.com/productos/${id}`,
+                            {
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`
+                                },
+
+                                body: JSON.stringify({
+                                    nombre: nuevoNombre,
+                                    precio: Number(
+                                        this.getAttribute("precio")
+                                    ),
+                                    descripcion:
+                                        this.getAttribute("descripcion")
+                                })
+                            }
+                        );
+
+                        const datos = await respuesta.json();
+
+                        if (!respuesta.ok) {
+                            throw new Error(
+                                datos.error ||
+                                "No se pudo actualizar el nombre"
+                            );
+                        }
+
+                        this.setAttribute(
+                            "nombre",
+                            nuevoNombre
+                        );
+
+                        document.title =
+                            `Vibe - ${nuevoNombre}`;
+
+                        this.render();
+
+                    } catch (error) {
+
+                        console.error(error);
+                        alert(error.message);
+
+                    }
+
+                });
+
+            });
+
+
+            // ==========================
+            // EDITAR PRECIO
+            // ==========================
+
+            const btnEditarPrecio = this.querySelector(
+                '[data-campo="precio"]'
+            );
+
+            btnEditarPrecio?.addEventListener("click", () => {
+
+                const campoPrecio = this.querySelector(
+                    ".campo-precio"
+                );
+
+                const precioActual = this.getAttribute("precio");
+
+                campoPrecio.innerHTML = `
+
+                    <input
+                        type="number"
+                        class="input-editar-producto"
+                        id="input-editar-precio"
+                        value="${precioActual}"
+                        min="0"
+                        step="0.01"
+                    >
+
+                    <button
+                        class="btn-guardar-campo"
+                        id="guardar-precio"
+                        title="Guardar"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+                    <button
+                        class="btn-cancelar-campo"
+                        id="cancelar-precio"
+                        title="Cancelar"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                `;
+
+                const input = this.querySelector(
+                    "#input-editar-precio"
+                );
+
+                input.focus();
+
+                // CANCELAR
+                this.querySelector(
+                    "#cancelar-precio"
+                ).addEventListener("click", () => {
+                    this.render();
+                });
+
+                // GUARDAR
+                this.querySelector(
+                    "#guardar-precio"
+                ).addEventListener("click", async () => {
+
+                    const nuevoPrecio = Number(input.value);
+
+                    if (!Number.isFinite(nuevoPrecio) || nuevoPrecio < 0) {
+                        alert("El precio no es válido");
+                        return;
+                    }
+
+                    try {
+
+                        const token = getToken();
+
+                        const respuesta = await fetch(
+                            `https://vibe-n9dy.onrender.com/productos/${id}`,
+                            {
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`
+                                },
+
+                                body: JSON.stringify({
+                                    nombre: this.getAttribute("nombre"),
+                                    precio: nuevoPrecio,
+                                    descripcion:
+                                        this.getAttribute("descripcion")
+                                })
+                            }
+                        );
+
+                        const datos = await respuesta.json();
+
+                        if (!respuesta.ok) {
+                            throw new Error(
+                                datos.error ||
+                                "No se pudo actualizar el precio"
+                            );
+                        }
+
+                        this.setAttribute(
+                            "precio",
+                            nuevoPrecio
+                        );
+
+                        this.render();
+
+                    } catch (error) {
+
+                        console.error(error);
+                        alert(error.message);
+
+                    }
+
+                });
+
+            });
+
+            // ==========================
+            // EDITAR DESCRIPCIÓN
+            // ==========================
+
+            const btnEditarDescripcion = this.querySelector(
+                '[data-campo="descripcion"]'
+            );
+
+            btnEditarDescripcion?.addEventListener("click", () => {
+
+                const campoDescripcion = this.querySelector(
+                    ".campo-descripcion"
+                );
+
+                const descripcionActual =
+                    this.getAttribute("descripcion");
+
+                campoDescripcion.innerHTML = `
+
+                    <textarea
+                        class="input-editar-producto"
+                        id="input-editar-descripcion"
+                        rows="4"
+                    >${descripcionActual}</textarea>
+
+                    <button
+                        class="btn-guardar-campo"
+                        id="guardar-descripcion"
+                        title="Guardar"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+                    <button
+                        class="btn-cancelar-campo"
+                        id="cancelar-descripcion"
+                        title="Cancelar"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                `;
+
+                const input = this.querySelector(
+                    "#input-editar-descripcion"
+                );
+
+                input.focus();
+
+                // CANCELAR
+                this.querySelector(
+                    "#cancelar-descripcion"
+                ).addEventListener("click", () => {
+                    this.render();
+                });
+
+                // GUARDAR
+                this.querySelector(
+                    "#guardar-descripcion"
+                ).addEventListener("click", async () => {
+
+                    const nuevaDescripcion =
+                        input.value.trim();
+
+                    if (!nuevaDescripcion) {
+                        alert("La descripción no puede estar vacía");
+                        return;
+                    }
+
+                    try {
+
+                        const token = getToken();
+
+                        const respuesta = await fetch(
+                            `https://vibe-n9dy.onrender.com/productos/${id}`,
+                            {
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`
+                                },
+
+                                body: JSON.stringify({
+                                    nombre:
+                                        this.getAttribute("nombre"),
+
+                                    precio: Number(
+                                        this.getAttribute("precio")
+                                    ),
+
+                                    descripcion:
+                                        nuevaDescripcion
+                                })
+                            }
+                        );
+
+                        const datos = await respuesta.json();
+
+                        if (!respuesta.ok) {
+                            throw new Error(
+                                datos.error ||
+                                "No se pudo actualizar la descripción"
+                            );
+                        }
+
+                        this.setAttribute(
+                            "descripcion",
+                            nuevaDescripcion
+                        );
+
+                        this.render();
+
+                    } catch (error) {
+
+                        console.error(error);
+                        alert(error.message);
+
+                    }
+
+                });
+
+            });
+
+            // ==========================
+            // MODIFICAR STOCK
+            // ==========================
 
             const btnStockMenos = this.querySelector(
                 "#admin-stock-menos"
@@ -186,278 +586,85 @@ class Producto extends HTMLElement {
                 "#admin-stock-mas"
             );
 
-            const stockAdmin = this.querySelector(
+            const contadorStock = this.querySelector(
                 "#admin-stock"
             );
 
 
-            // ==========================
-            // STOCK TEMPORAL
-            // ==========================
+            // RESTAR STOCK
+            btnStockMenos?.addEventListener("click", async () => {
 
-            const stockOriginal = stock;
+                await modificarStock(-1);
 
-            let stockNuevo = stockOriginal;
+            });
 
 
-            // ==========================
-            // REDUCIR STOCK
-            // ==========================
+            // SUMAR STOCK
+            btnStockMas?.addEventListener("click", async () => {
 
-            btnStockMenos.addEventListener(
-                "click",
-                () => {
+                await modificarStock(1);
 
-                    if (stockNuevo <= 0) {
-                        return;
+            });
+
+
+            // FUNCIÓN PARA MODIFICAR STOCK
+            const modificarStock = async (cantidad) => {
+
+                try {
+
+                    const token = getToken();
+
+                    const respuesta = await fetch(
+                        `https://vibe-n9dy.onrender.com/productos/${id}/stock`,
+                        {
+                            method: "PATCH",
+
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`
+                            },
+
+                            body: JSON.stringify({
+                                cantidad: cantidad
+                            })
+                        }
+                    );
+
+                    const datos = await respuesta.json();
+
+                    if (!respuesta.ok) {
+                        throw new Error(
+                            datos.error ||
+                            "No se pudo modificar el stock"
+                        );
                     }
 
-                    stockNuevo--;
-
-                    stockAdmin.textContent = stockNuevo;
-
-                }
-            );
-
-
-            // ==========================
-            // AUMENTAR STOCK
-            // ==========================
-
-            btnStockMas.addEventListener(
-                "click",
-                () => {
-
-                    stockNuevo++;
-
-                    stockAdmin.textContent = stockNuevo;
-
-                }
-            );
-
-
-            // ==========================
-            // GUARDAR CAMBIOS
-            // ==========================
-
-            btnGuardar.addEventListener(
-                "click",
-                async () => {
-
-                    try {
-
-                        const nuevoNombre =
-                            this
-                            .querySelector("#admin-nombre")
-                            .value
-                            .trim();
-
-
-                        const nuevoPrecio =
-                            Number(
-                                this
-                                .querySelector("#admin-precio")
-                                .value
-                            );
-
-
-                        const nuevaDescripcion =
-                            this
-                            .querySelector("#admin-descripcion")
-                            .value
-                            .trim();
-
-
-                        // ==========================
-                        // VALIDACIONES
-                        // ==========================
-
-                        if (!nuevoNombre) {
-
-                            alert(
-                                "El nombre no puede estar vacío"
-                            );
-
-                            return;
-
-                        }
-
-
-                        if (nuevoPrecio < 0) {
-
-                            alert(
-                                "El precio no puede ser negativo"
-                            );
-
-                            return;
-
-                        }
-
-
-                        // ==========================
-                        // TOKEN
-                        // ==========================
-
-                        const token = getToken();
-
-
-                        // ==========================
-                        // CAMBIO DE STOCK
-                        // ==========================
-
-                        const diferenciaStock =
-                            stockNuevo - stockOriginal;
-
-
-                        // Si cambió el stock,
-                        // lo guardamos en la BD
-
-                        if (diferenciaStock !== 0) {
-
-                            const respuestaStock =
-                                await fetch(
-                                    `https://vibe-n9dy.onrender.com/productos/${id}/stock`,
-                                    {
-                                        method: "PATCH",
-
-                                        headers: {
-                                            "Content-Type":
-                                                "application/json",
-
-                                            "Authorization":
-                                                `Bearer ${token}`
-                                        },
-
-                                        body: JSON.stringify({
-                                            cantidad:
-                                                diferenciaStock
-                                        })
-                                    }
-                                );
-
-
-                            const datosStock =
-                                await respuestaStock.json();
-
-
-                            if (!respuestaStock.ok) {
-
-                                throw new Error(
-                                    datosStock.error ||
-                                    "No se pudo actualizar el stock"
-                                );
-
-                            }
-
-
-                            // Usamos el stock real
-                            // devuelto por el backend
-
-                            stockNuevo =
-                                datosStock.producto.stock;
-
-                        }
-
-
-                        // ==========================
-                        // ACTUALIZAR PRODUCTO
-                        // ==========================
-
-                        const respuesta =
-                            await fetch(
-                                `https://vibe-n9dy.onrender.com/productos/${id}`,
-                                {
-                                    method: "PUT",
-
-                                    headers: {
-                                        "Content-Type":
-                                            "application/json",
-
-                                        "Authorization":
-                                            `Bearer ${token}`
-                                    },
-
-                                    body: JSON.stringify({
-
-                                        nombre:
-                                            nuevoNombre,
-
-                                        precio:
-                                            nuevoPrecio,
-
-                                        descripcion:
-                                            nuevaDescripcion
-
-                                    })
-                                }
-                            );
-
-
-                        const datos =
-                            await respuesta.json();
-
-
-                        if (!respuesta.ok) {
-
-                            throw new Error(
-                                datos.error ||
-                                "Error al actualizar producto"
-                            );
-
-                        }
-
-
-                        // ==========================
-                        // ACTUALIZAR COMPONENTE
-                        // ==========================
-
-                        this.setAttribute(
-                            "nombre",
-                            nuevoNombre
-                        );
-
-                        this.setAttribute(
-                            "precio",
-                            nuevoPrecio
-                        );
-
-                        this.setAttribute(
-                            "descripcion",
-                            nuevaDescripcion
-                        );
-
-                        this.setAttribute(
-                            "stock",
-                            stockNuevo
-                        );
-
-
-                        document.title =
-                            `Vibe - ${nuevoNombre}`;
-
-
-                        alert(
-                            "Producto actualizado correctamente"
-                        );
-
-
-                        // Volvemos a renderizar
-
+                    // Actualizamos el atributo del componente
+                    this.setAttribute(
+                        "stock",
+                        datos.stock
+                    );
+
+                    // Actualizamos solamente el número
+                    contadorStock.textContent = datos.stock;
+
+                    // Si llega a 0, volvemos a renderizar
+                    // para mostrar "Sin stock"
+                    if (Number(datos.stock) === 0) {
                         this.render();
-
-
-                    } catch (error) {
-
-                        console.error(error);
-
-                        alert(error.message);
-
                     }
 
+                } catch (error) {
+
+                    console.error(error);
+                    alert(error.message);
+
                 }
-            );
+
+            };
 
         }
+    
 
         // ==========================
         // GALERÍA DE IMÁGENES
