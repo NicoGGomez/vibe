@@ -77,6 +77,53 @@ const eliminarProducto = async (id) => {
     return resultado.rows[0];
 };
 
+// Función para actualizar un producto
+
+const actualizarProducto = async (
+    id,
+    nombre,
+    precio,
+    descripcion,
+    stock
+) => {
+
+    const resultado = await db.query(
+        `UPDATE producto
+         SET
+            nombre = $1,
+            precio = $2,
+            descripcion = $3,
+            stock = $4
+         WHERE id_producto = $5
+         RETURNING *`,
+        [
+            nombre,
+            precio,
+            descripcion,
+            stock,
+            id
+        ]
+    );
+
+    return resultado.rows[0];
+};
+
+// Función para modificar el stock de un producto
+
+const modificarStock = async (id, cantidad) => {
+
+    const resultado = await db.query(
+        `UPDATE producto
+         SET stock = stock + $1
+         WHERE id_producto = $2
+         AND stock + $1 >= 0
+         RETURNING *`,
+        [cantidad, id]
+    );
+
+    return resultado.rows[0];
+};
+
 // Exportación de funciones
 
 module.exports = {
@@ -84,5 +131,7 @@ module.exports = {
     obtenerProductos,
     obtenerProductoPorCategoria,
     cargarProductos,
-    eliminarProducto
+    eliminarProducto,
+    actualizarProducto,
+    modificarStock
 };

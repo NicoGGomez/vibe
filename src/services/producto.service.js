@@ -34,6 +34,37 @@ const eliminarProducto = async (id) => {
     return await productoModel.eliminarProducto(id);
 }
 
+// Función para actualizar un producto
+
+const actualizarProducto = async (
+    id,
+    nombre,
+    precio,
+    descripcion,
+    stock
+) => {
+
+    return await productoModel.actualizarProducto(
+        id,
+        nombre,
+        precio,
+        descripcion,
+        stock
+    );
+
+};
+
+// Función para modificar el stock
+
+const modificarStock = async (id, cantidad) => {
+
+    return await productoModel.modificarStock(
+        id,
+        cantidad
+    );
+
+};
+
 // Exportación de funciones
 
 module.exports = {
@@ -41,5 +72,7 @@ module.exports = {
     listarProductos,
     cargarProductos,
     eliminarProducto,
-    listarProductoPorCategoria
+    listarProductoPorCategoria,
+    actualizarProducto,
+    modificarStock
 };

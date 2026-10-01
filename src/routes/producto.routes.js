@@ -14,6 +14,13 @@ const productoController = require("../controllers/producto.controller");
 
 // Rutas
 
+router.patch(
+    "/:id/stock",
+    verificarToken,
+    verificarRol("admin"),
+    productoController.modificarStock
+);
+
 router.get("/", productoController.getProductos);
 router.get("/categoria/:id", productoController.getProductoPorCategoria);
 router.get("/:id", productoController.getProducto);
@@ -41,6 +48,13 @@ router.post(
         }
     ]),
     productoController.cargarProducto
+);
+
+router.put(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    productoController.actualizarProducto
 );
 
 router.delete(

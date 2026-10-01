@@ -172,6 +172,136 @@ const eliminarProducto = async (req,res)=>{
 
 };
 
+// Función para actualizar un producto
+
+const actualizarProducto = async (req, res) => {
+
+    try {
+
+        const id = req.params.id;
+
+        const {
+            nombre,
+            precio,
+            descripcion,
+            stock
+        } = req.body;
+
+        if (!nombre || precio === undefined || stock === undefined) {
+
+            return res.status(400).json({
+                error: "Faltan datos del producto"
+            });
+
+        }
+
+        if (Number(precio) < 0) {
+
+            return res.status(400).json({
+                error: "El precio no puede ser negativo"
+            });
+
+        }
+
+        if (Number(stock) < 0) {
+
+            return res.status(400).json({
+                error: "El stock no puede ser negativo"
+            });
+
+        }
+
+        const producto =
+            await productoService.actualizarProducto(
+                id,
+                nombre,
+                precio,
+                descripcion,
+                stock
+            );
+
+        if (!producto) {
+
+            return res.status(404).json({
+                error: "Producto no encontrado"
+            });
+
+        }
+
+        res.json({
+            mensaje: "Producto actualizado correctamente",
+            producto
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            error: error.message
+        });
+
+    }
+
+};
+
+// Función para modificar el stock
+
+const modificarStock = async (req, res) => {
+
+    try {
+
+        const id = req.params.id;
+
+        const { cantidad } = req.body;
+
+        if (cantidad === undefined) {
+
+            return res.status(400).json({
+                error: "Debe especificar una cantidad"
+            });
+
+        }
+
+        if (!Number.isInteger(Number(cantidad))) {
+
+            return res.status(400).json({
+                error: "La cantidad debe ser un número entero"
+            });
+
+        }
+
+        const producto =
+            await productoService.modificarStock(
+                id,
+                Number(cantidad)
+            );
+
+        if (!producto) {
+
+            return res.status(400).json({
+                error: "No se puede modificar el stock o el producto no existe"
+            });
+
+        }
+
+        res.json({
+            mensaje: "Stock actualizado correctamente",
+            producto
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            error: error.message
+        });
+
+    }
+
+};
+
 // Exportación de Funciones
 
 module.exports = {
@@ -179,5 +309,7 @@ module.exports = {
     getProductos,
     getProductoPorCategoria,
     cargarProducto,
-    eliminarProducto
+    eliminarProducto,
+    actualizarProducto,
+    modificarStock
 };
