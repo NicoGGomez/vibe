@@ -113,6 +113,14 @@ a {
         carritoExito 1.2s ease 0.65s;
 }
 
+.btn-carrito {
+    transition: color 0.25s ease;
+}
+
+.btn-carrito.en-carrito {
+    color: #22c55e;
+}
+
 @keyframes carritoPop {
     0% {
         transform: scale(1) rotate(0deg);

@@ -614,6 +614,15 @@ async function agregarAlCarrito(idProducto) {
     }
 
     await cargarCarrito();
+    const card = document.querySelector(
+    `card-comp[data-id="${idProducto}"]`
+    );
+
+    if (card) {
+        card.marcarEnCarrito();
+    }
+
+    animarCarritoFlotante();
 }
 
 // Función para borrar carrito
@@ -671,6 +680,15 @@ async function borrarDelCarrito(idProducto) {
         const error = await respuesta.json();
         throw new Error(error.mensaje);
     }
+
+    // ⚫ Volver a marcar la Card como disponible
+    const card = document.querySelector(
+        `card-comp[data-id="${idProducto}"]`
+    );
+
+    if (card) {
+        card.desmarcarEnCarrito();
+    }
 }
 
 // Función para crear un carrito 
@@ -702,6 +720,18 @@ async function cargarCarrito(){
     }
 
     const productos = await respuesta.json();
+
+        productos.forEach(producto => {
+
+        const card = document.querySelector(
+            `card-comp[data-id="${producto.id_producto}"]`
+        );
+
+        if (card) {
+            card.marcarEnCarrito();
+        }
+
+    });
 
     const lista = document.getElementById("lista-carrito");
 
@@ -895,6 +925,26 @@ function resetearQR() {
     btnGenerarQR.disabled = false;
 
     btnPagarMercadoPago.style.display = "none";
+}
+
+function animarCarritoFlotante() {
+
+    const carrito = document.getElementById("btn-abrir-carrito");
+
+    if (!carrito) return;
+
+    // Reiniciar animación
+    carrito.classList.remove("animar-carrito-flotante");
+
+    void carrito.offsetWidth;
+
+    // Ejecutar animación
+    carrito.classList.add("animar-carrito-flotante");
+
+    // Quitar la clase exactamente cuando termina
+    carrito.addEventListener("animationend", () => {
+        carrito.classList.remove("animar-carrito-flotante");
+    }, { once: true });
 }
 
 cargarProductos();

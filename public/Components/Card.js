@@ -1,4 +1,5 @@
 class Card extends HTMLElement {
+
     connectedCallback() {
 
         const id = this.getAttribute("data-id");
@@ -9,20 +10,26 @@ class Card extends HTMLElement {
 
         this.innerHTML = `
             <div class="cont card" data-id="${id}">
+
                 <a href="producto.html?id=${id}">
+
                     <img src="${imagen}" alt="">
-                
 
-                <div class="cont info-card-comp">
-                    <div class="cont info-card">
-                        <p class="texto">${nombre}</p>
-                        <p class="precio">$${precio}</p>
+                    <div class="cont info-card-comp">
+
+                        <div class="cont info-card">
+                            <p class="texto">${nombre}</p>
+                            <p class="precio">$${precio}</p>
+                        </div>
+
+                </a>
+
+                        <i
+                            id="btn-agregar-carrito"
+                            class="fa-solid fa-cart-shopping btn-carrito">
+                        </i>
+
                     </div>
-
-                </a>    
-
-                    <i id="btn-agregar-carrito" class="fa-solid fa-cart-shopping btn-carrito"></i>
-                </div>
 
                 ${
                     stock === 0
@@ -39,7 +46,6 @@ class Card extends HTMLElement {
             const card = this.querySelector(".card");
 
             card.classList.add("sin-stock-card");
-
         }
 
         const btnCarrito = this.querySelector(".btn-carrito");
@@ -49,18 +55,20 @@ class Card extends HTMLElement {
         }
 
         if (btnCarrito) {
+
             btnCarrito.addEventListener("click", (e) => {
+
                 e.preventDefault();
                 e.stopPropagation();
 
-                // Reiniciar animación
+                // Animación de la Card
                 btnCarrito.classList.remove("animar-carrito");
+
                 void btnCarrito.offsetWidth;
 
-                // Ejecutar animación
                 btnCarrito.classList.add("animar-carrito");
 
-                // Agregar producto
+                // Avisar que se quiere agregar
                 this.dispatchEvent(
                     new CustomEvent("agregar-carrito", {
                         bubbles: true,
@@ -71,8 +79,24 @@ class Card extends HTMLElement {
                 );
             });
         }
-
     }
+
+    marcarEnCarrito() {
+        const btnCarrito = this.querySelector(".btn-carrito");
+
+        if (btnCarrito) {
+                btnCarrito.classList.add("en-carrito");
+        }
+    }
+
+    desmarcarEnCarrito() {
+        const btnCarrito = this.querySelector(".btn-carrito");
+
+        if (btnCarrito) {
+            btnCarrito.classList.remove("en-carrito");
+        }
+    }
+
 }
 
 customElements.define("card-comp", Card);
