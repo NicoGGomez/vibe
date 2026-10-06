@@ -224,6 +224,87 @@
     background: #7f3fa8;
 }
 
+/* =========================================
+   LO MÁS SOLICITADO
+========================================= */
+
+.seccion-mas-solicitados {
+    width: 100%;
+    margin-top: 60px;
+    scroll-margin-top: 30px;
+}
+
+.titulo-mas-solicitados {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.titulo-mas-solicitados i {
+    color: #974fc2;
+    font-size: 22px;
+}
+
+.titulo-mas-solicitados h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.mensaje-mas-solicitados {
+    text-align: center;
+
+    color: #888;
+
+    font-size: 14px;
+
+    margin: 0 0 25px;
+}
+
+.lista-mas-solicitados {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 350px));
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin: 2vh;
+}
+
+.producto-mas-solicitado {
+    width: 100%;
+    max-width: 350px;
+}
+
+.cantidad-solicitudes {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 10px;
+
+    font-size: 14px;
+
+    color: #777;
+}
+
+.cantidad-solicitudes i {
+    color: #974fc2;
+}
+
 /* Cerrar sesión */
 
 .btn-logout {
@@ -243,6 +324,14 @@
 /* =========================================
    MOBILE
 ========================================= */
+
+@media (max-width: 900px) {
+
+    .lista-mas-solicitados {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
 
 @media (max-width: 600px) {
 
@@ -289,4 +378,20 @@
         margin-top: 35px;
     }
 
+    .producto-mas-solicitado {
+        width: 100%;
+    }
+
+    .lista-mas-solicitados {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2vh 0;
+    }
+
+    .seccion-mas-solicitados {
+        width: 100%;
+        margin-top: 40px;
+    }
 }

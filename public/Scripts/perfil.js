@@ -15,6 +15,14 @@ const listaFavoritos =
 const mensajeFavoritos =
     document.getElementById("mensaje-favoritos");
 
+const listaMasSolicitados =
+    document.getElementById("lista-mas-solicitados");
+
+const mensajeMasSolicitados =
+    document.getElementById("mensaje-mas-solicitados");
+
+const seccionMasSolicitados =
+    document.getElementById("seccion-mas-solicitados");
 
 const token =
     localStorage.getItem("token");
@@ -63,6 +71,11 @@ if (!token || !usuarioGuardado) {
             linkCompras.querySelector("i")
                 .className =
                 "fa-solid fa-box";
+
+            // Mostrar sección de productos más solicitados
+            seccionMasSolicitados.style.display = "block";
+
+            cargarMasSolicitados();
 
         } else {
 
@@ -165,5 +178,99 @@ async function cargarFavoritos() {
 
         mensajeFavoritos.textContent =
             "No se pudieron cargar tus favoritos.";
+    }
+}
+
+async function cargarMasSolicitados() {
+
+    const token = getToken();
+
+    if (!token) return;
+
+    try {
+
+        const respuesta = await fetch(
+            "https://vibe-n9dy.onrender.com/favoritos/mas-solicitados",
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        const productos =
+            await respuesta.json();
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                productos.mensaje ||
+                "No se pudieron obtener los productos más solicitados."
+            );
+        }
+
+        listaMasSolicitados.innerHTML = "";
+
+        if (productos.length === 0) {
+
+            mensajeMasSolicitados.textContent =
+                "Todavía no hay productos solicitados.";
+
+            return;
+        }
+
+        mensajeMasSolicitados.textContent =
+            `${productos.length} producto${productos.length !== 1 ? "s" : ""}`;
+
+        productos.forEach(producto => {
+
+            const contenedor =
+                document.createElement("div");
+
+            contenedor.classList.add(
+                "producto-mas-solicitado"
+            );
+
+            contenedor.innerHTML = `
+
+                <card-comp
+                    data-id="${producto.id_producto}"
+                    nombre="${producto.nombre}"
+                    precio="${producto.precio}"
+                    imagen="${producto.imagen_principal}"
+                    stock="${producto.stock}"
+                >
+                </card-comp>
+
+                <div class="cantidad-solicitudes">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    <span>
+                        ${producto.cantidad_favoritos}
+                        ${Number(producto.cantidad_favoritos) === 1
+                            ? "persona lo desea"
+                            : "personas lo desean"}
+                    </span>
+
+                </div>
+
+            `;
+
+            listaMasSolicitados.appendChild(
+                contenedor
+            );
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Error al cargar productos más solicitados:",
+            error
+        );
+
+        mensajeMasSolicitados.textContent =
+            "No se pudieron cargar los productos más solicitados.";
     }
 }
