@@ -758,9 +758,41 @@ async function cargarCarrito(){
 // Función para actualizar el boton de cantidad
 
 function actualizarBtnCarrito() {
-    if (!btnIrCarrito) return;
-    const cantidad = document.querySelectorAll("carrito-producto").length;
-    btnIrCarrito.style.display = cantidad > 0 ? "block" : "none";
+
+    const cantidadProductos =
+        document.querySelectorAll("carrito-producto").length;
+
+    const contador =
+        document.getElementById("contador-carrito");
+
+    const carrito =
+        document.getElementById("btn-abrir-carrito");
+
+    if (!contador || !carrito) return;
+
+    // Mostrar / ocultar contador
+    if (cantidadProductos > 0) {
+
+        contador.textContent = cantidadProductos;
+        contador.style.display = "flex";
+
+        // 🟢 Hay productos
+        carrito.classList.add("tiene-productos");
+
+    } else {
+
+        contador.textContent = "0";
+        contador.style.display = "none";
+
+        // ⚪ Carrito vacío
+        carrito.classList.remove("tiene-productos");
+    }
+
+    // Botón "Ir al carrito"
+    if (btnIrCarrito) {
+        btnIrCarrito.style.display =
+            cantidadProductos > 0 ? "block" : "none";
+    }
 }
 
 // Función para agregar un nuevo producto
