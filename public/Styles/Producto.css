@@ -293,6 +293,62 @@ producto-comp {
     transform: scale(1.15);
 }
 
+/* ==========================
+   FAVORITO PRODUCTO
+========================== */
+
+.btn-favorito-producto {
+    width: 48px !important;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: var(--color-secundario);
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+    transition:
+        transform 0.2s ease,
+        color 0.25s ease,
+        background-color 0.2s ease;
+}
+
+.btn-favorito-producto:hover {
+    transform: scale(1.08);
+    background-color: #f2f2f2;
+}
+
+.btn-favorito-producto.favorito-activo {
+    color: #974fc2;
+}
+
+.btn-favorito-producto.animar-favorito {
+    animation: favoritoProductoPop 0.45s ease;
+}
+
+@keyframes favoritoProductoPop {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.2);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 @media (max-width: 900px) {
 
@@ -530,5 +586,10 @@ producto-comp {
 
     .contenedor-botones .botones button {
         width: 100%;
+    }
+
+    .btn-favorito-producto {
+        width: 100% !important;
+        height: 45px;
     }
 }

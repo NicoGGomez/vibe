@@ -194,6 +194,14 @@ class Producto extends HTMLElement {
                                 }
                             </button>
 
+                            <button
+                                id="btn-favorito-prod"
+                                class="btn-favorito-producto"
+                                title="Agregar a favoritos"
+                            >
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+
                         </div>
 
                     </div>

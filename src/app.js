@@ -15,6 +15,7 @@ const carritoRoutes = require("./routes/carrito.routes");
 const pagoRoutes = require("./routes/pago.routes");
 const mercadoPagoSetupRoutes = require("./routes/mercadoPagoSetup.routes");
 const pedidoRoutes = require("./routes/pedido.routes");
+const favoritoRoutes = require("./routes/favorito.routes");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/carrito", carritoRoutes);
 app.use("/pedidos", pedidoRoutes);
 app.use("/pagos", pagoRoutes);
 app.use("/pagos/setup",mercadoPagoSetupRoutes);
+app.use("/favoritos", favoritoRoutes);
 
 module.exports = app;
 

@@ -185,3 +185,61 @@ a {
     }
 
 }
+
+/* ==========================
+   FAVORITO CARD
+========================== */
+
+.card {
+    position: relative;
+}
+
+.btn-favorito {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    font-size: 25px;
+
+    color: #000;
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        transform 0.2s ease,
+        color 0.25s ease;
+}
+
+.btn-favorito:hover {
+    transform: scale(1.15);
+}
+
+.btn-favorito.favorito-activo {
+    color: #974fc2;
+}
+
+.btn-favorito.animar-favorito {
+    animation: favoritoPop 0.45s ease;
+}
+
+@keyframes favoritoPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.35);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}

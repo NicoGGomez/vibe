@@ -11,6 +11,11 @@ class Card extends HTMLElement {
         this.innerHTML = `
             <div class="cont card" data-id="${id}">
 
+                <i
+                    class="fa-regular fa-heart btn-favorito"
+                    title="Agregar a favoritos">
+                </i>
+
                 <a href="producto.html?id=${id}">
 
                     <img src="${imagen}" alt="">
