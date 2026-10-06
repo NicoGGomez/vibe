@@ -849,9 +849,19 @@ const cargarProductos = async () => {
 
     }
 
+    if (cantProductos) {
     cantProductos.textContent = `Productos (${cantidadTotal})`;
-    montoProductos.textContent = `$${total.toLocaleString("es-AR")}`;
-    montoFinal.textContent = `$${total.toLocaleString("es-AR")}`;
+    }
+
+    if (montoProductos) {
+        montoProductos.textContent =
+            `$${total.toLocaleString("es-AR")}`;
+    }
+
+    if (montoFinal) {
+        montoFinal.textContent =
+            `$${total.toLocaleString("es-AR")}`;
+    }
 
 }
 

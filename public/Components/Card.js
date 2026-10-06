@@ -1,3 +1,5 @@
+import { agregarFavorito, quitarFavorito, esFavorito } from "../Scripts/Favorito.js";
+
 class Card extends HTMLElement {
 
     connectedCallback() {
@@ -51,6 +53,91 @@ class Card extends HTMLElement {
             const card = this.querySelector(".card");
 
             card.classList.add("sin-stock-card");
+        }
+
+        // ==========================
+        // FAVORITOS
+        // ==========================
+
+        const btnFavorito = this.querySelector(".btn-favorito");
+
+        if (btnFavorito) {
+
+            // Verificar si ya está en favoritos
+            esFavorito(id).then((favorito) => {
+
+                if (favorito) {
+
+                    btnFavorito.classList.remove("fa-regular");
+                    btnFavorito.classList.add("fa-solid");
+                    btnFavorito.classList.add("favorito-activo");
+
+                    btnFavorito.title = "Quitar de favoritos";
+                }
+
+            });
+
+
+            // Click en favorito
+            btnFavorito.addEventListener("click", async (e) => {
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                const estaActivo =
+                    btnFavorito.classList.contains("favorito-activo");
+
+
+                // ==========================
+                // QUITAR
+                // ==========================
+
+                if (estaActivo) {
+
+                    const eliminado = await quitarFavorito(id);
+
+                    if (!eliminado) {
+                        return;
+                    }
+
+                    btnFavorito.classList.remove("fa-solid");
+                    btnFavorito.classList.add("fa-regular");
+
+                    btnFavorito.classList.remove("favorito-activo");
+
+                    btnFavorito.title = "Agregar a favoritos";
+
+                    return;
+                }
+
+
+                // ==========================
+                // AGREGAR
+                // ==========================
+
+                const agregado = await agregarFavorito(id);
+
+                if (!agregado) {
+                    return;
+                }
+
+                btnFavorito.classList.remove("fa-regular");
+                btnFavorito.classList.add("fa-solid");
+
+                btnFavorito.classList.add("favorito-activo");
+
+                btnFavorito.title = "Quitar de favoritos";
+
+
+                // Animación
+                btnFavorito.classList.remove("animar-favorito");
+
+                void btnFavorito.offsetWidth;
+
+                btnFavorito.classList.add("animar-favorito");
+
+            });
+
         }
 
         const btnCarrito = this.querySelector(".btn-carrito");

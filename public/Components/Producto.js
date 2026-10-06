@@ -1,4 +1,5 @@
 import { getUsuario, getToken } from "../Scripts/auth.js";
+import { agregarFavorito, quitarFavorito, esFavorito } from "../Scripts/Favorito.js";
 
 class Producto extends HTMLElement {
 
@@ -207,6 +208,84 @@ class Producto extends HTMLElement {
                     </div>
 
         `;
+
+        // ==========================
+        // FAVORITO
+        // ==========================
+
+        const btnFavorito = this.querySelector("#btn-favorito-prod");
+
+        if (btnFavorito) {
+
+            const iconoFavorito = btnFavorito.querySelector("i");
+
+            const actualizarIconoFavorito = async () => {
+
+                const favorito = await esFavorito(id);
+
+                if (favorito) {
+                    iconoFavorito.classList.remove("fa-regular");
+                    iconoFavorito.classList.add("fa-solid");
+
+                    btnFavorito.classList.add("favorito-activo");
+                    btnFavorito.title = "Quitar de favoritos";
+
+                } else {
+                    iconoFavorito.classList.remove("fa-solid");
+                    iconoFavorito.classList.add("fa-regular");
+
+                    btnFavorito.classList.remove("favorito-activo");
+                    btnFavorito.title = "Agregar a favoritos";
+                }
+            };
+
+            actualizarIconoFavorito();
+
+            btnFavorito.addEventListener("click", async (e) => {
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                const usuario = getUsuario();
+                const token = getToken();
+
+                if (!usuario || !token) {
+                    alert("Tenés que iniciar sesión para agregar favoritos.");
+                    return;
+                }
+
+                const favorito = await esFavorito(id);
+
+                if (favorito) {
+
+                    const eliminado = await quitarFavorito(id);
+
+                    if (eliminado) {
+                        actualizarIconoFavorito();
+                    }
+
+                } else {
+
+                    const agregado = await agregarFavorito(id);
+
+                    if (agregado) {
+                        actualizarIconoFavorito();
+
+                        // Animación
+                        btnFavorito.classList.remove("animar-favorito");
+
+                        // Forzamos que la animación pueda repetirse
+                        void btnFavorito.offsetWidth;
+
+                        btnFavorito.classList.add("animar-favorito");
+
+                        setTimeout(() => {
+                            btnFavorito.classList.remove("animar-favorito");
+                        }, 450);
+                    }
+                }
+            });
+        }
 
         // ==========================
         // ADMINISTRACIÓN
