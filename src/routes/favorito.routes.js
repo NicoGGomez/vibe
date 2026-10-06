@@ -29,15 +29,15 @@ router.get(
 );
 
 router.get(
-    "/:id",
-    verificarToken,
-    favoritoController.esFavorito
-);
-
-router.get(
     "/mas-solicitados",
     verificarToken,
     favoritoController.obtenerMasSolicitados
+);
+
+router.get(
+    "/:id",
+    verificarToken,
+    favoritoController.esFavorito
 );
 
 router.delete(
