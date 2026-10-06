@@ -14,6 +14,7 @@ const categoriaController = require("../controllers/categoria.controller");
 router.get("/", categoriaController.getCategorias);
 router.post("/", categoriaController.cargarCategoria);
 router.get("/:id", categoriaController.getCategoria);
+router.delete("/:id", categoriaController.borrarCategoria)
 
 // Exportación de rutas
 

@@ -22,10 +22,17 @@ const cargarCategorias = async (nombreCategoria) => {
     return await categoriaModel.cargarCategorias(nombreCategoria);
 }
 
+// Función para eliminar categoría 
+
+const borrarCategoria = async (id) => {
+    return await categoriaModel.borrarCategoria(id)
+}
+
 // Exportación de funciones
 
 module.exports = {
     listarCategorias,
     cargarCategorias,
-    listarCategoria
+    listarCategoria,
+    borrarCategoria
 };

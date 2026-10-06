@@ -74,10 +74,47 @@ const getCategoria = async (req,res)=>{
 
 };
 
+// Función para eliminar categoría
+
+const borrarCategoria = async (req, res) => {
+
+    try {
+
+        const id = req.params.id;
+
+        const categoria =
+            await categoriaService.borrarCategoria(id);
+
+        res.json({
+            mensaje: "Categoría eliminada correctamente",
+            categoria
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        if (error.status === 409) {
+
+            return res.status(409).json({
+                mensaje: error.message
+            });
+
+        }
+
+        res.status(500).json({
+            error: error.message
+        });
+
+    }
+
+};
+
 // Exportación de Funciones
 
 module.exports = {
     getCategorias,
     cargarCategoria,
-    getCategoria
+    getCategoria,
+    borrarCategoria
 };

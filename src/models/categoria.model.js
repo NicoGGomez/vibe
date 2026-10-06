@@ -40,10 +40,48 @@ const cargarCategorias = async (nombreCategoria) => {
     return resultado.rows[0];
 };
 
+// Función para eliminar categoría
+
+const borrarCategoria = async (id) => {
+
+    // Primero verificamos si la categoría tiene productos
+    const productos = await db.query(
+        `SELECT 1
+         FROM producto
+         WHERE id_categoria = $1
+         LIMIT 1`,
+        [id]
+    );
+
+    // Si encontramos al menos un producto, no permitimos borrar
+    if (productos.rows.length > 0) {
+
+        const error = new Error(
+            "No se puede eliminar la categoría porque tiene productos asociados"
+        );
+
+        error.status = 409;
+
+        throw error;
+    }
+
+
+    // Si no tiene productos, la eliminamos
+    const resultado = await db.query(
+        `DELETE FROM categoria
+         WHERE id_categoria = $1
+         RETURNING *`,
+        [id]
+    );
+
+    return resultado.rows[0];
+};
+
 // Exportación de funciones
 
 module.exports = {
     obtenerCategorias,
     cargarCategorias,
-    obtenerCategoria
+    obtenerCategoria,
+    borrarCategoria
 };

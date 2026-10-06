@@ -290,6 +290,43 @@
     border-bottom: none;
 }
 
+/* =========================================
+   BOTÓN ELIMINAR CATEGORÍA
+========================================= */
+
+.btn-eliminar-categoria {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-eliminar-categoria:hover {
+    background: #f5f5f5;
+    color: #e53935;
+
+    transform: scale(1.05);
+}
+
+.btn-eliminar-categoria:active {
+    transform: scale(0.95);
+}
+
 
 /* =========================================
    RESPONSIVE
