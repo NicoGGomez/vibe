@@ -72,6 +72,17 @@
 
             </a>
 
+            <a
+                id="link-favoritos"
+                class="btn-perfil btn-favoritos"
+                href="#favoritos"
+            >
+                <i class="fa-solid fa-heart"></i>
+
+                <span>
+                    Mis favoritos
+                </span>
+            </a>
 
             <button
                 id="btn-logout"
@@ -89,6 +100,25 @@
 
         </div>
 
+        <section id="favoritos" class="seccion-favoritos">
+
+            <div class="titulo-favoritos">
+                <i class="fa-solid fa-heart"></i>
+
+                <h2>Mis favoritos</h2>
+            </div>
+
+            <p id="mensaje-favoritos" class="mensaje-favoritos">
+                Cargando favoritos...
+            </p>
+
+            <div
+                id="lista-favoritos"
+                class="lista-favoritos"
+            ></div>
+
+        </section>
+
     </main>
 
     <!-- footer -->
@@ -99,6 +129,7 @@
 
     <script type="module" src="Scripts/logut.js"></script>
     <script src="Components/Footer.js"></script>
+    <script type="module" src="Components/Card.js"></script>
     <script type="module" src="Scripts/perfil.js"></script>
     <script type="module" src="Components/NavBar.js"></script>
 </body>

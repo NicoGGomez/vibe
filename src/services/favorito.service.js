@@ -68,6 +68,15 @@ const obtenerFavoritos = async (idUsuario) => {
     );
 };
 
+// ==========================
+// LO MÁS SOLICITADO
+// ==========================
+
+const obtenerMasSolicitados = async () => {
+
+    return await favoritoModel.obtenerMasSolicitados();
+
+};
 
 // ==========================
 // EXPORTACIÓN
@@ -77,5 +86,6 @@ module.exports = {
     agregarFavorito,
     quitarFavorito,
     esFavorito,
-    obtenerFavoritos
+    obtenerFavoritos,
+    obtenerMasSolicitados
 };

@@ -83,6 +83,37 @@ const obtenerFavoritos = async (idUsuario) => {
     return resultado.rows;
 };
 
+// ==========================
+// LO MÁS SOLICITADO
+// ==========================
+
+const obtenerMasSolicitados = async () => {
+
+    const resultado = await db.query(
+        `SELECT
+            p.id_producto,
+            p.nombre,
+            p.precio,
+            p.imagen_principal,
+            p.stock,
+            p.descripcion,
+            COUNT(f.id_favorito) AS cantidad_favoritos
+        FROM favorito f
+        JOIN producto p
+            ON f.id_producto = p.id_producto
+        GROUP BY
+            p.id_producto,
+            p.nombre,
+            p.precio,
+            p.imagen_principal,
+            p.stock,
+            p.descripcion
+        ORDER BY cantidad_favoritos DESC
+        LIMIT 10`
+    );
+
+    return resultado.rows;
+};
 
 // ==========================
 // EXPORTACIÓN
@@ -92,5 +123,6 @@ module.exports = {
     agregarFavorito,
     quitarFavorito,
     esFavorito,
-    obtenerFavoritos
+    obtenerFavoritos,
+    obtenerMasSolicitados
 };

@@ -34,6 +34,12 @@ router.get(
     favoritoController.esFavorito
 );
 
+router.get(
+    "/mas-solicitados",
+    verificarToken,
+    favoritoController.obtenerMasSolicitados
+);
+
 router.delete(
     "/:id",
     verificarToken,

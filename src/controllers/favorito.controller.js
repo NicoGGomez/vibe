@@ -117,6 +117,32 @@ const obtenerFavoritos = async (req, res) => {
     }
 };
 
+// ==========================
+// LO MÁS SOLICITADO
+// ==========================
+
+const obtenerMasSolicitados = async (req, res) => {
+
+    try {
+
+        const productos =
+            await favoritoService.obtenerMasSolicitados();
+
+        res.status(200).json(productos);
+
+    } catch (error) {
+
+        console.error(
+            "Error obteniendo productos más solicitados:",
+            error
+        );
+
+        res.status(500).json({
+            mensaje: error.message
+        });
+
+    }
+};
 
 // ==========================
 // EXPORTACIÓN
@@ -126,5 +152,6 @@ module.exports = {
     agregarFavorito,
     quitarFavorito,
     esFavorito,
-    obtenerFavoritos
-};
+    obtenerFavoritos,
+    obtenerMasSolicitados
+};  
