@@ -39,36 +39,137 @@
 
     <!-- form -->
 
-    <div class="cont seccion-contacto">
+    <section class="contacto">
 
-        <form id="contactForm" action="">
+        <div class="contacto-contenido">
 
-            <div class="input">
+            <!-- informacion -->
 
-                <label for="nombreInput">Ingresa tu Nombre</label>
-                <input type="text" name="nombre" id="nombreInput">
+            <div class="contacto-info">
+
+                <span class="contacto-tag">
+                    <i class="fa-solid fa-envelope"></i>
+                    CONTACTO
+                </span>
+
+                <h1>
+                    Hablemos.
+                </h1>
+
+                <p>
+                    ¿Tenés alguna consulta, sugerencia o simplemente querés
+                    decirnos algo? Completá el formulario y nos pondremos
+                    en contacto con vos.
+                </p>
 
             </div>
 
-            <div class="input">
 
-                <label for="mailInput">Ingresa tu Mail</label>
-                <input type="email" name="email" id="mailInput">
+            <!-- formulario -->
+
+            <div class="contacto-card">
+
+                <div class="contacto-card-header">
+
+                    <h2>Enviá tu mensaje</h2>
+
+                    <p>
+                        Te responderemos lo antes posible.
+                    </p>
+
+                </div>
+
+
+                <form id="contactForm">
+
+                    <div class="input">
+
+                        <label for="nombreInput">
+                            Nombre
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-user"></i>
+
+                            <input
+                                type="text"
+                                name="nombre"
+                                id="nombreInput"
+                                placeholder="Tu nombre"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input">
+
+                        <label for="mailInput">
+                            Email
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                name="email"
+                                id="mailInput"
+                                placeholder="tuemail@gmail.com"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input input-msg">
+
+                        <label for="msgInput">
+                            Mensaje
+                        </label>
+
+                        <div class="input-wrapper textarea-wrapper">
+
+                            <i class="fa-regular fa-message"></i>
+
+                            <textarea
+                                name="message"
+                                id="msgInput"
+                                placeholder="Escribí tu mensaje..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="btnEnviar"
+                    >
+                        <span>Enviar mensaje</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <p
+                        id="form-message"
+                        class="form-message"
+                    ></p>
+
+                </form>
 
             </div>
 
-            <div class="input input-msg">
+        </div>
 
-                <label for="msgInput">Ingresa tu mensaje</label>
-                <textarea name="message" id="msgInput" ></textarea>
-
-            </div>
-
-            <button type="submit">Enviar</button>
-
-        </form>
-
-    </div>
+    </section>
 
     <div class="separador"></div>
 
@@ -78,7 +179,6 @@
 
     <!-- link a scripts -->
 
-    <script> emailjs.init("Z1zZWU8mOaSMKb943") </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script src="Scripts/EnvioMensaje.js"></script>
