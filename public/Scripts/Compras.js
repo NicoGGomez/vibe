@@ -4,6 +4,10 @@
 
 const API_URL = "https://vibe-n9dy.onrender.com";
 
+// Importación de función de "getUsuario()" de "auth.js"
+
+import { mostrarError } from "./mostrarInfo.js";
+
 // Obtención de elementos del DOM
 
 const contenedorCompras =
@@ -444,11 +448,7 @@ async function marcarComoEnviado(
             error
         );
 
-        alert(
-            error.message ||
-            "No se pudo marcar el pedido como enviado."
-        );
-
+        mostrarError("No se pudo marcar el pedido como enviado.")
 
         boton.disabled = false;
 

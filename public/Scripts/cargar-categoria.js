@@ -3,7 +3,7 @@
 // Importación de función de "getUsuario()" de "auth.js"
 
 import { getUsuario } from "./auth.js";
-
+import { mostrarConfirmacion, mostrarError } from "./mostrarInfo.js";
 
 // Obtención de usuario y verificación de rol
 
@@ -134,9 +134,7 @@ const cargarCategorias = async () => {
 
 const eliminarCategoria = async (idCategoria) => {
 
-    const confirmar = confirm(
-        "¿Seguro que querés eliminar esta categoría?"
-    );
+    const confirmar = await mostrarConfirmacion();
 
     if (!confirmar) return;
 
@@ -155,10 +153,12 @@ const eliminarCategoria = async (idCategoria) => {
 
         if (!respuesta.ok) {
 
-            alert(
-                data.mensaje ||
+            console.log(
+                "No se pudo eliminar la categoría. error:", data.mensaje || 
                 "No se pudo eliminar la categoría."
             );
+
+            mostrarError("No se pudo eliminar la categoría.")
 
             return;
         }
@@ -172,18 +172,14 @@ const eliminarCategoria = async (idCategoria) => {
             error
         );
 
-        alert(
-            "Ocurrió un error al eliminar la categoría."
-        );
+        mostrarError("Ocurrió un error al eliminar la categoría.")
 
     }
 
 };
 
 
-// =========================================
-// EVENTO DEL BOTÓN ELIMINAR
-// =========================================
+// Eveneto de eliminar
 
 listaCategorias.addEventListener("click", (e) => {
 
@@ -200,8 +196,6 @@ listaCategorias.addEventListener("click", (e) => {
 });
 
 
-// =========================================
-// CARGAR AL INICIAR
-// =========================================
+// Cargar al iniciar
 
 cargarCategorias();

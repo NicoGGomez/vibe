@@ -5,6 +5,7 @@
 
 import { getUsuario } from "./auth.js";
 import { mostrarCarga } from "./carga.js";
+import { mostrarError } from "./mostrarInfo.js";
 
 // Instansiación de variables y constantes
 
@@ -83,6 +84,7 @@ const cargarProductos = async () => {
 
     } catch (error) {
         console.log(error);
+        mostrarError("No se pudieron cargar los productos.");
     }
 
 };
@@ -121,6 +123,6 @@ document.addEventListener("click", async (e) => {
 
     } catch (error) {
         console.error(error);
-        alert("Error al eliminar el producto.");
+        mostrarError("Error al eliminar el producto.");
     }
 });

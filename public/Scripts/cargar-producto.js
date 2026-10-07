@@ -3,6 +3,7 @@
 // Importación de función de "getUsuario()" de "auth.js"
 
 import { getUsuario } from "./auth.js";
+import { mostrarError } from "./mostrarInfo.js";
 
 // Obtención de usuario y verificación de rol
 
@@ -61,7 +62,8 @@ formProducto.addEventListener("submit", async (e) => {
         const token = localStorage.getItem("token");
 
         if(!token){
-            alert("Tenés que iniciar sesión");
+
+            mostrarError("Tenés que iniciar sesión")
             return;
         }
 

@@ -1,0 +1,76 @@
+/* Modal de confirmación */
+
+
+/* Estilos */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9998;
+}
+
+.modal-confirmacion {
+    width: 90%;
+    max-width: 400px;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+
+    text-align: center;
+}
+
+.modal-confirmacion h3 {
+    margin: 0 0 10px;
+}
+
+.modal-confirmacion p {
+    margin-bottom: 25px;
+    color: #555;
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-botones button {
+    border: none;
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.btn-cancelar {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-confirmar {
+    background: #e53935;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background: #d5d5d5;
+}
+
+.btn-confirmar:hover {
+    background: #c62828;
+}

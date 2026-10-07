@@ -3,6 +3,7 @@
 // Importación de función de "mostrarCarga()" de "carga.js"
 
 import { mostrarCarga } from "./carga.js";
+import { mostrarError } from "./mostrarInfo.js";
 
 // Obtención de elementos del DOM
 
@@ -61,12 +62,12 @@ if (btnGenerarQR) {
 
         // Validar datos
         if (!nombreApellido || !telefono) {
-            alert("Completá tu nombre, apellido y teléfono para generar el QR.");
+            mostrarError("Completá tu nombre, apellido y teléfono para generar el QR.")
             return;
         }
 
         if (!tipoEntrega) {
-            alert("Seleccioná una forma de entrega: Retiro o Envío.");
+            mostrarError("Seleccioná una forma de entrega: Retiro o Envío.")
             return;
         }
 
@@ -86,19 +87,19 @@ if (btnGenerarQR) {
                 .value.trim();
 
             if (!direccion || !ciudad || !codigoPostal) {
-                alert("Completá todos los datos de envío.");
+                mostrarError("Completá todos los datos de envío.");
                 return;
             }
 
             if (!ubicacionConfirmada) {
-                alert("Confirmá la ubicación presionando ✓.");
+                mostrarError("Confirmá la ubicación presionando ✓.");
                 return;
             }
 
         }
 
         if (totalCompra <= 0) {
-            alert("No hay productos para pagar.");
+            mostrarError("No hay productos para pagar.");
             return;
         }
 
@@ -110,7 +111,7 @@ if (btnGenerarQR) {
             const token = localStorage.getItem("token");
 
             if (!token) {
-                alert("Debés iniciar sesión.");
+                mostrarError("Debés iniciar sesión.");
                 btnGenerarQR.disabled = false;
                 btnGenerarQR.textContent = "Generar QR de pago";
                 return;
@@ -283,7 +284,7 @@ if (btnGenerarQR) {
                 error
             );
 
-            alert(error.message);
+            mostrarError(error.message);
 
             btnGenerarQR.textContent =
                 "Generar QR de pago";
@@ -391,7 +392,8 @@ if(btnUbicacion){
         resetearQR();
 
         if (!navigator.geolocation) {
-            alert("Tu navegador no permite obtener la ubicación.");
+            mostrarError("Tu navegador no permite obtener la ubicación.");
+
             return;
         }
 
@@ -439,7 +441,7 @@ if(btnUbicacion){
 
                     console.error(error);
 
-                    alert("No pudimos obtener tu dirección.");
+                    mostrarError("No pudimos obtener tu dirección.");
 
                     btnUbicacion.textContent = "Usar mi ubicación";
                 }
@@ -451,9 +453,9 @@ if(btnUbicacion){
                 console.error(error);
 
                 if (error.code === error.PERMISSION_DENIED) {
-                    alert("Necesitamos permiso para acceder a tu ubicación.");
+                    mostrarError("Necesitamos permiso para acceder a tu ubicación.");
                 } else {
-                    alert("No pudimos obtener tu ubicación.");
+                    mostrarError("No pudimos obtener tu ubicación.");
                 }
 
                 btnUbicacion.textContent = "Usar mi ubicación";
@@ -483,7 +485,7 @@ if (btnUbicacionSeleccionada) {
         const codigoPostal = document.getElementById("codigo-postal").value.trim();
 
         if (!direccion || !ciudad || !codigoPostal) {
-            alert("Completá la dirección, ciudad y código postal.");
+            mostrarError("Completá la dirección, ciudad y código postal.");
             return;
         }
 
@@ -506,7 +508,7 @@ if (btnUbicacionSeleccionada) {
             const datos = await respuesta.json();
 
             if (datos.length === 0) {
-                alert("No encontramos esa dirección.");
+                mostrarError("No encontramos esa dirección.");
                 return;
             }
 
@@ -526,7 +528,7 @@ if (btnUbicacionSeleccionada) {
 
             console.error(error);
 
-            alert("No pudimos calcular el costo del envío.");
+            mostrarError("No pudimos calcular el costo del envío.");
 
             btnUbicacionSeleccionada.textContent = "✓";
         }
@@ -570,7 +572,7 @@ async function agregarAlCarrito(idProducto) {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        alert("Debés iniciar sesión para agregar productos al carrito.");
+        mostrarError("Debés iniciar sesión para agregar productos al carrito.");
         return;
     }
 
@@ -649,7 +651,7 @@ async function borrarDelCarrito(idProducto) {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        alert("Debés iniciar sesión.");
+        mostrarError("Debés iniciar sesión.");
         return;
     }
 
@@ -695,7 +697,7 @@ async function cargarCarrito(){
     if (respuesta.status === 401) {
         localStorage.removeItem("token");
 
-        alert("Tu sesión expiró. Iniciá sesión nuevamente.");
+        mostrarError("Tu sesión expiró. Iniciá sesión nuevamente.");
 
         window.location.href = "/login.html";
 
@@ -927,7 +929,7 @@ async function esperarPago(idOrden) {
 
                 clearInterval(intervalo);
 
-                alert("El pago expiró o fue cancelado.");
+                mostrarError("El pago expiró o fue cancelado.");
 
             }
 

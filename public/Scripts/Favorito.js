@@ -7,6 +7,7 @@ const API_URL = "https://vibe-n9dy.onrender.com/favoritos";
 // Importación de función de "getToken(), getUsuario()" de "auth.js"
 
 import { getToken, getUsuario } from "./auth.js";
+import { mostrarError } from "./mostrarInfo.js"
 
 // Instanciación de variables y constantes
 
@@ -94,7 +95,7 @@ export async function agregarFavorito(idProducto) {
     const token = getToken();
 
     if (!usuario || !token) {
-        alert("Tenés que iniciar sesión para agregar favoritos.");
+        mostrarError("Tenés que iniciar sesión para agregar favoritos.");
         return false;
     }
 
@@ -134,7 +135,7 @@ export async function agregarFavorito(idProducto) {
 
         console.error("Error al agregar favorito:", error);
 
-        alert(error.message);
+        mostrarError("Error al agregar favorito");
 
         return false;
     }
@@ -185,7 +186,7 @@ export async function quitarFavorito(idProducto) {
 
         console.error("Error al quitar favorito:", error);
 
-        alert(error.message);
+        mostrarError("Error al quitar favorito");
 
         return false;
     }
