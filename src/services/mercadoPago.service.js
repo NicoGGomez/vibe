@@ -67,6 +67,8 @@ const crearOrdenQR = async (monto, referencia) => {
     return datos;
 };
 
+// Función para crear preferncia
+
 const crearPreferencia = async (monto, referencia) => {
 
     const body = {
@@ -83,8 +85,8 @@ const crearPreferencia = async (monto, referencia) => {
 
         back_urls: {
             success: "misCompras.html",
-            failure: "https://TU-FRONTEND/pago-error.html",
-            pending: "https://TU-FRONTEND/pago-pendiente.html"
+            failure: "index.html",
+            pending: "..."
         },
 
         auto_return: "approved"
@@ -116,6 +118,8 @@ const crearPreferencia = async (monto, referencia) => {
 
     return datos;
 };
+
+// Función para obtener orden de código QR
 
 const obtenerOrdenQR = async (idOrden) => {
 

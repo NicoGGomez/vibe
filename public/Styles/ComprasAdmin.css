@@ -1,6 +1,7 @@
-/* =========================================
-   COMPRAS ADMIN
-========================================= */
+/* Compras admin */
+
+
+/* Estilos */
 
 .contenedor-compras-admin {
     width: 90%;
@@ -9,9 +10,7 @@
 }
 
 
-/* =========================================
-   TITULO
-========================================= */
+/* Titulo */
 
 .titulo-compras-admin {
     margin-bottom: 35px;
@@ -30,9 +29,7 @@
 }
 
 
-/* =========================================
-   CONTENEDOR DE PEDIDOS
-========================================= */
+/* Pedidos */
 
 .contenedor-compras {
     display: flex;
@@ -41,9 +38,7 @@
 }
 
 
-/* =========================================
-   TARJETA PEDIDO
-========================================= */
+/* Tarjeta pedido */
 
 .pedido-admin {
     background: #ffffff;
@@ -54,9 +49,7 @@
 }
 
 
-/* =========================================
-   HEADER PEDIDO
-========================================= */
+/* Hacer pedido */
 
 .pedido-admin-header {
     display: flex;
@@ -79,9 +72,7 @@
 }
 
 
-/* =========================================
-   ESTADO
-========================================= */
+/* Estado */
 
 .estado-pedido {
     display: inline-flex;
@@ -105,9 +96,7 @@
 }
 
 
-/* =========================================
-   CLIENTE
-========================================= */
+/* Cliente */
 
 .cliente-pedido-admin {
     padding: 20px 0;
@@ -135,9 +124,7 @@
 }
 
 
-/* =========================================
-   PRODUCTOS
-========================================= */
+/* Productos */
 
 .pedido-productos-admin {
     padding: 20px 0;
@@ -186,9 +173,7 @@
 }
 
 
-/* =========================================
-   ENTREGA
-========================================= */
+/* Entrega */
 
 .pedido-entrega-admin {
     padding: 20px 0;
@@ -219,9 +204,7 @@
 }
 
 
-/* =========================================
-   FOOTER DEL PEDIDO
-========================================= */
+/* Footer del pedido */
 
 .pedido-admin-footer {
     display: flex;
@@ -248,29 +231,21 @@
 }
 
 
-/* =========================================
-   BOTON MARCAR ENVIADO
-========================================= */
+/* Boton marcar como enviado */
 
 .btn-marcar-enviado {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-
     border: none;
     border-radius: 8px;
-
     padding: 11px 18px;
-
     background: #111;
     color: #fff;
-
     font-size: 13px;
     font-weight: 500;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease,
@@ -293,9 +268,7 @@
 }
 
 
-/* =========================================
-   CARGANDO
-========================================= */
+/* Cargando */
 
 #cargando-compras {
     display: flex;
@@ -314,9 +287,7 @@
 }
 
 
-/* =========================================
-   SIN COMPRAS
-========================================= */
+/* Sin compras */
 
 .sin-compras {
     text-align: center;
@@ -342,9 +313,7 @@
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* Media queries */
 
 @media (max-width: 700px) {
 

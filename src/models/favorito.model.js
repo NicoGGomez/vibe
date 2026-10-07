@@ -4,10 +4,7 @@
 
 const db = require("../config/database");
 
-
-// ==========================
-// AGREGAR FAVORITO
-// ==========================
+// Función para agregar a favoritos un producto
 
 const agregarFavorito = async (idUsuario, idProducto) => {
 
@@ -22,10 +19,7 @@ const agregarFavorito = async (idUsuario, idProducto) => {
     return resultado.rows[0];
 };
 
-
-// ==========================
-// QUITAR FAVORITO
-// ==========================
+// Función para quitar de favoritos un producto
 
 const quitarFavorito = async (idUsuario, idProducto) => {
 
@@ -39,10 +33,7 @@ const quitarFavorito = async (idUsuario, idProducto) => {
     return resultado.rowCount;
 };
 
-
-// ==========================
-// VERIFICAR FAVORITO
-// ==========================
+// Función para verificar que un producto esta en favoritos
 
 const esFavorito = async (idUsuario, idProducto) => {
 
@@ -57,10 +48,7 @@ const esFavorito = async (idUsuario, idProducto) => {
     return resultado.rows.length > 0;
 };
 
-
-// ==========================
-// OBTENER FAVORITOS
-// ==========================
+// Función para obtener productos en favoritos
 
 const obtenerFavoritos = async (idUsuario) => {
 
@@ -83,9 +71,7 @@ const obtenerFavoritos = async (idUsuario) => {
     return resultado.rows;
 };
 
-// ==========================
-// LO MÁS SOLICITADO
-// ==========================
+// Función para que devuelva los productos mas solicitados
 
 const obtenerMasSolicitados = async () => {
 
@@ -115,9 +101,7 @@ const obtenerMasSolicitados = async () => {
     return resultado.rows;
 };
 
-// ==========================
-// EXPORTACIÓN
-// ==========================
+// Exportación de Funciones
 
 module.exports = {
     agregarFavorito,

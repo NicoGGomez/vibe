@@ -1,4 +1,5 @@
 class carritoCard extends HTMLElement {
+
     connectedCallback() {
 
         const id = this.getAttribute("data-id");
@@ -47,6 +48,7 @@ class carritoCard extends HTMLElement {
         });
 
     }
+    
 }
 
 customElements.define("carrito-card-comp", carritoCard);

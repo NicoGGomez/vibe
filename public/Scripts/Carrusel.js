@@ -14,10 +14,7 @@ function iniciarCarrusel() {
 
     let pausado = false;
 
-
-    // =========================
-    // PAUSAR CON EL MOUSE
-    // =========================
+    // Pausar con el mouse 
 
     carrusel.addEventListener("mouseenter", () => {
         pausado = true;
@@ -27,10 +24,7 @@ function iniciarCarrusel() {
         pausado = false;
     });
 
-
-    // =========================
-    // ANIMACIÓN
-    // =========================
+    // Función para animar el carrusel
 
     function animar() {
 
@@ -38,10 +32,6 @@ function iniciarCarrusel() {
 
             posicion += velocidad;
 
-
-            /*
-             * Miramos la primera card.
-             */
             const primeraCard = carrusel.children[0];
 
 
@@ -53,25 +43,10 @@ function iniciarCarrusel() {
                 const anchoCard =
                     primeraCard.getBoundingClientRect().width;
 
-
-                /*
-                 * Cuando la primera card salió
-                 * completamente de la pantalla...
-                 */
                 if (posicion >= anchoCard + gap) {
 
-                    /*
-                     * Sacamos la primera card
-                     * y la mandamos al final.
-                     */
                     carrusel.appendChild(primeraCard);
 
-
-                    /*
-                     * Compensamos el movimiento.
-                     *
-                     * De esta forma no hay salto.
-                     */
                     posicion -= anchoCard + gap;
 
                 }

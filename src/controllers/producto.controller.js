@@ -1,5 +1,7 @@
 // Controlador de producto 
 
+// Importación de clases
+
 const productoService = require("../services/producto.service");
 const supabase = require("../config/supabase");
 

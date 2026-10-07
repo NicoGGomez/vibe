@@ -1,8 +1,15 @@
+// Mis compras
+
+// api de la página
+
 const API_URL = "https://vibe-n9dy.onrender.com";
+
+// Obtención de elementos del DOM
 
 const contenedorPedidos =
     document.getElementById("contenedor-pedidos");
 
+// Función para ver las compras 
 
 async function cargarPedidos() {
 
@@ -235,6 +242,5 @@ async function cargarPedidos() {
     }
 
 }
-
 
 cargarPedidos();

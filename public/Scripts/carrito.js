@@ -118,9 +118,7 @@ if (btnGenerarQR) {
 
             const total = totalCompra + precioEnvio;
 
-            // ==========================================
-            // 1. CREAR PEDIDO
-            // ==========================================
+            // 1. Creación del pedido
 
             const direccion =
                 document.getElementById("direccion")?.value.trim() || "";
@@ -196,10 +194,7 @@ if (btnGenerarQR) {
                 idPedido
             );
 
-
-            // ==========================================
-            // 2. GENERAR PAGO
-            // ==========================================
+            // 2. Generar pago
 
             btnGenerarQR.textContent = "Generando QR...";
 
@@ -239,9 +234,7 @@ if (btnGenerarQR) {
 
             esperarPago(datos.id);
 
-            // ==========================================
-            // 3. GENERAR QR VISUAL
-            // ==========================================
+            // 3. Generar QR visual
 
             if (!datos.qr_data) {
 
@@ -264,17 +257,11 @@ if (btnGenerarQR) {
 
             contenedorQR.style.display = "flex";
 
-
-            // ==========================================
-            // 4. OCULTAR BOTÓN GENERAR
-            // ==========================================
+            // 4. Ocultar botón de generar QR
 
             btnGenerarQR.style.display = "none";
 
-
-            // ==========================================
-            // 5. MOSTRAR CHECKOUT PRO
-            // ==========================================
+            // 5. Mostrar Checkout
 
             if (datos.init_point) {
 
@@ -897,6 +884,8 @@ const cargarProductos = async () => {
 
 }
 
+// Función de espera del pago
+
 async function esperarPago(idOrden) {
 
     const token = localStorage.getItem("token");
@@ -968,6 +957,8 @@ function resetearQR() {
 
     btnPagarMercadoPago.style.display = "none";
 }
+
+// Función animación del carrito flotante
 
 function animarCarritoFlotante() {
 

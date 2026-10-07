@@ -1,3 +1,8 @@
+/* Contacto */
+
+
+/* Estilos */
+
 .seccion-contacto {
     width: 100%;
 }
@@ -43,6 +48,8 @@ textarea {
     height: 20vh;
 }
 
+
+/* Media queries */
 
 @media (max-width: 600px) {
 

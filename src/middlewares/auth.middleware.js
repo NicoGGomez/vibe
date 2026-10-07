@@ -1,6 +1,10 @@
 // Middleware para proteger rutas verificando que el usuario tenga un JWT válido
 
+// Importación de clases
+
 const jwt = require("jsonwebtoken");
+
+// Función para verificar que exista un usuario
 
 const verificarToken = (req,res,next)=>{
 
@@ -16,7 +20,7 @@ const verificarToken = (req,res,next)=>{
 
     const token = authHeader.split(" ")[1];
 
-    try{
+    try { 
 
         const usuario = jwt.verify(
             token,
@@ -27,8 +31,7 @@ const verificarToken = (req,res,next)=>{
 
         next();
 
-    }
-    catch{
+    } catch {
 
         return res.status(401).json({
             error:"Token inválido."

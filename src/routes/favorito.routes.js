@@ -1,9 +1,9 @@
 // Rutas de Favoritos
 
+// Importaciones
+
 const express = require("express");
-
 const router = express.Router();
-
 
 // Importación de clases
 
@@ -47,6 +47,6 @@ router.delete(
 );
 
 
-// Exportación
+// Exportación de ruta
 
 module.exports = router;

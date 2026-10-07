@@ -1,12 +1,16 @@
 // Rutas de Pedido
 
-const express = require("express");
+// Importaciones
 
+const express = require("express");
 const router = express.Router();
+
+// Importación de clases
 
 const pedidoController = require("../controllers/pedido.controller");
 const verificarToken = require("../middlewares/auth.middleware");
 
+// Rutas
 
 router.post(
     "/",
@@ -31,5 +35,7 @@ router.patch(
     verificarToken,
     pedidoController.marcarPedidoEnviado
 );
+
+// Exportación de rutas
 
 module.exports = router;

@@ -1,6 +1,7 @@
-/* =========================================
-   CARGAR CATEGORÍA
-========================================= */
+/* Cargar categoría */
+
+
+/* Estilos */
 
 .contenedor-cargar-categoria {
     width: 100%;
@@ -16,9 +17,7 @@
 }
 
 
-/* =========================================
-   FORMULARIO
-========================================= */
+/* Formulario */
 
 .form-carga-categoria {
     width: 100%;
@@ -44,9 +43,7 @@
 }
 
 
-/* =========================================
-   TITULO
-========================================= */
+/* Titulo */
 
 .titulo-formulario {
     width: 100%;
@@ -57,79 +54,56 @@
 .icono-formulario {
     width: 60px;
     height: 60px;
-
     margin: 0 auto 15px;
-
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #f3f3f3;
 }
 
 .icono-formulario i {
     font-size: 24px;
-
     color: #333;
 }
 
 .titulo-formulario h1 {
     margin: 0;
-
     font-size: 25px;
-
     font-weight: 600;
 }
 
 .titulo-formulario p {
     margin: 7px 0 0;
-
     color: #888;
-
     font-size: 14px;
 }
 
 
-/* =========================================
-   INPUT
-========================================= */
+/* Input */
 
 .form-carga-categoria .input {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
     gap: 8px;
 }
 
 .form-carga-categoria .input label {
     font-size: 14px;
-
     font-weight: 500;
-
     color: #333;
 }
 
 .form-carga-categoria .input input {
     width: 100%;
-
     box-sizing: border-box;
-
     padding: 13px 14px;
-
     border: 1px solid #ddd;
-
     border-radius: 8px;
-
     background: #fff;
-
     font-size: 14px;
-
     outline: none;
-
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -137,7 +111,6 @@
 
 .form-carga-categoria .input input:focus {
     border-color: #999;
-
     box-shadow:
         0 0 0 3px rgba(0, 0, 0, 0.05);
 }
@@ -147,39 +120,23 @@
 }
 
 
-/* =========================================
-   BOTÓN
-========================================= */
+/* Botón */
 
 .form-carga-categoria button {
     width: 100%;
-
     min-height: 48px;
-
     padding: 12px 18px;
-
     border: none;
-
     border-radius: 9px;
-
     background: #111;
-
     color: #fff;
-
     font-size: 14px;
-
     font-weight: 500;
-
     cursor: pointer;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 8px;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -187,7 +144,6 @@
 
 .form-carga-categoria button:hover {
     background: #333;
-
     transform: translateY(-1px);
 }
 
@@ -196,65 +152,42 @@
 }
 
 
-/* =========================================
-   LISTA DE CATEGORÍAS
-========================================= */
+/* Lista de categorías */
 
 .contenedor-lista-categorias {
     width: 100%;
     max-width: 550px;
-
     margin-top: 30px;
-
     padding: 25px;
-
     box-sizing: border-box;
-
     background: #fff;
-
     border: 1px solid #e8e8e8;
-
     border-radius: 16px;
-
     box-shadow:
         0 5px 20px rgba(0, 0, 0, 0.04);
 }
 
 
-/* =========================================
-   TITULO LISTA
-========================================= */
+/* Titulo lista */
 
 .titulo-lista-categorias {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     padding-bottom: 15px;
-
     border-bottom: 1px solid #eeeeee;
 }
 
 .titulo-lista-categorias h2 {
     margin: 0;
-
     font-size: 18px;
-
     font-weight: 600;
 }
 
 .titulo-lista-categorias span {
     color: #777;
-
     font-size: 16px;
 }
-
-
-/* =========================================
-   UL
-========================================= */
 
 #lista-categorias {
     list-style: none;
@@ -264,9 +197,7 @@
 }
 
 
-/* =========================================
-   CATEGORÍA
-========================================= */
+/* Categoría */
 
 #lista-categorias li {
     display: flex;
@@ -290,26 +221,20 @@
     border-bottom: none;
 }
 
-/* =========================================
-   BOTÓN ELIMINAR CATEGORÍA
-========================================= */
+
+/* Botón eliminar Categoría */
 
 .btn-eliminar-categoria {
     width: 34px;
     height: 34px;
-
     border: none;
     border-radius: 8px;
-
     background: transparent;
     color: #999;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         color 0.2s ease,
@@ -328,9 +253,7 @@
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* Media queries */
 
 @media (max-width: 600px) {
 

@@ -4,7 +4,7 @@
 
 import { getUsuario } from "./auth.js";
 
-// Obtención de elementos del dom 
+// Obtención de elementos del DOM 
 
 const contenedorCards = document.getElementById("lista-cards-productos-similares");
 

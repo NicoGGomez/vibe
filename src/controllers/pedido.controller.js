@@ -1,8 +1,11 @@
 // Controlador de Pedido
 
+// Importación de clases
+
 const pedidoService = require("../services/pedido.service");
 
-// Crear un pedido a partir del carrito
+// Función para crear un pedido a partir del carrito
+
 const crearPedido = async (req, res) => {
 
     try {
@@ -108,6 +111,8 @@ const crearPedido = async (req, res) => {
 
 };
 
+// Función para obtención de pedidos
+
 const obtenerPedidos = async (req, res) => {
 
     try {
@@ -130,6 +135,8 @@ const obtenerPedidos = async (req, res) => {
     }
 
 };
+
+// Función para que el admin reciba todos los pedidos
 
 const obtenerPedidosAdmin = async (req, res) => {
 
@@ -158,6 +165,8 @@ const obtenerPedidosAdmin = async (req, res) => {
         });
     }
 };
+
+// Función para marcar un pedido como enviado
 
 const marcarPedidoEnviado = async (req, res) => {
 
@@ -191,6 +200,8 @@ const marcarPedidoEnviado = async (req, res) => {
         });
     }
 };
+
+// Exportación de funciones
 
 module.exports = {
     crearPedido,

@@ -1,3 +1,8 @@
+/* Producto */
+
+
+/* Estilos */
+
 producto-comp {
     display: flex;
     justify-content: center;
@@ -32,7 +37,6 @@ producto-comp {
     gap: 2vh;
     margin: 2vh;
     padding: 2vh;
-    /* justify-content: space-around; */
 }
 
 .producto-informacion .producto-texto {
@@ -98,9 +102,8 @@ producto-comp {
     gap: 25px;
 }
 
-/* ==========================
-   PRODUCTO SIN STOCK
-========================== */
+
+/* Producto sin stock */
 
 .producto-sin-stock .img-producto-prin {
     filter: grayscale(100%);
@@ -143,15 +146,15 @@ producto-comp {
     z-index: 2;
 }
 
+
 /* Botones cuando no hay stock */
 .producto-sin-stock .botones button {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-/* =========================
-   EDICIÓN ADMIN
-   ========================= */
+
+/* Edición Admin */
 
 .campo-producto {
     display: flex;
@@ -176,7 +179,6 @@ producto-comp {
     justify-content: center;
 
     border: none;
-    /* background: transparent; */
     background-color: var(--color-secundario);
 
     padding: 4px;
@@ -196,7 +198,7 @@ producto-comp {
 }
 
 
-/* DESCRIPCIÓN */
+/* Descripción */
 
 .campo-descripcion {
     display: flex;
@@ -210,7 +212,7 @@ producto-comp {
 }
 
 
-/* STOCK */
+/* Stock */
 
 .campo-stock {
     display: flex;
@@ -293,9 +295,8 @@ producto-comp {
     transform: scale(1.15);
 }
 
-/* ==========================
-   FAVORITO PRODUCTO
-========================== */
+
+/* Producto favorito */
 
 .btn-favorito-producto {
     width: 48px !important;
@@ -331,6 +332,9 @@ producto-comp {
     animation: favoritoProductoPop 0.45s ease;
 }
 
+
+/* Keyframes */
+
 @keyframes favoritoProductoPop {
     0% {
         transform: scale(1);
@@ -349,6 +353,8 @@ producto-comp {
     }
 }
 
+
+/* Media queries */
 
 @media (max-width: 900px) {
 
@@ -381,9 +387,7 @@ producto-comp {
 
 @media (max-width: 900px) {
 
-    /* ==========================
-       PRODUCTO
-    ========================== */
+    /* Producto */
 
     .productos {
         display: flex;
@@ -402,9 +406,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       IMAGEN
-    ========================== */
+    /* Imagen */
 
     .contenedor-imagen-producto {
         width: 100%;
@@ -416,9 +418,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       INFORMACIÓN
-    ========================== */
+    /* Información */
 
     .contenedor-producto .producto-informacion {
         width: 100%;
@@ -439,9 +439,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       NOMBRE Y PRECIO
-    ========================== */
+    /* Nombre y precio */
 
     .informacion-principal {
         flex-direction: column;
@@ -461,11 +459,6 @@ producto-comp {
         max-width: 100%;
     }
 
-
-    /* ==========================
-       INPUT NOMBRE
-    ========================== */
-
     #input-editar-nombre {
         width: 100%;
         min-width: 0;
@@ -473,20 +466,13 @@ producto-comp {
         box-sizing: border-box;
     }
 
-
-    /* ==========================
-       INPUT PRECIO
-    ========================== */
-
     #input-editar-precio {
         width: 140px;
         max-width: 60%;
     }
 
 
-    /* ==========================
-       DESCRIPCIÓN
-    ========================== */
+    /* Descripción */
 
     .campo-descripcion {
         width: 100%;
@@ -510,9 +496,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       BOTONES EDITAR
-    ========================== */
+    /* Botones de editar */
 
     .btn-editar-campo {
         font-size: 13px;
@@ -526,9 +510,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       STOCK
-    ========================== */
+    /* Stock */
 
     .campo-stock {
         width: 100%;
@@ -549,9 +531,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       GALERÍA
-    ========================== */
+    /* Galteria */
 
     .imagenes {
         overflow-x: auto;
@@ -568,9 +548,7 @@ producto-comp {
     }
 
 
-    /* ==========================
-       BOTONES
-    ========================== */
+    /* Botones */
 
     .contenedor-botones {
         width: 100%;
@@ -592,4 +570,5 @@ producto-comp {
         width: 100% !important;
         height: 45px;
     }
+
 }

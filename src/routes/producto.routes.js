@@ -21,9 +21,20 @@ router.patch(
     productoController.modificarStock
 );
 
-router.get("/", productoController.getProductos);
-router.get("/categoria/:id", productoController.getProductoPorCategoria);
-router.get("/:id", productoController.getProducto);
+router.get(
+    "/", 
+    productoController.getProductos
+);
+
+router.get(
+    "/categoria/:id", 
+    productoController.getProductoPorCategoria
+);
+
+router.get(
+    "/:id", 
+    productoController.getProducto
+);
 
 router.post(
     "/",

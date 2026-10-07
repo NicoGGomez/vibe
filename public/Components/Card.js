@@ -171,6 +171,7 @@ class Card extends HTMLElement {
                 );
             });
         }
+        
     }
 
     marcarEnCarrito() {

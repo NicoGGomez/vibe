@@ -1,10 +1,12 @@
 // Cargar categoría
 
 // Importación de función de "getUsuario()" de "auth.js"
+
 import { getUsuario } from "./auth.js";
 
 
 // Obtención de usuario y verificación de rol
+
 const usuario = getUsuario();
 
 if (!usuario || usuario.rol !== "admin") {
@@ -12,8 +14,8 @@ if (!usuario || usuario.rol !== "admin") {
     throw new Error("Acceso denegado");
 }
 
-
 // Obtención de elementos del DOM
+
 const formCategoria =
     document.getElementById("form-carga-categoria");
 
@@ -23,10 +25,7 @@ const inputNombre =
 const listaCategorias =
     document.getElementById("lista-categorias");
 
-
-// =========================================
-// CARGAR NUEVA CATEGORÍA
-// =========================================
+// Función para cargar nueva categoría
 
 formCategoria.addEventListener("submit", async (e) => {
 
@@ -73,10 +72,7 @@ formCategoria.addEventListener("submit", async (e) => {
 
 });
 
-
-// =========================================
-// MOSTRAR CATEGORÍAS
-// =========================================
+// Función para mostrar las categorías 
 
 const cargarCategorias = async () => {
 
@@ -134,10 +130,7 @@ const cargarCategorias = async () => {
 
 };
 
-
-// =========================================
-// ELIMINAR CATEGORÍA
-// =========================================
+// Función para eliminar una categoría
 
 const eliminarCategoria = async (idCategoria) => {
 

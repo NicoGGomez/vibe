@@ -1,3 +1,6 @@
+// Controlador de pago
+
+// Importación de clases
 
 const mercadoPagoService = require("../services/mercadoPago.service");
 const pedidoService = require("../services/pedido.service");
@@ -115,6 +118,8 @@ const crearQR = async (req, res) => {
 
 };
 
+// Función para obtener el estado del QR
+
 const obtenerEstadoQR = async (req, res) => {
 
     try {
@@ -147,6 +152,8 @@ const obtenerEstadoQR = async (req, res) => {
     }
 };
 
+// Función para conectar con el webhook de mercado pago
+
 const webhook = async (req, res) => {
 
     try {
@@ -164,10 +171,7 @@ const webhook = async (req, res) => {
         console.log("Signature:", signature);
         console.log("Body:", req.body);
 
-
-        // ==========================================
-        // 1. VALIDAR DATOS DEL WEBHOOK
-        // ==========================================
+        // Validación de datos del webhook
 
         if (!signature || !requestId || !dataId) {
 
@@ -179,10 +183,7 @@ const webhook = async (req, res) => {
 
         }
 
-
-        // ==========================================
-        // 2. EXTRAER FIRMA
-        // ==========================================
+        // Extracción de la firma
 
         const partes = signature.split(",");
 
@@ -212,10 +213,7 @@ const webhook = async (req, res) => {
 
         }
 
-
-        // ==========================================
-        // 3. CREAR MANIFEST
-        // ==========================================
+        // Creación del "Manifest"
 
         const manifest =
             `id:${dataId.toLowerCase()};` +
@@ -229,10 +227,7 @@ const webhook = async (req, res) => {
             !!process.env.MP_WEBHOOK_SECRET
         );
 
-
-        // ==========================================
-        // 4. VALIDAR FIRMA
-        // ==========================================
+        // Validación de la firma
 
         console.log("=================================");
         console.log("DEBUG FIRMA WEBHOOK");
@@ -299,11 +294,8 @@ const webhook = async (req, res) => {
         console.log(
             "✅ Firma de Mercado Pago válida."
         );
-
-
-        // ==========================================
-        // 5. CONSULTAR ORDER REAL
-        // ==========================================
+        
+        // Consulta a la orden
 
         const orden =
             await mercadoPagoService.obtenerOrdenQR(
@@ -331,10 +323,7 @@ const webhook = async (req, res) => {
             orden.total_amount
         );
 
-
-        // ==========================================
-        // 6. VERIFICAR ESTADO DEL PAGO
-        // ==========================================
+        // Verificación del estado del pago
 
         if (orden.status !== "processed") {
 
@@ -351,10 +340,7 @@ const webhook = async (req, res) => {
 
         }
 
-
-        // ==========================================
-        // 7. OBTENER REFERENCIA DEL PEDIDO
-        // ==========================================
+        // Obtención de referencia del pedido
 
         const referenciaPago =
             orden.external_reference;
@@ -373,10 +359,7 @@ const webhook = async (req, res) => {
 
         }
 
-
-        // ==========================================
-        // 8. BUSCAR PEDIDO LOCAL
-        // ==========================================
+        // Busqueda del pedido
 
         const pedido =
             await pedidoModel.obtenerPedidoPorReferenciaPago(
@@ -402,10 +385,7 @@ const webhook = async (req, res) => {
             pedido.id_pedido
         );
 
-
-        // ==========================================
-        // 9. VERIFICAR MONTO
-        // ==========================================
+        // Verificación del monto
 
         const montoMercadoPago =
             Number(orden.total_amount);
@@ -438,10 +418,7 @@ const webhook = async (req, res) => {
 
         }
 
-
-        // ==========================================
-        // 10. PROCESAR PEDIDO
-        // ==========================================
+        // Procesamiento del pedido
 
         const resultado =
             await pedidoService.procesarPagoAprobado(
@@ -468,10 +445,7 @@ const webhook = async (req, res) => {
             resultado.yaProcesado
         );
 
-
-        // ==========================================
-        // 11. RESPUESTA
-        // ==========================================
+        // Respuesta
 
         return res.status(200).json({
 

@@ -3,7 +3,9 @@ import { getUsuario } from "../Scripts/auth.js";
 const usuario = getUsuario();
 
 class NavBar extends HTMLElement {
+
     connectedCallback() {
+        
         this.innerHTML = `
             <nav class="cont">
                 <ul>
@@ -32,7 +34,9 @@ class NavBar extends HTMLElement {
         if (usuario?.rol !== "admin") {
             btnAdmin.style.display = "none";
         }
+
     }
+    
 }
 
 customElements.define("nav-bar", NavBar);

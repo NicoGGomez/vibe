@@ -1,3 +1,8 @@
+/* Card */
+
+
+/* Estilos */
+
 a {
     text-decoration: none;
     display: flex;
@@ -93,16 +98,12 @@ a {
 
 .sin-stock {
     position: absolute;
-    /* top: 50%; */
     left: 50%;
     transform: translate(-50%, -50%);
-
     background: rgba(0, 0, 0, 0.75);
     color: white;
-
     padding: 8px 14px;
     border-radius: 6px;
-
     font-weight: bold;
     z-index: 2;
 }
@@ -119,6 +120,61 @@ a {
 
 .btn-carrito.en-carrito {
     color: #22c55e;
+}
+
+
+/* Card favorito */
+
+.card {
+    position: relative;
+}
+
+.btn-favorito {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-size: 25px;
+    color: #000;
+    cursor: pointer;
+    z-index: 10;
+    transition:
+        transform 0.2s ease,
+        color 0.25s ease;
+}
+
+.btn-favorito:hover {
+    transform: scale(1.15);
+}
+
+.btn-favorito.favorito-activo {
+    color: #974fc2;
+}
+
+.btn-favorito.animar-favorito {
+    animation: favoritoPop 0.45s ease;
+}
+
+
+/* Keyframes */
+
+@keyframes favoritoPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.35);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
 }
 
 @keyframes carritoPop {
@@ -164,6 +220,9 @@ a {
     }
 }
 
+
+/* Media queries */
+
 @media (max-width: 900px) {
 
     .btn-eliminar{
@@ -182,64 +241,6 @@ a {
         cursor: pointer;
         font-size: 18px;
         z-index: 100;
-    }
-
-}
-
-/* ==========================
-   FAVORITO CARD
-========================== */
-
-.card {
-    position: relative;
-}
-
-.btn-favorito {
-    position: absolute;
-
-    top: 18px;
-    left: 18px;
-
-    font-size: 25px;
-
-    color: #000;
-    cursor: pointer;
-
-    z-index: 10;
-
-    transition:
-        transform 0.2s ease,
-        color 0.25s ease;
-}
-
-.btn-favorito:hover {
-    transform: scale(1.15);
-}
-
-.btn-favorito.favorito-activo {
-    color: #974fc2;
-}
-
-.btn-favorito.animar-favorito {
-    animation: favoritoPop 0.45s ease;
-}
-
-@keyframes favoritoPop {
-
-    0% {
-        transform: scale(1);
-    }
-
-    40% {
-        transform: scale(1.35);
-    }
-
-    70% {
-        transform: scale(0.9);
-    }
-
-    100% {
-        transform: scale(1);
     }
 
 }

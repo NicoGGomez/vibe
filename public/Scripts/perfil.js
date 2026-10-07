@@ -1,4 +1,10 @@
+// perfil
+
+// Importación de función de "getToken(), getUsuario()" de "auth.js"
+
 import { getUsuario, getToken } from "./auth.js";
+
+// Obtención de elementos del DOM
 
 const linkCompras =
     document.getElementById("link-compras");
@@ -44,18 +50,12 @@ if (!token || !usuarioGuardado) {
 
         console.log("Usuario:", usuario);
 
-
-        // =========================
-        // NOMBRE
-        // =========================
+        // Nombre
 
         nombreUsuario.textContent =
             `${usuario.nombre} ${usuario.apellido}`;
 
-
-        // =========================
-        // ROL
-        // =========================
+        // Rol
 
         if (usuario.rol === "admin") {
 
@@ -109,6 +109,8 @@ if (!token || !usuarioGuardado) {
             "login.html";
     }
 }
+
+// Función para cargar cargar los productos favoritos
 
 async function cargarFavoritos() {
 
@@ -180,6 +182,8 @@ async function cargarFavoritos() {
             "No se pudieron cargar tus favoritos.";
     }
 }
+
+// Función para cargar los productos más solicitados
 
 async function cargarMasSolicitados() {
 

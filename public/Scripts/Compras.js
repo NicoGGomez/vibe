@@ -1,4 +1,10 @@
+// Compras 
+
+// api de la página
+
 const API_URL = "https://vibe-n9dy.onrender.com";
+
+// Obtención de elementos del DOM
 
 const contenedorCompras =
     document.getElementById("contenedor-compras");
@@ -12,10 +18,7 @@ const sinCompras =
 const msgError =
     document.getElementById("msg-error");
 
-
-/* =========================
-   MOSTRAR ERROR
-========================= */
+// Función para mostrar el error
 
 function mostrarError(mensaje) {
 
@@ -23,10 +26,7 @@ function mostrarError(mensaje) {
     msgError.style.display = "block";
 }
 
-
-/* =========================
-   CARGAR COMPRAS
-========================= */
+// Función carga de compras de usuario
 
 async function cargarCompras() {
 
@@ -64,10 +64,7 @@ async function cargarCompras() {
 
         cargandoCompras.style.display = "none";
 
-
-        /* =========================
-           NO HAY COMPRAS
-        ========================= */
+        // No hay compras
 
         if (datos.length === 0) {
 
@@ -75,10 +72,7 @@ async function cargarCompras() {
             return;
         }
 
-
-        /* =========================
-           MOSTRAR PEDIDOS
-        ========================= */
+        // Mostrar pedidos
 
         contenedorCompras.innerHTML = "";
 
@@ -107,10 +101,7 @@ async function cargarCompras() {
     }
 }
 
-
-/* =========================
-   CREAR TARJETA
-========================= */
+// Función de creación de tarjeta de pedido
 
 function crearTarjetaPedido(pedido) {
 
@@ -251,10 +242,7 @@ function crearTarjetaPedido(pedido) {
         `;
     }
 
-
-    /* =========================
-       HTML DE LA TARJETA
-    ========================= */
+    // HTML de la tarjeta
 
     tarjeta.innerHTML = `
 
@@ -346,11 +334,6 @@ function crearTarjetaPedido(pedido) {
 
     `;
 
-
-    /* =========================
-       BOTÓN ENVIADO
-    ========================= */
-
     const boton =
         tarjeta.querySelector(
             ".btn-marcar-enviado"
@@ -369,10 +352,7 @@ function crearTarjetaPedido(pedido) {
     return tarjeta;
 }
 
-
-/* =========================
-   MARCAR COMO ENVIADO
-========================= */
+// Función para marcar como enviado
 
 async function marcarComoEnviado(
     idPedido,
@@ -438,10 +418,7 @@ async function marcarComoEnviado(
             );
         }
 
-
-        /* =========================
-           CAMBIAR LA TARJETA
-        ========================= */
+        // Cambiar estado de la tarjeta
 
         tarjeta
             .querySelector(
@@ -482,9 +459,6 @@ async function marcarComoEnviado(
     }
 }
 
-
-/* =========================
-   INICIAR
-========================= */
+// Inciar
 
 cargarCompras();

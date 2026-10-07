@@ -11,9 +11,20 @@ const usuarioController = require("../controllers/usuario.controller");
 
 // Rutas
 
-router.get("/", usuarioController.getUsuarios);
-router.post("/registro", usuarioController.registrarUsuario);
-router.post("/login", usuarioController.loguearUsuario);
+router.get(
+    "/", 
+    usuarioController.getUsuarios
+);
+
+router.post(
+    "/registro", 
+    usuarioController.registrarUsuario
+);
+
+router.post(
+    "/login", 
+    usuarioController.loguearUsuario
+);
 
 // Exportación de rutas
 

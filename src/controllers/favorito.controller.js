@@ -1,11 +1,10 @@
 // Controlador de Favoritos
 
+// Importación de clases
+
 const favoritoService = require("../services/favorito.service");
 
-
-// ==========================
-// AGREGAR FAVORITO
-// ==========================
+// Función para agregar a favoritos un producto
 
 const agregarFavorito = async (req, res) => {
 
@@ -32,10 +31,7 @@ const agregarFavorito = async (req, res) => {
     }
 };
 
-
-// ==========================
-// QUITAR FAVORITO
-// ==========================
+// Función para quitar de favoritos un producto
 
 const quitarFavorito = async (req, res) => {
 
@@ -62,10 +58,7 @@ const quitarFavorito = async (req, res) => {
     }
 };
 
-
-// ==========================
-// VERIFICAR FAVORITO
-// ==========================
+// Función para verificar que un producto esta en favoritos
 
 const esFavorito = async (req, res) => {
 
@@ -92,10 +85,7 @@ const esFavorito = async (req, res) => {
     }
 };
 
-
-// ==========================
-// OBTENER FAVORITOS
-// ==========================
+// Función para obtener productos en favoritos
 
 const obtenerFavoritos = async (req, res) => {
 
@@ -117,11 +107,9 @@ const obtenerFavoritos = async (req, res) => {
     }
 };
 
-// ==========================
-// LO MÁS SOLICITADO
-// ==========================
+// Función para que devuelva los productos mas solicitados
 
-const obtenerMasSolicitados = async (req, res) => {
+const obtenerMasSolicitados = async (res) => {
 
     try {
 
@@ -144,9 +132,7 @@ const obtenerMasSolicitados = async (req, res) => {
     }
 };
 
-// ==========================
-// EXPORTACIÓN
-// ==========================
+// Exportación de Funciones
 
 module.exports = {
     agregarFavorito,

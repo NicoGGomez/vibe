@@ -32,26 +32,36 @@
     <!-- seccion principal -->
 
     <div class="cont contenido-principal">
+        
         <img class="fondo" src="Imgs/fundas.png" alt="">
         <img class="mascota" src="Imgs/Mascota.png" alt="Mascota Vibe">
+
     </div>
 
     <div id="btn-abrir-carrito" class="carrito-btn-comp">
+
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="contador-carrito">0</span>
+
     </div>
 
     <div id="carrito-abierto" class="carrito-abierto-comp">
+
         <div id="btn-cerrar-carrito" class="cerrar-carrito">x</div>
         <b>Carrito</b>
         <div id="lista-carrito"></div>
         <div class="separador"></div>
-        <a href="Carrito.html"><button id="btn-ir-carrito">Ir al carrito</button></a>
+        <a href="Carrito.html">
+            <button id="btn-ir-carrito">Ir al carrito</button>
+        </a>
+
     </div>
     
     <div class="cont texto-principal">
+
         <h1>¡Bienvenido a Vibe!</h1>
         <p>Variedad que conecta con tu estilo.</p>
+
     </div>
 
     <div class="separador"></div>
@@ -59,6 +69,7 @@
     <!-- seccion ofertas -->
 
     <div class="cont ofertas">
+
         <img class="logo" src="Imgs/productos-oferta.png" alt="">
     
         <div class="carrusel-oferta">
@@ -74,6 +85,7 @@
                     precio='15.000'
                     stock="1">
                     </card-comp>
+
                     <card-comp 
                     data-id="86"
                     imagen="imgs/img-carrusel-dos.png" 
@@ -81,6 +93,7 @@
                     precio='10.000'
                     stock="1">
                     </card-comp>
+
                     <card-comp 
                     data-id="96"
                     imagen="imgs/img-carrusel-tres.png" 
@@ -88,6 +101,7 @@
                     precio='25.000'
                     stock="1">
                     </card-comp>
+
                     <card-comp 
                     data-id="29"
                     imagen="imgs/img-carrusel-cuatro.png" 
@@ -95,6 +109,7 @@
                     precio='30.000'
                     stock="1">
                     </card-comp>
+
                     <card-comp 
                     data-id="105"
                     imagen="imgs/img-carrusel-cinco.png" 
@@ -102,6 +117,7 @@
                     precio='15.000'
                     stock="1">
                     </card-comp>
+
                     <card-comp 
                     data-id="76"
                     imagen="imgs/img-carrusel-seis.png" 
@@ -121,6 +137,7 @@
     <!-- seccion destacados -->
 
     <div class="cont destacados">
+
         <img class="logo" src="Imgs/productos-destacados.png" alt="">
     
         <div class="cont productos-destacados">
@@ -134,9 +151,11 @@
     <!-- seccion ingreso al catalogo -->
 
     <div class="cont seccion-catalogo">
+
         <div class="separador"></div>
         <button><a href="Productos.html">Ver catalogo completo</a></button>
         <div class="separador"></div>
+
     </div>
 
     <!-- footer -->
@@ -145,12 +164,14 @@
 
     <!-- link a scripts -->
 
-    <script type="module" src="Components/Card.js"></script>
     <script src="Scripts/Carrusel.js"></script>
     <script src="Components/Footer.js"></script>
     <script src="Components/CarritoProducto.js"></script>
+
+    <script type="module" src="Components/Card.js"></script>
     <script type="module" src="Scripts/carrito.js"></script>
     <script type="module" src="Scripts/productos.js"></script>
     <script type="module" src="Components/NavBar.js"></script>
+
 </body>
 </html>

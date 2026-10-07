@@ -1,5 +1,7 @@
 // Middleware verificador de rol de usuario
 
+// Función para verificar el rol de administrador 
+
 const verificarRol = (...rolesPermitidos) => {
 
     return (req, res, next) => {

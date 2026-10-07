@@ -1,18 +1,22 @@
-import { getToken, getUsuario } from "./auth.js";
+// Favorito
+
+// api de la página
 
 const API_URL = "https://vibe-n9dy.onrender.com/favoritos";
+
+// Importación de función de "getToken(), getUsuario()" de "auth.js"
+
+import { getToken, getUsuario } from "./auth.js";
+
+// Instanciación de variables y constantes
 
 // Cache de favoritos
 let favoritosCache = null;
 
-// IMPORTANTE:
-// guarda el fetch que está en progreso
+// guarda el fetch que está en progreso (Importante)
 let favoritosPromise = null;
 
-
-// ==========================
-// CARGAR TODOS LOS FAVORITOS
-// ==========================
+// Función de carga de los productos favoritos
 
 async function cargarFavoritos() {
 
@@ -82,10 +86,7 @@ async function cargarFavoritos() {
     return favoritosPromise;
 }
 
-
-// ==========================
-// AGREGAR FAVORITO
-// ==========================
+// Función para agregar productos a favoritos
 
 export async function agregarFavorito(idProducto) {
 
@@ -139,10 +140,7 @@ export async function agregarFavorito(idProducto) {
     }
 }
 
-
-// ==========================
-// QUITAR FAVORITO
-// ==========================
+// Función para eliminar un producto de favoritos
 
 export async function quitarFavorito(idProducto) {
 
@@ -193,10 +191,7 @@ export async function quitarFavorito(idProducto) {
     }
 }
 
-
-// ==========================
-// VERIFICAR SI ES FAVORITO
-// ==========================
+// Función para verificar q un producto sea favorito
 
 export async function esFavorito(idProducto) {
 
@@ -212,10 +207,7 @@ export async function esFavorito(idProducto) {
     return favoritos.has(Number(idProducto));
 }
 
-
-// ==========================
-// LIMPIAR CACHE
-// ==========================
+// Función para limpiar cache
 
 export function limpiarCacheFavoritos() {
 

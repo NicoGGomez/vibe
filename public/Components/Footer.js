@@ -1,5 +1,7 @@
 class Footer extends HTMLElement {
+
     connectedCallback() {
+
         this.innerHTML = `
             <footer>
                 <div class="cont footer-arriba">
@@ -42,7 +44,9 @@ class Footer extends HTMLElement {
                 </div>
             </footer>
         `;
+
     }
+    
 }
 
 customElements.define("footer-comp", Footer);

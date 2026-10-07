@@ -1,11 +1,14 @@
 // Servicios de Pedido
 
+// Importaciones
+
 const db = require("../config/database");
 const { randomUUID } = require("crypto");
 
-
 // Crear un pedido a partir del carrito
+
 const crearPedido = async ({
+
     idUsuario,
     tipoEntrega,
     direccion,
@@ -15,6 +18,7 @@ const crearPedido = async ({
     telefono,
     metodoPago,
     precioEnvio
+
 }) => {
 
     const client = await db.connect();
@@ -23,7 +27,6 @@ const crearPedido = async ({
 
         // Iniciar transacción
         await client.query("BEGIN");
-
 
         // Obtener productos del carrito
         const resultado = await client.query(
@@ -180,6 +183,8 @@ const crearPedido = async ({
     }
 };
 
+// Función para procesar un pago aprobado
+
 const procesarPagoAprobado = async (referenciaPago) => {
 
     const client = await db.connect();
@@ -314,6 +319,8 @@ const procesarPagoAprobado = async (referenciaPago) => {
     }
 };
 
+// Función para obtener los pedidos de un usuario por id
+
 const obtenerPedidosUsuario = async (idUsuario) => {
 
     const resultado = await db.query(`
@@ -361,7 +368,10 @@ const obtenerPedidosUsuario = async (idUsuario) => {
     `, [idUsuario]);
 
     return resultado.rows;
+
 };
+
+// Función para obtener todos los pedidos
 
 const obtenerPedidosAdmin = async () => {
 
@@ -409,7 +419,10 @@ const obtenerPedidosAdmin = async () => {
     `);
 
     return resultado.rows;
+
 };
+
+// Función para marcar pedido como enviado
 
 const marcarPedidoEnviado = async (idPedido) => {
 
@@ -432,6 +445,8 @@ const marcarPedidoEnviado = async (idPedido) => {
 
     return resultado.rows[0];
 };
+
+// Exportación de funciones
 
 module.exports = {
     crearPedido,

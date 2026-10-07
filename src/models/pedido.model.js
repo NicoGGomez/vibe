@@ -1,8 +1,11 @@
 // Model de Pedido
 
+// Importación de la DB
+
 const db = require("../config/database");
 
-// Obtener los productos del carrito de un usuario
+// Función para obtener los productos del carrito de un usuario
+
 const obtenerProductosCarrito = async (idUsuario) => {
 
     const resultado = await db.query(
@@ -23,7 +26,8 @@ const obtenerProductosCarrito = async (idUsuario) => {
     return resultado.rows;
 };
 
-// Obtener un pedido perteneciente a un usuario
+// Función para obtener un pedido perteneciente a un usuario
+
 const obtenerPedidoPorIdUsuario = async (idPedido, idUsuario) => {
 
     const resultado = await db.query(
@@ -38,6 +42,7 @@ const obtenerPedidoPorIdUsuario = async (idPedido, idUsuario) => {
 };
 
 // Crear un pedido
+
 const crearPedido = async ({
     idUsuario,
     fecha,
@@ -92,8 +97,8 @@ const crearPedido = async ({
     return resultado.rows[0];
 };
 
+// Función para crear un producto dentro del pedido
 
-// Crear un producto dentro del pedido
 const crearPedidoProducto = async ({
     cantidad,
     precioUnidad,
@@ -121,8 +126,8 @@ const crearPedidoProducto = async ({
     return resultado.rows[0];
 };
 
+// Función para eliminar todos los productos del carrito
 
-// Eliminar todos los productos del carrito
 const vaciarCarrito = async (idUsuario) => {
 
     await db.query(
@@ -136,6 +141,8 @@ const vaciarCarrito = async (idUsuario) => {
     );
 };
 
+// Función para obtener un pedido por la referencia de pago
+
 const obtenerPedidoPorReferenciaPago = async (referenciaPago) => {
 
     const resultado = await db.query(
@@ -147,6 +154,8 @@ const obtenerPedidoPorReferenciaPago = async (referenciaPago) => {
 
     return resultado.rows[0];
 };
+
+// Exportación de Funciones
 
 module.exports = {
     obtenerProductosCarrito,

@@ -1,67 +1,8 @@
-/* .contenedor-cargar-producto, .contenedor-cargar-categoria, .contenedor-registro, .contenedor-login {
-    width: 100%;
-}
+/* Cargar */
 
-.form-carga-producto, .form-carga-categoria, .form-registro, .form-login  {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3vh;
-    background-color: #fff;
-    width: 60%;
-    min-height: 60vh;
-    flex-direction: column;
-    gap: 3vh;
-    margin: 2vh 0;
-}
+/* Estilos */
 
-.contenedor-lista-productos {
-    margin: 4vh 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2vh;
-}
-
-.contenedor-lista-productos .contenedor-productos {
-    margin: 4vh 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2vh;
-}
-
-@media (max-width: 900px) {
-
-    .form-carga-producto, .form-carga-categoria, .form-registro, .form-login {
-        width: 80%;
-    }
-
-    .contenedor-lista-productos .contenedor-productos, .contenedor-registro, .contenedor-login {
-        margin: 4vh 0;
-        flex-direction: column;
-    }
-    
-}
-
-@media (max-width: 600px) {
-
-    .form-carga-producto, .form-carga-categoria, .form-registro, .form-login {
-        width: 80%;
-    }
-
-    .contenedor-lista-productos .contenedor-productos, .contenedor-registro, .contenedor-login {
-        margin: 4vh 0;
-        flex-direction: column;
-    }
-
-} */
-
-/* =========================================
-   CONTENEDORES DE FORMULARIOS
-========================================= */
+/* Contenedor formularios */
 
 .contenedor-cargar-producto,
 .contenedor-cargar-categoria,
@@ -70,15 +11,12 @@
     width: 100%;
     padding: 50px 20px 80px;
     box-sizing: border-box;
-
     display: flex;
     justify-content: center;
 }
 
 
-/* =========================================
-   FORMULARIOS
-========================================= */
+/* Formularios */
 
 .form-carga-producto,
 .form-carga-categoria,
@@ -86,33 +24,22 @@
 .form-login {
     width: 100%;
     max-width: 550px;
-
     box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
-
     gap: 18px;
-
     padding: 35px;
-
     background-color: #fff;
-
     border: 1px solid #e8e8e8;
-
     border-radius: 16px;
-
     box-shadow:
         0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 
-/* =========================================
-   INPUTS
-========================================= */
+/* Inputs */
 
 .form-carga-producto input,
 .form-carga-producto select,
@@ -130,23 +57,14 @@
 .form-login select,
 .form-login textarea {
     width: 100%;
-
     box-sizing: border-box;
-
     padding: 13px 14px;
-
     border: 1px solid #ddd;
-
     border-radius: 8px;
-
     background-color: #fff;
-
     color: #222;
-
     font-size: 14px;
-
     outline: none;
-
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -169,15 +87,12 @@
 .form-login select:focus,
 .form-login textarea:focus {
     border-color: #999;
-
     box-shadow:
         0 0 0 3px rgba(0, 0, 0, 0.05);
 }
 
 
-/* =========================================
-   TEXTAREA
-========================================= */
+/* TextArea */
 
 .form-carga-producto textarea {
     min-height: 120px;
@@ -186,34 +101,22 @@
 }
 
 
-/* =========================================
-   BOTONES
-========================================= */
+/* Botones */
 
 .form-carga-producto button,
 .form-carga-categoria button,
 .form-registro button,
 .form-login button {
     width: 100%;
-
     min-height: 48px;
-
     padding: 12px 18px;
-
     border: none;
-
     border-radius: 9px;
-
     background-color: #111;
-
     color: #fff;
-
     font-size: 14px;
-
     font-weight: 500;
-
     cursor: pointer;
-
     transition:
         background-color 0.2s ease,
         transform 0.2s ease,
@@ -226,7 +129,6 @@
 .form-registro button:hover,
 .form-login button:hover {
     background-color: #333;
-
     transform: translateY(-1px);
 }
 
@@ -244,46 +146,33 @@
 .form-registro button:disabled,
 .form-login button:disabled {
     opacity: 0.6;
-
     cursor: not-allowed;
-
     transform: none;
 }
 
 
-/* =========================================
-   LABELS
-========================================= */
+/* Labels */
 
 .form-carga-producto label,
 .form-carga-categoria label,
 .form-registro label,
 .form-login label {
     width: 100%;
-
     font-size: 14px;
-
     font-weight: 500;
-
     color: #333;
 }
 
 
-/* =========================================
-   LINKS
-========================================= */
+/* Links */
 
 .form-registro a,
 .form-login a {
     color: #333;
-
     font-size: 13px;
-
     text-decoration: none;
-
     transition: opacity 0.2s ease;
 }
-
 
 .form-registro a:hover,
 .form-login a:hover {
@@ -291,43 +180,30 @@
 }
 
 
-/* =========================================
-   LISTA DE PRODUCTOS
-========================================= */
+/* Lista de productos */
 
 .contenedor-lista-productos {
     width: 100%;
-
     margin: 50px 0;
-
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
-
     gap: 25px;
 }
 
 .contenedor-lista-productos .contenedor-productos {
     width: 100%;
-
     margin: 0;
-
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     flex-wrap: wrap;
-
     gap: 20px;
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* Media queries */
 
 @media (max-width: 900px) {
 
@@ -352,7 +228,6 @@
     }
 
 }
-
 
 @media (max-width: 600px) {
 

@@ -1,4 +1,5 @@
 class BreadCrumb extends HTMLElement {
+
     connectedCallback() {
 
         const links = this.getAttribute("links")
@@ -24,6 +25,7 @@ class BreadCrumb extends HTMLElement {
             </div>
         `;
     }
+    
 }
 
 customElements.define("bread-crumb", BreadCrumb);

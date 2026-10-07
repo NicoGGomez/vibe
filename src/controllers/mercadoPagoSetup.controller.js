@@ -1,5 +1,7 @@
 // Controlador del servicio de Mercado Pago
 
+// Importación de clases
+
 const mercadoPagoSetupService = require("../services/mercadoPagoSetup.service");
 
 // Función para crear una sucursal

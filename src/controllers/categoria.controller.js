@@ -1,5 +1,7 @@
 // Controlador de Categoria
 
+// Importación de clases
+
 const categoriaService = require("../services/categoria.service");
 
 // Función para obtener categorias

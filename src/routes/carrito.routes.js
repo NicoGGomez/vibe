@@ -12,9 +12,23 @@ const verificarToken = require("../middlewares/auth.middleware");
 
 // Rutas
 
-router.post("/", verificarToken, carritoController.agregarProductoCarrito);
-router.get("/", verificarToken, carritoController.getProductosCarrito);
-router.delete("/:id", verificarToken, carritoController.eliminarProductoCarrito);
+router.post(
+    "/", 
+    verificarToken, 
+    carritoController.agregarProductoCarrito
+);
+
+router.get(
+    "/", 
+    verificarToken, 
+    carritoController.getProductosCarrito
+);
+
+router.delete(
+    "/:id", 
+    verificarToken, 
+    carritoController.eliminarProductoCarrito
+);
 
 // Exportación de rutas
 

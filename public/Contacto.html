@@ -44,18 +44,24 @@
         <form id="contactForm" action="">
 
             <div class="input">
+
                 <label for="nombreInput">Ingresa tu Nombre</label>
                 <input type="text" name="nombre" id="nombreInput">
+
             </div>
 
             <div class="input">
+
                 <label for="mailInput">Ingresa tu Mail</label>
                 <input type="email" name="email" id="mailInput">
+
             </div>
 
             <div class="input input-msg">
+
                 <label for="msgInput">Ingresa tu mensaje</label>
                 <textarea name="message" id="msgInput" ></textarea>
+
             </div>
 
             <button type="submit">Enviar</button>
@@ -72,13 +78,14 @@
 
     <!-- link a scripts -->
 
+    <script> emailjs.init("Z1zZWU8mOaSMKb943") </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-    emailjs.init("Z1zZWU8mOaSMKb943");
-    </script>
+
     <script src="Scripts/EnvioMensaje.js"></script>
     <script src="Components/BreadCrumb.js"></script>
     <script src="Components/Footer.js"></script>
+
     <script type="module" src="Components/NavBar.js"></script>
+
 </body>
 </html>

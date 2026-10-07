@@ -13,7 +13,7 @@ if (usuario) {
     throw new Error("Ya estas logueado");
 }
 
-// Obtención de elementos del dom 
+// Obtención de elementos del DOM
 
 const formRegistro = document.getElementById("form-registro");
 const inputNombre = document.getElementById("input-lg-nombre");

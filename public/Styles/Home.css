@@ -1,3 +1,8 @@
+/* Home */
+
+
+/* Estilos */
+
 .cont {
     display: flex;
     flex-direction: column;
@@ -11,7 +16,8 @@
     width: 80%;
 }
 
-/* banner principal */
+
+/* Banner principal */
 
 .contenido-principal {
     width: 100%;
@@ -42,11 +48,13 @@
     transform: scale(1.1) rotate(-5deg);
 }
 
-/* texto de bienvenida */
+
+/* Texto de bienvenida */
 
 .texto-principal {
     margin-bottom: 2vh;
 }
+
 
 /* icono carrito */
 
@@ -54,44 +62,8 @@
     font-size: 36px;
 }
 
-/* seccion ofertas */
 
-/* .ofertas {
-    width: 100%;
-    margin: 2vh 0;
-}
-
-.logo {
-    padding: 20px;
-    margin: 2vh;
-}
-
-.carrusel-oferta {
-    width: 100%;
-    overflow: hidden;
-}
-
-.productos-oferta {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-    background-color: rgb(162, 136, 136);
-}
-
-.carrusel-cards {
-    display: flex;
-    gap: 20px;
-    width: max-content;
-}
-
-.productos-oferta .card{
-    flex-shrink: 0;
-} */
-
-
-/* =========================
-   SECCIÓN OFERTAS
-========================= */
+/* Ofertas */
 
 .ofertas {
     width: 100%;
@@ -104,9 +76,7 @@
 }
 
 
-/* =========================
-   CONTENEDOR DEL CARRUSEL
-========================= */
+/* Carrusel */
 
 .carrusel-oferta {
     width: 100%;
@@ -117,36 +87,30 @@
     width: 80%;
     margin: auto;
     overflow: hidden;
-
     background-color: rgb(162, 136, 136);
-
-    /* Evita que el contenido se salga */
     position: relative;
 }
 
 
-/* =========================
-   CARDS QUE SE MUEVEN
-========================= */
+/* Cards que se mueven */
 
 .carrusel-cards {
     display: flex;
     flex-wrap: nowrap;
     gap: 20px;
     width: max-content;
-
     will-change: transform;
 }
 
-/* =========================
-   CARDS
-========================= */
+
+/* Cards */
 
 .carrusel-cards card-comp {
     flex: 0 0 auto;
 }
 
-/* seccion destacados */
+
+/* Destacados */
 
 .destacados {
     margin-bottom: 2vh;
@@ -165,7 +129,8 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
-/* seccion para ingresar al catalogo */
+
+/* Catalogo */
 
 .seccion-catalogo {
     display: flex;
@@ -184,7 +149,7 @@
     background-color: #000;    
 }
 
-/* media queries */
+/* Media queries */
 
 @media (max-width: 900px) {
     .productos-oferta,

@@ -1,4 +1,4 @@
-/* PAGINA CARRITO */
+/* Carrito */
 
 .contenedor-carrito {
     margin: 2vh;
@@ -91,6 +91,8 @@
     border: none;
 }
 
+/* QR */
+
 .cont-qr {
     width: 40%;
     height: 300px;
@@ -106,7 +108,7 @@
     align-items: center;
 }
 
-/* carrito */
+/* Carrito */
 
 .contenedor-carrito .contenedor-info-pago {
     background-color: #fff;
@@ -164,7 +166,7 @@ carrito-card-comp {
     padding: 1vh;
 }
 
-/* CARRITO FLOTANTE */
+/* Carrito flotante */
 
 .carrito-btn-comp {
     position: fixed;
@@ -232,69 +234,16 @@ carrito-card-comp {
     box-sizing: border-box;
 }
 
-/* =========================================
-   ANIMACIÓN CARRITO FLOTANTE
-========================================= */
+/* Animación carrito flotante */
 
 .carrito-btn-comp.animar-carrito-flotante {
     animation: llegadaCarrito 0.8s ease;
 }
 
-@keyframes llegadaCarrito {
-
-    0% {
-        transform: scale(1);
-    }
-
-    20% {
-        transform: scale(0.85);
-    }
-
-    45% {
-        transform: scale(1.25) translateY(-8px);
-    }
-
-    65% {
-        transform: scale(1.1) translateY(3px);
-    }
-
-    80% {
-        transform: scale(1.15) translateY(-2px);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-
 /* Ícono */
 
 .carrito-btn-comp.animar-carrito-flotante i {
     animation: iconoLlegada 0.8s ease;
-}
-
-@keyframes iconoLlegada {
-
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-
-    35% {
-        transform: rotate(-15deg) scale(1.2);
-    }
-
-    55% {
-        transform: rotate(15deg) scale(1.35);
-    }
-
-    75% {
-        transform: rotate(-5deg) scale(1.15);
-    }
-
-    100% {
-        transform: rotate(0deg) scale(1);
-    }
 }
 
 .carrito-abierto-comp {
@@ -389,7 +338,59 @@ carrito-card-comp {
     cursor: pointer;
 }
 
+/* Keyframes */
 
+@keyframes llegadaCarrito {
+
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(0.85);
+    }
+
+    45% {
+        transform: scale(1.25) translateY(-8px);
+    }
+
+    65% {
+        transform: scale(1.1) translateY(3px);
+    }
+
+    80% {
+        transform: scale(1.15) translateY(-2px);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes iconoLlegada {
+
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    35% {
+        transform: rotate(-15deg) scale(1.2);
+    }
+
+    55% {
+        transform: rotate(15deg) scale(1.35);
+    }
+
+    75% {
+        transform: rotate(-5deg) scale(1.15);
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+/* Media queries */
 
 @media (max-width: 600px) {
 

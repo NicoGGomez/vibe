@@ -4,10 +4,7 @@
 
 const favoritoModel = require("../models/favorito.model");
 
-
-// ==========================
-// AGREGAR FAVORITO
-// ==========================
+// Función para agregar a favoritos un producto
 
 const agregarFavorito = async (idUsuario, idProducto) => {
 
@@ -26,10 +23,7 @@ const agregarFavorito = async (idUsuario, idProducto) => {
     );
 };
 
-
-// ==========================
-// QUITAR FAVORITO
-// ==========================
+// Función para quitar de favoritos un producto
 
 const quitarFavorito = async (idUsuario, idProducto) => {
 
@@ -43,10 +37,7 @@ const quitarFavorito = async (idUsuario, idProducto) => {
     }
 };
 
-
-// ==========================
-// VERIFICAR FAVORITO
-// ==========================
+// Función para verificar que un producto esta en favoritos
 
 const esFavorito = async (idUsuario, idProducto) => {
 
@@ -56,10 +47,7 @@ const esFavorito = async (idUsuario, idProducto) => {
     );
 };
 
-
-// ==========================
-// OBTENER FAVORITOS
-// ==========================
+// Función para obtener productos en favoritos
 
 const obtenerFavoritos = async (idUsuario) => {
 
@@ -68,9 +56,7 @@ const obtenerFavoritos = async (idUsuario) => {
     );
 };
 
-// ==========================
-// LO MÁS SOLICITADO
-// ==========================
+// Función para que devuelva los productos mas solicitados
 
 const obtenerMasSolicitados = async () => {
 
@@ -78,9 +64,7 @@ const obtenerMasSolicitados = async () => {
 
 };
 
-// ==========================
-// EXPORTACIÓN
-// ==========================
+// Exportación de Funciones
 
 module.exports = {
     agregarFavorito,

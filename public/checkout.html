@@ -36,38 +36,59 @@
     <div class="cont contenedor-carrito">
 
         <div class="cont contenedor-info-cliente">
+
             <div class="cont-titulo">
+
                 <b>Finalizar compra</b>
                 <div class="separador"></div>
+
             </div>
+
             <div class="cont-informacion-pedido">
+
                 <div class="cont-informacion">
+
                     <div class="cont-ubicacion">
+
                         <b>Forma de entrega</b>
+
                         <div class="cont-ubicacion-btns">
+
                             <button id="btn-retiro">Retiro</button>
                             <button id="btn-envio">Envio</button>
                             <button id="btn-ubicacion">Usar mi ubicacion</button>
                             <button id="btn-ubicacion-seleccionada">✓</button>
+
                         </div>
 
                         <div id="info-ubicacion" class="cont-info-ubicacion">
+
                             <input id="direccion" type="text" placeholder="Dirección">
                             <input id="ciudad" type="text" placeholder="Ciudad">
                             <input id="codigo-postal" type="text" placeholder="Código postal">
+
                         </div>
+
                     </div>
+
                     <div class="cont-info-comprador">
+
                         <b>Informacion del comprador</b>
                         <div class="cont-input">
+
                             <p>Nombre y Apellido</p>
                             <input id="nombre-apellido" type="text" placeholder="Agrega tu nombre aqui..." required>
+
                         </div>
+
                         <div class="cont-input">
+
                             <p>Telefono</p>
                             <input id="telefono" type="text" placeholder="Agrega tu numero de Telefono aqui..." required>
                         </div>
+
                     </div>
+
                 </div>
 
                 <div id="cont-qr" class="cont-qr">
@@ -84,7 +105,9 @@
                 </div>
 
                 <div class="qr" id="qr"></div>
+
             </div>
+
         </div>
 
         <div class="cont contenedor-info-pago">
@@ -95,28 +118,35 @@
             </div>
             
             <div class="info-compra">
+
                 <div class="carrito-productos">
                     <p id="cant-productos" class="cant-prods">Productos (x)</p>
                     <p id="monto-productos" class="monto-total">$000</p>
                 </div>
+
                 <div class="carrito-envio">
                     <p class="monto-envio">Envio</p>
                     <p id="monto-envio">$000</p>
                 </div>
+
             </div>
 
             <div class="cupon">
+                
                 <p class="monto-envio">¿Tenes un cupon de descuento?</p>
                 <input
                     type="text"
                     placeholder="Cupones próximamente..."
                     disabled
                 >
+
             </div>
 
             <div class="monto">
+
                 <p>Total</p>
                 <p id="monto-final" class="monto-final">$0000</p>
+                
             </div>
 
         </div>
@@ -127,14 +157,17 @@
 
     <footer-comp class="cont"></footer-comp>
 
-    <!-- link a scripts -->
+    <!-- scripts -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <script src="Components/BreadCrumb.js"></script>
     <script src="Components/Footer.js"></script>
     <script src="Components/carritoCard.js"></script>
+
     <script type="module" src="Scripts/logut.js"></script>
     <script type="module" src="Scripts/carrito.js"></script>
     <script type="module" src="Components/NavBar.js"></script>
+
 </body>
 </html>
