@@ -43,6 +43,13 @@ let totalCompra = 0;
 let tipoEntrega = null;
 let ubicacionConfirmada = false;
 
+// Verificar si existe una compra directa
+const compraDirecta = JSON.parse(
+    sessionStorage.getItem("compraDirecta")
+);
+
+console.log("Compra directa:", compraDirecta);
+
 // Verificación de existencia de elemento del DOM
 
 if (btnGenerarQR) {
@@ -739,17 +746,19 @@ async function cargarCarrito(){
                 `;
         });
 
-        actualizarBtnCarrito();
+        actualizarBtnCarrito(productos.length);
     }
 
 }
 
 // Función para actualizar el boton de cantidad
 
-function actualizarBtnCarrito() {
+function actualizarBtnCarrito(cantidad = null) {
 
     const cantidadProductos =
-        document.querySelectorAll("carrito-producto").length;
+        cantidad !== null
+            ? cantidad
+            : document.querySelectorAll("carrito-producto").length;
 
     const contador =
         document.getElementById("contador-carrito");
@@ -801,18 +810,46 @@ const cargarProductos = async () => {
 
         if (!token) return;
 
-        const respuesta = await fetch("https://vibe-n9dy.onrender.com/carrito", {
-            headers: {
-                Authorization: `Bearer ${token}`
+        let productos;
+
+        if (compraDirecta) {
+
+            const respuesta = await fetch(
+                `https://vibe-n9dy.onrender.com/productos/${compraDirecta.idProducto}`
+            );
+
+            if (!respuesta.ok) {
+                throw new Error("No se pudo obtener el producto.");
             }
-        });
 
-        if (!respuesta.ok) {
-            const error = await respuesta.json();
-            throw new Error(error.mensaje);
+            const producto = await respuesta.json();
+
+            productos = [{
+                ...producto,
+                id_producto: producto.id_producto || producto.id,
+                cantidad: compraDirecta.cantidad
+            }];
+
+            sessionStorage.removeItem("compraDirecta");
+
+        } else {
+
+            const respuesta = await fetch(
+                "https://vibe-n9dy.onrender.com/carrito",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (!respuesta.ok) {
+                const error = await respuesta.json();
+                throw new Error(error.mensaje);
+            }
+
+            productos = await respuesta.json();
         }
-
-        const productos = await respuesta.json();
 
         if (btnContinuar) {
             
@@ -982,4 +1019,5 @@ function animarCarritoFlotante() {
     }, { once: true });
 }
 
+cargarCarrito()
 cargarProductos();

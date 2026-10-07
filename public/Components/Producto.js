@@ -180,8 +180,9 @@ class Producto extends HTMLElement {
 
                             <button 
                                 ${sinStock ? "disabled" : ""}
+                                id="btn-comprar-ahora"
                             >
-                                Comprar
+                                Comprar ahora
                             </button>
 
                             <button 
@@ -782,6 +783,26 @@ class Producto extends HTMLElement {
                     });
 
                 });
+        }
+
+        const btnComprarAhora = this.querySelector("#btn-comprar-ahora");
+
+        if (btnComprarAhora && !sinStock) {
+
+            btnComprarAhora.addEventListener("click", () => {
+
+                const compraDirecta = {
+                    idProducto: id,
+                    cantidad: 1
+                };
+
+                sessionStorage.setItem(
+                    "compraDirecta",
+                    JSON.stringify(compraDirecta)
+                );
+
+                window.location.href = "checkout.html";
+            });
         }
 
         // ==========================

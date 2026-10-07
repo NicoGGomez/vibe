@@ -39,9 +39,11 @@ const cargarProductosRelacionados = async () => {
         let productos = await respuesta.json();
 
         // Quito el producto que estoy viendo
-        productos = productos.filter(
-            producto => producto.id_producto != idProducto
-        );
+        productos = productos
+            .filter(producto => producto.id_producto != idProducto)
+            .sort((a, b) => {
+                return (a.stock === 0) - (b.stock === 0);
+            });
 
         contenedorCards.innerHTML = "";
 
