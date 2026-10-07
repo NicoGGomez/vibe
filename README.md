@@ -4,7 +4,7 @@
 
 El proyecto implementa desde la gestión de productos y usuarios hasta el carrito de compras, favoritos y procesamiento de pagos mediante **Mercado Pago**.
 
-🔗 **Demo:** https://vibe-nico.netlify.app/  
+🔗 **Demo:** https://vibetandil.netlify.app/
 🔗 **Backend:** https://vibe-n9dy.onrender.com/  
 🔗 **Repositorio:** https://github.com/NicoGGomez/vibe
 
