@@ -9,7 +9,7 @@ const db = require("../config/database");
 const obtenerProductos = async () => {
 
     const resultado = await db.query(
-        "SELECT * FROM producto"
+        "SELECT * FROM producto WHERE activo = TRUE"
     );
 
     return resultado.rows;
@@ -20,7 +20,10 @@ const obtenerProductos = async () => {
 const obtenerProducto = async (id) => {
 
     const resultado = await db.query(
-        "SELECT * FROM producto WHERE id_producto = $1",
+        `SELECT *
+        FROM producto
+        WHERE id_producto = $1
+        AND activo = TRUE`,
         [id]
     );
 
@@ -32,7 +35,10 @@ const obtenerProducto = async (id) => {
 const obtenerProductoPorCategoria = async (id) => {
 
     const resultado = await db.query(
-        "SELECT * FROM producto WHERE id_categoria = $1",
+        `SELECT *
+        FROM producto
+        WHERE id_categoria = $1
+        AND activo = TRUE`,
         [id]
     );
 
@@ -67,14 +73,51 @@ const cargarProductos = async (nombre, precio, descr, imgP, img1, img2, img3, st
 
 // Función para eliminar un producto
 
+
 const eliminarProducto = async (id) => {
 
-    const resultado = await db.query(
-        "DELETE FROM producto WHERE id_producto = $1 RETURNING *",
-        [id]
-    );
+    try {
+        const resultado = await db.query(
+            `DELETE FROM producto
+             WHERE id_producto = $1
+             RETURNING *`,
+            [id]
+        );
 
-    return resultado.rows[0];
+        if (!resultado.rows[0]) {
+            return null;
+        }
+
+        return {
+            ...resultado.rows[0],
+            baja_logica: false
+        };
+
+    } catch (error) {
+        // Si el producto tiene pedidos asociados,
+        // conservarlo y retirarlo del catálogo.
+        if (error.code !== "23503") {
+            throw error;
+        }
+
+        const resultado = await db.query(
+            `UPDATE producto
+             SET activo = FALSE
+             WHERE id_producto = $1
+             RETURNING *`,
+            [id]
+        );
+
+        if (!resultado.rows[0]) {
+            return null;
+        }
+
+        return {
+            ...resultado.rows[0],
+            baja_logica: true
+        };
+    }
+    
 };
 
 // Función para actualizar un producto

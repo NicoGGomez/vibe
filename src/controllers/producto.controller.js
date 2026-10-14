@@ -153,6 +153,7 @@ const cargarProducto = async (req, res) => {
 // Función para eliminar un producto
 
 
+
 const eliminarProducto = async (req, res) => {
     try {
         const id = req.params.id;
@@ -165,24 +166,23 @@ const eliminarProducto = async (req, res) => {
             });
         }
 
-        res.json({
-            mensaje: "Producto eliminado correctamente",
+        if (producto.baja_logica) {
+            return res.json({
+                mensaje: "Producto retirado del catálogo. Se conservaron los pedidos asociados.",
+                producto
+            });
+        }
+
+        return res.json({
+            mensaje: "Producto eliminado correctamente.",
             producto
         });
 
     } catch (error) {
         console.error("Error al eliminar producto:", error);
 
-        // El producto está asociado a un pedido existente
-        if (error.code === "23503" &&
-            error.constraint === "fk_producto_pedido_producto") {
-            return res.status(409).json({
-                error: "No se puede eliminar este producto porque está asociado a uno o más pedidos."
-            });
-        }
-
-        res.status(500).json({
-            error: "Error interno al eliminar el producto"
+        return res.status(500).json({
+            error: "No se pudo eliminar el producto."
         });
     }
 };

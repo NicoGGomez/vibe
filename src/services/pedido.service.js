@@ -59,6 +59,7 @@ const crearPedido = async ({
                     AS t(id_producto, cantidad)
                 ) datos
                     ON p.id_producto = datos.id_producto
+                    AND p.activo = TRUE
                 FOR UPDATE OF p`,
                 [
                     ids,
@@ -72,16 +73,16 @@ const crearPedido = async ({
 
             productos = resultado.rows;
 
-        } else {
-
-            // Compra normal: obtener productos del carrito
+        }  else {
+            // Compra normal: obtener todos los productos del carrito
             const resultado = await client.query(
                 `SELECT
                     cp.cantidad,
                     p.id_producto,
                     p.precio,
                     p.stock,
-                    p.nombre
+                    p.nombre,
+                    p.activo
                 FROM carrito c
                 JOIN carrito_producto cp
                     ON c.id_carrito = cp.id_carrito
@@ -93,6 +94,12 @@ const crearPedido = async ({
             );
 
             productos = resultado.rows;
+
+            if (productos.some(producto => !producto.activo)) {
+                throw new Error(
+                    "Tu carrito contiene productos que ya no están disponibles. Actualizá el carrito antes de continuar."
+                );
+            }
         }
 
         // Verificar que haya productos
@@ -294,6 +301,26 @@ const procesarPagoAprobado = async (referenciaPago) => {
         );
 
         const productos = productosResultado.rows;
+
+        if (productos.length === 0) {
+            throw new Error("El pedido no contiene productos válidos.");
+        }
+
+        const inactivos = await client.query(
+            `SELECT pp.id_producto
+            FROM pedido_producto pp
+            JOIN producto p
+            ON p.id_producto = pp.id_producto
+            WHERE pp.id_pedido = $1
+            AND p.activo = FALSE`,
+            [pedido.id_pedido]
+        );
+
+        if (inactivos.rows.length > 0) {
+            throw new Error(
+                "El pedido contiene productos retirados del catálogo."
+            );
+        }
 
         // Verificar stock nuevamente
         for (const producto of productos) {

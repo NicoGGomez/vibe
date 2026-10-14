@@ -91,38 +91,50 @@ const cargarProductos = async () => {
 
 cargarProductos();
 
+
 // Función para eliminar un producto 
 
 document.addEventListener("click", async (e) => {
-    if (!e.target.classList.contains("btn-eliminar")) return;
+    const boton = e.target.closest(".btn-eliminar");
 
-    const id = e.target.dataset.id;
+    if (!boton) return;
 
-    if (!confirm("¿Eliminar este producto?")) return;
+    const id = boton.dataset.id;
+
+    if (!confirm("¿Eliminar o retirar este producto del catálogo?")) {
+        return;
+    }
 
     const token = localStorage.getItem("token");
 
     try {
-        const respuesta = await fetch(`https://vibe-n9dy.onrender.com/productos/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`
+        const respuesta = await fetch(
+            `https://vibe-n9dy.onrender.com/productos/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        });
+        );
 
-        const data = await respuesta.json().catch(() => null);
-
-        console.log("DELETE status:", respuesta.status);
-        console.log("DELETE respuesta:", data);
+        const data = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(data?.error || data?.mensaje || "No se pudo eliminar");
+            throw new Error(data.error || "No se pudo eliminar el producto.");
         }
 
-        await cargarProductos();
+        const tarjeta = boton.closest(".card-wrapper");
+
+        if (tarjeta) {
+            tarjeta.remove();
+        }
+
+        alert(data.mensaje);
 
     } catch (error) {
-        console.error(error);
-        mostrarError("Error al eliminar el producto.");
+        console.error("Error al eliminar el producto:", error);
+        alert(error.message || "Error al eliminar el producto.");
     }
 });
+
