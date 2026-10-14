@@ -84,9 +84,9 @@ const crearPreferencia = async (monto, referencia) => {
         external_reference: referencia,
 
         back_urls: {
-            success: "misCompras.html",
-            failure: "index.html",
-            pending: "..."
+            success: "https://vibetandil.netlify.app/checkout.html",
+            failure: "https://vibetandil.netlify.app/checkout.html",
+            pending: "https://vibetandil.netlify.app/checkout.html"
         },
 
         auto_return: "approved"
