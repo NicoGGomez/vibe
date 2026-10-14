@@ -152,27 +152,41 @@ const cargarProducto = async (req, res) => {
 
 // Función para eliminar un producto
 
-const eliminarProducto = async (req,res)=>{
 
+const eliminarProducto = async (req, res) => {
     try {
-
         const id = req.params.id;
 
         const producto = await productoService.eliminarProducto(id);
 
-        res.json(producto);
-
-    } catch(error){
-
-            console.log(error);
-
-            res.status(500).json({
-                error: error.message
+        if (!producto) {
+            return res.status(404).json({
+                error: "Producto no encontrado"
             });
+        }
 
+        res.json({
+            mensaje: "Producto eliminado correctamente",
+            producto
+        });
+
+    } catch (error) {
+        console.error("Error al eliminar producto:", error);
+
+        // El producto está asociado a un pedido existente
+        if (error.code === "23503" &&
+            error.constraint === "fk_producto_pedido_producto") {
+            return res.status(409).json({
+                error: "No se puede eliminar este producto porque está asociado a uno o más pedidos."
+            });
+        }
+
+        res.status(500).json({
+            error: "Error interno al eliminar el producto"
+        });
     }
-
 };
+
 
 // Función para actualizar un producto
 

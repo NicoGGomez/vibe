@@ -1,4 +1,6 @@
 import { agregarFavorito, quitarFavorito, esFavorito } from "../Scripts/Favorito.js";
+import { getUsuario, getToken } from "../Scripts/auth.js";
+import { mostrarError } from "../Scripts/mostrarInfo.js"; 
 
 class Card extends HTMLElement {
 
@@ -152,6 +154,17 @@ class Card extends HTMLElement {
 
                 e.preventDefault();
                 e.stopPropagation();
+
+                // Verificar sesión antes de disparar el evento
+                const usuario = getUsuario();
+                const token = getToken();
+
+                if (!usuario || !token) {
+                    mostrarError(
+                        "Tenés que iniciar sesión para agregar productos al carrito."
+                    );
+                    return;
+                }
 
                 // Animación de la Card
                 btnCarrito.classList.remove("animar-carrito");

@@ -1,5 +1,6 @@
 import { getUsuario, getToken } from "../Scripts/auth.js";
 import { agregarFavorito, quitarFavorito, esFavorito } from "../Scripts/Favorito.js";
+import { mostrarError } from "../Scripts/mostrarInfo.js"; 
 
 class Producto extends HTMLElement {
 
@@ -251,7 +252,8 @@ class Producto extends HTMLElement {
                 const token = getToken();
 
                 if (!usuario || !token) {
-                    alert("Tenés que iniciar sesión para agregar favoritos.");
+                    mostrarError("Tenés que iniciar sesión para agregar favoritos.")
+                    // alert();
                     return;
                 }
 
@@ -789,6 +791,16 @@ class Producto extends HTMLElement {
 
         if (btnComprarAhora && !sinStock) {
             btnComprarAhora.addEventListener("click", () => {
+
+                // Verificar que el usuario haya iniciado sesión
+                const usuario = getUsuario();
+                const token = getToken();
+
+                if (!usuario || !token) {
+                    mostrarError("Debes iniciar sesión para comprar.");
+                    return;
+                }
+
                 const compraDirecta = {
                     idProducto: id,
                     cantidad: 1
