@@ -69,8 +69,8 @@ const crearOrdenQR = async (monto, referencia) => {
 
 // Función para crear preferncia
 
-const crearPreferencia = async (monto, referencia) => {
 
+const crearPreferencia = async (monto, referencia) => {
     const body = {
         items: [
             {
@@ -82,6 +82,9 @@ const crearPreferencia = async (monto, referencia) => {
         ],
 
         external_reference: referencia,
+
+        notification_url:
+            "https://vibe-n9dy.onrender.com/pagos/webhook",
 
         back_urls: {
             success: "https://vibetandil.netlify.app/misCompras.html",
@@ -96,12 +99,10 @@ const crearPreferencia = async (monto, referencia) => {
         "https://api.mercadopago.com/checkout/preferences",
         {
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
             },
-
             body: JSON.stringify(body)
         }
     );
@@ -118,6 +119,7 @@ const crearPreferencia = async (monto, referencia) => {
 
     return datos;
 };
+
 
 // Función para obtener orden de código QR
 
