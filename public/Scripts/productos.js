@@ -130,11 +130,13 @@ document.addEventListener("click", async (e) => {
             tarjeta.remove();
         }
 
-        alert(data.mensaje);
+        mostrarError(data.mensaje)
+        
 
     } catch (error) {
         console.error("Error al eliminar el producto:", error);
-        alert(error.message || "Error al eliminar el producto.");
+        mostrarError(error.message || "Error al eliminar el producto.")
+        
     }
 });
 
