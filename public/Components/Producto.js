@@ -788,17 +788,26 @@ class Producto extends HTMLElement {
         const btnComprarAhora = this.querySelector("#btn-comprar-ahora");
 
         if (btnComprarAhora && !sinStock) {
-
             btnComprarAhora.addEventListener("click", () => {
-
                 const compraDirecta = {
                     idProducto: id,
                     cantidad: 1
                 };
 
+                if (!id) {
+                    console.error("No se encontró el ID del producto.");
+                    alert("No se pudo iniciar la compra.");
+                    return;
+                }
+
                 sessionStorage.setItem(
                     "compraDirecta",
                     JSON.stringify(compraDirecta)
+                );
+
+                console.log(
+                    "Compra directa guardada:",
+                    sessionStorage.getItem("compraDirecta")
                 );
 
                 window.location.href = "checkout.html";

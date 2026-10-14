@@ -20,7 +20,8 @@ const crearPedido = async (req, res) => {
             nombre_apellido,
             telefono,
             metodo_pago,
-            precio_envio
+            precio_envio,
+            productos
         } = req.body;
 
 
@@ -80,7 +81,9 @@ const crearPedido = async (req, res) => {
 
             metodoPago: metodo_pago || "mercado_pago",
 
-            precioEnvio: precio_envio || 0
+            precioEnvio: precio_envio || 0,
+            
+            productos
 
         });
 

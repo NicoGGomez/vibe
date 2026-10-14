@@ -8,7 +8,6 @@ const { randomUUID } = require("crypto");
 // Crear un pedido a partir del carrito
 
 const crearPedido = async ({
-
     idUsuario,
     tipoEntrega,
     direccion,
@@ -17,8 +16,8 @@ const crearPedido = async ({
     nombreApellido,
     telefono,
     metodoPago,
-    precioEnvio
-
+    precioEnvio,
+    productos: productosDirectos
 }) => {
 
     const client = await db.connect();
@@ -28,31 +27,78 @@ const crearPedido = async ({
         // Iniciar transacción
         await client.query("BEGIN");
 
-        // Obtener productos del carrito
-        const resultado = await client.query(
-            `SELECT
-                cp.cantidad,
-                p.id_producto,
-                p.precio,
-                p.stock,
-                p.nombre
-            FROM carrito c
-            JOIN carrito_producto cp
-                ON c.id_carrito = cp.id_carrito
-            JOIN producto p
-                ON cp.id_producto = p.id_producto
-            WHERE c.id_usuario = $1`,
-            [idUsuario]
-        );
+        // Obtener productos de la compra directa o del carrito
+        let productos;
 
-        const productos = resultado.rows;
+        if (Array.isArray(productosDirectos) && productosDirectos.length > 0) {
 
+            // Obtener productos reales desde la base de datos
+            const ids = productosDirectos.map(p => Number(p.id_producto));
 
-        // Verificar que el carrito no esté vacío
-        if (productos.length === 0) {
-            throw new Error("El carrito está vacío.");
+            if (
+                ids.some(id => !Number.isInteger(id) || id <= 0) ||
+                productosDirectos.some(p =>
+                    !Number.isInteger(Number(p.cantidad)) ||
+                    Number(p.cantidad) <= 0
+                )
+            ) {
+                throw new Error("Los productos de la compra no son válidos.");
+            }
+
+            const resultado = await client.query(
+                `SELECT
+                    p.id_producto,
+                    p.precio,
+                    p.stock,
+                    p.nombre,
+                    datos.cantidad
+                FROM producto p
+                JOIN (
+                    SELECT *
+                    FROM unnest($1::int[], $2::int[])
+                    AS t(id_producto, cantidad)
+                ) datos
+                    ON p.id_producto = datos.id_producto
+                FOR UPDATE OF p`,
+                [
+                    ids,
+                    productosDirectos.map(p => Number(p.cantidad))
+                ]
+            );
+
+            if (resultado.rows.length !== productosDirectos.length) {
+                throw new Error("Uno o más productos no existen.");
+            }
+
+            productos = resultado.rows;
+
+        } else {
+
+            // Compra normal: obtener productos del carrito
+            const resultado = await client.query(
+                `SELECT
+                    cp.cantidad,
+                    p.id_producto,
+                    p.precio,
+                    p.stock,
+                    p.nombre
+                FROM carrito c
+                JOIN carrito_producto cp
+                    ON c.id_carrito = cp.id_carrito
+                JOIN producto p
+                    ON cp.id_producto = p.id_producto
+                WHERE c.id_usuario = $1
+                FOR UPDATE OF p`,
+                [idUsuario]
+            );
+
+            productos = resultado.rows;
         }
 
+        // Verificar que haya productos
+        if (productos.length === 0) {
+            throw new Error("No hay productos para realizar la compra.");
+        }
 
         // Verificar stock
         for (const producto of productos) {

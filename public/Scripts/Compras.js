@@ -19,17 +19,6 @@ const cargandoCompras =
 const sinCompras =
     document.getElementById("sin-compras");
 
-const msgError =
-    document.getElementById("msg-error");
-
-// Función para mostrar el error
-
-function mostrarError(mensaje) {
-
-    msgError.textContent = mensaje;
-    msgError.style.display = "block";
-}
-
 // Función carga de compras de usuario
 
 async function cargarCompras() {

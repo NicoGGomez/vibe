@@ -149,6 +149,13 @@ if (btnGenerarQR) {
 
                     body: JSON.stringify({
 
+                        productos: compraDirecta
+                            ? [{
+                                id_producto: compraDirecta.idProducto,
+                                cantidad: compraDirecta.cantidad
+                            }]
+                            : null,
+
                         tipo_entrega: tipoEntrega,
 
                         direccion:
