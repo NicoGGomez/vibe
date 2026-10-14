@@ -69,7 +69,7 @@ if (btnGenerarQR) {
 
         // Validar datos
         if (!nombreApellido || !telefono) {
-            mostrarError("Completá tu nombre, apellido y teléfono para generar el QR.")
+            mostrarError("Completá tu nombre, apellido y teléfono para generar la orden de pago.")
             return;
         }
 
@@ -120,7 +120,7 @@ if (btnGenerarQR) {
             if (!token) {
                 mostrarError("Debés iniciar sesión.");
                 btnGenerarQR.disabled = false;
-                btnGenerarQR.textContent = "Generar QR de pago";
+                btnGenerarQR.textContent = "Generar orden de pago";
                 return;
             }
 
@@ -204,7 +204,7 @@ if (btnGenerarQR) {
 
             // 2. Generar pago
 
-            btnGenerarQR.textContent = "Generando QR...";
+            btnGenerarQR.textContent = "Generando orden de pago...";
 
             const pagoRespuesta = await fetch(
                 "https://vibe-n9dy.onrender.com/pagos/qr",
@@ -991,7 +991,7 @@ function resetearQR() {
 
     contenedorBtnQR.style.display = "flex";
 
-    btnGenerarQR.textContent = "Generar QR de pago";
+    btnGenerarQR.textContent = "Generar orden de pago";
     btnGenerarQR.disabled = false;
 
     btnPagarMercadoPago.style.display = "none";

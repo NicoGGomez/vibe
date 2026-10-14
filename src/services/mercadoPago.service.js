@@ -84,7 +84,7 @@ const crearPreferencia = async (monto, referencia) => {
         external_reference: referencia,
 
         back_urls: {
-            success: "https://vibetandil.netlify.app/checkout.html",
+            success: "https://vibetandil.netlify.app/misCompras.html",
             failure: "https://vibetandil.netlify.app/checkout.html",
             pending: "https://vibetandil.netlify.app/checkout.html"
         },
@@ -146,10 +146,36 @@ const obtenerOrdenQR = async (idOrden) => {
     return datos;
 };
 
+// Obtener un pago de Checkout Pro por su ID
+const obtenerPago = async (idPago) => {
+    const respuesta = await fetch(
+        `https://api.mercadopago.com/v1/payments/${idPago}`,
+        {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`
+            }
+        }
+    );
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.message ||
+            datos.error ||
+            JSON.stringify(datos)
+        );
+    }
+
+    return datos;
+};
+
 // Exportación de Función
 
 module.exports = {
     crearOrdenQR,
     crearPreferencia,
-    obtenerOrdenQR
+    obtenerOrdenQR,
+    obtenerPago
 };

@@ -297,125 +297,70 @@ const webhook = async (req, res) => {
         
         // Consulta a la orden
 
-        const orden =
-            await mercadoPagoService.obtenerOrdenQR(
-                dataId
-            );
+        // Consultar el recurso correspondiente al tipo de notificación
+        const tipoNotificacion =
+            req.query.type ||
+            req.query.topic ||
+            req.body.type ||
+            req.body.topic;
 
+        let referenciaPago;
+        let montoMercadoPago;
+        let idRecurso;
+        let estadoPago;
 
-        console.log(
-            "Estado real de la Order:",
-            orden.status
-        );
+        if (
+            tipoNotificacion === "payment" ||
+            req.body.action?.startsWith("payment.")
+        ) {
+            // Checkout Pro: consultar el pago
+            const pago = await mercadoPagoService.obtenerPago(dataId);
 
-        console.log(
-            "Detalle:",
-            orden.status_detail
-        );
+            idRecurso = pago.id;
+            estadoPago = pago.status;
+            referenciaPago = pago.external_reference;
+            montoMercadoPago = Number(pago.transaction_amount);
 
-        console.log(
-            "Referencia:",
-            orden.external_reference
-        );
-
-        console.log(
-            "Monto Mercado Pago:",
-            orden.total_amount
-        );
-
-        // Verificación del estado del pago
-
-        if (orden.status !== "processed") {
-
-            console.log(
-                "La Order todavía no está procesada."
-            );
-
-            return res.status(200).json({
-                recibido: true,
-                orden: orden.id,
-                estado: orden.status,
-                procesado: false
+            console.log("Pago Checkout Pro:", {
+                id: idRecurso,
+                estado: estadoPago,
+                referencia: referenciaPago,
+                monto: montoMercadoPago
             });
 
-        }
+            // En Checkout Pro el estado aprobado es "approved"
+            if (estadoPago !== "approved") {
+                return res.status(200).json({
+                    recibido: true,
+                    estado: estadoPago,
+                    procesado: false
+                });
+            }
 
-        // Obtención de referencia del pedido
+        } else {
+            // QR: consultar la orden
+            const orden =
+                await mercadoPagoService.obtenerOrdenQR(dataId);
 
-        const referenciaPago =
-            orden.external_reference;
+            idRecurso = orden.id;
+            estadoPago = orden.status;
+            referenciaPago = orden.external_reference;
+            montoMercadoPago = Number(orden.total_amount);
 
-
-        if (!referenciaPago) {
-
-            console.log(
-                "La Order no tiene external_reference."
-            );
-
-            return res.status(400).json({
-                mensaje:
-                    "La Order no tiene referencia de pago."
+            console.log("Orden QR:", {
+                id: idRecurso,
+                estado: estadoPago,
+                referencia: referenciaPago,
+                monto: montoMercadoPago
             });
 
-        }
-
-        // Busqueda del pedido
-
-        const pedido =
-            await pedidoModel.obtenerPedidoPorReferenciaPago(
-                referenciaPago
-            );
-
-
-        if (!pedido) {
-
-            console.log(
-                "No existe un pedido con esa referencia."
-            );
-
-            return res.status(404).json({
-                mensaje: "Pedido no encontrado."
-            });
-
-        }
-
-
-        console.log(
-            "Pedido encontrado:",
-            pedido.id_pedido
-        );
-
-        // Verificación del monto
-
-        const montoMercadoPago =
-            Number(orden.total_amount);
-
-        const montoPedido =
-            Number(pedido.total);
-
-
-        console.log(
-            "Monto pedido:",
-            montoPedido
-        );
-
-        console.log(
-            "Monto Mercado Pago:",
-            montoMercadoPago
-        );
-
-
-        if (montoMercadoPago !== montoPedido) {
-
-            console.log(
-                "❌ El monto no coincide."
-            );
-
-            return res.status(400).json({
-                mensaje:
-                    "El monto del pago no coincide con el pedido."
-            });
-
+            if (estadoPago !== "processed") {
+                return res.status(200).json({
+                    recibido: true,
+                    estado: estadoPago,
+                    procesado: false
+                });
+            }
         }
 
         // Procesamiento del pedido
@@ -451,9 +396,9 @@ const webhook = async (req, res) => {
 
             recibido: true,
 
-            orden: orden.id,
-
-            estado: orden.status,
+            id_recurso: idRecurso,
+            
+            estado_pago: estadoPago,
 
             pedido: resultado.pedido.id_pedido,
 
