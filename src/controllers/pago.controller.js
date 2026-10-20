@@ -3,6 +3,7 @@
 // Importación de clases
 
 const mercadoPagoService = require("../services/mercadoPago.service");
+const { enviarAvisoCompra } = require("../services/email.service");
 const pedidoService = require("../services/pedido.service");
 const pedidoModel = require("../models/pedido.model");
 const crypto = require("crypto");
@@ -369,6 +370,29 @@ const webhook = async (req, res) => {
             await pedidoService.procesarPagoAprobado(
                 referenciaPago
             );
+
+        // Enviar aviso de compra solo la primera vez
+        if (!resultado.yaProcesado) {
+            try {
+                await enviarAvisoCompra(
+                    resultado.pedido,
+                    resultado.productos
+                );
+
+                console.log(
+                    "Email de compra enviado:",
+                    resultado.pedido.id_pedido
+                );
+
+            } catch (error) {
+                // No devolver error al webhook si falla el email:
+                // el pedido ya quedó registrado como pagado.
+                console.error(
+                    "Error enviando email de compra:",
+                    error
+                );
+            }
+        }
 
 
         console.log("=================================");

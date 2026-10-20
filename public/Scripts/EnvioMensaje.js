@@ -3,9 +3,10 @@
 // Configuración EmailJS
 
 const EMAILJS_CONFIG = {
-    publicKey: "Z1zZWU8mOaSMKb943",
-    serviceId: "service_oh3pirn",
-    templateId: "template_v9u0n1g"
+    serviceId: "service_hftcuvs",
+    publicKey: "mNu2h0FBQDg5YeOqs",
+    orderTamplateId: "template_lzt3hyt",
+    contactTemplateId: "template_8tacez1"
 };
 
 // Inicializar EmailJS
@@ -35,7 +36,7 @@ form.addEventListener("submit", async function (e) {
 
         await emailjs.sendForm(
             EMAILJS_CONFIG.serviceId,
-            EMAILJS_CONFIG.templateId,
+            EMAILJS_CONFIG.contactTemplateId,
             this
         );
 
