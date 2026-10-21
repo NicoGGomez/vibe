@@ -19,6 +19,11 @@ const categoriaSeleccionada = parametros.get("categoria");
 const contenedor = document.getElementById("lista-productos");
 const contenedorCards = document.getElementById("lista-cards-productos");
 
+const buscador = document.getElementById("busqueda-productos");
+const mensajeSinResultados = document.getElementById("sin-resultados");
+
+let todosLosProductos = [];
+
 // Función para obtener los productos y agregarlos a un contenedor del DOM 
 
 const cargarProductos = async () => {
@@ -27,9 +32,12 @@ const cargarProductos = async () => {
     try {
 
         const respuesta = await fetch("https://vibe-n9dy.onrender.com/productos");
+        
         const productos = await respuesta.json();
 
-        let productosFiltrados = productos;
+        todosLosProductos = productos;
+
+        let productosFiltrados = [...todosLosProductos];    
 
         if (categoriaSeleccionada) {
             productosFiltrados = productos.filter(producto =>
@@ -139,4 +147,58 @@ document.addEventListener("click", async (e) => {
         
     }
 });
+
+
+const normalizarTexto = (texto) => {
+    return texto
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+};
+
+const filtrarProductos = () => {
+    const busqueda = normalizarTexto(buscador.value);
+
+    let productosFiltrados = todosLosProductos.filter(producto => {
+        const coincideNombre = normalizarTexto(producto.nombre)
+            .includes(busqueda);
+
+        const coincideCategoria = !categoriaSeleccionada ||
+            producto.id_categoria == categoriaSeleccionada;
+
+        return coincideNombre && coincideCategoria;
+    });
+
+    // Los productos sin stock quedan al final.
+    productosFiltrados.sort((a, b) => {
+        return (a.stock === 0) - (b.stock === 0);
+    });
+
+    contenedorCards.innerHTML = "";
+
+    productosFiltrados.forEach(producto => {
+        const botonEliminar = esAdmin
+            ? `<button class="btn-eliminar" data-id="${producto.id_producto}">✖</button>`
+            : "";
+
+        contenedorCards.innerHTML += `
+            <div class="card-wrapper">
+                ${botonEliminar}
+                <card-comp
+                    data-id="${producto.id_producto}"
+                    imagen="${producto.imagen_principal}"
+                    nombre="${producto.nombre}"
+                    precio="${producto.precio}"
+                    stock="${producto.stock}">
+                </card-comp>
+            </div>
+        `;
+    });
+
+    mensajeSinResultados.style.display =
+        productosFiltrados.length === 0 ? "block" : "none";
+};
+
+buscador.addEventListener("input", filtrarProductos);
 

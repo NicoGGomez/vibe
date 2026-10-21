@@ -1,0 +1,39 @@
+
+.buscador-productos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 550px;
+    margin: 10px auto 25px;
+    padding: 12px 16px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.buscador-productos:focus-within {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.buscador-productos i {
+    color: #7c3aed;
+}
+
+.buscador-productos input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: #222;
+}
+
+#sin-resultados {
+    text-align: center;
+    margin: 30px 0;
+    color: #666;
+}
