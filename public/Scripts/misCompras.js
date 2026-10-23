@@ -138,25 +138,22 @@ async function cargarPedidos() {
 
 
             const entrega =
-                pedido.tipo_entrega === "envio"
-                    ? `
-                        <div class="dato-pedido">
-                            <i class="fa-solid fa-truck"></i>
-                            <span>
-                                Envío a
-                                ${pedido.direccion},
-                                ${pedido.ciudad}
-                            </span>
-                        </div>
-                    `
-                    : `
-                        <div class="dato-pedido">
-                            <i class="fa-solid fa-store"></i>
-                            <span>
-                                Retiro en el local
-                            </span>
-                        </div>
-                    `;
+            pedido.tipo_entrega === "envio"
+                ? `
+                    <div class="dato-pedido">
+                        <i class="fa-solid fa-truck"></i>
+                        <span>
+                            Envío a ${pedido.direccion},
+                            ${pedido.ciudad}
+                        </span>
+                    </div>
+                `
+                : `
+                    <div class="dato-pedido">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Retiro en el local</span>
+                    </div>
+                `;
 
 
             const tarjeta = document.createElement("article");
@@ -197,17 +194,20 @@ async function cargarPedidos() {
 
                 <div class="pedido-footer">
 
-                    ${entrega}
+    <div class="pedido-entrega">
 
-                    <div class="total-pedido">
+        ${entrega}
 
-                        <span>Total</span>
+        <a
+            href="https://vibetandil.netlify.app/contacto"
+            class="contacto-pedido"
+        >
+            <i class="fa-regular fa-circle-question"></i>
+            Por dudas, contactanos
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
-                        <strong>
-                            $${total}
-                        </strong>
-
-                    </div>
+    </div>
 
                 </div>
 

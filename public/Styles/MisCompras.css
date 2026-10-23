@@ -217,6 +217,36 @@
 }
 
 
+.pedido-entrega {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.contacto-pedido {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #7040c9;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.contacto-pedido:hover {
+    color: #5126a8;
+    text-decoration: underline;
+}
+
+.contacto-pedido i {
+    font-size: 14px;
+}
+
+
 /* Cargando */
 
 #cargando-pedidos {
