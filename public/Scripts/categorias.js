@@ -26,8 +26,14 @@ const cargarCategorias = async () => {
 
         categorias.forEach(categoria => {
 
+            const categoriaActual = new URLSearchParams(window.location.search)
+                .get("categoria");
+
+            const activa = categoriaActual === String(categoria.id_categoria);
+
             listaCategorias.innerHTML += `
-                <a href="productos.html?categoria=${categoria.id_categoria}">
+                <a href="productos.html?categoria=${categoria.id_categoria}"
+                class="${activa ? 'categoria-activa' : ''}">
                     <li>
                         ${categoria.nombre}
                     </li>
@@ -35,7 +41,7 @@ const cargarCategorias = async () => {
             `;
 
         });
-
+        
     } catch(error) {
 
         console.log("Error al cargar categorías:", error);

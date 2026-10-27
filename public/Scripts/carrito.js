@@ -23,6 +23,7 @@ const btnRetiro = document.getElementById("btn-retiro")
 const btnUbicacion = document.getElementById("btn-ubicacion")
 const formEnvio = document.getElementById("info-ubicacion")
 const btnUbicacionSeleccionada = document.getElementById("btn-ubicacion-seleccionada");
+const contenedorBtnPago = document.getElementById("cont-pago")
 const btnGenerarQR = document.getElementById("btn-generar-qr");
 const contenedorQR = document.getElementById("qr");
 const contenedorBtnQR = document.getElementById("cont-qr");
@@ -251,30 +252,39 @@ if (btnGenerarQR) {
 
             // 3. Generar QR visual
 
+            
+            // 3. Generar QR visual
             if (!datos.qr_data) {
-
-                throw new Error(
-                    "Mercado Pago no devolvió el QR."
-                );
-
+                throw new Error("Mercado Pago no devolvió el QR.");
             }
 
+            // Preparar el QR
             contenedorQR.innerHTML = "";
 
-            new QRCode(
-                contenedorQR,
-                {
-                    text: datos.qr_data,
-                    width: 250,
-                    height: 250
-                }
-            );
+            new QRCode(contenedorQR, {
+                text: datos.qr_data,
+                width: 220,
+                height: 220
+            });
 
+            // Configurar el botón de Mercado Pago
+            if (datos.init_point) {
+                btnPagarMercadoPago.onclick = () => {
+                    window.location.href = datos.init_point;
+                };
+
+                btnPagarMercadoPago.style.display = "flex";
+            } else {
+                btnPagarMercadoPago.style.display = "none";
+            }
+
+            // Ocultar el botón para generar la orden
+            contenedorBtnPago.style.display = "none";
+
+            // Mostrar la sección de pago con QR
+            contenedorBtnQR.style.display = "flex";
             contenedorQR.style.display = "flex";
 
-            // 4. Ocultar botón de generar QR
-
-            btnGenerarQR.style.display = "none";
 
             // 5. Mostrar Checkout
 
@@ -991,16 +1001,22 @@ async function esperarPago(idOrden) {
 
 // Función para resetear un QR
 
-function resetearQR() {
 
+function resetearQR() {
+    // Limpiar el QR anterior
     contenedorQR.innerHTML = "";
     contenedorQR.style.display = "none";
 
-    contenedorBtnQR.style.display = "flex";
+    // Ocultar la sección de pago
+    contenedorBtnQR.style.display = "none";
+
+    // Volver a mostrar el botón de generar orden
+    contenedorBtnPago.style.display = "flex";
 
     btnGenerarQR.textContent = "Generar orden de pago";
     btnGenerarQR.disabled = false;
 
+    // Ocultar el botón de Mercado Pago
     btnPagarMercadoPago.style.display = "none";
 }
 

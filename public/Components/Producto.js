@@ -1,6 +1,7 @@
 import { getUsuario, getToken } from "../Scripts/auth.js";
 import { agregarFavorito, quitarFavorito, esFavorito } from "../Scripts/Favorito.js";
 import { mostrarError } from "../Scripts/mostrarInfo.js"; 
+import { requerirLogin } from "../Scripts/loginModal.js";
 
 class Producto extends HTMLElement {
 
@@ -251,9 +252,21 @@ class Producto extends HTMLElement {
                 const usuario = getUsuario();
                 const token = getToken();
 
-                if (!usuario || !token) {
-                    mostrarError("Tenés que iniciar sesión para agregar favoritos.")
-                    // alert();
+                if (!getUsuario() || !getToken()) {
+                    requerirLogin(async () => {
+                        const agregado = await agregarFavorito(id);
+
+                        if (agregado) {
+                            actualizarIconoFavorito();
+
+                            btnFavorito.classList.add("animar-favorito");
+
+                            setTimeout(() => {
+                                btnFavorito.classList.remove("animar-favorito");
+                            }, 450);
+                        }
+                    });
+
                     return;
                 }
 
@@ -792,37 +805,27 @@ class Producto extends HTMLElement {
         if (btnComprarAhora && !sinStock) {
             btnComprarAhora.addEventListener("click", () => {
 
-                // Verificar que el usuario haya iniciado sesión
-                const usuario = getUsuario();
-                const token = getToken();
-
-                if (!usuario || !token) {
-                    mostrarError("Debes iniciar sesión para comprar.");
-                    return;
-                }
-
-                const compraDirecta = {
-                    idProducto: id,
-                    cantidad: 1
-                };
-
                 if (!id) {
                     console.error("No se encontró el ID del producto.");
                     alert("No se pudo iniciar la compra.");
                     return;
                 }
 
-                sessionStorage.setItem(
-                    "compraDirecta",
-                    JSON.stringify(compraDirecta)
-                );
+                const iniciarCompra = () => {
+                    const compraDirecta = {
+                        idProducto: id,
+                        cantidad: 1
+                    };
 
-                console.log(
-                    "Compra directa guardada:",
-                    sessionStorage.getItem("compraDirecta")
-                );
+                    sessionStorage.setItem(
+                        "compraDirecta",
+                        JSON.stringify(compraDirecta)
+                    );
 
-                window.location.href = "checkout.html";
+                    window.location.href = "checkout.html";
+                };
+
+                requerirLogin(iniciarCompra);
             });
         }
 
@@ -835,23 +838,21 @@ class Producto extends HTMLElement {
         );
 
         if (btnCarritoProducto && !sinStock) {
-
             btnCarritoProducto.addEventListener("click", (e) => {
-
                 e.preventDefault();
                 e.stopPropagation();
 
-                this.dispatchEvent(
-                    new CustomEvent("agregar-carrito", {
-                        bubbles: true,
-                        detail: {
-                            idProducto: id
-                        }
-                    })
-                );
-
+                requerirLogin(() => {
+                    this.dispatchEvent(
+                        new CustomEvent("agregar-carrito", {
+                            bubbles: true,
+                            detail: {
+                                idProducto: id
+                            }
+                        })
+                    );
+                });
             });
-
         }
 
     }

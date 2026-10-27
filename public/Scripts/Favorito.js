@@ -95,7 +95,6 @@ export async function agregarFavorito(idProducto) {
     const token = getToken();
 
     if (!usuario || !token) {
-        mostrarError("Tenés que iniciar sesión para agregar favoritos.");
         return false;
     }
 

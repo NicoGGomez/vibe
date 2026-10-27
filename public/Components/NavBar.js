@@ -11,13 +11,14 @@ class NavBar extends HTMLElement {
                 <ul>
                     <a href=""><img src="Imgs/logo-vibe.png" alt=""></a>
 
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Inicio</a></li>
                     <li><a href="Productos.html">Productos</a></li>
                     <li><a href="Nosotros.html">Nosotros</a></li>
+                    
 
                     ${
                         !usuario
-                            ? `<li><a href="login.html">Login</a></li>`
+                            ? `<li><a href="login.html">Login</a></li> `
                             : `<li><a href="perfil.html">Perfil</a></li>`
                     }
 

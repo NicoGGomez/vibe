@@ -20,7 +20,6 @@
 @import url(Producto.css);
 @import url(cargar.css);
 @import url(Perfil.css);
-@import url(MsgError.css);
 @import url(Carrito.css);
 @import url(carga.css);
 @import url(MisCompras.css);
@@ -30,6 +29,8 @@
 @import url(btnConfirmacion.css);
 @import url(login-registro.css);
 @import url(barraBusqueda.css);
+@import url(Checkout.css);
+@import url(MsgError.css);
 
 /* Variables */
 

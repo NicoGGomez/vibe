@@ -1,315 +1,351 @@
-/* Autenticación */
 
-/* Estilos */
+/* ==========================================
+   VIBE — LOGIN, REGISTRO Y MODAL
+========================================== */
 
-/* Contenedor formularios */
+:root {
+    --auth-violeta: #8544d6;
+    --auth-violeta-hover: #7034bf;
+    --auth-texto: #19151f;
+    --auth-secundario: #77717e;
+    --auth-borde: #e6e0eb;
+    --auth-fondo: #fffaf2;
+}
 
-.contenedor-registro,
-.contenedor-login {
+/* CONTENEDORES */
+
+.contenedor-login,
+.contenedor-registro {
     width: 100%;
-    min-height: calc(100vh - 100px);
-
-    padding: 50px 20px 80px;
-
+    min-height: calc(100vh - 110px);
+    padding: 55px 20px 70px;
     box-sizing: border-box;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* background-color: #fafafa; */
 }
 
+/* TARJETAS */
 
-/* Formularios */
-
+.form-login,
 .form-registro,
-.form-login {
+#modal-login-vibe .login-modal-contenido {
     width: 100%;
-    max-width: 430px;
-
+    max-width: 440px;
+    padding: 38px;
     box-sizing: border-box;
 
+    background: #fff;
+    color: var(--auth-texto);
+
+    border: 1px solid rgba(80, 50, 100, 0.07);
+    border-radius: 18px;
+
+    box-shadow: 0 15px 45px rgba(38, 20, 48, 0.08);
+
+    font-family: inherit;
+}
+
+/* FORMULARIOS */
+
+.form-login,
+.form-registro {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    gap: 16px;
-
-    padding: 40px;
-
-    background-color: #fff;
-
-    border: 1px solid #e8e8e8;
-    border-radius: 16px;
-
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.06);
+    align-items: stretch;
+    gap: 15px;
 }
 
+/* TÍTULOS */
 
-/* Títulos */
-
+.form-login h1,
 .form-registro h1,
-.form-login h1 {
+#modal-login-vibe h2 {
     width: 100%;
+    margin: 0 0 5px;
 
-    margin: 0;
-
-    color: #111;
-
-    font-size: 28px;
-    font-weight: 600;
-
-    text-align: center;
+    color: var(--auth-texto);
+    font-size: 29px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    text-align: left;
 }
 
-.form-registro h2,
-.form-login h2 {
+/* SUBTÍTULOS */
+
+.form-login h2,
+.form-registro h2 {
     width: 100%;
+    margin: -4px 0 12px;
 
-    margin: -5px 0 10px;
-
-    color: #777;
-
+    color: var(--auth-secundario);
     font-size: 14px;
     font-weight: 400;
-
-    text-align: center;
+    line-height: 1.6;
+    text-align: left;
 }
 
+#modal-login-vibe .login-modal-contenido > p {
+    margin: 0 0 22px;
+    color: var(--auth-secundario);
+    font-size: 14px;
+    line-height: 1.6;
+}
 
-/* Campos */
+/* GRUPOS DE CAMPOS */
 
-.form-registro .input,
-.form-login .input {
-    width: 100%;
-    max-width: 100%;
-
-    box-sizing: border-box;
-
+.form-login .input,
+.form-registro .input {
     display: flex;
     flex-direction: column;
-
-    gap: 7px;
+    gap: 8px;
+    width: 100%;
 }
 
+/* ETIQUETAS */
 
-/* Inputs */
+.form-login label,
+.form-registro label,
+#modal-login-vibe label {
+    display: block;
+    width: 100%;
+    color: #39333f;
+    font-size: 13px;
+    font-weight: 600;
+}
 
-.form-registro input,
-.form-registro select,
-.form-registro textarea,
+/* CAMPOS */
 
 .form-login input,
+.form-registro input,
 .form-login select,
-.form-login textarea {
+.form-registro select,
+.form-login textarea,
+.form-registro textarea,
+#modal-login-vibe input {
+    display: block;
     width: 100%;
-    max-width: 100%;
     min-width: 0;
-
-    align-self: stretch;
+    min-height: 48px;
+    padding: 0 14px;
 
     box-sizing: border-box;
 
-    height: 48px;
+    border: 1px solid var(--auth-borde);
+    border-radius: 9px;
 
-    padding: 0 14px;
+    background: #fff;
+    color: var(--auth-texto);
 
-    border: 1px solid #ddd;
-    border-radius: 8px;
-
-    background-color: #fff;
-
-    color: #222;
-
+    font-family: inherit;
     font-size: 14px;
-
     outline: none;
 
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
 }
 
-
-/* Inputs */
-
-.form-registro input,
-.form-registro select,
-.form-registro textarea,
-
-.form-login input,
-.form-login select,
-.form-login textarea {
-    width: 100%;
-
-    min-width: 0;
-
-    box-sizing: border-box;
-
-    height: 48px;
-
-    padding: 0 14px;
-
-    border: 1px solid #ddd;
-    border-radius: 8px;
-
-    background-color: #fff;
-
-    color: #222;
-
-    font-size: 14px;
-
-    outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+.form-login textarea,
+.form-registro textarea {
+    min-height: 90px;
+    padding: 12px 14px;
+    resize: vertical;
 }
 
-
+.form-login input::placeholder,
 .form-registro input::placeholder,
-.form-login input::placeholder {
-    color: #aaa;
+#modal-login-vibe input::placeholder {
+    color: #aaa3b0;
 }
-
-
-.form-registro input:focus,
-.form-registro select:focus,
-.form-registro textarea:focus,
 
 .form-login input:focus,
+.form-registro input:focus,
 .form-login select:focus,
-.form-login textarea:focus {
-    border-color: #999;
-
-    box-shadow:
-        0 0 0 3px rgba(0, 0, 0, 0.05);
+.form-registro select:focus,
+.form-login textarea:focus,
+.form-registro textarea:focus,
+#modal-login-vibe input:focus {
+    border-color: var(--auth-violeta);
+    box-shadow: 0 0 0 3px rgba(133, 68, 214, 0.11);
 }
 
+/* BOTONES PRINCIPALES */
 
-/* Botones */
-
+.form-login button,
 .form-registro button,
-.form-login button {
+#modal-login-vibe #login-modal-submit {
     width: 100%;
-
-    min-width: 0;
+    min-height: 48px;
+    margin-top: 7px;
+    padding: 13px 18px;
 
     box-sizing: border-box;
-
-    min-height: 48px;
-
-    margin-top: 6px;
-
-    padding: 12px 18px;
-
     border: none;
     border-radius: 9px;
 
-    background-color: #111;
+    background: var(--auth-violeta);
     color: #fff;
 
+    font-family: inherit;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
 
     cursor: pointer;
 
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease,
-        opacity 0.2s ease;
+    transition: background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
-
+.form-login button:hover,
 .form-registro button:hover,
-.form-login button:hover {
-    background-color: #333;
-
+#modal-login-vibe #login-modal-submit:hover {
+    background: var(--auth-violeta-hover);
+    box-shadow: 0 5px 14px rgba(112, 52, 191, 0.2);
     transform: translateY(-1px);
 }
 
-
-.form-registro button:active,
-.form-login button:active {
+.form-login button:active,
+.form-registro button:active {
     transform: translateY(0);
 }
 
-
+.form-login button:disabled,
 .form-registro button:disabled,
-.form-login button:disabled {
+#modal-login-vibe #login-modal-submit:disabled {
     opacity: 0.6;
-
     cursor: not-allowed;
-
     transform: none;
+    box-shadow: none;
 }
 
+/* ENLACES */
 
-/* Labels */
-
-.form-registro label,
-.form-login label {
-    width: 100%;
-
-    color: #333;
-
+.form-login a,
+.form-registro a,
+#modal-login-vibe a {
+    color: var(--auth-violeta);
     font-size: 13px;
     font-weight: 500;
-}
-
-
-/* Links */
-
-.form-registro a,
-.form-login a {
-    margin-top: 2px;
-
-    color: #555;
-
-    font-size: 13px;
-
     text-decoration: none;
-
-    transition:
-        color 0.2s ease,
-        opacity 0.2s ease;
+    transition: color 0.2s ease;
 }
 
-
+.form-login a:hover,
 .form-registro a:hover,
-.form-login a:hover {
-    color: #111;
-
-    opacity: 0.8;
-
+#modal-login-vibe a:hover {
+    color: var(--auth-violeta-hover);
     text-decoration: underline;
 }
 
+/* MENSAJES DE ERROR */
 
-/* Media queries */
+#msg-error,
+#login-modal-error {
+    color: #c62828;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* MODAL */
+
+#modal-login-vibe .login-modal-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: rgba(18, 10, 25, 0.58);
+    backdrop-filter: blur(4px);
+}
+
+#modal-login-vibe .login-modal-contenido {
+    position: relative;
+    max-width: 420px;
+    animation: authEntrada 0.2s ease-out;
+}
+
+#modal-login-vibe .login-modal-cerrar {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+
+    width: 32px;
+    height: 32px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 50%;
+    background: #f5f1f8;
+    color: #51475a;
+
+    font-size: 23px;
+    cursor: pointer;
+}
+
+#modal-login-vibe .login-modal-cerrar:hover {
+    background: #eee5f7;
+    color: #19151f;
+}
+
+#modal-login-vibe form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#modal-login-vibe .login-modal-registro {
+    margin: 22px 0 0;
+    color: var(--auth-secundario);
+    font-size: 13px;
+    text-align: center;
+}
+
+@keyframes authEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 600px) {
-
-    .contenedor-registro,
-    .contenedor-login {
+    .contenedor-login,
+    .contenedor-registro {
         min-height: calc(100vh - 80px);
-
-        padding: 30px 15px 50px;
+        padding: 30px 16px 45px;
     }
 
+    .form-login,
     .form-registro,
-    .form-login {
-        padding: 30px 22px;
-
-        border-radius: 13px;
+    #modal-login-vibe .login-modal-contenido {
+        padding: 30px 24px;
+        border-radius: 15px;
     }
 
+    .form-login h1,
     .form-registro h1,
-    .form-login h1 {
+    #modal-login-vibe h2 {
         font-size: 25px;
     }
-
 }

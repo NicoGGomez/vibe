@@ -19,6 +19,9 @@ const categoriaSeleccionada = parametros.get("categoria");
 const contenedor = document.getElementById("lista-productos");
 const contenedorCards = document.getElementById("lista-cards-productos");
 
+const esInicio = Boolean(contenedorCards);
+const LIMITE_PRODUCTOS_INICIO = 8;
+
 const buscador = document.getElementById("busqueda-productos");
 const mensajeSinResultados = document.getElementById("sin-resultados");
 
@@ -48,6 +51,13 @@ const cargarProductos = async () => {
         productosFiltrados.sort((a, b) => {
             return (a.stock === 0) - (b.stock === 0);
         });
+
+        if (esInicio) {
+            productosFiltrados = productosFiltrados.slice(
+                0,
+                LIMITE_PRODUCTOS_INICIO
+            );
+        }
 
         if (contenedorCards) contenedorCards.innerHTML = "";
         if (contenedor) contenedor.innerHTML = "";

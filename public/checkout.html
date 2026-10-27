@@ -52,9 +52,11 @@
 
                         <b>Forma de entrega</b>
 
+                        <p>Completá tus datos para coordinar la entrega de tu pedido.</p>
+
                         <div class="cont-ubicacion-btns">
 
-                            <button id="btn-retiro">Retiro</button>
+                            <button id="btn-retiro">Coordinar retiro</button>
                             <button id="btn-envio">Envio</button>
                             <button id="btn-ubicacion">Usar mi ubicacion</button>
                             <button id="btn-ubicacion-seleccionada">✓</button>
@@ -62,11 +64,23 @@
                         </div>
 
                         <div id="info-ubicacion" class="cont-info-ubicacion">
+                            <input
+                                id="direccion"
+                                type="text"
+                                placeholder="Calle y número"
+                            >
 
-                            <input id="direccion" type="text" placeholder="Dirección">
-                            <input id="ciudad" type="text" placeholder="Ciudad">
-                            <input id="codigo-postal" type="text" placeholder="Código postal">
+                            <input
+                                id="ciudad"
+                                type="text"
+                                placeholder="Ciudad o localidad"
+                            >
 
+                            <input
+                                id="codigo-postal"
+                                type="text"
+                                placeholder="Código postal"
+                            >
                         </div>
 
                     </div>
@@ -74,6 +88,9 @@
                     <div class="cont-info-comprador">
 
                         <b>Informacion del comprador</b>
+
+                        <p>Esta Información es importante para poder realizar el envío correctamente.</p>
+
                         <div class="cont-input">
 
                             <p>Nombre y Apellido</p>
@@ -91,20 +108,25 @@
 
                 </div>
 
-                <div id="cont-qr" class="cont-qr">
-
+                <div id="cont-pago" class="cont-generar-pago">
                     <button id="btn-generar-qr">
-                        Generar pago
+                        Generar orden de pago
                     </button>
+                </div>
+
+
+                <div id="cont-qr" class="cont-qr">
 
                     <button id="btn-pagar-mercado-pago" style="display: none;">
                         <i class="fa-brands fa-mercadopago"></i>
                         Pagar con Mercado Pago
                     </button>
 
+                    <div class="qr" id="qr"></div>
+
                 </div>
 
-                <div class="qr" id="qr"></div>
+                
 
             </div>
 

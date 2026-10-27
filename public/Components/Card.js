@@ -1,6 +1,7 @@
 import { agregarFavorito, quitarFavorito, esFavorito } from "../Scripts/Favorito.js";
 import { getUsuario, getToken } from "../Scripts/auth.js";
 import { mostrarError } from "../Scripts/mostrarInfo.js"; 
+import { requerirLogin } from "../Scripts/loginModal.js";
 
 class Card extends HTMLElement {
 
@@ -81,64 +82,54 @@ class Card extends HTMLElement {
 
 
             // Click en favorito
-            btnFavorito.addEventListener("click", async (e) => {
-
+            
+            
+            btnFavorito.addEventListener("click", (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
                 const estaActivo =
                     btnFavorito.classList.contains("favorito-activo");
 
+                if (!getUsuario() || !getToken()) {
+                    if (estaActivo) return;
 
-                // ==========================
-                // QUITAR
-                // ==========================
+                    requerirLogin(async () => {
+                        const agregado = await agregarFavorito(id);
+
+                        if (agregado) {
+                            btnFavorito.classList.remove("fa-regular");
+                            btnFavorito.classList.add("fa-solid", "favorito-activo");
+                            btnFavorito.title = "Quitar de favoritos";
+                        }
+                    });
+
+                    return;
+                }
 
                 if (estaActivo) {
+                    const eliminado = quitarFavorito(id);
 
-                    const eliminado = await quitarFavorito(id);
+                    eliminado.then((ok) => {
+                        if (!ok) return;
 
-                    if (!eliminado) {
-                        return;
-                    }
-
-                    btnFavorito.classList.remove("fa-solid");
-                    btnFavorito.classList.add("fa-regular");
-
-                    btnFavorito.classList.remove("favorito-activo");
-
-                    btnFavorito.title = "Agregar a favoritos";
+                        btnFavorito.classList.remove("fa-solid", "favorito-activo");
+                        btnFavorito.classList.add("fa-regular");
+                        btnFavorito.title = "Agregar a favoritos";
+                    });
 
                     return;
                 }
 
+                agregarFavorito(id).then((agregado) => {
+                    if (!agregado) return;
 
-                // ==========================
-                // AGREGAR
-                // ==========================
-
-                const agregado = await agregarFavorito(id);
-
-                if (!agregado) {
-                    return;
-                }
-
-                btnFavorito.classList.remove("fa-regular");
-                btnFavorito.classList.add("fa-solid");
-
-                btnFavorito.classList.add("favorito-activo");
-
-                btnFavorito.title = "Quitar de favoritos";
-
-
-                // Animación
-                btnFavorito.classList.remove("animar-favorito");
-
-                void btnFavorito.offsetWidth;
-
-                btnFavorito.classList.add("animar-favorito");
-
+                    btnFavorito.classList.remove("fa-regular");
+                    btnFavorito.classList.add("fa-solid", "favorito-activo");
+                    btnFavorito.title = "Quitar de favoritos";
+                });
             });
+
 
         }
 
@@ -149,41 +140,29 @@ class Card extends HTMLElement {
         }
 
         if (btnCarrito) {
-
             btnCarrito.addEventListener("click", (e) => {
-
                 e.preventDefault();
                 e.stopPropagation();
 
-                // Verificar sesión antes de disparar el evento
-                const usuario = getUsuario();
-                const token = getToken();
+                if (stock === 0) return;
 
-                if (!usuario || !token) {
-                    mostrarError(
-                        "Tenés que iniciar sesión para agregar productos al carrito."
+                requerirLogin(() => {
+                    btnCarrito.classList.remove("animar-carrito");
+                    void btnCarrito.offsetWidth;
+                    btnCarrito.classList.add("animar-carrito");
+
+                    this.dispatchEvent(
+                        new CustomEvent("agregar-carrito", {
+                            bubbles: true,
+                            detail: {
+                                idProducto: id
+                            }
+                        })
                     );
-                    return;
-                }
-
-                // Animación de la Card
-                btnCarrito.classList.remove("animar-carrito");
-
-                void btnCarrito.offsetWidth;
-
-                btnCarrito.classList.add("animar-carrito");
-
-                // Avisar que se quiere agregar
-                this.dispatchEvent(
-                    new CustomEvent("agregar-carrito", {
-                        bubbles: true,
-                        detail: {
-                            idProducto: id
-                        }
-                    })
-                );
+                });
             });
         }
+
         
     }
 
